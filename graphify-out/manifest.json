@@ -1,0 +1,317 @@
+{
+  "web/.eslintrc.json": {
+    "mtime": 1783186538.4677618,
+    "ast_hash": "1c195f00e80a8e80e07986231ce105bc",
+    "semantic_hash": ""
+  },
+  "web/.oxlintrc.json": {
+    "mtime": 1783186342.922723,
+    "ast_hash": "029f4905006c1fffd96bc863e2d98d3e",
+    "semantic_hash": ""
+  },
+  "web/package.json": {
+    "mtime": 1783334737.3105235,
+    "ast_hash": "7702f25515238f2fa55936779254f8ce",
+    "semantic_hash": ""
+  },
+  "web/scratch.ts": {
+    "mtime": 1783242302.1766827,
+    "ast_hash": "321a9df4e2d3c5aa4f6c26b80ffde3da",
+    "semantic_hash": ""
+  },
+  "web/src/App.tsx": {
+    "mtime": 1783351403.2988896,
+    "ast_hash": "ecf6bbaabe628119f88e6d92d03acfdc",
+    "semantic_hash": ""
+  },
+  "web/src/__tests__/engine/collision.test.ts": {
+    "mtime": 1783326478.293293,
+    "ast_hash": "dcadb7c0e36ee4818e5cdb5d12b821fb",
+    "semantic_hash": ""
+  },
+  "web/src/__tests__/engine/movement.test.ts": {
+    "mtime": 1783324443.2265089,
+    "ast_hash": "b7bcc53bffcd352ddb40e896470ad516",
+    "semantic_hash": ""
+  },
+  "web/src/__tests__/engine/simulate.test.ts": {
+    "mtime": 1783326488.0058787,
+    "ast_hash": "fa079eddb5cfcc82574f1811f0b400be",
+    "semantic_hash": ""
+  },
+  "web/src/__tests__/engine/useGameLoop.test.tsx": {
+    "mtime": 1783238618.8440602,
+    "ast_hash": "97155671976f8498fc392eb668cae4c4",
+    "semantic_hash": ""
+  },
+  "web/src/constants/index.ts": {
+    "mtime": 1783333349.2007136,
+    "ast_hash": "a562dae28fc6e5b162e5f46f647fb6f6",
+    "semantic_hash": ""
+  },
+  "web/src/engine/collision.ts": {
+    "mtime": 1783325914.92582,
+    "ast_hash": "0cfe94d46c6933c014c652ac5e35ce7d",
+    "semantic_hash": ""
+  },
+  "web/src/engine/movement.ts": {
+    "mtime": 1783332294.9145794,
+    "ast_hash": "77adad9330a6bddd12c4ad85e61b284f",
+    "semantic_hash": ""
+  },
+  "web/src/engine/reproduction.ts": {
+    "mtime": 1783332321.666306,
+    "ast_hash": "593f747010fa30d1d1502d6f295a9910",
+    "semantic_hash": ""
+  },
+  "web/src/engine/simulate.ts": {
+    "mtime": 1783332398.2246232,
+    "ast_hash": "41560cf2d6e7e7f790fc61b41d9dd3bf",
+    "semantic_hash": ""
+  },
+  "web/src/engine/spawner.ts": {
+    "mtime": 1783240304.7754538,
+    "ast_hash": "678f94700ccb444004513088cade792b",
+    "semantic_hash": ""
+  },
+  "web/src/engine/useGameLoop.ts": {
+    "mtime": 1783350917.0217586,
+    "ast_hash": "ff3c501a9cb0ca6489eb72d2d31a33d2",
+    "semantic_hash": ""
+  },
+  "web/src/engine/worldRef.ts": {
+    "mtime": 1783350902.5931883,
+    "ast_hash": "c7007a06a4241cd1c73fb6e2453be9bd",
+    "semantic_hash": ""
+  },
+  "web/src/hooks/useDrawingCanvas.ts": {
+    "mtime": 1783235594.0134456,
+    "ast_hash": "df10fb7eaa52fc1ba8c6c68a8484463a",
+    "semantic_hash": ""
+  },
+  "web/src/main.tsx": {
+    "mtime": 1783186343.0695612,
+    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
+    "semantic_hash": ""
+  },
+  "web/src/renderer/Renderer.ts": {
+    "mtime": 1783328453.1002674,
+    "ast_hash": "2db5793177849597d5273563e0c9cc65",
+    "semantic_hash": ""
+  },
+  "web/src/renderer/canvasUtils.ts": {
+    "mtime": 1783333360.1651957,
+    "ast_hash": "a0261310249c1662be35b7cd1dcadcdc",
+    "semantic_hash": ""
+  },
+  "web/src/renderer/drawCreature.ts": {
+    "mtime": 1783333370.1107454,
+    "ast_hash": "c9a6b9ceae60b6c5d2ad9f4e5bd39480",
+    "semantic_hash": ""
+  },
+  "web/src/renderer/drawPlant.ts": {
+    "mtime": 1783186817.081576,
+    "ast_hash": "92be3cd0894b835d04abd39558629c00",
+    "semantic_hash": ""
+  },
+  "web/src/renderer/imageCache.ts": {
+    "mtime": 1783332004.2805867,
+    "ast_hash": "2bfef70e199e40de3d955540ee4c0157",
+    "semantic_hash": ""
+  },
+  "web/src/store/useStore.ts": {
+    "mtime": 1783350894.634744,
+    "ast_hash": "f5f578c38370125889f111505c98f8ed",
+    "semantic_hash": ""
+  },
+  "web/src/test-setup.ts": {
+    "mtime": 1783186404.3326924,
+    "ast_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9",
+    "semantic_hash": ""
+  },
+  "web/src/types/index.ts": {
+    "mtime": 1783350889.0475388,
+    "ast_hash": "8ac2120960060dd1f45bbcc4f9326226",
+    "semantic_hash": ""
+  },
+  "web/src/ui/BrushPicker.tsx": {
+    "mtime": 1783235196.031114,
+    "ast_hash": "7d7df511049993a0efec8e81fecae637",
+    "semantic_hash": ""
+  },
+  "web/src/ui/CameraControls.tsx": {
+    "mtime": 1783326680.2393537,
+    "ast_hash": "3e8d81e001dd3f618b4fb052c6c68177",
+    "semantic_hash": ""
+  },
+  "web/src/ui/ColorPalette.tsx": {
+    "mtime": 1783235583.9918628,
+    "ast_hash": "0eeef62769662d6ff1f8f6ff5391f709",
+    "semantic_hash": ""
+  },
+  "web/src/ui/CreationPanel.tsx": {
+    "mtime": 1783241864.3416972,
+    "ast_hash": "ac0d0483cfc9faf7990c64aa3b4cc853",
+    "semantic_hash": ""
+  },
+  "web/src/ui/CreatureInspector.tsx": {
+    "mtime": 1783332349.6257105,
+    "ast_hash": "c6046d4a8075f7ebc77fac992aeb9ee1",
+    "semantic_hash": ""
+  },
+  "web/src/ui/EmptyState.tsx": {
+    "mtime": 1783333339.6471798,
+    "ast_hash": "e1f26323a65c9cad8866588e4a36ffbc",
+    "semantic_hash": ""
+  },
+  "web/src/ui/FAB.tsx": {
+    "mtime": 1783333379.1487923,
+    "ast_hash": "a92de4b3ced2f5ba05f57ee380c5b1f1",
+    "semantic_hash": ""
+  },
+  "web/src/ui/GodToolbar.tsx": {
+    "mtime": 1783327461.7856534,
+    "ast_hash": "b3d461e200a2a9a271e84c3f9ec9041b",
+    "semantic_hash": ""
+  },
+  "web/src/ui/TitleScreen.tsx": {
+    "mtime": 1783333328.139141,
+    "ast_hash": "44e3c904a947fd74f72233046d420b66",
+    "semantic_hash": ""
+  },
+  "web/src/ui/TraitPicker.tsx": {
+    "mtime": 1783242216.7852817,
+    "ast_hash": "06e420219e695f776ae1e7b1aa014f5e",
+    "semantic_hash": ""
+  },
+  "web/src/ui/TutorialButton.tsx": {
+    "mtime": 1783350927.3082612,
+    "ast_hash": "e19a9b35c73f2effeeafff292fc22384",
+    "semantic_hash": ""
+  },
+  "web/src/ui/TutorialModal.tsx": {
+    "mtime": 1783350962.6416442,
+    "ast_hash": "ed9e9044034f705434bacb6f8811557c",
+    "semantic_hash": ""
+  },
+  "web/src/utils/nameGenerator.ts": {
+    "mtime": 1783234493.0342314,
+    "ast_hash": "ea1c57c86c6ab9b704789d72c705d12f",
+    "semantic_hash": ""
+  },
+  "web/tsconfig.app.json": {
+    "mtime": 1783186342.939731,
+    "ast_hash": "5f2dafd737dea8a4ddcbb10f5113ac5a",
+    "semantic_hash": ""
+  },
+  "web/tsconfig.json": {
+    "mtime": 1783324285.0075448,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": ""
+  },
+  "web/tsconfig.node.json": {
+    "mtime": 1783186342.9477313,
+    "ast_hash": "f9cb81ddcea69ffdab672fc8c48dca66",
+    "semantic_hash": ""
+  },
+  "web/vite.config.ts": {
+    "mtime": 1783238630.096028,
+    "ast_hash": "d9e8eb856c8d7b3be95d77f226a4414c",
+    "semantic_hash": ""
+  },
+  "docs/architecture.md": {
+    "mtime": 1783352467.9464207,
+    "ast_hash": "fb0f180417101ea9af94f36e75180b0e",
+    "semantic_hash": ""
+  },
+  "docs/design.md": {
+    "mtime": 1783352476.8213549,
+    "ast_hash": "31028e61fb1203c032e416ff52288d98",
+    "semantic_hash": ""
+  },
+  "docs/style-guide.md": {
+    "mtime": 1783352487.9629278,
+    "ast_hash": "21ae1eda15a3bbb0869038cc64be3eb4",
+    "semantic_hash": ""
+  },
+  "web/.serena/memories/conventions.md": {
+    "mtime": 1783237746.071715,
+    "ast_hash": "9329818582dbe126d778f12489f5f799",
+    "semantic_hash": ""
+  },
+  "web/.serena/memories/core.md": {
+    "mtime": 1783237804.4994035,
+    "ast_hash": "f424352cedb3f614f5dddb62a4792309",
+    "semantic_hash": ""
+  },
+  "web/.serena/memories/memory_maintenance.md": {
+    "mtime": 1783237609.0166657,
+    "ast_hash": "17877e37a829c58bb20c04228b985ab8",
+    "semantic_hash": ""
+  },
+  "web/.serena/memories/suggested_commands.md": {
+    "mtime": 1783237737.838874,
+    "ast_hash": "8c85abe6561a6f3f703d1035b0802851",
+    "semantic_hash": ""
+  },
+  "web/.serena/memories/task_completion.md": {
+    "mtime": 1783237788.937161,
+    "ast_hash": "8c5a94a6e265e6065093a076a53eb2ee",
+    "semantic_hash": ""
+  },
+  "web/.serena/memories/tech_stack.md": {
+    "mtime": 1783237669.165295,
+    "ast_hash": "c51fde2a0a8991af2645713238e16126",
+    "semantic_hash": ""
+  },
+  "web/.serena/project.local.yml": {
+    "mtime": 1783237604.3729165,
+    "ast_hash": "80d87878a5dcaa57ac055afdac265ad1",
+    "semantic_hash": ""
+  },
+  "web/.serena/project.yml": {
+    "mtime": 1783237604.3714182,
+    "ast_hash": "141c864af95384b1788ae21b37269126",
+    "semantic_hash": ""
+  },
+  "web/README.md": {
+    "mtime": 1783352703.7376716,
+    "ast_hash": "7ddc39576da860c1c1c6dcf90ec5b575",
+    "semantic_hash": ""
+  },
+  "web/index.html": {
+    "mtime": 1783333317.2661204,
+    "ast_hash": "e2dfa84438eab4e40659f4d486c1e68c",
+    "semantic_hash": ""
+  },
+  "web/public/design-system.html": {
+    "mtime": 1783233223.5956306,
+    "ast_hash": "3f821772281c3296378b434dd586f996",
+    "semantic_hash": ""
+  },
+  "web/public/favicon.svg": {
+    "mtime": 1783186342.99253,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": ""
+  },
+  "web/public/icons.svg": {
+    "mtime": 1783186343.0125296,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "web/src/assets/hero.png": {
+    "mtime": 1783186342.9720292,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": ""
+  },
+  "web/src/assets/react.svg": {
+    "mtime": 1783186343.0287766,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "web/src/assets/vite.svg": {
+    "mtime": 1783186343.0425603,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  }
+}

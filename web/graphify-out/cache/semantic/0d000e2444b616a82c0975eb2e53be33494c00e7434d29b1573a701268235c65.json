@@ -1,0 +1,1 @@
+{"nodes": [{"id": "renderer_drawplant_drawplant", "label": "drawPlant", "file_type": "code", "source_file": "src/renderer/drawPlant.ts"}], "edges": [{"source": "renderer_drawplant_drawplant", "target": "types_index_plant", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/renderer/drawPlant.ts"}], "hyperedges": []}

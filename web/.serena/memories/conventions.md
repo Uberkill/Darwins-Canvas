@@ -1,0 +1,6 @@
+- Use TypeScript strict mode
+- State management relies heavily on a mutable `worldRef` singleton for 60fps simulation, bypassing React render cycles to maintain performance for the simulation engine. React state (`zustand`) is used for UI only.
+- Game simulation loop logic lives in `src/engine/` and rendering logic in `src/renderer/`.
+- The main drawing canvas uses a 1024x1024 internal logical buffer for high resolution drawing. On mobile, `devicePixelRatio=1` is enforced for the buffer to prevent RAM crashes, scaling is done via CSS `aspect-ratio: 1/1` and `width: 100%`.
+- Use zero-cost crop exporting for canvas data: dynamically track bounding box of drawn pixels during pointer events.
+- Encapsulation: avoid exporting internal-only variables, functions, and types. Use `npx knip` to find orphaned/dead code.

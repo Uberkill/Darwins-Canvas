@@ -1,0 +1,302 @@
+{
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.eslintrc.json": {
+    "mtime": 1783186538.4677618,
+    "ast_hash": "1c195f00e80a8e80e07986231ce105bc",
+    "semantic_hash": "1c195f00e80a8e80e07986231ce105bc"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.oxlintrc.json": {
+    "mtime": 1783186342.922723,
+    "ast_hash": "029f4905006c1fffd96bc863e2d98d3e",
+    "semantic_hash": "029f4905006c1fffd96bc863e2d98d3e"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\package.json": {
+    "mtime": 1783238346.3421507,
+    "ast_hash": "13db66769ac4a9de3d2853b1da15b399",
+    "semantic_hash": "13db66769ac4a9de3d2853b1da15b399"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\App.tsx": {
+    "mtime": 1783234562.8251524,
+    "ast_hash": "ecd079e2048aed540b32059d10f1cd98",
+    "semantic_hash": "ecd079e2048aed540b32059d10f1cd98"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\__tests__\\engine\\collision.test.ts": {
+    "mtime": 1783240419.275866,
+    "ast_hash": "1609ab74cb70597056cc3cc9d8e05c6b",
+    "semantic_hash": "1609ab74cb70597056cc3cc9d8e05c6b"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\__tests__\\engine\\movement.test.ts": {
+    "mtime": 1783239632.2412634,
+    "ast_hash": "500c4a0d0dc339a35add8bf38ea1f4d2",
+    "semantic_hash": "500c4a0d0dc339a35add8bf38ea1f4d2"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\__tests__\\engine\\simulate.test.ts": {
+    "mtime": 1783240435.5554664,
+    "ast_hash": "4a1d07d0b2c1f01616d61866fd21e854",
+    "semantic_hash": "4a1d07d0b2c1f01616d61866fd21e854"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\__tests__\\engine\\useGameLoop.test.tsx": {
+    "mtime": 1783238618.8440602,
+    "ast_hash": "97155671976f8498fc392eb668cae4c4",
+    "semantic_hash": "97155671976f8498fc392eb668cae4c4"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\constants\\index.ts": {
+    "mtime": 1783239453.984797,
+    "ast_hash": "e6df5cad7a11ca3eb3807cd42fe3e5e5",
+    "semantic_hash": "e6df5cad7a11ca3eb3807cd42fe3e5e5"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\collision.ts": {
+    "mtime": 1783240407.6434948,
+    "ast_hash": "52eb07fb844a223513f2b0adb1448003",
+    "semantic_hash": "52eb07fb844a223513f2b0adb1448003"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\movement.ts": {
+    "mtime": 1783190206.880132,
+    "ast_hash": "8433d06bd000d6895e125cf3947fada7",
+    "semantic_hash": "8433d06bd000d6895e125cf3947fada7"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\reproduction.ts": {
+    "mtime": 1783239249.3989995,
+    "ast_hash": "7d225d03f084f9d49525f31e246b058f",
+    "semantic_hash": "7d225d03f084f9d49525f31e246b058f"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\simulate.ts": {
+    "mtime": 1783240387.767055,
+    "ast_hash": "4215561f4a66c32794c3a717af52f328",
+    "semantic_hash": "4215561f4a66c32794c3a717af52f328"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\spawner.ts": {
+    "mtime": 1783240304.7754538,
+    "ast_hash": "678f94700ccb444004513088cade792b",
+    "semantic_hash": "678f94700ccb444004513088cade792b"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\useGameLoop.ts": {
+    "mtime": 1783238324.5427547,
+    "ast_hash": "33a422d4551a51e74aedcd9c9421921d",
+    "semantic_hash": "33a422d4551a51e74aedcd9c9421921d"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\engine\\worldRef.ts": {
+    "mtime": 1783240285.3378708,
+    "ast_hash": "0d76b282f49ea8945c1692bed8e6912a",
+    "semantic_hash": "0d76b282f49ea8945c1692bed8e6912a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\hooks\\useDrawingCanvas.ts": {
+    "mtime": 1783235594.0134456,
+    "ast_hash": "df10fb7eaa52fc1ba8c6c68a8484463a",
+    "semantic_hash": "df10fb7eaa52fc1ba8c6c68a8484463a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\main.tsx": {
+    "mtime": 1783186343.0695612,
+    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
+    "semantic_hash": "787e5a07efeb2bf6209d5937195f2f68"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\renderer\\Renderer.ts": {
+    "mtime": 1783239599.7309735,
+    "ast_hash": "c4208bac4d5ffc28985e611bf1dd311d",
+    "semantic_hash": "c4208bac4d5ffc28985e611bf1dd311d"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\renderer\\canvasUtils.ts": {
+    "mtime": 1783235210.4910243,
+    "ast_hash": "c666a02c5db337c98c976f6f7cbf1905",
+    "semantic_hash": "c666a02c5db337c98c976f6f7cbf1905"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\renderer\\drawCreature.ts": {
+    "mtime": 1783190290.6963396,
+    "ast_hash": "1332c1c898d92442867a5b70d22f617e",
+    "semantic_hash": "1332c1c898d92442867a5b70d22f617e"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\renderer\\drawPlant.ts": {
+    "mtime": 1783186817.081576,
+    "ast_hash": "92be3cd0894b835d04abd39558629c00",
+    "semantic_hash": "92be3cd0894b835d04abd39558629c00"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\renderer\\imageCache.ts": {
+    "mtime": 1783235579.745529,
+    "ast_hash": "63cf00d92b23324b61e4845907e52e04",
+    "semantic_hash": "63cf00d92b23324b61e4845907e52e04"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\store\\useStore.ts": {
+    "mtime": 1783186572.7834115,
+    "ast_hash": "361ce6645801d0bc2f1fab96f029f9b8",
+    "semantic_hash": "361ce6645801d0bc2f1fab96f029f9b8"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\test-setup.ts": {
+    "mtime": 1783186404.3326924,
+    "ast_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9",
+    "semantic_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\types\\index.ts": {
+    "mtime": 1783240278.4371815,
+    "ast_hash": "d6003ab7f3e0325c2011fa6e93390885",
+    "semantic_hash": "d6003ab7f3e0325c2011fa6e93390885"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\BrushPicker.tsx": {
+    "mtime": 1783235196.031114,
+    "ast_hash": "7d7df511049993a0efec8e81fecae637",
+    "semantic_hash": "7d7df511049993a0efec8e81fecae637"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\ColorPalette.tsx": {
+    "mtime": 1783235583.9918628,
+    "ast_hash": "0eeef62769662d6ff1f8f6ff5391f709",
+    "semantic_hash": "0eeef62769662d6ff1f8f6ff5391f709"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\CreationPanel.tsx": {
+    "mtime": 1783238624.8594918,
+    "ast_hash": "951c27a22071ccd10c7efd3e91cfd076",
+    "semantic_hash": "951c27a22071ccd10c7efd3e91cfd076"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\EmptyState.tsx": {
+    "mtime": 1783233467.3537827,
+    "ast_hash": "7691769ff2540d17e14b3e9a8f42809d",
+    "semantic_hash": "7691769ff2540d17e14b3e9a8f42809d"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\FAB.tsx": {
+    "mtime": 1783233476.969734,
+    "ast_hash": "996473c5487e56dafe2fd1dbe5689380",
+    "semantic_hash": "996473c5487e56dafe2fd1dbe5689380"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\TitleScreen.tsx": {
+    "mtime": 1783233368.718809,
+    "ast_hash": "bc8f4e3a204c6c390c5943ddd9e8a77e",
+    "semantic_hash": "bc8f4e3a204c6c390c5943ddd9e8a77e"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\ui\\TraitPicker.tsx": {
+    "mtime": 1783233433.9582777,
+    "ast_hash": "7ff482c7fc52d4712db26881cdba5a30",
+    "semantic_hash": "7ff482c7fc52d4712db26881cdba5a30"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\utils\\nameGenerator.ts": {
+    "mtime": 1783234493.0342314,
+    "ast_hash": "ea1c57c86c6ab9b704789d72c705d12f",
+    "semantic_hash": "ea1c57c86c6ab9b704789d72c705d12f"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\tsconfig.app.json": {
+    "mtime": 1783186342.939731,
+    "ast_hash": "5f2dafd737dea8a4ddcbb10f5113ac5a",
+    "semantic_hash": "5f2dafd737dea8a4ddcbb10f5113ac5a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\tsconfig.json": {
+    "mtime": 1783186342.9437315,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\tsconfig.node.json": {
+    "mtime": 1783186342.9477313,
+    "ast_hash": "f9cb81ddcea69ffdab672fc8c48dca66",
+    "semantic_hash": "f9cb81ddcea69ffdab672fc8c48dca66"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\vite.config.ts": {
+    "mtime": 1783238630.096028,
+    "ast_hash": "d9e8eb856c8d7b3be95d77f226a4414c",
+    "semantic_hash": "d9e8eb856c8d7b3be95d77f226a4414c"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\FISH_TANK.md": {
+    "mtime": 1783185365.4208777,
+    "ast_hash": "5d6be0b30ba04bad52777e0f66d01ccc",
+    "semantic_hash": "5d6be0b30ba04bad52777e0f66d01ccc"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\src\\01_PRD_Core_Concept.md": {
+    "mtime": 1783182750.6790166,
+    "ast_hash": "9d8d5a9d81ea94123b40a135fdff63d4",
+    "semantic_hash": "9d8d5a9d81ea94123b40a135fdff63d4"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\src\\02_System_Architecture.md": {
+    "mtime": 1783182758.276022,
+    "ast_hash": "44671419faf5904212f727d84a323971",
+    "semantic_hash": "44671419faf5904212f727d84a323971"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\src\\03_Design_and_Creatures.md": {
+    "mtime": 1783182765.5630996,
+    "ast_hash": "dbc727aa92250345008c47577d731e88",
+    "semantic_hash": "dbc727aa92250345008c47577d731e88"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\src\\04_Workflows_and_Logic.md": {
+    "mtime": 1783182772.05756,
+    "ast_hash": "9f3d76581b1f3ffd974ea7c10d17dcaa",
+    "semantic_hash": "9f3d76581b1f3ffd974ea7c10d17dcaa"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\src\\05_Implementation_Plan.md": {
+    "mtime": 1783182778.3726869,
+    "ast_hash": "dd63ffdc06353dbf029e97f847a31e2a",
+    "semantic_hash": "dd63ffdc06353dbf029e97f847a31e2a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\memories\\conventions.md": {
+    "mtime": 1783237746.071715,
+    "ast_hash": "9329818582dbe126d778f12489f5f799",
+    "semantic_hash": "9329818582dbe126d778f12489f5f799"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\memories\\core.md": {
+    "mtime": 1783237804.4994035,
+    "ast_hash": "f424352cedb3f614f5dddb62a4792309",
+    "semantic_hash": "f424352cedb3f614f5dddb62a4792309"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\memories\\memory_maintenance.md": {
+    "mtime": 1783237609.0166657,
+    "ast_hash": "17877e37a829c58bb20c04228b985ab8",
+    "semantic_hash": "17877e37a829c58bb20c04228b985ab8"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\memories\\suggested_commands.md": {
+    "mtime": 1783237737.838874,
+    "ast_hash": "8c85abe6561a6f3f703d1035b0802851",
+    "semantic_hash": "8c85abe6561a6f3f703d1035b0802851"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\memories\\task_completion.md": {
+    "mtime": 1783237788.937161,
+    "ast_hash": "8c5a94a6e265e6065093a076a53eb2ee",
+    "semantic_hash": "8c5a94a6e265e6065093a076a53eb2ee"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\memories\\tech_stack.md": {
+    "mtime": 1783237669.165295,
+    "ast_hash": "c51fde2a0a8991af2645713238e16126",
+    "semantic_hash": "c51fde2a0a8991af2645713238e16126"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\project.local.yml": {
+    "mtime": 1783237604.3729165,
+    "ast_hash": "80d87878a5dcaa57ac055afdac265ad1",
+    "semantic_hash": "80d87878a5dcaa57ac055afdac265ad1"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\.serena\\project.yml": {
+    "mtime": 1783237604.3714182,
+    "ast_hash": "141c864af95384b1788ae21b37269126",
+    "semantic_hash": "141c864af95384b1788ae21b37269126"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\README.md": {
+    "mtime": 1783186342.9581375,
+    "ast_hash": "10495bfcc6c568eca4dab6dd5df795d3",
+    "semantic_hash": "10495bfcc6c568eca4dab6dd5df795d3"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\index.html": {
+    "mtime": 1783233325.0686996,
+    "ast_hash": "4db375cd5a875efa643411c447442c75",
+    "semantic_hash": "4db375cd5a875efa643411c447442c75"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\public\\design-system.html": {
+    "mtime": 1783233223.5956306,
+    "ast_hash": "3f821772281c3296378b434dd586f996",
+    "semantic_hash": "3f821772281c3296378b434dd586f996"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\public\\favicon.svg": {
+    "mtime": 1783186342.99253,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": "7e840862161341271697daa99a40d76b"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\public\\icons.svg": {
+    "mtime": 1783186343.0125296,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\assets\\hero.png": {
+    "mtime": 1783186342.9720292,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": "aead493361b27e7510691c5d7072dfc1"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\assets\\react.svg": {
+    "mtime": 1783186343.0287766,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": "f0402b67b6ce880f65666bb49e841696"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\fish-tank\\web\\src\\assets\\vite.svg": {
+    "mtime": 1783186343.0425603,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": "9960a24288958394ac50e57ff638b036"
+  }
+}

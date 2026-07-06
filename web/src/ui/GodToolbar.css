@@ -1,0 +1,91 @@
+.god-toolbar {
+  position: absolute;
+  left: max(20px, env(safe-area-inset-left));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 100;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+}
+
+.god-tool-btn {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  border: 2px solid transparent;
+  background: white;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@media (hover: hover) {
+  .god-tool-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-text);
+    box-shadow: 4px 4px 0 var(--color-text);
+    transform: translate(-2px, -2px);
+  }
+}
+
+.god-tool-btn.active {
+  background: var(--color-primary);
+  color: white;
+  border: 2px solid var(--color-text);
+  box-shadow: 4px 4px 0 var(--color-text);
+}
+
+/* Custom Tooltip */
+.god-tooltip {
+  position: absolute;
+  left: calc(100% + 16px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  background: var(--color-text);
+  color: white;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+.god-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: var(--color-text);
+}
+
+@media (hover: hover) {
+  .god-tool-btn:hover .god-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+@media (hover: none) {
+  .god-tool-btn.active .god-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+}

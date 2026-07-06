@@ -1,0 +1,7 @@
+- React
+- TypeScript
+- Vite
+- Zustand for state management
+- CSS modules / plain CSS (vanilla)
+- Oxlint and ESLint for linting
+- Vitest for testing

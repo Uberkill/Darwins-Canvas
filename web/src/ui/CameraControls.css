@@ -1,0 +1,87 @@
+.camera-controls-container {
+  position: absolute;
+  bottom: max(32px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  z-index: 40;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+}
+
+.camera-controls-group {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-panel);
+  border: 3px solid #E2DDD5;
+  padding: 4px;
+  gap: 8px;
+}
+
+.camera-btn {
+  background: var(--color-bg-base);
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--color-text);
+}
+
+.camera-btn:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.camera-btn:active {
+  transform: scale(0.9);
+}
+
+.camera-btn-icon {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.camera-zoom-indicator {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--color-text-muted);
+  min-width: 48px;
+  text-align: center;
+}
+
+.camera-btn-mode {
+  background: white;
+  color: var(--color-text-muted);
+  border: 3px solid #E2DDD5;
+  border-radius: var(--radius-full);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn-neutral);
+  transition: all 0.2s;
+}
+
+.camera-btn-mode:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.camera-btn-mode.active {
+  background: var(--color-tertiary);
+  color: white;
+  border-color: var(--color-tertiary);
+  box-shadow: var(--shadow-btn-yellow);
+}

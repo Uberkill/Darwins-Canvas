@@ -1,0 +1,4 @@
+- Run `npx tsc --noEmit` to verify type safety and compiler checks without emitting files. This is the source of truth for ensuring clean builds after deletion/cleanup.
+- Run `npm run lint` to ensure oxlint/eslint checks pass.
+- Run `npm test` if engine logic is modified.
+- Run `npx knip` to verify no orphaned/dead code remains.

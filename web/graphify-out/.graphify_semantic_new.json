@@ -1,0 +1,1585 @@
+{
+  "nodes": [
+    {
+      "id": "src_app_app",
+      "label": "App",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src_app_usecreaturecount",
+      "label": "useCreatureCount",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_collision_runcollision",
+      "label": "runCollision",
+      "file_type": "code",
+      "source_file": "src/engine/collision.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_movement_movecrawler",
+      "label": "moveCrawler",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_movement_movehopper",
+      "label": "moveHopper",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_movement_movepacer",
+      "label": "movePacer",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_reproduction_checkreproduction",
+      "label": "checkReproduction",
+      "file_type": "code",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_reproduction_spawnbaby",
+      "label": "spawnBaby",
+      "file_type": "code",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_simulate_simulate",
+      "label": "simulate",
+      "file_type": "code",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_simulate_buildcreature",
+      "label": "buildCreature",
+      "file_type": "code",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_spawner_tickplantspawner",
+      "label": "tickPlantSpawner",
+      "file_type": "code",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_spawner_createplant",
+      "label": "createPlant",
+      "file_type": "code",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_usegameloop_usegameloop",
+      "label": "useGameLoop",
+      "file_type": "code",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_worldref_worldref",
+      "label": "worldRef",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_worldref_createinitialworldstate",
+      "label": "createInitialWorldState",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_worldref_updateworlddimensions",
+      "label": "updateWorldDimensions",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "label": "useDrawingCanvas",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hooks_usedrawingcanvas_applybrushsettings",
+      "label": "applyBrushSettings",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hooks_usedrawingcanvas_hextorgb",
+      "label": "hexToRgb",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hooks_usedrawingcanvas_floodfill",
+      "label": "floodFill",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hooks_usedrawingcanvas_checkisempty",
+      "label": "checkIsEmpty",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "renderer_canvasutils_setupcanvas",
+      "label": "setupCanvas",
+      "file_type": "code",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "renderer_canvasutils_getcanvaspoint",
+      "label": "getCanvasPoint",
+      "file_type": "code",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "renderer_drawcreature_drawcreature",
+      "label": "drawCreature",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "renderer_drawcreature_drawcreatureshadow",
+      "label": "drawCreatureShadow",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "renderer_drawcreature_drawfallback",
+      "label": "drawFallback",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "constants_index_carnivore_eat_range",
+      "label": "CARNIVORE_EAT_RANGE",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "constants_index_herbivore_eat_range",
+      "label": "HERBIVORE_EAT_RANGE",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "constants_index_getworldwidth",
+      "label": "getWorldWidth",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "constants_index_getworldheight",
+      "label": "getWorldHeight",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_collision_zgate",
+      "label": "Z-Gate Collision Pattern",
+      "file_type": "rationale",
+      "source_file": "src/engine/collision.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Prevents Hoppers from colliding with ground entities while visually airborne by checking Z-axis."
+    },
+    {
+      "id": "engine_reproduction_asexual",
+      "label": "Asexual Reproduction Mechanism",
+      "file_type": "rationale",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "When a creature is well-fed, off cooldown, and world is below cap, probabilistically spawns a baby (clone) to prevent ecosystem death."
+    },
+    {
+      "id": "hooks_usedrawingcanvas_zerocostcrop",
+      "label": "Zero-Cost Crop Export",
+      "file_type": "rationale",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Dynamic bounding box tracking allows for zero-cost cropping of the drawing canvas when exporting, skipping full-canvas scans."
+    },
+    {
+      "id": "engine_collision_test_makeworld",
+      "label": "makeWorld (collision)",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_collision_test_makecreature",
+      "label": "makeCreature (collision)",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_movement_test_makecreature",
+      "label": "makeCreature (movement)",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "engine_simulate_test_makeworld",
+      "label": "makeWorld (simulate)",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "renderer_drawplant_drawplant",
+      "label": "drawPlant",
+      "file_type": "code",
+      "source_file": "src/renderer/drawPlant.ts"
+    },
+    {
+      "id": "renderer_imagecache_cache",
+      "label": "cache",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "id": "renderer_imagecache_getimage",
+      "label": "getImage",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "id": "renderer_imagecache_preloadimage",
+      "label": "preloadImage",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "id": "renderer_imagecache_releaseimage",
+      "label": "releaseImage",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "id": "store_usestore_usestore",
+      "label": "useStore",
+      "file_type": "code",
+      "source_file": "src/store/useStore.ts"
+    },
+    {
+      "id": "types_index_creaturesize",
+      "label": "CreatureSize",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_movementtype",
+      "label": "MovementType",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_diettype",
+      "label": "DietType",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_creaturestate",
+      "label": "CreatureState",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_creature",
+      "label": "Creature",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_plant",
+      "label": "Plant",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_worldstate",
+      "label": "WorldState",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_gamestore",
+      "label": "GameStore",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "types_index_pendingcreature",
+      "label": "PendingCreature",
+      "file_type": "code",
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "ui_brushpicker_brush_sizes",
+      "label": "BRUSH_SIZES",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx"
+    },
+    {
+      "id": "ui_brushpicker_brushpickerprops",
+      "label": "BrushPickerProps",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx"
+    },
+    {
+      "id": "ui_brushpicker_brushpicker",
+      "label": "BrushPicker",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx"
+    },
+    {
+      "id": "ui_colorpalette_palette",
+      "label": "PALETTE",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx"
+    },
+    {
+      "id": "ui_colorpalette_colorpaletteprops",
+      "label": "ColorPaletteProps",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx"
+    },
+    {
+      "id": "ui_colorpalette_colorpalette",
+      "label": "ColorPalette",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx"
+    },
+    {
+      "id": "ui_creationpanel_creationpanel",
+      "label": "CreationPanel",
+      "file_type": "code",
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "id": "ui_emptystate_emptystate",
+      "label": "EmptyState",
+      "file_type": "code",
+      "source_file": "src/ui/EmptyState.tsx"
+    },
+    {
+      "id": "ui_fab_fabprops",
+      "label": "FABProps",
+      "file_type": "code",
+      "source_file": "src/ui/FAB.tsx"
+    },
+    {
+      "id": "ui_fab_fab",
+      "label": "FAB",
+      "file_type": "code",
+      "source_file": "src/ui/FAB.tsx"
+    },
+    {
+      "id": "ui_titlescreen_titlescreenprops",
+      "label": "TitleScreenProps",
+      "file_type": "code",
+      "source_file": "src/ui/TitleScreen.tsx"
+    },
+    {
+      "id": "ui_titlescreen_titlescreen",
+      "label": "TitleScreen",
+      "file_type": "code",
+      "source_file": "src/ui/TitleScreen.tsx"
+    },
+    {
+      "id": "ui_traitpicker_traitpickerprops",
+      "label": "TraitPickerProps",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "id": "ui_traitpicker_traitpicker",
+      "label": "TraitPicker",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "id": "ui_traitpicker_size_options",
+      "label": "SIZE_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "id": "ui_traitpicker_movement_options",
+      "label": "MOVEMENT_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "id": "ui_traitpicker_diet_options",
+      "label": "DIET_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "id": "utils_namegenerator_adjectives",
+      "label": "ADJECTIVES",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts"
+    },
+    {
+      "id": "utils_namegenerator_nouns",
+      "label": "NOUNS",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts"
+    },
+    {
+      "id": "utils_namegenerator_generaterandomname",
+      "label": "generateRandomName",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts"
+    },
+    {
+      "id": "renderer_imagecache_caching_strategy",
+      "label": "HTMLImageElement Caching Strategy",
+      "file_type": "rationale",
+      "source_file": "src/renderer/imageCache.ts",
+      "rationale": "Prevents GC pauses and dropped frames by pre-building HTMLImageElement per creature instead of creating `new Image()` on every frame."
+    },
+    {
+      "id": "store_usestore_command_bus_pattern",
+      "label": "Command Bus Pattern",
+      "file_type": "rationale",
+      "source_file": "src/store/useStore.ts",
+      "rationale": "Separates UI state from simulation state. The store handles user actions and bridges to the game loop without directly mutating the simulation, maintaining 60fps performance."
+    },
+    {
+      "id": "public_favicon_logo",
+      "label": "Favicon Logo",
+      "file_type": "image",
+      "source_file": "web/public/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_bluesky_icon",
+      "label": "bluesky-icon",
+      "file_type": "image",
+      "source_file": "public/icons.svg",
+      "source_location": "2-5",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_discord_icon",
+      "label": "discord-icon",
+      "file_type": "image",
+      "source_file": "public/icons.svg",
+      "source_location": "6-8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_documentation_icon",
+      "label": "documentation-icon",
+      "file_type": "image",
+      "source_file": "public/icons.svg",
+      "source_location": "9-13",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_github_icon",
+      "label": "github-icon",
+      "file_type": "image",
+      "source_file": "public/icons.svg",
+      "source_location": "14-16",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_social_icon",
+      "label": "social-icon",
+      "file_type": "image",
+      "source_file": "public/icons.svg",
+      "source_location": "17-20",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "public_icons_x_icon",
+      "label": "x-icon",
+      "file_type": "image",
+      "source_file": "public/icons.svg",
+      "source_location": "21-23",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "assets_hero_isometric_layers",
+      "label": "Isometric Stacked Layers Diagram",
+      "file_type": "image",
+      "source_file": "web/src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "assets_hero_layered_architecture",
+      "label": "Layered Architecture Concept",
+      "file_type": "concept",
+      "source_file": "web/src/assets/hero.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "assets_react_react_logo",
+      "label": "React Logo",
+      "file_type": "image",
+      "source_file": "src/assets/react.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "assets_react_react",
+      "label": "React",
+      "file_type": "concept",
+      "source_file": "src/assets/react.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "assets_vite_vite",
+      "label": "Vite Logo",
+      "file_type": "image",
+      "source_file": "src/assets/vite.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_app_app",
+      "target": "engine_usegameloop_usegameloop",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_app",
+      "target": "renderer_canvasutils_getcanvaspoint",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_app",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_usecreaturecount",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "constants_index_carnivore_eat_range",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/collision.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "constants_index_herbivore_eat_range",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/collision.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "engine_collision_zgate",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/engine/collision.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction_checkreproduction",
+      "target": "engine_reproduction_spawnbaby",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction_checkreproduction",
+      "target": "engine_reproduction_asexual",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_movement_movecrawler",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_movement_movehopper",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_movement_movepacer",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_collision_runcollision",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_reproduction_checkreproduction",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_spawner_tickplantspawner",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner_tickplantspawner",
+      "target": "engine_spawner_createplant",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/spawner.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_simulate_simulate",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "renderer_drawcreature_drawcreatureshadow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "renderer_drawcreature_drawcreature",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "renderer_canvasutils_setupcanvas",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_worldref_updateworlddimensions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_simulate_buildcreature",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_createinitialworldstate",
+      "target": "constants_index_getworldwidth",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_createinitialworldstate",
+      "target": "constants_index_getworldheight",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_updateworlddimensions",
+      "target": "constants_index_getworldwidth",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_updateworlddimensions",
+      "target": "constants_index_getworldheight",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "renderer_canvasutils_setupcanvas",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "renderer_canvasutils_getcanvaspoint",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_applybrushsettings",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_hextorgb",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_floodfill",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_checkisempty",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_zerocostcrop",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature_drawcreature",
+      "target": "renderer_drawcreature_drawfallback",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test_makecreature",
+      "target": "engine_movement_test_makecreature",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test_makeworld",
+      "target": "engine_simulate_test_makeworld",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawplant_drawplant",
+      "target": "types_index_plant",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/renderer/drawPlant.ts"
+    },
+    {
+      "source": "renderer_imagecache_getimage",
+      "target": "renderer_imagecache_cache",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "source": "renderer_imagecache_preloadimage",
+      "target": "renderer_imagecache_cache",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "source": "renderer_imagecache_releaseimage",
+      "target": "renderer_imagecache_cache",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "source": "store_usestore_usestore",
+      "target": "types_index_gamestore",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/store/useStore.ts"
+    },
+    {
+      "source": "store_usestore_usestore",
+      "target": "types_index_pendingcreature",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/store/useStore.ts"
+    },
+    {
+      "source": "types_index_creature",
+      "target": "types_index_creaturesize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_creature",
+      "target": "types_index_movementtype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_creature",
+      "target": "types_index_diettype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_creature",
+      "target": "types_index_creaturestate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_worldstate",
+      "target": "types_index_creature",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_worldstate",
+      "target": "types_index_plant",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_gamestore",
+      "target": "types_index_pendingcreature",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_pendingcreature",
+      "target": "types_index_creaturesize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_pendingcreature",
+      "target": "types_index_movementtype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "types_index_pendingcreature",
+      "target": "types_index_diettype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "source": "ui_brushpicker_brushpicker",
+      "target": "ui_brushpicker_brushpickerprops",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/BrushPicker.tsx"
+    },
+    {
+      "source": "ui_brushpicker_brushpicker",
+      "target": "ui_brushpicker_brush_sizes",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/BrushPicker.tsx"
+    },
+    {
+      "source": "ui_colorpalette_colorpalette",
+      "target": "ui_colorpalette_colorpaletteprops",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/ColorPalette.tsx"
+    },
+    {
+      "source": "ui_colorpalette_colorpalette",
+      "target": "ui_colorpalette_palette",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/ColorPalette.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "types_index_creaturesize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "types_index_movementtype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "types_index_diettype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_colorpalette_colorpalette",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_brushpicker_brushpicker",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_traitpicker_traitpicker",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_traitpicker_size_options",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_traitpicker_movement_options",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_traitpicker_diet_options",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "utils_namegenerator_generaterandomname",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_fab_fab",
+      "target": "ui_fab_fabprops",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/FAB.tsx"
+    },
+    {
+      "source": "ui_fab_fab",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/FAB.tsx"
+    },
+    {
+      "source": "ui_titlescreen_titlescreen",
+      "target": "ui_titlescreen_titlescreenprops",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "ui_traitpicker_traitpicker",
+      "target": "ui_traitpicker_traitpickerprops",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "source": "ui_traitpicker_size_options",
+      "target": "types_index_creaturesize",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "source": "ui_traitpicker_movement_options",
+      "target": "types_index_movementtype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "source": "ui_traitpicker_diet_options",
+      "target": "types_index_diettype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "source": "utils_namegenerator_generaterandomname",
+      "target": "utils_namegenerator_adjectives",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/utils/nameGenerator.ts"
+    },
+    {
+      "source": "utils_namegenerator_generaterandomname",
+      "target": "utils_namegenerator_nouns",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/utils/nameGenerator.ts"
+    },
+    {
+      "source": "ui_traitpicker_traitpicker",
+      "target": "types_index_creature",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/ui/TraitPicker.tsx"
+    },
+    {
+      "source": "renderer_imagecache_caching_strategy",
+      "target": "renderer_imagecache_cache",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/renderer/imageCache.ts"
+    },
+    {
+      "source": "store_usestore_command_bus_pattern",
+      "target": "store_usestore_usestore",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/store/useStore.ts"
+    },
+    {
+      "source": "assets_hero_isometric_layers",
+      "target": "assets_hero_layered_architecture",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "web/src/assets/hero.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "assets_react_react_logo",
+      "target": "assets_react_react",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/assets/react.svg",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "engine_movement_types",
+      "label": "Creature Movement Behaviors",
+      "nodes": [
+        "engine_movement_movecrawler",
+        "engine_movement_movehopper",
+        "engine_movement_movepacer"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/engine/movement.ts"
+    },
+    {
+      "id": "engine_simulation_systems",
+      "label": "Simulation Engine Systems",
+      "nodes": [
+        "engine_simulate_simulate",
+        "engine_movement_movecrawler",
+        "engine_movement_movehopper",
+        "engine_movement_movepacer",
+        "engine_collision_runcollision",
+        "engine_reproduction_checkreproduction",
+        "engine_spawner_tickplantspawner"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts"
+    },
+    {
+      "id": "creature_traits",
+      "label": "Creature Traits Definition",
+      "nodes": [
+        "types_index_creature",
+        "types_index_creaturesize",
+        "types_index_movementtype",
+        "types_index_diettype"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/types/index.ts"
+    },
+    {
+      "id": "public_icons_social_group",
+      "label": "Social Media Icons",
+      "nodes": [
+        "public_icons_bluesky_icon",
+        "public_icons_discord_icon",
+        "public_icons_github_icon",
+        "public_icons_social_icon",
+        "public_icons_x_icon"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "public/icons.svg"
+    },
+    {
+      "id": "public_icons_spritesheet",
+      "label": "SVG Icon Sprite Sheet",
+      "nodes": [
+        "public_icons_bluesky_icon",
+        "public_icons_discord_icon",
+        "public_icons_documentation_icon",
+        "public_icons_github_icon",
+        "public_icons_social_icon",
+        "public_icons_x_icon"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "public/icons.svg"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
