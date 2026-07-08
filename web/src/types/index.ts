@@ -112,13 +112,30 @@ interface CameraState {
 }
 
 // ─── Population Tracking ──────────────────────────────────────────────────────
-export interface PopulationDataPoint {
+export interface EcosystemDataPoint {
   time: number;
   carnivore: number;
   omnivore: number;
   herbivore: number;
   plant: number;
   meat: number;
+  births: number;
+  starvationDeaths: number;
+  huntedDeaths: number;
+  damageDealt: number;
+  caloriesConsumed: number;
+  maxGeneration: number;
+}
+
+export interface EcosystemAnalytics {
+  currentSecondAccumulator: {
+    births: number;
+    starvationDeaths: number;
+    huntedDeaths: number;
+    damageDealt: number;
+    caloriesConsumed: number;
+  };
+  history: EcosystemDataPoint[];
 }
 
 // ─── World state (lives in worldRef — NOT in Zustand) ────────────────────────
@@ -165,7 +182,7 @@ export interface WorldState {
   isPaused: boolean;
   
   // Statistics & History
-  populationHistory: PopulationDataPoint[];
+  analytics: EcosystemAnalytics;
   historyTimer: number;
 }
 

@@ -46,8 +46,13 @@ export function runCollision(world: WorldState, _dt: number): void {
           const aBurst = a.lungeTimer > 0 ? 2 : 1;
           const bBurst = b.lungeTimer > 0 ? 2 : 1;
 
-          a.health -= (b.damage * bBurst) * _dt;
-          b.health -= (a.damage * aBurst) * _dt;
+          const aDmg = b.damage * bBurst * _dt;
+          const bDmg = a.damage * aBurst * _dt;
+
+          a.health -= aDmg;
+          b.health -= bDmg;
+          
+          world.analytics.currentSecondAccumulator.damageDealt += (aDmg + bDmg);
           
           if (b.damage > 0) {
             if (a.hitTimer <= 0) {
@@ -65,6 +70,7 @@ export function runCollision(world: WorldState, _dt: number): void {
           // Determine death
           if (a.health <= 0) {
             killCreature(world, a.id)
+            world.analytics.currentSecondAccumulator.huntedDeaths++;
             spawnPlant(world, {
               id: crypto.randomUUID(),
               type: 'MEAT',
@@ -82,6 +88,7 @@ export function runCollision(world: WorldState, _dt: number): void {
           }
           if (b.health <= 0) {
             killCreature(world, b.id)
+            world.analytics.currentSecondAccumulator.huntedDeaths++;
             spawnPlant(world, {
               id: crypto.randomUUID(),
               type: 'MEAT',
@@ -140,6 +147,7 @@ export function runCollision(world: WorldState, _dt: number): void {
         }
         
         c.hunger = Math.min(100, c.hunger + plantEnergy)
+        world.analytics.currentSecondAccumulator.caloriesConsumed += plantEnergy
         c.state = 'EATING'
         c.eatingTimer = (c.diet === 'CARNIVORE' && isMeat) ? 15.0 : 0.5
         c.foodEaten += 1
@@ -154,6 +162,7 @@ export function runCollision(world: WorldState, _dt: number): void {
   for (const c of world.creatures) {
     if (c.health <= 0 && !deletedCreatureIds.has(c.id)) {
       killCreature(world, c.id)
+      world.analytics.currentSecondAccumulator.starvationDeaths++;
     }
   }
 

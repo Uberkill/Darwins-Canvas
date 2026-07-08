@@ -163,6 +163,7 @@ export function simulate(world: WorldState, dt: number): void {
   if (babies.length > 0) {
     for (let i = 0; i < babies.length; i++) {
       spawnCreature(world, babies[i]);
+      world.analytics.currentSecondAccumulator.births++;
     }
   }
 
@@ -203,38 +204,50 @@ export function simulate(world: WorldState, dt: number): void {
     }
   }
 
-  // ─── POPULATION TRACKER (1Hz) ──────────────────────────────────────────────
-  world.historyTimer += dt;
+  // ─── ECOSYSTEM ANALYTICS TRACKER (1Hz) ───
+  world.historyTimer += dt
   if (world.historyTimer >= 1.0) {
-    world.historyTimer = 0;
-    
-    let carnivore = 0;
-    let omnivore = 0;
-    let herbivore = 0;
-    for (const c of world.creatures) {
-      if (c.diet === 'CARNIVORE') carnivore++;
-      else if (c.diet === 'OMNIVORE') omnivore++;
-      else if (c.diet === 'HERBIVORE') herbivore++;
+    world.historyTimer = 0
+
+    let carnivore = 0
+    let omnivore = 0
+    let herbivore = 0
+    let maxGeneration = 1
+
+    for (let i = 0; i < world.creatures.length; i++) {
+      const c = world.creatures[i]
+      if (c.diet === 'CARNIVORE') carnivore++
+      else if (c.diet === 'OMNIVORE') omnivore++
+      else if (c.diet === 'HERBIVORE') herbivore++
+      
+      if (c.generation > maxGeneration) {
+        maxGeneration = c.generation
+      }
     }
 
-    let plant = 0;
-    let meat = 0;
-    for (const p of world.plants) {
-      if (p.type === 'MEAT') meat++;
-      else plant++;
+    let plant = 0
+    let meat = 0
+    for (let i = 0; i < world.plants.length; i++) {
+      if (world.plants[i].type === 'MEAT') meat++
+      else plant++
     }
 
-    world.populationHistory.push({
+    world.analytics.history.push({
       time: world.totalTime,
-      carnivore,
-      omnivore,
-      herbivore,
-      plant,
-      meat
-    });
-
-    if (world.populationHistory.length > 200) {
-      world.populationHistory.shift();
-    }
+      carnivore, omnivore, herbivore, plant, meat,
+      births: world.analytics.currentSecondAccumulator.births,
+      starvationDeaths: world.analytics.currentSecondAccumulator.starvationDeaths,
+      huntedDeaths: world.analytics.currentSecondAccumulator.huntedDeaths,
+      damageDealt: world.analytics.currentSecondAccumulator.damageDealt,
+      caloriesConsumed: world.analytics.currentSecondAccumulator.caloriesConsumed,
+      maxGeneration
+    })
+    
+    // Zero out the interval accumulators
+    world.analytics.currentSecondAccumulator.births = 0;
+    world.analytics.currentSecondAccumulator.starvationDeaths = 0;
+    world.analytics.currentSecondAccumulator.huntedDeaths = 0;
+    world.analytics.currentSecondAccumulator.damageDealt = 0;
+    world.analytics.currentSecondAccumulator.caloriesConsumed = 0;
   }
 }

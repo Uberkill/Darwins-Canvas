@@ -26,7 +26,16 @@ describe('entityManager', () => {
       draggedEntityId: null,
       hoveredEntityId: null,
       activeLure: null,
-      populationHistory: [],
+      analytics: {
+        currentSecondAccumulator: {
+          births: 0,
+          starvationDeaths: 0,
+          huntedDeaths: 0,
+          damageDealt: 0,
+          caloriesConsumed: 0,
+        },
+        history: []
+      },
       historyTimer: 0,
       mouseX: 0,
       mouseY: 0

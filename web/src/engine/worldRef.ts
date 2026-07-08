@@ -41,7 +41,16 @@ function createInitialWorldState(): WorldState {
     },
     draggedEntityId: null,
     isPaused: false,
-    populationHistory: [],
+    analytics: {
+      currentSecondAccumulator: {
+        births: 0,
+        starvationDeaths: 0,
+        huntedDeaths: 0,
+        damageDealt: 0,
+        caloriesConsumed: 0,
+      },
+      history: []
+    },
     historyTimer: 0,
   }
 }
