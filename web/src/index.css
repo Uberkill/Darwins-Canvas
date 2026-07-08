@@ -1101,7 +1101,7 @@ body {
   }
 }
 /* --- Touch-Landscape Layout (< 500px height) ----------------------- */
-@media (max-height: 500px) and (orientation: landscape) {
+@media (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
   .creation-modal-container {
     display: flex !important;
     flex-direction: row !important;

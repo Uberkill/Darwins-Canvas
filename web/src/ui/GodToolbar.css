@@ -97,7 +97,7 @@
 }
 
 /* Mobile & Landscape Responsive */
-@media (max-width: 768px), (max-height: 500px) {
+@media (max-width: 768px) and (pointer: coarse), (max-height: 500px) and (pointer: coarse) {
   .god-toolbar {
     gap: 8px;
     left: max(12px, env(safe-area-inset-left));

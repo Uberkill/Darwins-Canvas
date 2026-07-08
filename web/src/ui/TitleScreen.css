@@ -301,7 +301,7 @@
 }
 
 /* Landscape Mobile (Short Screens) */
-@media (max-height: 500px) {
+@media (max-height: 500px) and (pointer: coarse) {
   .title-screen-container {
     gap: 10px;
     padding: 10px;

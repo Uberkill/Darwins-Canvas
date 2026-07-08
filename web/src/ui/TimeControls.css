@@ -14,7 +14,7 @@
   pointer-events: auto;
 }
 
-@media (max-height: 500px) and (orientation: landscape) {
+@media (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
   .time-controls-media {
     top: auto;
     bottom: max(12px, env(safe-area-inset-bottom)); 

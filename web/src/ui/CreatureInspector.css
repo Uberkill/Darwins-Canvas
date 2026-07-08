@@ -17,7 +17,7 @@
   pointer-events: auto;
 }
 
-@media (max-width: 768px), (max-height: 500px) {
+@media (max-width: 768px) and (pointer: coarse), (max-height: 500px) and (pointer: coarse) {
   .inspector-panel {
     top: auto;
     bottom: 0;
