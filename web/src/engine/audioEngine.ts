@@ -52,6 +52,13 @@ class AudioEngine {
     if (this.isAssetLoading || !this.ctx) return;
     this.isAssetLoading = true;
     
+    // Create HTML Audio synchronously so startBGM doesn't fall back to procedural!
+    this.dayBgm = new Audio(AUDIO_ASSETS.bgm.dayTheme);
+    this.dayBgm.loop = true;
+    this.nightBgm = new Audio(AUDIO_ASSETS.bgm.nightTheme);
+    this.nightBgm.loop = true;
+    this.syncHtmlAudioVolumes();
+
     for (const [key, url] of Object.entries(AUDIO_ASSETS.sfx)) {
       try {
         const response = await fetch(url);
@@ -62,12 +69,6 @@ class AudioEngine {
         }
       } catch (e) {} // Fallback to procedural
     }
-
-    this.dayBgm = new Audio(AUDIO_ASSETS.bgm.dayTheme);
-    this.dayBgm.loop = true;
-    this.nightBgm = new Audio(AUDIO_ASSETS.bgm.nightTheme);
-    this.nightBgm.loop = true;
-    this.syncHtmlAudioVolumes();
   }
 
   private playCustomSfx(key: keyof typeof AUDIO_ASSETS.sfx, volumeMod: number = 1.0, playbackRate: number = 1.0): boolean {
@@ -215,19 +216,24 @@ class AudioEngine {
 
     this.isBgmPlaying = true;
     
-    let playedHtml = false;
     if (this.dayBgm && this.nightBgm) {
-      try {
-        this.syncHtmlAudioVolumes();
-        this.dayBgm.play();
-        this.nightBgm.play();
-        playedHtml = true;
-      } catch (e) {
-        console.warn('HTML Audio autoplay prevented');
-      }
-    }
-    
-    if (!playedHtml) {
+      this.syncHtmlAudioVolumes();
+      
+      this.dayBgm.play().then(() => {
+        // If HTML audio successfully starts, forcibly kill any procedural timeouts just in case!
+        if (this.bgmTimeoutId !== null) {
+          clearTimeout(this.bgmTimeoutId);
+          this.bgmTimeoutId = null;
+        }
+      }).catch(() => {
+        // If HTML audio fails (404 or autoplay block), fall back to procedural
+        if (this.isBgmPlaying && this.bgmTimeoutId === null) {
+          this.playNextBgmNote();
+        }
+      });
+      
+      this.nightBgm.play().catch(() => {});
+    } else {
       this.playNextBgmNote();
     }
   }
@@ -426,10 +432,13 @@ class AudioEngine {
     }
     
     if (this.isBgmPlaying && this.dayBgm && this.dayBgm.paused) {
-      try {
-        this.dayBgm.play();
-        this.nightBgm?.play();
-      } catch (e) {}
+      this.dayBgm.play().then(() => {
+        if (this.bgmTimeoutId !== null) {
+          clearTimeout(this.bgmTimeoutId);
+          this.bgmTimeoutId = null;
+        }
+      }).catch(() => {});
+      this.nightBgm?.play().catch(() => {});
     }
 
     if (this.playCustomSfx('uiClick')) return;
