@@ -1,10 +1,18 @@
 import { worldRef } from './worldRef';
+import { AUDIO_ASSETS } from '../constants/audioConfig';
 
 class AudioEngine {
   private ctx: AudioContext | null = null;
   private masterGain: GainNode | null = null;
   private sfxGain: GainNode | null = null;
   private bgmGain: GainNode | null = null;
+
+  // Hybrid Audio State
+  private sfxBuffers: Record<string, AudioBuffer> = {};
+  private dayBgm: HTMLAudioElement | null = null;
+  private nightBgm: HTMLAudioElement | null = null;
+  private isAssetLoading = false;
+  private currentCrossfade = 0; // 0 = day, 1 = night
 
   // State
   private isBgmPlaying = false;
@@ -34,9 +42,45 @@ class AudioEngine {
       this.masterGain.connect(this.ctx.destination);
 
       this.updateVolumes();
+      this.loadCustomAssets();
     } catch (e) {
       console.warn('Web Audio API not supported', e);
     }
+  }
+
+  private async loadCustomAssets() {
+    if (this.isAssetLoading || !this.ctx) return;
+    this.isAssetLoading = true;
+    
+    for (const [key, url] of Object.entries(AUDIO_ASSETS.sfx)) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const arrayBuffer = await response.arrayBuffer();
+          const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
+          this.sfxBuffers[key] = audioBuffer;
+        }
+      } catch (e) {} // Fallback to procedural
+    }
+
+    this.dayBgm = new Audio(AUDIO_ASSETS.bgm.dayTheme);
+    this.dayBgm.loop = true;
+    this.nightBgm = new Audio(AUDIO_ASSETS.bgm.nightTheme);
+    this.nightBgm.loop = true;
+    this.syncHtmlAudioVolumes();
+  }
+
+  private playCustomSfx(key: keyof typeof AUDIO_ASSETS.sfx, volumeMod: number = 1.0, playbackRate: number = 1.0): boolean {
+    if (!this.ctx || !this.sfxGain || !this.sfxBuffers[key]) return false;
+    const source = this.ctx.createBufferSource();
+    source.buffer = this.sfxBuffers[key];
+    source.playbackRate.value = playbackRate;
+    const gain = this.ctx.createGain();
+    gain.gain.value = volumeMod;
+    source.connect(gain);
+    gain.connect(this.sfxGain);
+    source.start(this.ctx.currentTime);
+    return true;
   }
 
   public setVolumes(master: number, sfx: number, music: number) {
@@ -52,10 +96,32 @@ class AudioEngine {
     this.masterGain.gain.setTargetAtTime(this.volumes.master, now, 0.1);
     this.sfxGain.gain.setTargetAtTime(this.volumes.sfx, now, 0.1);
     this.bgmGain.gain.setTargetAtTime(this.volumes.music * 0.5, now, 0.1); // BGM naturally quieter
+    
+    this.syncHtmlAudioVolumes();
+  }
+
+  public updateTimeOfDay(timeOfDay: number) {
+    let factor = 0;
+    if (timeOfDay > 0.4 && timeOfDay < 0.6) {
+      factor = (timeOfDay - 0.4) / 0.2;
+    } else if (timeOfDay >= 0.6) {
+      factor = 1;
+    }
+    if (this.currentCrossfade !== factor) {
+      this.currentCrossfade = factor;
+      this.syncHtmlAudioVolumes();
+    }
+  }
+
+  private syncHtmlAudioVolumes() {
+    const masterVol = this.volumes.master * this.volumes.music * 0.5;
+    if (this.dayBgm) this.dayBgm.volume = Math.max(0, Math.min(1, masterVol * (1 - this.currentCrossfade)));
+    if (this.nightBgm) this.nightBgm.volume = Math.max(0, Math.min(1, masterVol * this.currentCrossfade));
   }
 
   public playPop() {
     this.init();
+    if (this.playCustomSfx('godLure')) return;
     if (!this.ctx || !this.sfxGain) return;
 
     const osc = this.ctx.createOscillator();
@@ -80,6 +146,7 @@ class AudioEngine {
 
   public playZap() {
     this.init();
+    if (this.playCustomSfx('godSmite')) return;
     if (!this.ctx || !this.sfxGain) return;
 
     const osc = this.ctx.createOscillator();
@@ -104,6 +171,7 @@ class AudioEngine {
 
   public playCrunch() {
     this.init();
+    if (this.playCustomSfx('godFeed')) return;
     if (!this.ctx || !this.sfxGain) return;
 
     const bufferSize = this.ctx.sampleRate * 0.15;
@@ -146,7 +214,22 @@ class AudioEngine {
     }
 
     this.isBgmPlaying = true;
-    this.playNextBgmNote();
+    
+    let playedHtml = false;
+    if (this.dayBgm && this.nightBgm) {
+      try {
+        this.syncHtmlAudioVolumes();
+        this.dayBgm.play();
+        this.nightBgm.play();
+        playedHtml = true;
+      } catch (e) {
+        console.warn('HTML Audio autoplay prevented');
+      }
+    }
+    
+    if (!playedHtml) {
+      this.playNextBgmNote();
+    }
   }
 
   public stopBGM() {
@@ -155,6 +238,8 @@ class AudioEngine {
       clearTimeout(this.bgmTimeoutId);
       this.bgmTimeoutId = null;
     }
+    if (this.dayBgm) this.dayBgm.pause();
+    if (this.nightBgm) this.nightBgm.pause();
   }
 
   private playNextBgmNote() {
@@ -230,6 +315,16 @@ class AudioEngine {
     if (distSq > 0 && cullDist > 0) {
       const distance = Math.sqrt(distSq);
       distanceGain = Math.max(0.01, 1.0 - (distance / cullDist));
+    }
+
+    let customKey: keyof typeof AUDIO_ASSETS.sfx | null = null;
+    if (event === 'EAT') customKey = 'creatureEat';
+    else if (event === 'HURT') customKey = 'creatureHurt';
+    else if (event === 'ATTACK') customKey = 'creatureAttack';
+    else if (event === 'SLEEP') customKey = 'creatureSleep';
+    
+    if (customKey && this.playCustomSfx(customKey, distanceGain, 1.0 / scale)) {
+      return;
     }
 
     const osc = this.ctx.createOscillator();
@@ -330,6 +425,15 @@ class AudioEngine {
       this.ctx.resume();
     }
     
+    if (this.isBgmPlaying && this.dayBgm && this.dayBgm.paused) {
+      try {
+        this.dayBgm.play();
+        this.nightBgm?.play();
+      } catch (e) {}
+    }
+
+    if (this.playCustomSfx('uiClick')) return;
+    
     if (!this.ctx || !this.sfxGain) return;
     
     const now = this.ctx.currentTime;
@@ -357,6 +461,7 @@ class AudioEngine {
 
   private playHeal() {
     this.init();
+    if (this.playCustomSfx('godHeal')) return;
     if (!this.ctx || !this.sfxGain) return;
 
     const osc = this.ctx.createOscillator();
@@ -382,18 +487,24 @@ class AudioEngine {
 
   public playLevelUp(x: number, y: number) {
     this.init();
+
+    const cam = worldRef.current?.camera;
+    const cullDist = 1500 / (cam?.zoom || 1);
+    let distanceGain = 1.0;
+    
+    if (cam) {
+      const distSq = (cam.x - x)**2 + (cam.y - y)**2;
+      if (distSq > cullDist * cullDist) return; // Hard cull
+      distanceGain = Math.max(0.01, 1.0 - (Math.sqrt(distSq) / cullDist));
+    }
+    
+    if (this.playCustomSfx('levelUp', distanceGain)) return;
+
     const ctx = this.ctx;
     const sfxGain = this.sfxGain;
     if (!ctx || !sfxGain) return;
 
-    const cam = worldRef.current?.camera;
-    const cullDist = 1500 / (cam?.zoom || 1);
     if (cam) {
-      const distSq = (cam.x - x)**2 + (cam.y - y)**2;
-      if (distSq > cullDist * cullDist) return; // Hard cull
-      
-      const distanceGain = Math.max(0.01, 1.0 - (Math.sqrt(distSq) / cullDist));
-      
       const now = ctx.currentTime;
       // Arpeggio: C5 -> E5 -> G5
       const notes = [523.25, 659.25, 783.99];

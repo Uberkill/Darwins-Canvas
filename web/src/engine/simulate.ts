@@ -8,6 +8,7 @@ import { LifeSystem } from './systems/LifeSystem'
 import { clampEntitiesToWorld } from './worldRef'
 import { spawnCreature, spawnPlant, killCreature, flushDeadEntities } from './entityManager'
 import { buildCreature } from './creatureFactory'
+import { audio } from './audioEngine'
 import {
   EXHAUSTION_SPEED_PENALTY,
   LUNGE_SPEED_MULTIPLIER,
@@ -22,6 +23,7 @@ import {
 export function simulate(world: WorldState, dt: number): void {
   // ─── 0. Macro Clock ───
   world.timeOfDay = (world.timeOfDay + dt / DAY_NIGHT_CYCLE_DURATION) % 1.0;
+  audio.updateTimeOfDay(world.timeOfDay);
   
   const weatherPhase = (world.totalTime % (WEATHER_CYCLE_DURATION * 2)) / WEATHER_CYCLE_DURATION;
   if (weatherPhase < 1.0) {
