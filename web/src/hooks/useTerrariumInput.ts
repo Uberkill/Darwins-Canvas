@@ -1,4 +1,4 @@
-import { useRef, useState, type RefObject } from 'react'
+import { useRef, useState, useEffect, type RefObject } from 'react'
 import { useStore } from '../store/useStore'
 import { worldRef } from '../engine/worldRef'
 import { spawnCreature, spawnPlant, killCreature } from '../engine/entityManager'
@@ -10,6 +10,67 @@ import { audio } from '../engine/audioEngine'
 export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>) {
   const [isDragging, setIsDragging] = useState(false)
   const activePointersRef = useRef<Map<number, {x: number, y: number}>>(new Map())
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const { setKeys, cameraMode } = useStore.getState();
+      
+      // If we start panning with keyboard, break out of tracking
+      const isPanKey = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(e.key);
+      if (isPanKey && cameraMode === 'TRACKING') {
+        useStore.getState().setCameraMode('FREE');
+        useStore.getState().setSelectedCreatureId(null);
+      }
+
+      switch (e.key) {
+        case 'ArrowUp':
+        case 'w':
+          setKeys({ up: true });
+          break;
+        case 'ArrowDown':
+        case 's':
+          setKeys({ down: true });
+          break;
+        case 'ArrowLeft':
+        case 'a':
+          setKeys({ left: true });
+          break;
+        case 'ArrowRight':
+        case 'd':
+          setKeys({ right: true });
+          break;
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      const { setKeys } = useStore.getState();
+      switch (e.key) {
+        case 'ArrowUp':
+        case 'w':
+          setKeys({ up: false });
+          break;
+        case 'ArrowDown':
+        case 's':
+          setKeys({ down: false });
+          break;
+        case 'ArrowLeft':
+        case 'a':
+          setKeys({ left: false });
+          break;
+        case 'ArrowRight':
+        case 'd':
+          setKeys({ right: false });
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!canvasRef.current) return
@@ -76,6 +137,19 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
       creature.y = pt.y
       preloadImage(creature.id, creature.drawingData)
       spawnCreature(worldRef.current, creature)
+      
+      audio.playSpawn()
+      if (!worldRef.current.visualEffects) worldRef.current.visualEffects = []
+      worldRef.current.visualEffects.push({
+        id: crypto.randomUUID(),
+        type: 'SPAWN',
+        x: pt.x,
+        y: pt.y,
+        timer: 1.0,
+        maxTimer: 1.0,
+        seed: Math.random()
+      })
+      
       useStore.getState().clearQueue()
       return
     }

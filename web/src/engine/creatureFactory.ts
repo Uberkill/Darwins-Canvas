@@ -100,9 +100,7 @@ export function buildCreature(
       speed: computed.speed,
       sightRadius: computed.sight,
       maxHealth: computed.maxHealth,
-      maxStamina: MAX_STAMINA,
       renderScale: computed.renderScale,
-      bravery: initialBravery,
       damage: computed.damage,
     },
 

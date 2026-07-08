@@ -25,7 +25,7 @@ export const LifeSystem = {
       }
       
       const oldLevel = creature.level;
-      creature.level = newLevel; // Uncapped!
+      creature.level = Math.min(100, newLevel); // Hard-capped at 100 to prevent Infinity maxAge
 
       if (creature.level > oldLevel) {
         // Trigger spatial level up sound
@@ -43,7 +43,7 @@ export const LifeSystem = {
       const statBonusLevel = Math.min(20, creature.level);
       const levelBonus = statBonusLevel - 1;
       creature.maxHealth = creature.baseStats.maxHealth * (1 + 0.10 * levelBonus);
-      creature.maxStamina = creature.baseStats.maxStamina * (1 + 0.10 * levelBonus);
+      creature.maxStamina = 100 * (1 + 0.10 * levelBonus); // Assuming base maxStamina is 100
       creature.speed = creature.baseStats.speed * (1 + 0.02 * levelBonus);
       creature.renderScale = creature.baseStats.renderScale * (1 + 0.05 * levelBonus);
       creature.damage = creature.baseStats.damage * (1 + 0.10 * levelBonus);

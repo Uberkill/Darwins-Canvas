@@ -45,12 +45,13 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       if (!active || !canvasRef.current || !rendererRef.current) return
 
       const storeState = useStore.getState()
-      let dtRaw = lastTimeRef.current === 0 ? 0 : timestamp - lastTimeRef.current
+      let dtRaw = lastTimeRef.current === 0 ? 0 : Math.max(0, timestamp - lastTimeRef.current)
       lastTimeRef.current = timestamp
 
       // Spiral of Death prevention: if tab is backgrounded, cap dtRaw
       if (dtRaw > 100) dtRaw = 100;
 
+      try {
       // Apply timeScale
       const dt = dtRaw * storeState.timeScale
 
@@ -95,6 +96,13 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
           store.setCameraMode('FREE');
           store.setSelectedCreatureId(null);
         }
+      } else {
+        // FREE MODE: Keyboard Panning
+        const panAmount = store.panSpeed * dtRealSec;
+        if (store.keys.up) cam.y -= panAmount;
+        if (store.keys.down) cam.y += panAmount;
+        if (store.keys.left) cam.x -= panAmount;
+        if (store.keys.right) cam.x += panAmount;
       }
 
       // Frustum Clamping
@@ -121,7 +129,9 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       // ── 2. Render ──
       rendererRef.current.draw(world)
 
-
+      } catch (err) {
+        console.error('Game loop error:', err);
+      }
 
       rafIdRef.current = requestAnimationFrame(tick)
     }

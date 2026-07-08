@@ -213,7 +213,7 @@ export const CreatureInspector: React.FC = () => {
               Health: { cur: creature.maxHealth, base: creature.baseStats.maxHealth },
               Scale: { cur: creature.renderScale, base: creature.baseStats.renderScale },
               Drain: { cur: creature.hungerDrainRate, base: creature.baseDrainRate },
-              Bravery: { cur: creature.bravery, base: creature.baseStats.bravery || 0.5 }
+              Bravery: { cur: creature.bravery, base: 0.5 }
             }).map(([label, { cur, base }]) => {
               const diff = ((cur / base) - 1) * 100;
               const isPositive = diff > 0.5;

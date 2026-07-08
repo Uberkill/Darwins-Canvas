@@ -45,6 +45,15 @@ export function simulate(world: WorldState, dt: number): void {
     globalSightPenalty = (1.0 - NIGHT_SIGHT_PENALTY) + (NIGHT_SIGHT_PENALTY * t);
   }
 
+  // ─── 0. Corrupt Save Sanitization (Infinite Evolution Bug) ───
+  for (const c of world.creatures) {
+    if (Number.isNaN(c.health) || !isFinite(c.health) || Number.isNaN(c.maxHealth) || !isFinite(c.maxHealth)) {
+      c.health = 0; // Force immediate death
+      c.maxHealth = 100; // Reset to safe value so math doesn't propagate NaN during the death frame
+      c.damage = 0;
+    }
+  }
+
   // ─── Visual Effects ───
   if (world.visualEffects) {
     for (let i = world.visualEffects.length - 1; i >= 0; i--) {

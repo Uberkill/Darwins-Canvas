@@ -300,6 +300,37 @@ class AudioEngine {
     const nextTime = (Math.random() * 1500 + 500) / this.currentPlaybackRate; // 500ms to 2000ms scaled
     this.bgmTimeoutId = window.setTimeout(() => this.playNextBgmNote(), nextTime);
   }
+
+  public playSpawn() {
+    this.init();
+    if (!this.ctx || !this.sfxGain) return;
+
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    
+    // Create a magical ascending chime
+    const notes = [400, 500, 600, 800, 1200];
+    
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      
+      const startTime = now + (i * 0.05);
+      osc.frequency.setValueAtTime(freq, startTime);
+      
+      // Fast attack, slow decay per note
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.4, startTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.5);
+      
+      osc.connect(gain);
+      gain.connect(this.sfxGain!);
+      osc.start(startTime);
+      osc.stop(startTime + 0.5);
+    });
+  }
+
   private lastPlayedEvent: Record<string, number> = {};
 
   public playCreatureEvent(

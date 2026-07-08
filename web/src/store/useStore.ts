@@ -47,11 +47,14 @@ export const useStore = create<GameStore>()(
 
   isPauseMenuOpen: false,
   previousTimeScale: 1.0,
-  openPauseMenu: () => set((state) => ({ 
-    isPauseMenuOpen: true, 
-    previousTimeScale: state.timeScale, 
-    timeScale: 0 
-  })),
+  openPauseMenu: () => set((state) => {
+    if (state.isPauseMenuOpen) return {}; // Prevent overwriting previousTimeScale to 0
+    return {
+      isPauseMenuOpen: true, 
+      previousTimeScale: state.timeScale, 
+      timeScale: 0 
+    };
+  }),
   closePauseMenu: () => set((state) => ({ 
     isPauseMenuOpen: false, 
     timeScale: state.previousTimeScale 
@@ -77,6 +80,11 @@ export const useStore = create<GameStore>()(
   setCameraMode: (mode) => set({ cameraMode: mode }),
   targetZoom: 1.0,
   setTargetZoom: (zoom) => set({ targetZoom: zoom }),
+
+  // ─── Camera Panning ───────────────────────────────────────────────────────
+  keys: { up: false, down: false, left: false, right: false },
+  setKeys: (newKeys) => set((state) => ({ keys: { ...state.keys, ...newKeys } })),
+  panSpeed: 1200,
 
   // ─── Pending creature queue ───────────────────────────────────────────────
   // The game loop polls this every frame. When set, it injects the creature

@@ -59,6 +59,7 @@ function App() {
       audio.stopBGM()
     }
     window.addEventListener('QUIT_TO_TITLE', handleQuit)
+    ;(window as any).worldRef = worldRef;
     return () => window.removeEventListener('QUIT_TO_TITLE', handleQuit)
   }, [])
 

@@ -24,6 +24,8 @@ Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic
 - **Borders:** Extremely thick. Use `border: 4px solid var(--color-text)` or `border: 4px solid white` depending on contrast needs. Do not use thin `1px` borders.
 - **Shadows:** Hard, solid drop shadows. Use `box-shadow: 0 4px 0 #E2DDD5` or `box-shadow: 0 6px 0 var(--color-text)`. Do not use soft, blurred shadows (e.g., `box-shadow: 0 4px 6px rgba(0,0,0,0.1)`).
 - **Radii:** Pill-shaped buttons (`var(--radius-full)` -> `9999px`) and rounded panels (`var(--radius-lg)` -> `24px`).
+- **Layouts (Dashboards):** Avoid messy multi-column grids. Prefer clean "Top-Middle-Bottom" horizontal rows (e.g. 3 massive KPI cards on top, charts in the middle, analytics badges on the bottom).
+- **BANNED (Dark Glassmorphism):** NEVER use dark translucent backgrounds with blurred overlays (`rgba(0,0,0, 0.8)` with `backdrop-filter: blur`). It destroys the bright, kid-friendly DNA of the app.
 
 ## Icons & Graphics
 - **NO EMOJIS:** Absolutely no emojis allowed in the UI. 

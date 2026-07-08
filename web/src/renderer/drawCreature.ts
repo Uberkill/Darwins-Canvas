@@ -22,8 +22,30 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature):
   // We keep the hitbox separate.
   const size = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0)
 
+  // ── Spawn Drop Animation ──
+  let spawnOffsetY = 0;
+  if (creature.age < 0.4) {
+    const t = creature.age / 0.4;
+    const n1 = 7.5625;
+    const d1 = 2.75;
+    let bounce = 0;
+    if (t < 1 / d1) {
+      bounce = n1 * t * t;
+    } else if (t < 2 / d1) {
+      const t2 = t - 1.5 / d1;
+      bounce = n1 * t2 * t2 + 0.75;
+    } else if (t < 2.5 / d1) {
+      const t2 = t - 2.25 / d1;
+      bounce = n1 * t2 * t2 + 0.9375;
+    } else {
+      const t2 = t - 2.625 / d1;
+      bounce = n1 * t2 * t2 + 0.984375;
+    }
+    spawnOffsetY = (1 - bounce) * 600;
+  }
+
   ctx.save()
-  ctx.translate(creature.x, creature.y - creature.z)
+  ctx.translate(creature.x, creature.y - creature.z - spawnOffsetY)
 
   // ── Wobble rotation ──
   if (creature.state === 'MOVING') {
@@ -133,7 +155,20 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature):
  */
 export function drawCreatureShadow(ctx: CanvasRenderingContext2D, creature: Creature): void {
   const size        = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0)
-  const z           = creature.z  // elevation
+  let z             = creature.z  // elevation
+
+  // ── Spawn Drop Animation ──
+  if (creature.age < 0.4) {
+    const t = creature.age / 0.4;
+    const n1 = 7.5625;
+    const d1 = 2.75;
+    let bounce = 0;
+    if (t < 1 / d1) bounce = n1 * t * t;
+    else if (t < 2 / d1) { const t2 = t - 1.5 / d1; bounce = n1 * t2 * t2 + 0.75; }
+    else if (t < 2.5 / d1) { const t2 = t - 2.25 / d1; bounce = n1 * t2 * t2 + 0.9375; }
+    else { const t2 = t - 2.625 / d1; bounce = n1 * t2 * t2 + 0.984375; }
+    z += (1 - bounce) * 600; // Add to Z so shadow scales naturally during drop
+  }
 
   const alpha   = Math.max(0, 0.18 - z * 0.003)
   if (alpha <= 0.005) return  // too faint to bother drawing

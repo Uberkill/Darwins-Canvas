@@ -36,7 +36,7 @@ const ONBOARDING_STEPS: OnboardingStep[] = [
   {
     id: 'godtools',
     title: "Play God",
-    description: "Use your God Tools at the bottom to zap, feed, or drag creatures around.",
+    description: "Use God Tools to zap, feed, or drag creatures around. (Tip: Use WASD or Arrow Keys to pan the camera!)",
     icon: <Zap size={40} color="white" />,
     color: "#FBC02D" // Yellow/Gold
   }

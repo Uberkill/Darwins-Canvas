@@ -85,9 +85,7 @@ export interface Creature {
     speed: number;
     sightRadius: number;
     maxHealth: number;
-    maxStamina: number;
     renderScale: number;
-    bravery: number;
     damage: number;
   };
   hitTimer: number; // time remaining for damage flash/shake
@@ -141,7 +139,7 @@ export interface EcosystemAnalytics {
 // ─── World state (lives in worldRef — NOT in Zustand) ────────────────────────
 interface VisualEffect {
   id: string;
-  type: 'LIGHTNING' | 'HEAL';
+  type: 'LIGHTNING' | 'HEAL' | 'SPAWN';
   x: number;
   y: number;
   timer: number;    // Current time remaining (in seconds or arbitrary units)
@@ -212,6 +210,11 @@ export interface GameStore {
   // We use this to force the camera logic to snap/zoom appropriately when buttons are clicked
   targetZoom:      number;
   setTargetZoom:   (zoom: number) => void;
+  
+  // Camera Panning
+  keys: { up: boolean; down: boolean; left: boolean; right: boolean };
+  setKeys: (keys: Partial<{ up: boolean; down: boolean; left: boolean; right: boolean }>) => void;
+  panSpeed: number;
 
   // ─── Settings ─────────────────────────────────────────────────────────────
   masterVolume: number;

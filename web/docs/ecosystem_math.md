@@ -67,6 +67,16 @@ Carnivores have an extreme burst speed (`LUNGE_SPEED_MULTIPLIER = 2.5`). However
 *   **Herbivores & Omnivores:** Diurnal. Sleep at night (`globalSightPenalty < 0.9`), unless they are starving (`hunger < 30`).
 *   **Carnivores:** Nocturnal. They hunt relentlessly at night. During the day, they take intermediate catnaps if they are well-fed (`hunger > 60`).
 
+## 9. Weather Systems & Plant Spawning
+*   **Clear:** `1.0x` Plant Spawn Rate
+*   **Rain:** `RAIN_PLANT_SPAWN_MULTIPLIER` (`2.5x`) Plant Spawn Rate
+*   **Drought:** `DROUGHT_PLANT_SPAWN_MULTIPLIER` (`0.2x`) Plant Spawn Rate
+
+## 10. Immigration (Anti-Extinction Rule)
+*   **Condition:** Herbivore, Carnivore, or Omnivore population = 0.
+*   **Timer:** Checked every `120` seconds.
+*   **Chance:** `5%` chance to spawn 1 Migrant on the edge of the map.
+
 ---
 
 ## 🛑 Blast Radius & Revert Guide 🛑

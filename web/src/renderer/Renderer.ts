@@ -281,6 +281,39 @@ export class GameRenderer {
             this.ctx.fill();
           }
           this.ctx.restore();
+        } else if (effect.type === 'SPAWN') {
+          this.ctx.save();
+          const alpha = Math.max(0, effect.timer / effect.maxTimer); // 1.0 to 0.0
+          
+          // Pillar of Light from sky down to spawn point
+          const topY = effect.y - 3000;
+          const gradient = this.ctx.createLinearGradient(effect.x, topY, effect.x, effect.y);
+          gradient.addColorStop(0, `rgba(255, 255, 200, 0)`);
+          gradient.addColorStop(0.5, `rgba(255, 255, 220, ${alpha * 0.6})`);
+          gradient.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
+
+          this.ctx.fillStyle = gradient;
+          
+          const widthTop = 200 * alpha;
+          const widthBottom = 60 * alpha;
+          
+          this.ctx.beginPath();
+          this.ctx.moveTo(effect.x - widthTop, topY);
+          this.ctx.lineTo(effect.x + widthTop, topY);
+          this.ctx.lineTo(effect.x + widthBottom, effect.y);
+          this.ctx.lineTo(effect.x - widthBottom, effect.y);
+          this.ctx.fill();
+
+          // Shockwave ring on the ground
+          const progress = 1.0 - alpha; // 0.0 to 1.0
+          const radius = progress * 150;
+          this.ctx.beginPath();
+          this.ctx.ellipse(effect.x, effect.y, radius, radius * 0.35, 0, 0, Math.PI * 2);
+          this.ctx.lineWidth = 4 * alpha;
+          this.ctx.strokeStyle = `rgba(255, 255, 200, ${alpha})`;
+          this.ctx.stroke();
+
+          this.ctx.restore();
         }
       }
     }

@@ -3,13 +3,14 @@ import {
   X, Brush, Eye, Zap, 
   Leaf, Drumstick, Utensils, 
   Dna, Route, Orbit,
-  Flame, Hand, Droplets
+  Flame, Hand, Droplets,
+  Sun, Moon, CloudRain, Activity, Swords, Hourglass, RefreshCw
 } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import './TutorialModal.css'
 
 type Tab = 'QUICKSTART' | 'GUIDE'
-type Chapter = 'DRAWING' | 'DIETS' | 'EVOLUTION' | 'TOOLS'
+type Chapter = 'DRAWING' | 'DIETS' | 'EVOLUTION' | 'TOOLS' | 'WEATHER' | 'COMBAT' | 'LIFECYCLE'
 
 export function TutorialModal() {
   const isTutorialOpen = useStore((s) => s.isTutorialOpen)
@@ -93,6 +94,15 @@ export function TutorialModal() {
                 </button>
                 <button className={`guide-nav-item ${activeChapter === 'TOOLS' ? 'active' : ''}`} onClick={() => setActiveChapter('TOOLS')}>
                   <Zap size={20} /> God Tools
+                </button>
+                <button className={`guide-nav-item ${activeChapter === 'WEATHER' ? 'active' : ''}`} onClick={() => setActiveChapter('WEATHER')}>
+                  <CloudRain size={20} /> Weather & Time
+                </button>
+                <button className={`guide-nav-item ${activeChapter === 'COMBAT' ? 'active' : ''}`} onClick={() => setActiveChapter('COMBAT')}>
+                  <Swords size={20} /> Combat & Stamina
+                </button>
+                <button className={`guide-nav-item ${activeChapter === 'LIFECYCLE' ? 'active' : ''}`} onClick={() => setActiveChapter('LIFECYCLE')}>
+                  <Hourglass size={20} /> Circle of Life
                 </button>
               </div>
               <div className="guide-body">
@@ -187,6 +197,72 @@ export function TutorialModal() {
                       <div className="guide-topic-content">
                         <h4>Grab</h4>
                         <p>Pick up a creature and move them away from danger (or drop them right in front of a hungry carnivore!).</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {activeChapter === 'WEATHER' && (
+                  <>
+                    <div className="guide-chapter-header">
+                      <CloudRain className="guide-chapter-icon" size={40} />
+                      <h2 className="guide-chapter-title">Weather & Time</h2>
+                    </div>
+                    <div className="guide-topic">
+                      <Moon className="guide-topic-icon" size={24} style={{color: 'var(--color-secondary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Day & Night</h4>
+                        <p>When the sun sets, visibility drops! Herbivores sleep in the dark, and Carnivores catnap during the day to save energy.</p>
+                      </div>
+                    </div>
+                    <div className="guide-topic">
+                      <Sun className="guide-topic-icon" size={24} style={{color: 'var(--color-primary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Seasons</h4>
+                        <p>Rain floods the ecosystem with massive plant growth, while Droughts cause extreme scarcity and mass starvation.</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {activeChapter === 'COMBAT' && (
+                  <>
+                    <div className="guide-chapter-header">
+                      <Activity className="guide-chapter-icon" size={40} />
+                      <h2 className="guide-chapter-title">Combat & Stamina</h2>
+                    </div>
+                    <div className="guide-topic">
+                      <Activity className="guide-topic-icon" size={24} />
+                      <div className="guide-topic-content">
+                        <h4>Exhaustion</h4>
+                        <p>Running and hunting drains a creature's stamina. If stamina hits 0, they suffer a severe 50% speed penalty until they rest.</p>
+                      </div>
+                    </div>
+                    <div className="guide-topic">
+                      <Swords className="guide-topic-icon" size={24} style={{color: 'var(--color-primary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Apex Predator Lunge</h4>
+                        <p>Carnivores can burst forward for 2.5x speed and deal double damage on impact, at the cost of massive stamina drain.</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {activeChapter === 'LIFECYCLE' && (
+                  <>
+                    <div className="guide-chapter-header">
+                      <Hourglass className="guide-chapter-icon" size={40} />
+                      <h2 className="guide-chapter-title">The Circle of Life</h2>
+                    </div>
+                    <div className="guide-topic">
+                      <Hourglass className="guide-topic-icon" size={24} />
+                      <div className="guide-topic-content">
+                        <h4>Aging & Senescence</h4>
+                        <p>Creatures don't live forever! Once they pass their maximum lifespan, they physically shrink, slow down, and starve faster until they die of old age.</p>
+                      </div>
+                    </div>
+                    <div className="guide-topic">
+                      <RefreshCw className="guide-topic-icon" size={24} style={{color: 'var(--color-tertiary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Immigration</h4>
+                        <p>If an entire species goes extinct, don't panic! Migrants may eventually wander in from the edges of the map to re-seed the population.</p>
                       </div>
                     </div>
                   </>

@@ -83,6 +83,7 @@ export function checkReproduction(
 }
 
 import { generateTintedImage } from '../renderer/imageCache'
+import { calculateCreatureStats } from './creatureFactory'
 
 function spawnBaby(parent: Creature, worldWidth: number, worldHeight: number, cooldown: number): Creature {
   const rawX  = parent.x + parent.direction.vx * REPRO_SPAWN_OFFSET
@@ -91,16 +92,19 @@ function spawnBaby(parent: Creature, worldWidth: number, worldHeight: number, co
   const babyX = Math.max(10, Math.min(worldWidth - 10, rawX))
   const babyY = Math.max(10, Math.min(worldHeight - 10, rawY))
 
+  // Get the biological baseline for this species
+  const baseline = calculateCreatureStats(parent.size, parent.movement, parent.diet, parent.decals)
+  const maxCap = 3.0 // Mutations cannot exceed 3x the baseline
+
   // Mutations (must mutate from baseStats to prevent Lamarckian leakage & time-of-day glitches)
   const mutate = (base: number, maxPct: number) => base * (1 + (Math.random() * maxPct * 2 - maxPct))
-  const speed = Math.max(10, mutate(parent.baseStats.speed, 0.05))
-  const sightRadius = Math.max(50, mutate(parent.baseStats.sightRadius, 0.05))
-  const maxHealth = Math.max(10, mutate(parent.baseStats.maxHealth, 0.05))
-  const maxStamina = Math.max(10, mutate(parent.baseStats.maxStamina, 0.05))
-  const renderScale = Math.max(0.2, mutate(parent.baseStats.renderScale, 0.02))
-  const damage = Math.max(1, mutate(parent.baseStats.damage, 0.05))
+  const speed = Math.min(baseline.speed * maxCap, Math.max(10, mutate(parent.baseStats.speed, 0.05)))
+  const sightRadius = Math.min(baseline.sight * maxCap, Math.max(50, mutate(parent.baseStats.sightRadius, 0.05)))
+  const maxHealth = Math.min(baseline.maxHealth * maxCap, Math.max(10, mutate(parent.baseStats.maxHealth, 0.05)))
+  const renderScale = Math.min(baseline.renderScale * maxCap, Math.max(0.2, mutate(parent.baseStats.renderScale, 0.02)))
+  const damage = Math.min(baseline.damage * maxCap, Math.max(1, mutate(parent.baseStats.damage, 0.05)))
   const hueShift = Math.floor((parent.hueShift + (Math.random() * 30 - 15)) + 360) % 360
-  const bravery = Math.max(0, Math.min(1, parent.baseStats.bravery + (Math.random() * 0.2 - 0.1)))
+  const bravery = Math.min(1, Math.max(0, parent.bravery + (Math.random() * 0.2 - 0.1)))
 
   // Metabolic Cost Formula
   const speedFactor = speed / parent.baseStats.speed
@@ -131,19 +135,19 @@ function spawnBaby(parent: Creature, worldWidth: number, worldHeight: number, co
     x: babyX,
     y: babyY,
     z: 0,
-    baseStats: { speed, sightRadius, maxHealth, maxStamina, renderScale, bravery, damage },
+    baseStats: { speed, sightRadius, maxHealth, renderScale, damage },
     baseDrainRate: hungerDrainRate,
     speed,
     sightRadius,
     maxHealth,
-    maxStamina,
+    maxStamina: 100, // Stamina is hardcoded globally
     renderScale,
     damage,
     hueShift,
     hungerDrainRate,
     health: maxHealth,
     hunger: STARTING_HUNGER,
-    stamina: maxStamina,
+    stamina: 100, // Stamina is hardcoded globally
     lungeTimer: 0,
     lungeCooldownTimer: 0,
     age: 0,
