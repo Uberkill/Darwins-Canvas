@@ -5,6 +5,7 @@ import type { SaveSlotMetadata } from '../utils/saveSystem'
 import { useStore } from '../store/useStore'
 import { worldRef } from '../engine/worldRef'
 import { setEntities, clearEntities } from '../engine/entityManager'
+import { audio } from '../engine/audioEngine'
 import './PauseMenuModal.css'
 import './TitleScreen.css'
 
@@ -42,6 +43,23 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
       setSaves(newSaves)
     }
     fetchSaves()
+    
+    // Attempt to start BGM immediately (may be blocked by browser autoplay policy)
+    audio.startBGM()
+    
+    // Fallback: start BGM on the very first user interaction anywhere on the page
+    const handleFirstInteraction = () => {
+      audio.startBGM()
+      window.removeEventListener('click', handleFirstInteraction)
+      window.removeEventListener('keydown', handleFirstInteraction)
+    }
+    window.addEventListener('click', handleFirstInteraction)
+    window.addEventListener('keydown', handleFirstInteraction)
+    
+    return () => {
+      window.removeEventListener('click', handleFirstInteraction)
+      window.removeEventListener('keydown', handleFirstInteraction)
+    }
   }, [])
 
   const hasSaves = Object.values(saves).some(s => s !== null)

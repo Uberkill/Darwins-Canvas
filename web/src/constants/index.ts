@@ -93,7 +93,7 @@ export const LUNGE_COOLDOWN = 4.0; // seconds
 export const LUNGE_SPEED_MULTIPLIER = 2.5; // 150% faster (Apex Predator Burst)
 
 // ─── Macro Systems (Day/Night & Weather) ─────────────────────────────────────
-export const DAY_NIGHT_CYCLE_DURATION = 60; // 60 real seconds for a full 24h cycle
+export const DAY_NIGHT_CYCLE_DURATION = 120; // 120 real seconds for a full 24h cycle (1 min day, 1 min night)
 export const NIGHT_SIGHT_PENALTY = 0.4; // 60% reduction in sight radius
 
 export const WEATHER_CYCLE_DURATION = 120; // 120 seconds per weather shift
