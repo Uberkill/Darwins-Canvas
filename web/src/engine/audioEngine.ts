@@ -207,7 +207,7 @@ class AudioEngine {
 
   public startBGM() {
     this.init();
-    if (!this.ctx || this.isBgmPlaying) return;
+    if (!this.ctx) return;
     
     // AudioContext might be suspended if startBGM is called before a user gesture
     if (this.ctx.state === 'suspended') {
@@ -219,22 +219,26 @@ class AudioEngine {
     if (this.dayBgm && this.nightBgm) {
       this.syncHtmlAudioVolumes();
       
-      this.dayBgm.play().then(() => {
-        // If HTML audio successfully starts, forcibly kill any procedural timeouts just in case!
-        if (this.bgmTimeoutId !== null) {
-          clearTimeout(this.bgmTimeoutId);
-          this.bgmTimeoutId = null;
-        }
-      }).catch(() => {
-        // If HTML audio fails (404 or autoplay block), fall back to procedural
-        if (this.isBgmPlaying && this.bgmTimeoutId === null) {
-          this.playNextBgmNote();
-        }
-      });
+      if (this.dayBgm.paused) {
+        this.dayBgm.play().then(() => {
+          // If HTML audio successfully starts, forcibly kill any procedural timeouts just in case!
+          if (this.bgmTimeoutId !== null) {
+            clearTimeout(this.bgmTimeoutId);
+            this.bgmTimeoutId = null;
+          }
+        }).catch(() => {
+          // Do NOT fall back to procedural if HTML audio fails (e.g. autoplay block).
+          // We will just retry on the next user interaction.
+        });
+      }
       
-      this.nightBgm.play().catch(() => {});
+      if (this.nightBgm.paused) {
+        this.nightBgm.play().catch(() => {});
+      }
     } else {
-      this.playNextBgmNote();
+      if (this.bgmTimeoutId === null) {
+        this.playNextBgmNote();
+      }
     }
   }
 
