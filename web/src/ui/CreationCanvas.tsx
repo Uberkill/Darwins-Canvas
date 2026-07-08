@@ -94,7 +94,7 @@ export function CreationCanvas({
           <canvas
             ref={drawing.canvasRef}
             className="drawing-canvas"
-            style={{ cursor: 'none', display: 'block', width: '100%', height: '100%' }}
+            style={{ cursor: 'none', display: 'block', width: '100%', height: '100%', touchAction: 'none' }}
             onPointerDown={drawing.onPointerDown}
             onPointerUp={drawing.onPointerUp}
             aria-label="Drawing space"
