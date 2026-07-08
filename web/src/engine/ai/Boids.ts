@@ -18,12 +18,12 @@ export function calculateBoids(c: Creature, world: WorldState): BoidsForces {
 
   const sightSq = c.sightRadius * c.sightRadius
 
-  if (c.diet === 'HERBIVORE') {
+  if (c.diet === 'HERBIVORE' || c.diet === 'CARNIVORE') {
     for (let j = 0; j < world.creatures.length; j++) {
       const other = world.creatures[j]
       if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
       if (other.id === world.draggedEntityId) continue
-      if (other.diet !== 'HERBIVORE') continue
+      if (other.diet !== c.diet) continue
 
       let dx = c.x - other.x
       let dy = c.y - other.y

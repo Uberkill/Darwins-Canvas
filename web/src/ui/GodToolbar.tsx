@@ -1,6 +1,7 @@
 import React from 'react'
-import { MousePointer2, Zap, Leaf, Magnet, Hand } from 'lucide-react'
+import { MousePointer2, Zap, Heart, Leaf, Magnet, Hand } from 'lucide-react'
 import { useStore } from '../store/useStore'
+import { audio } from '../engine/audioEngine'
 import type { GodTool } from '../types'
 import './GodToolbar.css'
 
@@ -8,6 +9,7 @@ const TOOLS: { id: GodTool; icon: React.ReactNode; tooltip: string }[] = [
   { id: 'POINTER', icon: <MousePointer2 size={24} />, tooltip: 'Pointer' },
   { id: 'GRAB', icon: <Hand size={24} />, tooltip: 'Grab (Drag & Drop)' },
   { id: 'SMITE', icon: <Zap size={24} />, tooltip: 'Smite (Delete)' },
+  { id: 'HEAL', icon: <Heart size={24} />, tooltip: 'Heal (Restore)' },
   { id: 'FEED', icon: <Leaf size={24} />, tooltip: 'Feed (Spawn Plant)' },
   { id: 'LURE', icon: <Magnet size={24} />, tooltip: 'Lure (Attract All)' },
 ]
@@ -29,6 +31,7 @@ export function GodToolbar() {
           key={tool.id}
           className={`god-tool-btn ${activeTool === tool.id ? 'active' : ''}`}
           onClick={() => {
+            audio.playUIClick()
             setActiveTool(tool.id)
             clearQueue()
           }}

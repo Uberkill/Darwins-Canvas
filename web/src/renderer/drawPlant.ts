@@ -1,52 +1,43 @@
 import type { Plant } from '../types'
 
 /**
- * drawPlant.ts — renders a single plant on the canvas.
+ * drawPlant.ts - renders a single plant/meat item on the canvas.
  *
- * Plants use a sprout design: thin stem + two leaf ovals.
- * growthStage (0→1) drives the overall scale so plants appear to grow in.
- * wobblePhase drives a gentle ±3° sway for organic life.
- *
- * The plant is drawn bottom-anchored at (x, y) — i.e., the stem root sits at y.
+ * Uses a minimalist "peblet" circle design.
+ * growthStage (0-1) drives the overall scale.
+ * wobblePhase drives a gentle pulsating animation for organic life.
  */
 export function drawPlant(ctx: CanvasRenderingContext2D, plant: Plant): void {
-  const scale = 0.3 + plant.growthStage * 0.7  // 0.3 → 1.0 as it grows
-  const wobble = Math.sin(plant.wobblePhase) * (3 * Math.PI / 180) // ±3°
+  const isMeat = plant.type === 'MEAT';
+  const scale = 0.5 + plant.growthStage * 0.5; // 0.5 -> 1.0 as it grows
+  // Pulsating radius instead of rotation
+  const pulse = Math.sin(plant.wobblePhase) * 1.5; 
+  const baseRadius = isMeat ? 12 : 10;
+  const radius = (baseRadius * scale) + pulse;
 
-  ctx.save()
-  ctx.translate(plant.x, plant.y)
-  ctx.rotate(wobble)
+  ctx.save();
+  ctx.translate(plant.x, plant.y);
 
-  const stemH  = 22 * scale
-  const stemW  = 2.5 * scale
-  const leafW  = 10 * scale
-  const leafH  = 6  * scale
+  ctx.beginPath();
+  ctx.arc(0, 0, Math.max(1, radius), 0, Math.PI * 2);
+  
+  if (isMeat) {
+    ctx.fillStyle = '#E63946'; // Red meat
+    ctx.strokeStyle = '#9e1a24';
+  } else {
+    ctx.fillStyle = '#7a9e5a'; // Green plant
+    ctx.strokeStyle = '#5a7a40';
+  }
+  
+  ctx.lineWidth = 2;
+  ctx.fill();
+  ctx.stroke();
 
-  // ── Stem ──
-  ctx.fillStyle = '#7a9e5a'
-  ctx.beginPath()
-  ctx.roundRect(-stemW / 2, -stemH, stemW, stemH, stemW / 2)
-  ctx.fill()
+  // Draw a small highlight to make it look like a pebble
+  ctx.beginPath();
+  ctx.arc(-radius * 0.3, -radius * 0.3, Math.max(1, radius * 0.2), 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.fill();
 
-  // ── Left leaf ──
-  ctx.fillStyle = '#8ab868'
-  ctx.save()
-  ctx.translate(-stemW / 2, -stemH * 0.55)
-  ctx.rotate(-35 * Math.PI / 180)
-  ctx.beginPath()
-  ctx.ellipse(0, 0, leafW, leafH, 0, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.restore()
-
-  // ── Right leaf ──
-  ctx.fillStyle = '#98c874'
-  ctx.save()
-  ctx.translate(stemW / 2, -stemH * 0.6)
-  ctx.rotate(35 * Math.PI / 180)
-  ctx.beginPath()
-  ctx.ellipse(0, 0, leafW, leafH, 0, 0, Math.PI * 2)
-  ctx.fill()
-  ctx.restore()
-
-  ctx.restore()
+  ctx.restore();
 }

@@ -1,22 +1,32 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { setupCanvas, getCanvasPoint } from '../renderer/canvasUtils'
+import type { Decal } from '../types'
 
 const CANVAS_SIZE = 1024
+const MAX_UNDO_STEPS = 10
 
-type DrawingTool = 'BRUSH' | 'FILL' | 'ERASER'
+type DrawingTool = 'BRUSH' | 'FILL' | 'ERASER' | 'STAMP'
+
+interface UndoSnapshot {
+  snapshotCanvas: HTMLCanvasElement
+  decals: Decal[]
+}
 
 export interface DrawingCanvasHandle {
   canvasRef:     React.RefObject<HTMLCanvasElement | null>
   isEmpty:       boolean
   activeTool:    DrawingTool
   setActiveTool: (tool: DrawingTool) => void
-  exportBase64:  () => string
+  activeStamp:   { type: 'EYE' | 'MOUTH', style: string } | null
+  setActiveStamp: (stamp: { type: 'EYE' | 'MOUTH', style: string } | null) => void
+  exportBase64:  () => { image: string; adjustedDecals: Decal[] }
   clear:         () => void
   undo:          () => void
   canUndo:       boolean
   onPointerDown: (e: React.PointerEvent<HTMLCanvasElement>) => void
   onPointerMove: (e: React.PointerEvent<HTMLCanvasElement>) => void
   onPointerUp:   () => void
+  decals:        Decal[]
 }
 
 /**
@@ -29,22 +39,13 @@ export function useDrawingCanvas(
   const canvasRef    = useRef<HTMLCanvasElement>(null)
   const ctxRef       = useRef<CanvasRenderingContext2D | null>(null)
   const isDrawing    = useRef(false)
-  const lastSnapshot = useRef<ImageData | null>(null)
+  const undoStack    = useRef<UndoSnapshot[]>([])
   
-  // Dynamic Bounding Box Tracking (Zero-cost crop)
-  const bounds       = useRef({ minX: CANVAS_SIZE, minY: CANVAS_SIZE, maxX: 0, maxY: 0 })
-
   const [isEmpty,    setIsEmpty]    = useState(true)
   const [canUndo,    setCanUndo]    = useState(false)
   const [activeTool, setActiveTool] = useState<DrawingTool>('BRUSH')
-
-  // Helper to expand bounds
-  const expandBounds = useCallback((x: number, y: number, radius: number) => {
-    bounds.current.minX = Math.max(0, Math.min(bounds.current.minX, x - radius))
-    bounds.current.minY = Math.max(0, Math.min(bounds.current.minY, y - radius))
-    bounds.current.maxX = Math.min(CANVAS_SIZE, Math.max(bounds.current.maxX, x + radius))
-    bounds.current.maxY = Math.min(CANVAS_SIZE, Math.max(bounds.current.maxY, y + radius))
-  }, [])
+  const [activeStamp, setActiveStamp] = useState<{ type: 'EYE' | 'MOUTH', style: string } | null>(null)
+  const [decals,     setDecals]     = useState<Decal[]>([])
 
   // ─── Mount: setup transparent canvas ─────────────────────────────────────
   useEffect(() => {
@@ -64,6 +65,26 @@ export function useDrawingCanvas(
     applyBrushSettings(ctx, brushSize, brushColor)
   }, [brushSize, brushColor])
 
+  // Save undo snapshot helper
+  const saveSnapshot = useCallback((currentDecals: Decal[]) => {
+    const canvas = canvasRef.current
+    const ctx = ctxRef.current
+    if (!canvas || !ctx) return
+    const snapshotCanvas = document.createElement('canvas')
+    snapshotCanvas.width = canvas.width
+    snapshotCanvas.height = canvas.height
+    snapshotCanvas.getContext('2d')!.drawImage(canvas, 0, 0)
+    undoStack.current.push({ snapshotCanvas, decals: [...currentDecals] })
+    if (undoStack.current.length > MAX_UNDO_STEPS) {
+      const removed = undoStack.current.shift()
+      if (removed && removed.snapshotCanvas) {
+        removed.snapshotCanvas.width = 0
+        removed.snapshotCanvas.height = 0
+      }
+    }
+    setCanUndo(true)
+  }, [])
+
   // ─── Pointer: DOWN ────────────────────────────────────────────────────────
   const onPointerDown = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
@@ -72,12 +93,30 @@ export function useDrawingCanvas(
 
     canvas.setPointerCapture(e.pointerId)
 
-    // Save undo snapshot before any action
-    lastSnapshot.current = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    setCanUndo(true)
-
     // Force customDpr=1 to match setupCanvas
     const pt = getCanvasPoint(canvas, e.nativeEvent, 1)
+
+    if (activeTool === 'STAMP' && activeStamp) {
+      saveSnapshot(decals)
+      // Stamps need to be much larger than a standard brush stroke to be visible on a 1024x1024 canvas.
+      const size = Math.max(120, brushSize * 6)
+      const newDecal: Decal = {
+        type: activeStamp.type,
+        style: activeStamp.style,
+        x: pt.x,
+        y: pt.y,
+        scale: size,
+        rotation: 0
+      }
+      setDecals(prev => {
+        const next = [...prev, newDecal]
+        return next
+      })
+      setIsEmpty(false)
+      return
+    }
+
+    saveSnapshot(decals)
 
     if (activeTool === 'FILL') {
       // ── Fill bucket: flood fill at tap point ──
@@ -88,22 +127,25 @@ export function useDrawingCanvas(
       floodFill(imageData.data, physX, physY, fr, fg, fb, canvas.width, canvas.height)
       ctx.putImageData(imageData, 0, 0)
       setIsEmpty(false)
-      // Fill technically spans the whole filled region, we just max out the bounds for safety
-      bounds.current = { minX: 0, minY: 0, maxX: CANVAS_SIZE, maxY: CANVAS_SIZE }
       return
     }
 
     // ── Brush or Eraser: start stroke ──
     isDrawing.current = true
 
+    const pressure = e.pointerType === 'pen' ? e.pressure : 1
+    const normalizedPressure = pressure === 0 ? 0.5 : Math.max(0.1, pressure)
+    const currentSize = activeTool === 'ERASER' ? brushSize * 2 : brushSize * (0.2 + normalizedPressure * 1.5)
+
     if (activeTool === 'ERASER') {
       ctx.globalCompositeOperation = 'destination-out'
       ctx.strokeStyle = 'rgba(0,0,0,1)'
       ctx.fillStyle   = 'rgba(0,0,0,1)'
+      ctx.lineWidth   = currentSize
     } else {
       ctx.globalCompositeOperation = 'source-over'
       applyBrushSettings(ctx, brushSize, brushColor)
-      expandBounds(pt.x, pt.y, brushSize / 2)
+      ctx.lineWidth = currentSize
     }
 
     ctx.beginPath()
@@ -116,7 +158,7 @@ export function useDrawingCanvas(
     if (activeTool !== 'ERASER') {
       setIsEmpty(false)
     }
-  }, [activeTool, brushSize, brushColor, expandBounds])
+  }, [activeTool, activeStamp, brushSize, brushColor, decals, saveSnapshot])
 
   // ─── Pointer: MOVE ────────────────────────────────────────────────────────
   const onPointerMove = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -126,10 +168,9 @@ export function useDrawingCanvas(
     if (!canvas || !ctx) return
 
     const pt = getCanvasPoint(canvas, e.nativeEvent, 1)
-    
-    if (activeTool !== 'ERASER') {
-      expandBounds(pt.x, pt.y, brushSize / 2)
-    }
+    const pressure = e.pointerType === 'pen' ? e.pressure : 1
+    const normalizedPressure = pressure === 0 ? 0.5 : Math.max(0.1, pressure)
+    ctx.lineWidth = activeTool === 'ERASER' ? brushSize * 2 : brushSize * (0.2 + normalizedPressure * 1.5)
 
     ctx.lineTo(pt.x, pt.y)
     ctx.stroke()
@@ -139,7 +180,7 @@ export function useDrawingCanvas(
     if (activeTool !== 'ERASER') {
       setIsEmpty(false)
     }
-  }, [activeTool, brushSize, expandBounds])
+  }, [activeTool, brushSize])
 
   // ─── Pointer: UP ─────────────────────────────────────────────────────────
   const onPointerUp = useCallback(() => {
@@ -151,7 +192,6 @@ export function useDrawingCanvas(
       if (canvas && ctx) {
         const empty = checkIsEmpty(ctx, canvas)
         setIsEmpty(empty)
-        if (empty) bounds.current = { minX: CANVAS_SIZE, minY: CANVAS_SIZE, maxX: 0, maxY: 0 }
       }
     }
   }, [activeTool])
@@ -166,35 +206,39 @@ export function useDrawingCanvas(
     applyBrushSettings(ctx, brushSize, brushColor)
     setIsEmpty(true)
     setCanUndo(false)
-    lastSnapshot.current = null
-    bounds.current = { minX: CANVAS_SIZE, minY: CANVAS_SIZE, maxX: 0, maxY: 0 }
+    undoStack.current = []
+    setDecals([])
   }, [brushSize, brushColor])
 
   const undo = useCallback(() => {
     const canvas = canvasRef.current
     const ctx    = ctxRef.current
-    if (!canvas || !ctx || !lastSnapshot.current) return
+    if (!canvas || !ctx || undoStack.current.length === 0) return
+    
+    const snapshot = undoStack.current.pop()!
     ctx.globalCompositeOperation = 'source-over'
-    ctx.putImageData(lastSnapshot.current, 0, 0)
-    lastSnapshot.current = null
-    setCanUndo(false)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(snapshot.snapshotCanvas, 0, 0)
+    setDecals(snapshot.decals)
+    
+    setCanUndo(undoStack.current.length > 0)
     const empty = checkIsEmpty(ctx, canvas)
-    setIsEmpty(empty)
-    if (empty) {
-      bounds.current = { minX: CANVAS_SIZE, minY: CANVAS_SIZE, maxX: 0, maxY: 0 }
-    } else {
-      bounds.current = { minX: 0, minY: 0, maxX: CANVAS_SIZE, maxY: CANVAS_SIZE }
-    }
+    // If there are decals, it's technically not empty
+    setIsEmpty(empty && snapshot.decals.length === 0)
   }, [])
 
-  // ─── Zero-Cost Auto-Crop Export ───────────────────────────────────────────
-  const exportBase64 = useCallback((): string => {
+  // ─── Zero-Cost Auto-Crop Export ──────────────────────────────────────────────
+  const exportBase64 = useCallback((): { image: string; adjustedDecals: Decal[] } => {
     const canvas = canvasRef.current
-    if (!canvas) return ''
+    const ctx = ctxRef.current
+    if (!canvas || !ctx) return { image: '', adjustedDecals: [] }
 
+    // Calculate exact pixel bounding box
+    const bounds = getPixelBounds(ctx, canvas.width, canvas.height, decals)
+    
     // If perfectly empty or bounds are invalid, return empty
-    const { minX, minY, maxX, maxY } = bounds.current
-    if (minX >= maxX || minY >= maxY) return canvas.toDataURL('image/png')
+    const { minX, minY, maxX, maxY } = bounds
+    if (minX >= maxX || minY >= maxY) return { image: canvas.toDataURL('image/png'), adjustedDecals: decals }
 
     // Add slight padding to the bounds
     const padding = 10
@@ -210,7 +254,7 @@ export function useDrawingCanvas(
     offscreen.width = maxDim
     offscreen.height = maxDim
     const octx = offscreen.getContext('2d')
-    if (!octx) return ''
+    if (!octx) return { image: '', adjustedDecals: [] }
 
     // BOTTOM-CENTER ALIGNMENT: 
     // X is centered. Y is pushed to the bottom so wobble/squash pivots correctly at the feet.
@@ -219,14 +263,30 @@ export function useDrawingCanvas(
 
     // Draw only the cropped portion from the main canvas
     octx.drawImage(canvas, cropX, cropY, cropW, cropH, offsetX, offsetY, cropW, cropH)
-    return offscreen.toDataURL('image/png')
-  }, [])
+    
+    // Shift decals by the crop offset
+    const adjustedDecals = decals.map(d => ({
+      ...d,
+      x: d.x - cropX + offsetX,
+      y: d.y - cropY + offsetY
+    }))
+
+    const result = { image: offscreen.toDataURL('image/png'), adjustedDecals }
+    
+    // Explicitly zero the buffer to release GPU memory on iOS/Safari
+    offscreen.width = 0
+    offscreen.height = 0
+    
+    return result
+  }, [decals])
 
   return {
     canvasRef,
     isEmpty,
     activeTool,
     setActiveTool,
+    activeStamp,
+    setActiveStamp,
     exportBase64,
     clear,
     undo,
@@ -234,6 +294,7 @@ export function useDrawingCanvas(
     onPointerDown,
     onPointerMove,
     onPointerUp,
+    decals,
   }
 }
 
@@ -308,6 +369,56 @@ function floodFill(
     if (y > 0)           stack.push(pos - width)
     if (y < height - 1)  stack.push(pos + width)
   }
+
+  // --- Dilation Pass (Anti-Aliasing Fix) ---
+  // Expand the fill area by 2 pixels to bleed UNDER the semi-transparent stroke edges.
+  // This matches professional software "Expand Fill" features.
+  const edges1 = new Uint8Array(width * height);
+  for (let y = 1; y < height - 1; y++) {
+    for (let x = 1; x < width - 1; x++) {
+      const pos = y * width + x;
+      if (visited[pos] === 1) {
+        if (visited[pos - 1] === 0) edges1[pos - 1] = 1;
+        if (visited[pos + 1] === 0) edges1[pos + 1] = 1;
+        if (visited[pos - width] === 0) edges1[pos - width] = 1;
+        if (visited[pos + width] === 0) edges1[pos + width] = 1;
+        if (visited[pos - 1 - width] === 0) edges1[pos - 1 - width] = 1;
+        if (visited[pos + 1 - width] === 0) edges1[pos + 1 - width] = 1;
+        if (visited[pos - 1 + width] === 0) edges1[pos - 1 + width] = 1;
+        if (visited[pos + 1 + width] === 0) edges1[pos + 1 + width] = 1;
+      }
+    }
+  }
+  
+  const edges2 = new Uint8Array(width * height);
+  for (let y = 1; y < height - 1; y++) {
+    for (let x = 1; x < width - 1; x++) {
+      const pos = y * width + x;
+      if (edges1[pos] === 1) {
+        if (visited[pos - 1] === 0 && edges1[pos - 1] === 0) edges2[pos - 1] = 1;
+        if (visited[pos + 1] === 0 && edges1[pos + 1] === 0) edges2[pos + 1] = 1;
+        if (visited[pos - width] === 0 && edges1[pos - width] === 0) edges2[pos - width] = 1;
+        if (visited[pos + width] === 0 && edges1[pos + width] === 0) edges2[pos + width] = 1;
+      }
+    }
+  }
+
+  // Composite the fill color UNDER the anti-aliased edge pixels
+  for (let pos = 0; pos < width * height; pos++) {
+    if (edges1[pos] === 1 || edges2[pos] === 1) {
+       const idx = pos * 4;
+       const tr = data[idx];
+       const tg = data[idx+1];
+       const tb = data[idx+2];
+       const ta = data[idx+3];
+       
+       const alpha = ta / 255;
+       data[idx]   = tr * alpha + fr * (1 - alpha);
+       data[idx+1] = tg * alpha + fg * (1 - alpha);
+       data[idx+2] = tb * alpha + fb * (1 - alpha);
+       data[idx+3] = 255;
+    }
+  }
 }
 
 function checkIsEmpty(
@@ -319,4 +430,33 @@ function checkIsEmpty(
     if (data[i] > 0) return false;
   }
   return true;
+}
+
+function getPixelBounds(ctx: CanvasRenderingContext2D, width: number, height: number, decals: Decal[]) {
+  const data = ctx.getImageData(0, 0, width, height).data;
+  let minX = width, minY = height, maxX = 0, maxY = 0;
+  
+  // Scan drawn pixels
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const alpha = data[(y * width + x) * 4 + 3];
+      if (alpha > 0) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+
+  // Factor in decals
+  for (const d of decals) {
+    const half = d.scale / 2;
+    if (d.x - half < minX) minX = d.x - half;
+    if (d.x + half > maxX) maxX = d.x + half;
+    if (d.y - half < minY) minY = d.y - half;
+    if (d.y + half > maxY) maxY = d.y + half;
+  }
+  
+  return { minX, minY, maxX, maxY };
 }

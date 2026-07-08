@@ -1,10 +1,38 @@
 import type { Creature, WorldState } from '../../types'
 
 export interface PerceptionResult {
-  targetType: 'FLEE' | 'HUNTS_PLANT' | 'HUNTS_MEAT' | 'LURE' | null;
+  targetType: 'FLEE' | 'HUNTS_PLANT' | 'HUNTS_MEAT' | 'HUNTS_SCAVENGE' | 'LURE' | null;
   targetX: number;
   targetY: number;
   targetId: string | null;
+}
+
+function sizeValue(s: string) {
+  return s === 'SMALL' ? 1 : s === 'MEDIUM' ? 2 : 3;
+}
+
+export function hunts(hunter: Creature, prey: Creature): boolean {
+  const hSize = sizeValue(hunter.size);
+  const pSize = sizeValue(prey.size);
+
+  if (hunter.diet === 'CARNIVORE') {
+    // Carnivores hunt Herbivores/Omnivores if they are large enough to hurt them
+    if (prey.diet === 'HERBIVORE' || prey.diet === 'OMNIVORE') {
+      return hSize >= pSize; 
+    }
+    
+    // Carnivores cannibalize if starving, but only if strictly larger than prey's size.
+    if (prey.diet === 'CARNIVORE') {
+       return hunter.hunger < 20 && hSize > pSize;
+    }
+  } else if (hunter.diet === 'OMNIVORE') {
+    // Omnivores hunt only as a desperate last resort
+    if (hunter.hunger < 20) {
+       if (prey.diet === 'HERBIVORE') return hSize >= pSize;
+       if (prey.diet === 'CARNIVORE' || prey.diet === 'OMNIVORE') return hSize > pSize;
+    }
+  }
+  return false;
 }
 
 export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: number): PerceptionResult {
@@ -12,14 +40,13 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
   let closestTargetX = 0
   let closestTargetY = 0
   let closestTargetId: string | null = null
-  let targetType: 'FLEE' | 'HUNTS_PLANT' | 'HUNTS_MEAT' | 'LURE' | null = null
+  let targetType: 'FLEE' | 'HUNTS_PLANT' | 'HUNTS_MEAT' | 'HUNTS_SCAVENGE' | 'LURE' | null = null
 
-  // 0. The Hand of God (Lure overrides all if very close, but only if they aren't terrified)
+  // 0. The Hand of God (Lure overrides all if very close)
   if (world.activeLure) {
     const lx = world.activeLure.x - c.x
     const ly = world.activeLure.y - c.y
     const ldSq = lx * lx + ly * ly
-    // If lure is within sight (even 1.5x sight), get curious
     if (ldSq < c.sightRadius * c.sightRadius * 2.25) {
       closestDistSq = ldSq
       closestTargetX = world.activeLure.x
@@ -30,43 +57,47 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
   }
 
   const safeBravery = Number.isNaN(c.bravery) ? 0.5 : Math.max(0, Math.min(1, c.bravery));
-  const braveryModifier = Math.max(0.1, 1.0 - safeBravery);
+  const braveryModifier = Math.max(0.4, 1.0 - safeBravery);
   const effectiveFleeRadius = c.sightRadius * braveryModifier;
   const fleeRadiusSq = effectiveFleeRadius * effectiveFleeRadius;
   const sightSq = c.sightRadius * c.sightRadius;
 
-  // 1. Check Predators (Highest Priority)
+  // 1. Check Predators (Fear) - Survival is the highest priority
+  // This must override LURE, even if the predator is further away than the lure.
   for (let j = 0; j < world.creatures.length; j++) {
     const other = world.creatures[j]
     if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
 
-    const bHuntsA = (other.diet === 'CARNIVORE' && (c.diet === 'HERBIVORE' || c.diet === 'OMNIVORE')) || 
-                    (other.diet === 'OMNIVORE' && other.hunger < 40 && (c.diet === 'HERBIVORE' || c.diet === 'CARNIVORE'))
-    
-    if (bHuntsA) {
+    if (hunts(other, c)) {
       const dx = other.x - c.x
       const dy = other.y - c.y
       const dSq = dx * dx + dy * dy
-      if (dSq < fleeRadiusSq && dSq < closestDistSq) {
-        closestDistSq = dSq
-        closestTargetX = other.x
-        closestTargetY = other.y
-        closestTargetId = other.id
-        targetType = 'FLEE'
+      if (dSq < fleeRadiusSq) {
+        if (targetType !== 'FLEE') {
+          closestDistSq = dSq
+          closestTargetX = other.x
+          closestTargetY = other.y
+          closestTargetId = other.id
+          targetType = 'FLEE'
+        } else if (dSq < closestDistSq) {
+          closestDistSq = dSq
+          closestTargetX = other.x
+          closestTargetY = other.y
+          closestTargetId = other.id
+        }
       }
     }
   }
 
-  // 2. Check Hunting Meat
-  if (targetType !== 'FLEE' && c.hunger < 80) {
+  const isPanicking = c.panicTimer > 0;
+
+  // 2. Check Hunting Meat (Aggression, only if not scared/lured)
+  if (targetType !== 'LURE' && targetType !== 'FLEE' && !isPanicking && c.hunger < 80) {
     for (let j = 0; j < world.creatures.length; j++) {
       const other = world.creatures[j]
       if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
       
-      const aHuntsB = (c.diet === 'CARNIVORE' && (other.diet === 'HERBIVORE' || other.diet === 'OMNIVORE')) || 
-                      (c.diet === 'OMNIVORE' && c.hunger < 40 && (other.diet === 'HERBIVORE' || other.diet === 'CARNIVORE'))
-      
-      if (aHuntsB) {
+      if (hunts(c, other)) {
         const dx = other.x - c.x
         const dy = other.y - c.y
         const dSq = dx * dx + dy * dy
@@ -81,11 +112,35 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
     }
   }
 
-  // 3. Check Hunting Plants
-  if (targetType !== 'FLEE' && !closestTargetId && (c.diet === 'HERBIVORE' || c.diet === 'OMNIVORE' || (c.diet === 'CARNIVORE' && c.hunger < 20))) {
+  // 3. Check Scavenging (Dropped Meat)
+  // Carnivores and Omnivores will scavenge for meat if they are hungry.
+  // We REMOVED targetType !== 'HUNTS_MEAT' so if meat is CLOSER than live prey, it overrides!
+  const isHungryCarnivore = c.diet === 'CARNIVORE' && c.hunger < 90;
+  const isStarvingOmnivore = c.diet === 'OMNIVORE' && c.hunger < 20;
+  if (targetType !== 'LURE' && targetType !== 'FLEE' && !isPanicking &&
+      (isHungryCarnivore || isStarvingOmnivore)) {
+    for (let k = 0; k < world.plants.length; k++) {
+      const p = world.plants[k];
+      if (world.scratchpad.deletedPlantIds.has(p.id) || p.type !== 'MEAT') continue;
+      const dx = p.x - c.x;
+      const dy = p.y - c.y;
+      const dSq = dx * dx + dy * dy;
+      if (dSq < sightSq && dSq < closestDistSq) {
+        closestDistSq = dSq;
+        closestTargetX = p.x;
+        closestTargetY = p.y;
+        closestTargetId = p.id;
+        targetType = 'HUNTS_SCAVENGE';
+      }
+    }
+  }
+
+  // 4. Check Foraging Plants
+  if (targetType !== 'LURE' && targetType !== 'FLEE' && targetType !== 'HUNTS_MEAT' && targetType !== 'HUNTS_SCAVENGE' && !isPanicking &&
+      (c.diet === 'HERBIVORE' || c.diet === 'OMNIVORE' || (c.diet === 'CARNIVORE' && c.hunger < 20))) {
     for (let k = 0; k < world.plants.length; k++) {
       const plant = world.plants[k]
-      if (world.scratchpad.deletedPlantIds.has(plant.id)) continue;
+      if (world.scratchpad.deletedPlantIds.has(plant.id) || plant.type === 'MEAT') continue;
       const dx = plant.x - c.x
       const dy = plant.y - c.y
       const dSq = dx * dx + dy * dy
@@ -107,6 +162,10 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
   } else if (targetType === 'HUNTS_MEAT') {
     c.mood = 'ANGRY';
     c.intent = 'Hunting prey!';
+    c.behavior = 'FORAGING';
+  } else if (targetType === 'HUNTS_SCAVENGE') {
+    c.mood = 'HUNGRY';
+    c.intent = 'Found some delicious meat...';
     c.behavior = 'FORAGING';
   } else if (targetType === 'HUNTS_PLANT') {
     c.mood = 'HUNGRY';

@@ -60,22 +60,22 @@ export function TutorialModal() {
               <div className="quickstart-step">
                 <div className="quickstart-icon"><Brush size={32} /></div>
                 <div className="quickstart-text">
-                  <h3>1. Draw Life</h3>
-                  <p>Click the + button to draw a creature. Big creatures are strong, but small creatures are fast!</p>
+                  <h3>1. Make a Creature</h3>
+                  <p>Click the big + button to draw your first creature! Big ones are tough tanks, while small ones are super speedy. Hover over the buttons to see what they do!</p>
                 </div>
               </div>
               <div className="quickstart-step">
                 <div className="quickstart-icon" style={{ background: 'var(--color-secondary)' }}><Eye size={32} /></div>
                 <div className="quickstart-text">
-                  <h3>2. Observe</h3>
-                  <p>Watch your creatures eat, survive, and reproduce. Their offspring will mutate and evolve over time.</p>
+                  <h3>2. Watch Them Grow</h3>
+                  <p>Watch your creatures eat, fight, and survive! If they do well, they'll level up. Reach Level 5 to become a massive, glowing Boss!</p>
                 </div>
               </div>
               <div className="quickstart-step">
                 <div className="quickstart-icon" style={{ background: 'var(--color-primary)' }}><Zap size={32} /></div>
                 <div className="quickstart-text">
-                  <h3>3. Intervene</h3>
-                  <p>Use God Tools at the bottom to shape the ecosystem. Feed the hungry, or smite the overpopulated!</p>
+                  <h3>3. Play God</h3>
+                  <p>Use the tools at the bottom to mess with the world! Zap creatures with lightning, feed your favorites, or pick them up and drop them. Oh, and the game auto-saves every 40 seconds!</p>
                 </div>
               </div>
             </div>
@@ -105,8 +105,8 @@ export function TutorialModal() {
                     <div className="guide-topic">
                       <Route className="guide-topic-icon" size={24} />
                       <div className="guide-topic-content">
-                        <h4>Size Defines Speed</h4>
-                        <p>Small creatures are incredibly fast but have very low health. Massive creatures are slow but can survive anything.</p>
+                        <h4>Size & Speed</h4>
+                        <p>Small creatures zoom around like crazy but are super squishy! Giant creatures are slow-moving tanks that can survive almost anything. Hover your mouse over the buttons to check their exact stats.</p>
                       </div>
                     </div>
                   </>
@@ -121,21 +121,21 @@ export function TutorialModal() {
                       <Leaf className="guide-topic-icon" size={24} />
                       <div className="guide-topic-content">
                         <h4>Herbivores</h4>
-                        <p>They peacefully graze on the natural environment. Their hunger drains slowly.</p>
+                        <p>Peaceful plant eaters. They just chill and munch on grass all day, so they don't get hungry too fast.</p>
                       </div>
                     </div>
                     <div className="guide-topic">
                       <Drumstick className="guide-topic-icon" size={24} />
                       <div className="guide-topic-content">
                         <h4>Carnivores</h4>
-                        <p>They must hunt other creatures to survive! They are aggressive and drain hunger quickly.</p>
+                        <p>Fierce meat eaters! They have to hunt to survive and get hungry super fast. Watch out for their jumping attacks!</p>
                       </div>
                     </div>
                     <div className="guide-topic">
                       <Utensils className="guide-topic-icon" size={24} />
                       <div className="guide-topic-content">
                         <h4>Omnivores</h4>
-                        <p>They eat anything they can find. They are the ultimate survivors in unpredictable ecosystems.</p>
+                        <p>They'll eat anything! Plants, meat, whatever is around. They are the ultimate survivors.</p>
                       </div>
                     </div>
                   </>
@@ -150,14 +150,14 @@ export function TutorialModal() {
                       <Orbit className="guide-topic-icon" size={24} />
                       <div className="guide-topic-content">
                         <h4>Mutations</h4>
-                        <p>When creatures reproduce, their babies inherit traits with slight random mutations. Only the fittest survive to pass on their genes!</p>
+                        <p>When creatures have babies, the kids might look and act a bit different! Only the strongest survive to pass on their genes.</p>
                       </div>
                     </div>
                     <div className="guide-topic">
                       <Brush className="guide-topic-icon" size={24} />
                       <div className="guide-topic-content">
-                        <h4>Color Shifting</h4>
-                        <p>As generations evolve, their colors naturally drift across the rainbow. Use the Inspector to check their genetic purity.</p>
+                        <h4>Boss Monsters!</h4>
+                        <p>As your creatures eat and hunt, they earn XP. When they hit Level 5, they turn into massive glowing Bosses with crazy high stats! If they survive past Level 10, they start living way longer too!</p>
                       </div>
                     </div>
                   </>
@@ -172,21 +172,21 @@ export function TutorialModal() {
                       <Flame className="guide-topic-icon" size={24} style={{color: 'var(--color-primary)'}} />
                       <div className="guide-topic-content">
                         <h4>Smite</h4>
-                        <p>Instantly vaporize any creature. Useful for removing overpopulated species.</p>
+                        <p>ZAP! Strike a creature with lightning to deal huge damage and scare them away!</p>
                       </div>
                     </div>
                     <div className="guide-topic">
                       <Droplets className="guide-topic-icon" size={24} style={{color: 'var(--color-secondary)'}} />
                       <div className="guide-topic-content">
                         <h4>Feed</h4>
-                        <p>Instantly restore a creature's hunger to maximum. Save your favorites from starvation.</p>
+                        <p>Drop a magical plant from the sky to save a starving creature.</p>
                       </div>
                     </div>
                     <div className="guide-topic">
                       <Hand className="guide-topic-icon" size={24} style={{color: 'var(--color-tertiary)'}} />
                       <div className="guide-topic-content">
                         <h4>Grab</h4>
-                        <p>Pick up a creature and drop them anywhere. Perfect for saving them from predators.</p>
+                        <p>Pick up a creature and move them away from danger (or drop them right in front of a hungry carnivore!).</p>
                       </div>
                     </div>
                   </>

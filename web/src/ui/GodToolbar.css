@@ -89,3 +89,64 @@
     transform: translateY(-50%) translateX(0);
   }
 }
+
+.god-toolbar-divider {
+  width: 32px;
+  height: 4px;
+  background: var(--color-text-muted);
+  border-radius: 4px;
+  margin: 8px auto;
+  opacity: 0.3;
+}
+
+.exit-btn {
+  color: #e07070;
+}
+@media (hover: hover) {
+  .exit-btn:hover {
+    color: white;
+    background: #e07070;
+    border-color: #e07070;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .god-toolbar {
+    left: 50%;
+    top: auto;
+    /* Raised from 20px to 100px to avoid overlapping with bottom-sheet Inspector and FAB */
+    bottom: max(100px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    flex-direction: row;
+    padding: 10px;
+    background: rgba(244, 240, 234, 0.9);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .god-toolbar-divider {
+    width: 4px;
+    height: 32px;
+    margin: auto 8px;
+  }
+
+  .god-tooltip {
+    left: 50%;
+    top: calc(-100% - 10px);
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  .god-tooltip::before {
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  }
+
+  @media (hover: none) {
+    .god-tool-btn.active .god-tooltip {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}

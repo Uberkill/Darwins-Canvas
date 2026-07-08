@@ -1,27 +1,20 @@
-import type { Creature, PendingCreature, WorldState } from '../types'
+import type { WorldState } from '../types'
 import { moveCrawler, moveHopper, movePacer } from './movement'
-import { evaluateThoughts } from './ai/Thoughts'
-import { calculateBoids } from './ai/Boids'
 import { runCollision } from './collision'
 import { checkReproduction } from './reproduction'
-import { tickPlantSpawner, tickHerbivoreSpawner } from './spawner'
+import { tickPlantSpawner } from './spawner'
+import { NavigationSystem } from './systems/NavigationSystem'
+import { LifeSystem } from './systems/LifeSystem'
 import { clampEntitiesToWorld } from './worldRef'
-import { releaseImage } from '../renderer/imageCache'
+import { spawnCreature, spawnPlant, killCreature, flushDeadEntities } from './entityManager'
+import { buildCreature } from './creatureFactory'
 import {
-  BASE_SPEED, STARTING_HUNGER, SIZE_STATS,
-  PACER_MOVE_DURATION, BASE_RENDER_SIZE,
-  HERBIVORE_BASE_HUNGER_DRAIN, CARNIVORE_BASE_HUNGER_DRAIN, OMNIVORE_BASE_HUNGER_DRAIN,
-  FLEEING_HUNGER_MULTIPLIER, HUNTING_HUNGER_MULTIPLIER,
-  SIGHT_RADIUS, MAX_STEERING_FORCE,
-  BASE_HEALTH, PASSIVE_HEAL_RATE, STARVATION_DAMAGE,
-  HERBIVORE_BASE_DAMAGE, CARNIVORE_BASE_DAMAGE, OMNIVORE_BASE_DAMAGE,
-  MAX_STAMINA, STAMINA_DRAIN_RATE, STAMINA_REGEN_RATE, EXHAUSTION_SPEED_PENALTY,
-  LUNGE_DURATION, LUNGE_COOLDOWN, LUNGE_SPEED_MULTIPLIER,
+  EXHAUSTION_SPEED_PENALTY,
+  LUNGE_SPEED_MULTIPLIER,
   DAY_NIGHT_CYCLE_DURATION, NIGHT_SIGHT_PENALTY,
-  WEATHER_CYCLE_DURATION, RAIN_PLANT_SPAWN_MULTIPLIER, DROUGHT_PLANT_SPAWN_MULTIPLIER
+  WEATHER_CYCLE_DURATION, RAIN_PLANT_SPAWN_MULTIPLIER, DROUGHT_PLANT_SPAWN_MULTIPLIER,
+  BASE_RENDER_SIZE
 } from '../constants'
-
-const ADULT_AGE = 30; // 30 seconds to reach full size
 
 /**
  * simulate.ts — the simulation orchestrator.
@@ -50,6 +43,16 @@ export function simulate(world: WorldState, dt: number): void {
     globalSightPenalty = (1.0 - NIGHT_SIGHT_PENALTY) + (NIGHT_SIGHT_PENALTY * t);
   }
 
+  // ─── Visual Effects ───
+  if (world.visualEffects) {
+    for (let i = world.visualEffects.length - 1; i >= 0; i--) {
+      world.visualEffects[i].timer -= dt;
+      if (world.visualEffects[i].timer <= 0) {
+        world.visualEffects.splice(i, 1);
+      }
+    }
+  }
+
   // ─── 0. Bounds Check ──────────────────────────────────────────────────────
   if (world.flags.boundsChanged) {
     clampEntitiesToWorld(world)
@@ -57,179 +60,22 @@ export function simulate(world: WorldState, dt: number): void {
   }
 
   // ─── 1. Sensory & Boids AI ────────────────────────────────────────────────
-  for (let i = 0; i < world.creatures.length; i++) {
-    const c = world.creatures[i]
-    if (c.id === world.draggedEntityId) {
-      c.direction.vx = 0
-      c.direction.vy = 0
-      continue
-    }
-    c.behavior = 'WANDERING'
-    c.targetId = null
-
-    // Carnivores get a 40% boost at night!
-    const sightMult = c.diet === 'CARNIVORE' && globalSightPenalty < 0.9 ? 1.4 : globalSightPenalty;
-    c.sightRadius = c.baseStats.sightRadius * sightMult;
-
-    const perception = evaluateThoughts(c, world, world.timeOfDay);
-    const boids = calculateBoids(c, world);
-
-    let forceX = 0;
-    let forceY = 0;
-    let remainingBudget = MAX_STEERING_FORCE;
-
-    const accumulateForce = (fX: number, fY: number) => {
-      if (remainingBudget <= 0) return;
-      const mag = Math.sqrt(fX*fX + fY*fY) || 1;
-      if (mag <= remainingBudget) {
-        forceX += fX;
-        forceY += fY;
-        remainingBudget -= mag;
-      } else {
-        forceX += (fX / mag) * remainingBudget;
-        forceY += (fY / mag) * remainingBudget;
-        remainingBudget = 0;
-      }
-    };
-
-    // 1. Separation (Highest Priority: don't crash into others)
-    if (boids.boidCount > 0) {
-      const sepMag = Math.sqrt(boids.sepX*boids.sepX + boids.sepY*boids.sepY) || 1;
-      accumulateForce((boids.sepX / sepMag) * MAX_STEERING_FORCE * 1.5, (boids.sepY / sepMag) * MAX_STEERING_FORCE * 1.5);
-    }
-
-    // 2. Fleeing / Foraging / Lure
-    if (perception.targetId && perception.targetType) {
-      c.targetId = perception.targetId;
-      if (perception.targetType === 'FLEE') c.behavior = 'FLEEING';
-      else if (perception.targetType === 'LURE') c.behavior = 'WANDERING';
-      else c.behavior = 'FORAGING';
-
-      let dX = c.x - perception.targetX;
-      let dY = c.y - perception.targetY;
-      if (dX === 0 && dY === 0) { dX = 0.1; dY = 0.1; }
-      const dist = Math.sqrt(dX*dX + dY*dY) || 1;
-
-      if (perception.targetType === 'FLEE') {
-        const desiredX = dX / dist;
-        const desiredY = dY / dist;
-        const urgency = 1 - Math.min(1, dist / c.sightRadius);
-        const applyForce = MAX_STEERING_FORCE * (0.5 + 0.5 * urgency) * 2.0;
-        accumulateForce(desiredX * applyForce, desiredY * applyForce);
-      } else {
-        // FORAGE or LURE (seek)
-        const desiredX = -dX / dist;
-        const desiredY = -dY / dist;
-        let force = MAX_STEERING_FORCE;
-        if (perception.targetType === 'LURE') force = MAX_STEERING_FORCE * 2; // Strong lure pull
-        accumulateForce(desiredX * force, desiredY * force);
-      }
-    }
-
-    // 3. Herding: Alignment & Cohesion (Only if not fleeing!)
-    if (c.mood !== 'SCARED' && boids.boidCount > 0) {
-      accumulateForce(boids.alignX * MAX_STEERING_FORCE * 0.8, boids.alignY * MAX_STEERING_FORCE * 0.8);
-      accumulateForce(boids.cohX * MAX_STEERING_FORCE * 0.5, boids.cohY * MAX_STEERING_FORCE * 0.5);
-    }
-
-    // Apply accumulated steering forces
-    if (forceX !== 0 || forceY !== 0) {
-      c.direction.vx += forceX * dt
-      c.direction.vy += forceY * dt
-      const mag = Math.sqrt(c.direction.vx*c.direction.vx + c.direction.vy*c.direction.vy)
-      if (mag === 0) {
-        const angle = Math.random() * Math.PI * 2
-        c.direction.vx = Math.cos(angle)
-        c.direction.vy = Math.sin(angle)
-      } else {
-        c.direction.vx /= mag
-        c.direction.vy /= mag
-      }
-    }
-
-  }
+  NavigationSystem.update(world, dt, globalSightPenalty);
 
   // ─── 2. Age + Stamina + Hunger drain ───
-  for (const creature of world.creatures) {
-    creature.age += dt
-    
-    // Growth
-    if (creature.age < ADULT_AGE) {
-      // Linearly scale from 0.5 to 1.5
-      creature.currentScale = 0.5 + (creature.age / ADULT_AGE) * 1.0;
-    } else if (creature.age > creature.maxAge * 0.8) {
-      // Shrink in old age (from 1.5 down to 1.2)
-      const oldAgeProgress = (creature.age - creature.maxAge * 0.8) / (creature.maxAge * 0.2);
-      creature.currentScale = 1.5 - (oldAgeProgress * 0.3);
-    } else {
-      creature.currentScale = 1.5;
-    }
-
-    // Death by old age
-    if (creature.age >= creature.maxAge) {
-      creature.health = 0;
-    }
-
-    // Sleep behavior
-    const isNight = globalSightPenalty < 0.9;
-    if (isNight && creature.diet !== 'CARNIVORE' && creature.behavior !== 'FLEEING' && creature.health > 50) {
-      creature.behavior = 'SLEEPING' as any;
-    } else if (creature.behavior === 'SLEEPING' as any) {
-      creature.behavior = 'WANDERING';
-    }
-
-    if (creature.behavior === 'FLEEING') {
-      creature.stamina = Math.max(0, creature.stamina - STAMINA_DRAIN_RATE * dt);
-    } else {
-      creature.stamina = Math.min(creature.maxStamina, creature.stamina + STAMINA_REGEN_RATE * dt);
-    }
-
-    if (creature.lungeCooldownTimer > 0) {
-      creature.lungeCooldownTimer -= dt;
-    }
-    if (creature.lungeTimer > 0) {
-      creature.lungeTimer -= dt;
-    }
-
-    if (creature.diet === 'CARNIVORE' && creature.behavior === 'FORAGING') {
-      // Trigger Lunge if they are chasing meat and not on cooldown
-      if (creature.lungeCooldownTimer <= 0 && creature.lungeTimer <= 0) {
-        creature.lungeTimer = LUNGE_DURATION;
-        creature.lungeCooldownTimer = LUNGE_DURATION + LUNGE_COOLDOWN;
-      }
-    }
-
-    let drainMultiplier = 1.0
-    if (creature.behavior === 'SLEEPING' as any) {
-      drainMultiplier = 0.2;
-      creature.state = 'IDLE';
-    }
-    if (creature.behavior === 'FLEEING') drainMultiplier = FLEEING_HUNGER_MULTIPLIER
-    else if (creature.behavior === 'FORAGING' && creature.diet === 'CARNIVORE') drainMultiplier = HUNTING_HUNGER_MULTIPLIER
-
-    creature.hunger -= creature.hungerDrainRate * drainMultiplier * dt
-
-    // Health Regeneration or Starvation
-    if (creature.hunger > 80) {
-      creature.health = Math.min(creature.maxHealth, creature.health + PASSIVE_HEAL_RATE * dt)
-    } else if (creature.hunger <= 0) {
-      creature.health -= STARVATION_DAMAGE * dt
-    }
-
-    // Reset state to MOVING if it was EATING (eating is momentary)
-    // Avoid overwriting FIGHTING state
-    if (creature.state === 'EATING') {
-      creature.state = 'MOVING'
-    }
-  }
+  LifeSystem.update(world, dt, globalSightPenalty);
 
   // ─── 3. Movement ──────────────────────────────────────────────────────────
   for (const creature of world.creatures) {
     if (creature.behavior === 'SLEEPING' as any) continue;
     if (creature.id === world.draggedEntityId) continue;
     let speedMult = 1.0;
-    if (creature.stamina <= 0) speedMult = EXHAUSTION_SPEED_PENALTY;
-    if (creature.lungeTimer > 0) speedMult = LUNGE_SPEED_MULTIPLIER;
+    if (creature.stamina <= 0) {
+      speedMult = EXHAUSTION_SPEED_PENALTY;
+      creature.lungeTimer = 0; // Cancel active lunge if exhausted
+    } else if (creature.lungeTimer > 0) {
+      speedMult = LUNGE_SPEED_MULTIPLIER;
+    }
     const effectiveDt = dt * speedMult;
 
     switch (creature.movement) {
@@ -242,53 +88,88 @@ export function simulate(world: WorldState, dt: number): void {
   // ─── 4. Collision & Feeding ───
   runCollision(world, dt)
   const deletedCreatureIds = world.scratchpad.deletedCreatureIds;
-  const deletedPlantIds = world.scratchpad.deletedPlantIds;
 
   // ─── 5. Reproduction (skip creatures already flagged for deletion) ───────────
   const babies = checkReproduction(world, dt, deletedCreatureIds)
 
-  // ─── 6. Plant spawner + growth + Herbivore Spawner ────────────────────────
+  // ─── 6. Migration (if extinct) ───
   let weatherMultiplier = 1.0;
   if (world.weather === 'RAIN') weatherMultiplier = RAIN_PLANT_SPAWN_MULTIPLIER;
   if (world.weather === 'DROUGHT') weatherMultiplier = DROUGHT_PLANT_SPAWN_MULTIPLIER;
   tickPlantSpawner(world, dt * weatherMultiplier);
-  tickHerbivoreSpawner(world, dt)
 
-  // ─── 7. Flush dead entities (Zero-GC Swap and Pop) ────────────────────────
-  if (deletedCreatureIds.size > 0 || world.creatures.some(c => c.health <= 0)) {
-    for (let i = world.creatures.length - 1; i >= 0; i--) {
-      const c = world.creatures[i];
-      if (c.health <= 0 || deletedCreatureIds.has(c.id)) {
-        releaseImage(c.id);
-        // Swap with the last element and pop
-        world.creatures[i] = world.creatures[world.creatures.length - 1];
-        world.creatures.pop();
+  // Immigration System (Re-seeding Extinct Populations)
+  if (!world.scratchpad.immigrationTimer) {
+    world.scratchpad.immigrationTimer = 0;
+  }
+  world.scratchpad.immigrationTimer += dt;
+  if (world.scratchpad.immigrationTimer > 30) { // Check every 30 seconds
+    world.scratchpad.immigrationTimer = 0;
+    
+    let herbivores = 0, carnivores = 0, omnivores = 0;
+    for (const c of world.creatures) {
+       if (c.health > 0) {
+         if (c.diet === 'HERBIVORE') herbivores++;
+         else if (c.diet === 'CARNIVORE') carnivores++;
+         else if (c.diet === 'OMNIVORE') omnivores++;
+       }
+    }
+
+    const spawnMigrant = (diet: 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE') => {
+      // 15% chance to migrate if extinct
+      if (Math.random() < 0.15) {
+        const side = Math.random() < 0.5 ? 0 : world.worldWidth;
+        const y = Math.random() * (world.worldHeight - 200) + 100;
+        const migrantColor = diet === 'HERBIVORE' ? 'green' : diet === 'CARNIVORE' ? 'red' : 'purple';
+        const migrantSVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="${migrantColor}"/></svg>`;
+        const migrant = buildCreature({
+           name: 'Migrant ' + diet.charAt(0) + diet.slice(1).toLowerCase(),
+           diet,
+           size: 'MEDIUM',
+           movement: 'CRAWLER',
+           drawingData: migrantSVG,
+           decals: []
+        }, world.worldWidth, world.worldHeight);
+        migrant.x = side;
+        migrant.y = y;
+        babies.push(migrant);
       }
+    };
+
+    if (herbivores === 0) spawnMigrant('HERBIVORE');
+    if (carnivores === 0) spawnMigrant('CARNIVORE');
+    if (omnivores === 0) spawnMigrant('OMNIVORE');
+  }
+
+  // ─── 7. Flush dead entities ──
+  // Process any creatures that starved this frame
+  for (let i = 0; i < world.creatures.length; i++) {
+    const c = world.creatures[i];
+    if (c.health <= 0 && !deletedCreatureIds.has(c.id)) {
+      killCreature(world, c.id);
+      spawnPlant(world, {
+        id: crypto.randomUUID(),
+        type: 'MEAT',
+        x: c.x,
+        y: c.y,
+        growthStage: 1.0,
+        wobblePhase: Math.random() * Math.PI * 2
+      });
     }
   }
   
   if (babies.length > 0) {
     for (let i = 0; i < babies.length; i++) {
-      world.creatures.push(babies[i]);
+      spawnCreature(world, babies[i]);
     }
   }
 
-  if (deletedPlantIds.size > 0) {
-    for (let i = world.plants.length - 1; i >= 0; i--) {
-      if (deletedPlantIds.has(world.plants[i].id)) {
-        world.plants[i] = world.plants[world.plants.length - 1];
-        world.plants.pop();
-      }
-    }
-  }
+  world.totalTime += dt;
+  
+  // Actually remove them from the arrays safely
+  flushDeadEntities(world);
 
-  // Clear scratchpad for next frame
-  deletedCreatureIds.clear();
-  deletedPlantIds.clear();
-
-  world.totalTime += dt
-
-  // ─── 8. Hit Detection ─────────────────────────────────────────────────────
+  // ─── 8. Hit Detection ──────────────────────────────────────────────────────────
   world.hoveredEntityId = null
   let highestY = -Infinity
   for (let i = world.creatures.length - 1; i >= 0; i--) {
@@ -301,7 +182,9 @@ export function simulate(world: WorldState, dt: number): void {
     let hitRadius = radius + (25 / world.camera.zoom)
     hitRadius = Math.max(48 / world.camera.zoom, hitRadius)
     
-    const distSq = (entity.x - world.mouseX) ** 2 + ((entity.y - entity.z) - world.mouseY) ** 2
+    // Offset the Y by radius so we hit the chest, not the feet.
+    const visualCenterY = (entity.y - entity.z) - radius;
+    const distSq = (entity.x - world.mouseX) ** 2 + (visualCenterY - world.mouseY) ** 2
     if (distSq < hitRadius ** 2) {
       if (entity.y > highestY) {
         highestY = entity.y
@@ -309,109 +192,12 @@ export function simulate(world: WorldState, dt: number): void {
       }
     }
   }
-
-  // ─── 9. Lure Timer ────────────────────────────────────────────────────────
+  
+  // ─── SAFE LIFECYCLE DELETIONS ────────────────────────────────────────────────────────
   if (world.activeLure) {
     world.activeLure.timer -= dt
     if (world.activeLure.timer <= 0) {
       world.activeLure = null
     }
-  }
-}
-
-// ─── buildCreature — factory ──────────────────────────────────────────────────
-export function buildCreature(
-  pending: PendingCreature,
-  worldWidth: number,
-  worldHeight: number,
-  generation: number = 1
-): Creature {
-  const stats = SIZE_STATS[pending.size]
-  const angle = Math.random() * Math.PI * 2
-
-  let baseDrain = HERBIVORE_BASE_HUNGER_DRAIN
-  let baseDamage = HERBIVORE_BASE_DAMAGE
-  if (pending.diet === 'CARNIVORE') {
-    baseDrain = CARNIVORE_BASE_HUNGER_DRAIN
-    baseDamage = CARNIVORE_BASE_DAMAGE
-  } else if (pending.diet === 'OMNIVORE') {
-    baseDrain = OMNIVORE_BASE_HUNGER_DRAIN
-    baseDamage = OMNIVORE_BASE_DAMAGE
-  }
-
-  const maxHealth = BASE_HEALTH * stats.healthMultiplier
-  const speed = BASE_SPEED * stats.speedMultiplier
-  const baseDrainRate = baseDrain * stats.hungerDrainMultiplier
-  const initialBravery = Math.random()
-
-  return {
-    // Identity
-    id:          crypto.randomUUID(),
-    name:        pending.name || 'Unknown',
-    drawingData: pending.drawingData,
-
-    // Position
-    x: 30 + Math.random() * (worldWidth - 60),
-    y: 30 + Math.random() * (worldHeight - 60),
-    z: 0,
-
-    // Traits
-    size:     pending.size,
-    movement: pending.movement,
-    diet:     pending.diet,
-
-    // Cached stats
-    speed:           speed,
-    hungerDrainRate: baseDrainRate,
-    renderScale:     stats.renderScale,
-    maxHealth:       maxHealth,
-    damage:          baseDamage * stats.damageMultiplier,
-    sightRadius:     SIGHT_RADIUS,
-
-    // Personality & Brain
-    bravery:   initialBravery,
-    kills:     0,
-    mood:      'HAPPY',
-    intent:    'Just born!',
-
-    // Genetics
-    hueShift: 0,
-    baseDrainRate: baseDrainRate,
-    baseStats: {
-      speed: speed,
-      sightRadius: SIGHT_RADIUS,
-      maxHealth: maxHealth,
-      maxStamina: MAX_STAMINA,
-      renderScale: stats.renderScale,
-      bravery: initialBravery,
-    },
-
-    // Live state
-    health:    maxHealth,
-    hunger:    STARTING_HUNGER,
-    direction: { vx: Math.cos(angle), vy: Math.sin(angle) },
-    state:     'IDLE',
-    behavior:  'WANDERING',
-    targetId:  null,
-    age:       0,
-    maxAge:    pending.diet === 'CARNIVORE' ? 420 : 300,
-    generation,
-    currentScale: 0.5,
-
-    // Movement sub-state
-    hopPhase:        Math.random() * Math.PI * 2,
-    hopPauseTimer:   0,
-    pacerMoveTimer:  PACER_MOVE_DURATION,
-    pacerPauseTimer: 0,
-    pacerPaused:     false,
-
-    // Reproduction
-    reproductionCooldown: 0,
-    
-    // Stamina & Combat
-    stamina: MAX_STAMINA,
-    maxStamina: MAX_STAMINA,
-    lungeTimer: 0,
-    lungeCooldownTimer: 0,
   }
 }

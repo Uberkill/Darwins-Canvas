@@ -209,6 +209,82 @@ export class GameRenderer {
       this.ctx.fillRect(0, 0, worldWidth, worldHeight);
     }
 
+    // 9. Draw Visual Effects (Lightning)
+    if (world.visualEffects) {
+      for (const effect of world.visualEffects) {
+        if (effect.type === 'LIGHTNING') {
+          this.ctx.save();
+          // Fade out based on timer
+          const alpha = Math.max(0, effect.timer / effect.maxTimer);
+          this.ctx.strokeStyle = `rgba(255, 255, 100, ${alpha})`;
+          this.ctx.lineWidth = 4;
+          this.ctx.lineCap = 'round';
+          this.ctx.lineJoin = 'round';
+          
+          // Seeded random for consistent jaggedness per effect
+          let seed = effect.seed;
+          const random = () => {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
+          };
+
+          this.ctx.beginPath();
+          // Start from sky (far above)
+          let currentX = effect.x + (random() - 0.5) * 100;
+          let currentY = effect.y - 1000;
+          this.ctx.moveTo(currentX, currentY);
+
+          // Draw jagged line down to target
+          while (currentY < effect.y) {
+            currentY += 50 + random() * 50;
+            if (currentY > effect.y) currentY = effect.y;
+            currentX += (random() - 0.5) * 80;
+            if (currentY === effect.y) currentX = effect.x; // Ensure it hits the target exactly
+            this.ctx.lineTo(currentX, currentY);
+          }
+          this.ctx.stroke();
+
+          // Flash core
+          this.ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+          this.ctx.lineWidth = 1;
+          this.ctx.stroke();
+          
+          this.ctx.restore();
+        } else if (effect.type === 'HEAL') {
+          this.ctx.save();
+          const progress = 1.0 - (effect.timer / effect.maxTimer); // 0 to 1
+          const alpha = Math.max(0, effect.timer / effect.maxTimer);
+          
+          // Floating green crosses
+          this.ctx.fillStyle = `rgba(46, 204, 113, ${alpha})`;
+          
+          let seed = effect.seed;
+          const random = () => {
+            seed = (seed * 9301 + 49297) % 233280;
+            return seed / 233280;
+          };
+
+          for (let i = 0; i < 5; i++) {
+            const rx = (random() - 0.5) * 60;
+            const ry = (random() - 0.5) * 40;
+            const rise = progress * (50 + random() * 50);
+            
+            const px = effect.x + rx;
+            const py = effect.y - 20 + ry - rise;
+            
+            const size = 4 + random() * 6;
+            
+            this.ctx.beginPath();
+            // Draw a plus sign (+)
+            this.ctx.rect(px - size/2, py - size/6, size, size/3);
+            this.ctx.rect(px - size/6, py - size/2, size/3, size);
+            this.ctx.fill();
+          }
+          this.ctx.restore();
+        }
+      }
+    }
+
     // Restore context scaling and camera matrix
     this.ctx.restore()
   }
@@ -224,15 +300,16 @@ export class GameRenderer {
 
     this.ctx.save();
     // Background (empty)
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
     this.ctx.beginPath();
-    this.ctx.roundRect ? this.ctx.roundRect(cx, cy, barWidth, barHeight, 3) : this.ctx.rect(cx, cy, barWidth, barHeight);
+    if (this.ctx.roundRect) this.ctx.roundRect(cx, cy, barWidth, barHeight, 3); 
+    else this.ctx.rect(cx, cy, barWidth, barHeight);
     this.ctx.fill();
 
-    // Foreground (health)
-    this.ctx.fillStyle = healthPercent > 0.5 ? '#2ecc71' : (healthPercent > 0.2 ? '#f1c40f' : '#e74c3c');
+    this.ctx.fillStyle = creature.health > 40 ? '#4CAF50' : '#f44336';
     this.ctx.beginPath();
-    this.ctx.roundRect ? this.ctx.roundRect(cx, cy, barWidth * healthPercent, barHeight, 3) : this.ctx.rect(cx, cy, barWidth * healthPercent, barHeight);
+    if (this.ctx.roundRect) this.ctx.roundRect(cx, cy, barWidth * healthPercent, barHeight, 3);
+    else this.ctx.rect(cx, cy, barWidth * healthPercent, barHeight);
     this.ctx.fill();
     this.ctx.restore();
   }

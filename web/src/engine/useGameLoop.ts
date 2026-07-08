@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import { worldRef, updateWorldDimensions } from './worldRef'
 import { useStore } from '../store/useStore'
 import { simulate } from './simulate'
-import { releaseImage } from '../renderer/imageCache'
 import { GameRenderer } from '../renderer/Renderer'
 
 const FIXED_TIME_STEP = 1000 / 60
@@ -22,6 +21,15 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
   const accumulator = useRef<number>(0)
   const rendererRef = useRef<GameRenderer | null>(null)
 
+  // Prevent default browser zooming/scrolling on the canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const preventDefault = (e: WheelEvent) => e.preventDefault();
+    canvas.addEventListener('wheel', preventDefault, { passive: false });
+    return () => canvas.removeEventListener('wheel', preventDefault);
+  }, [canvasRef]);
+
   useEffect(() => {
     let active = true
 
@@ -30,35 +38,37 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       rendererRef.current = new GameRenderer(canvasRef.current)
     }
 
-    const aliveIdsBefore = new Set<string>()
-    const aliveIdsAfter  = new Set<string>()
-
     function tick(timestamp: number) {
       if (!active || !canvasRef.current || !rendererRef.current) return
 
-      const dt = lastTimeRef.current === 0 ? 0 : timestamp - lastTimeRef.current
+      const storeState = useStore.getState()
+      let dtRaw = lastTimeRef.current === 0 ? 0 : timestamp - lastTimeRef.current
       lastTimeRef.current = timestamp
 
-      const storeState = useStore.getState()
+      // Spiral of Death prevention: if tab is backgrounded, cap dtRaw
+      if (dtRaw > 100) dtRaw = 100;
+
+      // Apply timeScale
+      const dt = dtRaw * storeState.timeScale
+
       const isPaused = storeState.isPanelOpen || storeState.isTutorialOpen
       if (isPaused) {
         accumulator.current = 0
       } else {
         accumulator.current += dt
-        // Prevent Spiral of Death (cap at ~15 frames worth of time)
-        if (accumulator.current > 250) accumulator.current = 250
+        // Prevent Spiral of Death (cap at ~1 real second worth of time, scaled)
+        if (accumulator.current > 1000) accumulator.current = 1000
       }
 
       const world = worldRef.current
 
-      // ── 1. Simulate Fixed Timesteps ──
+      // 🔄 1. Simulate Fixed Timesteps 🔄
       let steps = 0
-      while (accumulator.current >= FIXED_TIME_STEP && steps < 10) {
-        aliveIdsBefore.clear()
-        for (const c of world.creatures) aliveIdsBefore.add(c.id)
-
+      while (accumulator.current >= FIXED_TIME_STEP && steps < 60) {
         const dtSec = FIXED_TIME_STEP / 1000;
         simulate(world, dtSec);
+        
+        steps++
 
         // ── Camera State Machine & Lerping ──
         const store = useStore.getState()
@@ -101,30 +111,8 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
             cam.y = Math.max(minY, Math.min(maxY, cam.y));
           }
         }
-
         
-        accumulator.current -= FIXED_TIME_STEP
-        steps++
-
-        aliveIdsAfter.clear()
-        for (const c of world.creatures) aliveIdsAfter.add(c.id)
-
-        const toRelease: string[] = []
-        for (const id of aliveIdsBefore) {
-          if (!aliveIdsAfter.has(id)) toRelease.push(id)
-        }
-        
-        // ── 4. Deferred Memory Cleanup ──
-        if (toRelease.length > 0) {
-          const runRelease = () => {
-            for (const id of toRelease) releaseImage(id)
-          }
-          if (typeof requestIdleCallback === 'function') {
-            requestIdleCallback(runRelease)
-          } else {
-            setTimeout(runRelease, 0)
-          }
-        }
+        accumulator.current -= FIXED_TIME_STEP;
       }
 
       // ── 2. Render ──

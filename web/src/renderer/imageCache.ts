@@ -44,7 +44,11 @@ export function preloadImage(id: string, drawingData: string): Promise<void> {
  * Prevents the cache from growing unbounded over a long session.
  */
 export function releaseImage(id: string): void {
-  cache.delete(id)
+  cache.delete(id);
+  cache.delete(`${id}_IDLE`);
+  cache.delete(`${id}_SLEEPING`);
+  cache.delete(`${id}_EATING`);
+  cache.delete(`${id}_FIGHTING`);
 }
 
 /**
@@ -73,6 +77,10 @@ export async function generateTintedImage(id: string, originalData: string, hueS
       ctx.drawImage(img, 0, 0);
       
       const tintedData = canvas.toDataURL('image/png');
+      
+      // Explicitly zero buffer to release GPU memory on iOS/Safari
+      canvas.width = 0;
+      canvas.height = 0;
       
       const tintedImg = new Image();
       tintedImg.src = tintedData;

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Heart, Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
+import { Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
 import { worldRef } from '../engine/worldRef';
 import { BASE_RENDER_SIZE } from '../constants';
+import { useStore } from '../store/useStore';
 import './HoverOverlay.css';
 
 const getMoodIcon = (mood: string) => {
@@ -45,23 +46,39 @@ export const HoverOverlay: React.FC = () => {
           const worldX = hoveredCreature.x;
           const worldY = hoveredCreature.y - hoveredCreature.z - size - 10; // slightly above
 
+          const uiScale = useStore.getState().uiScale;
+
           // Logical screen bounds
           const logicalW = window.innerWidth;
           const logicalH = window.innerHeight;
 
+          // Camera math to convert world coords to screen coords
           const screenX = (worldX - camera.x) * camera.zoom + (logicalW / 2);
           const screenY = (worldY - camera.y) * camera.zoom + (logicalH / 2);
 
-          setTooltipData({
-            x: screenX,
-            y: screenY,
-            name: hoveredCreature.name,
-            mood: hoveredCreature.mood,
-            intent: hoveredCreature.intent,
-            visible: true
+          // Boundary clamping for mobile (tooltips go offscreen otherwise)
+          const margin = 100;
+          const clampedX = Math.max(margin, Math.min(logicalW - margin, screenX));
+          const clampedY = Math.max(margin, Math.min(logicalH - margin, screenY));
+
+          // Because .terrarium-overlay is scaled by uiScale, we must inversely scale the absolute position
+          // so it visually aligns with the unscaled canvas.
+          setTooltipData(prev => {
+            const next = {
+              x: clampedX / uiScale,
+              y: clampedY / uiScale,
+              name: hoveredCreature.name,
+              mood: hoveredCreature.mood,
+              intent: hoveredCreature.intent,
+              visible: true
+            };
+            if (prev && prev.visible && prev.x === next.x && prev.y === next.y && prev.name === next.name && prev.mood === next.mood && prev.intent === next.intent) {
+              return prev;
+            }
+            return next;
           });
         } else {
-          setTooltipData(null);
+          setTooltipData(prev => (prev && !prev.visible) ? prev : { ...prev, visible: false } as any);
         }
       }
       requestAnimationFrame(poll);

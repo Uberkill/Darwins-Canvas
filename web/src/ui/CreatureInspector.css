@@ -1,8 +1,10 @@
 .inspector-panel {
   position: absolute;
-  top: max(24px, env(safe-area-inset-top));
+  top: calc(max(24px, env(safe-area-inset-top)) + 70px);
   right: max(24px, env(safe-area-inset-right));
   width: 320px;
+  max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 180px);
+  overflow-y: auto;
   background: var(--color-panel);
   border-radius: var(--radius-lg);
   padding: 24px;
@@ -13,6 +15,36 @@
   gap: 20px;
   z-index: 50;
   pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .inspector-panel {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 50vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* Custom scrollbar for inspector panel */
+.inspector-panel::-webkit-scrollbar {
+  width: 8px;
+}
+.inspector-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.inspector-panel::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}
+.inspector-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text);
 }
 
 .inspector-header {
@@ -247,4 +279,40 @@
   font-weight: 900;
   color: var(--color-text);
   margin-top: 2px;
+}
+
+.inspector-boss-badge {
+  background: var(--color-tertiary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+}
+
+.inspector-xp-bar {
+  background: #E2DDD5;
+  height: 18px;
+  border-radius: var(--radius-full);
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.inspector-xp-fill {
+  background: var(--color-secondary);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+.inspector-xp-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+  white-space: nowrap;
 }

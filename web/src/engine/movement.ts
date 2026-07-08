@@ -51,9 +51,9 @@ export function moveCrawler(creature: Creature, dt: number, worldWidth: number, 
 // Pauses briefly between each hop cycle.
 
 export function moveHopper(creature: Creature, dt: number, worldWidth: number, worldHeight: number): void {
-  // Adrenaline Rush: Never pause when running for life or hunting!
+  // Adrenaline Rush: Reduce pause significantly, but never to 0 to ensure they can attack/be attacked on the ground.
   const isAdrenaline = creature.behavior === 'FLEEING' || (creature.behavior === 'FORAGING' && creature.diet !== 'HERBIVORE')
-  if (isAdrenaline) creature.hopPauseTimer = 0
+  if (isAdrenaline && creature.hopPauseTimer > 0.1) creature.hopPauseTimer = 0.1
 
   // If in between-hop pause, tick down and skip movement
   if (creature.hopPauseTimer > 0) {

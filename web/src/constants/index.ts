@@ -27,8 +27,8 @@ export const SIZE_STATS: Record<CreatureSize, {
 
 // ─── Diet-Specific Tuning ─────────────────────────────────────────────────────
 export const HERBIVORE_BASE_HUNGER_DRAIN = 2.5; // 40 seconds to starve
-export const CARNIVORE_BASE_HUNGER_DRAIN = 3.5; // ~28 seconds to starve
-export const OMNIVORE_BASE_HUNGER_DRAIN  = 3.0; 
+export const CARNIVORE_BASE_HUNGER_DRAIN = 1.5; // ~66 seconds to starve (Stamina/Endurance buff)
+export const OMNIVORE_BASE_HUNGER_DRAIN  = 2.8; 
 
 // ─── Health & Combat Stats ────────────────────────────────────────────────────
 export const BASE_HEALTH = 100;
@@ -36,7 +36,7 @@ export const PASSIVE_HEAL_RATE = 10.0; // HP/sec regenerated if hunger > 80
 export const STARVATION_DAMAGE = 5.0; // HP/sec lost if hunger <= 0
 
 export const HERBIVORE_BASE_DAMAGE = 2.0;  // Weak
-export const OMNIVORE_BASE_DAMAGE  = 20.0; // Moderate
+export const OMNIVORE_BASE_DAMAGE  = 10.0; // Moderate
 export const CARNIVORE_BASE_DAMAGE = 30.0; // High
 
 // Exhaustion multipliers applied during specific BehaviorStates
@@ -44,12 +44,14 @@ export const FLEEING_HUNGER_MULTIPLIER = 1.0; // Handled by Stamina now
 export const HUNTING_HUNGER_MULTIPLIER = 1.0;
 
 // ─── Population limits ────────────────────────────────────────────────────────
-export const GLOBAL_POPULATION_CAP    = 50;
-export const CARNIVORE_POPULATION_CAP = 5;
+export const GLOBAL_POPULATION_CAP    = 250;
+export const HERBIVORE_POPULATION_CAP = 100;
+export const CARNIVORE_POPULATION_CAP = 25;
+export const OMNIVORE_POPULATION_CAP  = 25;
 
 // ─── Plant constants ──────────────────────────────────────────────────────────
-export const PLANT_CAP          = 40;   // max plants on screen at once
-export const PLANT_SPAWN_RATE   = 1.5;  // seconds between spawns
+export const PLANT_CAP          = 100;   // max plants on screen at once
+export const PLANT_SPAWN_RATE   = 0.4;  // seconds between spawns
 export const PLANT_GROWTH_RATE  = 0.4;  // growthStage increase per second (0→1 in ~2.5s)
 export const PLANT_WOBBLE_SPEED = 1.2;  // radians/second for organic sway
 
@@ -60,12 +62,13 @@ export const SIGHT_RADIUS        = 400; // px
 export const MAX_STEERING_FORCE  = 120; // max velocity change per second
 
 // ─── Reproduction ─────────────────────────────────────────────────────────────
-export const HERBIVORE_REPRO_THRESHOLD = 60;
+export const HERBIVORE_REPRO_THRESHOLD = 50;
 export const HERBIVORE_REPRO_COOLDOWN  = 15; 
 export const CARNIVORE_REPRO_THRESHOLD = 75;
 export const CARNIVORE_REPRO_COOLDOWN  = 45;
 
-export const REPRO_CHANCE_PER_SEC   = 0.008; // ~0.8% chance per eligible second
+export const HERBIVORE_REPRO_CHANCE = 0.025; // 2.5% chance per eligible second
+export const CARNIVORE_REPRO_CHANCE = 0.008; // 0.8% chance per eligible second
 export const REPRO_SPAWN_OFFSET     = 65;    // px away from parent
 
 // ─── Hopper movement ──────────────────────────────────────────────────────────
@@ -77,7 +80,7 @@ export const HOP_PAUSE_DURATION = 0.5;  // seconds between hops
 export const PACER_MOVE_DURATION  = 1.5; // seconds of burst
 export const PACER_PAUSE_DURATION = 2.0; // seconds of pause
 
-export const EMPTY_STATE_DELAY_MS   = 3000; // ms before showing empty-state tooltip
+
 
 // ─── Stamina & Combat Dynamics ───────────────────────────────────────────────
 export const MAX_STAMINA = 100;
@@ -87,7 +90,7 @@ export const EXHAUSTION_SPEED_PENALTY = 0.5; // 50% slower when stamina is 0
 
 export const LUNGE_DURATION = 1.5; // seconds
 export const LUNGE_COOLDOWN = 4.0; // seconds
-export const LUNGE_SPEED_MULTIPLIER = 1.5; // 50% faster
+export const LUNGE_SPEED_MULTIPLIER = 2.5; // 150% faster (Apex Predator Burst)
 
 // ─── Macro Systems (Day/Night & Weather) ─────────────────────────────────────
 export const DAY_NIGHT_CYCLE_DURATION = 60; // 60 real seconds for a full 24h cycle
@@ -96,3 +99,33 @@ export const NIGHT_SIGHT_PENALTY = 0.4; // 60% reduction in sight radius
 export const WEATHER_CYCLE_DURATION = 120; // 120 seconds per weather shift
 export const RAIN_PLANT_SPAWN_MULTIPLIER = 2.0; // 2x plants
 export const DROUGHT_PLANT_SPAWN_MULTIPLIER = 0.5; // half plants
+
+// ─── Decal Stats ─────────────────────────────────────────────────────────────
+export const DECAL_STATS: Record<string, { desc: string, stats: { label: string, value: string, isGood: boolean }[] }> = {
+  'CARNIVORE_EYE': { desc: 'Piercing gaze for tracking prey.', stats: [{ label: 'Sight', value: '+15%', isGood: true }, { label: 'Bravery', value: '+10%', isGood: true }] },
+  'HERBIVORE_EYE': { desc: 'Wide angle for spotting predators.', stats: [{ label: 'Sight', value: '+20%', isGood: true }, { label: 'Speed', value: '+5%', isGood: true }] },
+  'INSECT_EYE': { desc: 'Incredible peripheral vision, but easily startled.', stats: [{ label: 'Sight', value: '+30%', isGood: true }, { label: 'Bravery', value: '-15%', isGood: false }] },
+  'NOCTURNAL_EYE': { desc: 'Excellent vision in the dark.', stats: [{ label: 'Sight', value: '+25%', isGood: true }, { label: 'Energy', value: '-5%', isGood: false }] },
+  'AQUATIC_EYE': { desc: 'Moist eyes that reduce energy drain slightly.', stats: [{ label: 'Sight', value: '+10%', isGood: true }, { label: 'Energy', value: '+5%', isGood: true }] },
+  'CARNIVORE_JAW': { desc: 'Sharp teeth for tearing flesh.', stats: [{ label: 'Damage', value: '+30%', isGood: true }, { label: 'Energy', value: '-10%', isGood: false }] },
+  'BEAK': { desc: 'Lightweight aerodynamic jaw.', stats: [{ label: 'Speed', value: '+15%', isGood: true }, { label: 'Damage', value: '-5%', isGood: false }] },
+  'HERBIVORE_JAW': { desc: 'Flat molars for efficient chewing.', stats: [{ label: 'Energy', value: '+5%', isGood: true }, { label: 'Speed', value: '-5%', isGood: false }] },
+  'PROBOSCIS': { desc: 'Long tube for sipping nectar.', stats: [{ label: 'Energy', value: '+8%', isGood: true }, { label: 'Damage', value: '-8%', isGood: false }] },
+  'BALEEN': { desc: 'Filter feeding apparatus.', stats: [{ label: 'Energy', value: '+10%', isGood: true }, { label: 'Speed', value: '-8%', isGood: false }] },
+};
+
+// ─── Trait Stats ─────────────────────────────────────────────────────────────
+export const TRAIT_STATS: Record<string, { desc: string, stats: { label: string, value: string, isGood: boolean }[] }> = {
+  // Size
+  'SMALL':  { desc: 'Tiny and evasive.', stats: [{ label: 'Speed', value: '+100%', isGood: true }, { label: 'Energy', value: '+50%', isGood: true }, { label: 'Health', value: '-50%', isGood: false }, { label: 'Damage', value: '-50%', isGood: false }] },
+  'MEDIUM': { desc: 'A perfectly balanced organism.', stats: [] },
+  'LARGE':  { desc: 'Mighty and resilient.', stats: [{ label: 'Health', value: '+100%', isGood: true }, { label: 'Damage', value: '+100%', isGood: true }, { label: 'Speed', value: '-50%', isGood: false }, { label: 'Energy', value: '-100%', isGood: false }] },
+  // Movement
+  'CRAWLER': { desc: 'Steady and predictable movement.', stats: [] },
+  'HOPPER':  { desc: 'Jumps to avoid attacks and obstacles.', stats: [] },
+  'PACER':   { desc: 'Moves in extremely fast, short bursts.', stats: [] },
+  // Diet
+  'HERBIVORE': { desc: 'Eats plants peacefully.', stats: [{ label: 'Base Damage', value: '2', isGood: false }] },
+  'OMNIVORE':  { desc: 'Eats plants and scavenges.', stats: [{ label: 'Base Damage', value: '10', isGood: true }] },
+  'CARNIVORE': { desc: 'Hunts other creatures for food.', stats: [{ label: 'Base Damage', value: '30', isGood: true }] },
+};

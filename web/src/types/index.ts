@@ -3,8 +3,8 @@ export type CreatureSize  = 'SMALL' | 'MEDIUM' | 'LARGE';
 export type MovementType  = 'CRAWLER' | 'HOPPER' | 'PACER';
 export type DietType      = 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE';
 type CreatureState = 'IDLE' | 'MOVING' | 'EATING' | 'JUMPING' | 'PAUSED' | 'FIGHTING';
-export type BehaviorState = 'WANDERING' | 'FORAGING' | 'FLEEING' | 'SLEEPING';
-export type MoodType = 'HAPPY' | 'SCARED' | 'HUNGRY' | 'SLEEPY' | 'ANGRY';
+type BehaviorState = 'WANDERING' | 'FORAGING' | 'FLEEING' | 'SLEEPING';
+type MoodType = 'HAPPY' | 'SCARED' | 'HUNGRY' | 'SLEEPY' | 'ANGRY';
 
 // ─── Core entity: Creature ────────────────────────────────────────────────────
 export interface Creature {
@@ -42,12 +42,14 @@ export interface Creature {
   maxAge:    number;        // maximum lifespan in seconds
   generation: number;       // genetic lineage depth (1 = created by player)
   currentScale: number;     // live scale (0.5 for babies, up to 1.5 for adults)
+  panicTimer: number;       // time remaining for fleeing fear Memory
 
   // Stamina & Combat
   stamina:    number;       // 0 to maxStamina (drained when fleeing)
   maxStamina: number;
   lungeTimer: number;       // active lunge time remaining
   lungeCooldownTimer: number; // time until next lunge can be used
+  eatingTimer: number;      // active eating time remaining
 
   // Movement sub-state (all movement types share the struct; only relevant fields used)
   hopPhase:       number;   // radians — sine wave phase for HOPPER
@@ -62,8 +64,19 @@ export interface Creature {
   // Personality & Brain
   bravery:   number;        // 0.0 to 1.0 (0 = skittish, 1 = fearless)
   kills:     number;        // Lifetime kills
+  foodEaten: number;        // Lifetime plants eaten
+  level:     number;        // 1 to 10, computed from kills and foodEaten
   mood:      MoodType;      // Current emotional state
   intent:    string;        // "Inner thoughts" text
+
+  // Visuals
+  decals: Decal[];
+  bakedSprites?: {
+    IDLE: string;
+    SLEEPING: string;
+    EATING: string;
+    FIGHTING: string;
+  };
 
   // Evolution & Genetics
   hueShift:           number;
@@ -75,31 +88,45 @@ export interface Creature {
     maxStamina: number;
     renderScale: number;
     bravery: number;
+    damage: number;
   };
+  hitTimer: number; // time remaining for damage flash/shake
 }
 
 // ─── Core entity: Plant ───────────────────────────────────────────────────────
 export interface Plant {
   id:          string;
+  type?:       'PLANT' | 'MEAT'; // If undefined, assume 'PLANT'
   x:           number;
   y:           number;
   growthStage: number;  // 0.0–1.0 — drives visual size
   wobblePhase: number;  // radians — drives organic sway animation
 }
 
+
 // ─── Camera ───────────────────────────────────────────────────────────────────
-export interface CameraState {
+interface CameraState {
   x: number;
   y: number;
   zoom: number;
 }
 
 // ─── World state (lives in worldRef — NOT in Zustand) ────────────────────────
+interface VisualEffect {
+  id: string;
+  type: 'LIGHTNING' | 'HEAL';
+  x: number;
+  y: number;
+  timer: number;    // Current time remaining (in seconds or arbitrary units)
+  maxTimer: number; // Total duration of the effect
+  seed: number;     // Random seed for procedural effects
+}
+
 export interface WorldState {
   creatures:       Creature[];
   plants:          Plant[];
+  visualEffects?:  VisualEffect[]; // Optional for backward compatibility with old saves
   plantSpawnTimer: number;   // countdown seconds to next plant spawn
-  herbivoreSpawnTimer: number; // countdown seconds to next wild herbivore spawn
   activeLure:      { x: number; y: number; timer: number } | null;
   totalTime:       number;   // total elapsed seconds
   worldWidth:      number;   // updated on resize
@@ -120,6 +147,7 @@ export interface WorldState {
   scratchpad: {
     deletedCreatureIds: Set<string>;
     deletedPlantIds:    Set<string>;
+    immigrationTimer?:  number;
   };
   // Drag and Drop
   draggedEntityId: string | null;
@@ -128,13 +156,20 @@ export interface WorldState {
 }
 
 // ─── Zustand store (command bus only — zero simulation state) ─────────────────
-export type GodTool = 'POINTER' | 'SMITE' | 'FEED' | 'LURE' | 'GRAB';
+export type GodTool = 'POINTER' | 'SMITE' | 'HEAL' | 'FEED' | 'LURE' | 'GRAB';
 
-export type CameraMode = 'FREE' | 'TRACKING';
+type CameraMode = 'FREE' | 'TRACKING';
 
 export interface GameStore {
   activeTool:      GodTool;
   setActiveTool:   (tool: GodTool) => void;
+
+  timeScale:       number;
+  setTimeScale:    (scale: number) => void;
+
+  // Save System
+  activeSaveSlot:  string | null;
+  setActiveSaveSlot: (slot: string | null) => void;
 
   // Selection UI
   selectedCreatureId: string | null;
@@ -147,6 +182,13 @@ export interface GameStore {
   targetZoom:      number;
   setTargetZoom:   (zoom: number) => void;
 
+  // ─── Settings ─────────────────────────────────────────────────────────────
+  masterVolume: number;
+  sfxVolume: number;
+  musicVolume: number;
+  uiScale: number;
+  setSettings: (settings: Partial<{ masterVolume: number; sfxVolume: number; musicVolume: number; uiScale: number }>) => void;
+
   isPanelOpen:     boolean;
   openPanel:       () => void;
   closePanel:      () => void;
@@ -155,16 +197,41 @@ export interface GameStore {
   openTutorial:    () => void;
   closeTutorial:   () => void;
 
+  isOnboardingOpen: boolean;
+  openOnboarding:   () => void;
+  closeOnboarding:  () => void;
+
+  isPauseMenuOpen:  boolean;
+  previousTimeScale: number;
+  openPauseMenu:    () => void;
+  closePauseMenu:   () => void;
+
   pendingCreature: PendingCreature | null;
   queueCreature:   (c: PendingCreature) => void;
   clearQueue:      () => void;
 }
 
 // ─── What the creation panel hands off on "Release" ──────────────────────────
+export interface Decal {
+  type: 'EYE' | 'MOUTH';
+  style: string;
+  x: number;
+  y: number;
+  scale: number;
+  rotation: number;
+}
+
 export interface PendingCreature {
   drawingData: string;
   name:        string;
   size:        CreatureSize;
   movement:    MovementType;
   diet:        DietType;
+  decals:      Decal[];
+  bakedSprites?: {
+    IDLE: string;
+    SLEEPING: string;
+    EATING: string;
+    FIGHTING: string;
+  };
 }

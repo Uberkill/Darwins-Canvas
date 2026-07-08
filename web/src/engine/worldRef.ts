@@ -20,7 +20,6 @@ function createInitialWorldState(): WorldState {
     creatures:           [],
     plants:              [],
     plantSpawnTimer:     0,
-    herbivoreSpawnTimer: 10,
     totalTime:           0,
     worldWidth:          getWorldWidth(),
     worldHeight:         getWorldHeight(),
@@ -69,7 +68,7 @@ export function clampEntitiesToWorld(world: WorldState): void {
 
   // Clamp plants horizontally and vertically
   for (const p of world.plants) {
-    const radius = 10
+    const radius = 50 // Increased to 50 so large creatures can reach them!
     p.x = Math.max(radius, Math.min(w - radius, p.x))
     p.y = Math.max(radius, Math.min(h - radius, p.y))
   }

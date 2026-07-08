@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStore } from '../store/useStore';
 import { worldRef } from '../engine/worldRef';
 import type { Creature } from '../types';
-import { Heart, Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
+import { Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
 import './CreatureInspector.css';
 
 const getMoodIcon = (mood: string) => {
@@ -52,6 +52,37 @@ export const CreatureInspector: React.FC = () => {
   const healthPct = Math.min(100, Math.max(0, Math.round((creature.health / creature.maxHealth) * 100)));
   const staminaPct = Math.min(100, Math.max(0, Math.round((creature.stamina / creature.maxStamina) * 100)));
 
+  // Calculate XP progress to next level using the exact quadratic formulas from simulate.ts
+  let currentXp = 0;
+  let xpNeeded = 1;
+  let xpLabel = 'XP';
+  
+  const currentLvl = creature.level;
+  const baseScore = Math.pow(currentLvl - 1, 2);
+  const targetScore = Math.pow(currentLvl, 2);
+  
+  if (creature.diet === 'HERBIVORE') {
+    const score = creature.foodEaten / 3;
+    currentXp = Math.floor(score - baseScore);
+    xpNeeded = targetScore - baseScore;
+    xpLabel = 'Food (Scaled)';
+  } else if (creature.diet === 'CARNIVORE') {
+    const score = creature.kills;
+    currentXp = score - baseScore;
+    xpNeeded = targetScore - baseScore;
+    xpLabel = 'Kills';
+  } else {
+    const score = (creature.kills * 1.5) + (creature.foodEaten / 6);
+    currentXp = Math.floor(score - baseScore);
+    xpNeeded = targetScore - baseScore;
+    xpLabel = 'Omni-XP';
+  }
+
+  // Prevent divide by zero edge cases
+  xpNeeded = Math.max(1, xpNeeded);
+  currentXp = Math.max(0, currentXp);
+  const xpPercent = Math.min(100, (currentXp / xpNeeded) * 100);
+
   return (
     <div className="inspector-panel">
       
@@ -70,10 +101,21 @@ export const CreatureInspector: React.FC = () => {
                 Veteran
               </span>
             )}
+            {creature.level >= 5 && (
+              <span className="inspector-boss-badge">
+                BOSS
+              </span>
+            )}
           </h2>
           <p className="inspector-subtitle">
-            {creature.diet} • {creature.movement}
+            {creature.diet} • {creature.movement} • Level {creature.level}
           </p>
+          <div className="inspector-xp-bar">
+             <div className="inspector-xp-fill" style={{ width: `${xpPercent}%` }} />
+             <span className="inspector-xp-text">
+               {currentXp} / {xpNeeded} {xpLabel}
+             </span>
+          </div>
         </div>
         <button 
           onClick={() => setSelectedCreatureId(null)}

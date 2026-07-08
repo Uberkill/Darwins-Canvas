@@ -50,22 +50,67 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature):
   scaleX *= breathe
   scaleY *= breathe
 
-  // Flip horizontally if moving right (assuming drawn facing left)
-  if (creature.direction.vx > 0) {
+  // Flip horizontally if moving left (assuming drawn facing right)
+  if (creature.direction.vx < 0) {
     scaleX *= -1
   }
 
   ctx.scale(scaleX, scaleY)
+  
+  // ── Determine Animated State ──
+  let frameState: 'IDLE' | 'SLEEPING' | 'EATING' | 'FIGHTING' = 'IDLE'
+  if (creature.behavior === ('SLEEPING' as any)) {
+    frameState = 'SLEEPING'
+  } else if (creature.state === 'EATING' || creature.eatingTimer > 0 || creature.lungeTimer > 0) {
+    frameState = 'EATING'
+  } else if (creature.state === 'FIGHTING') {
+    frameState = 'FIGHTING'
+  }
+
+  const base64Src = creature.bakedSprites ? creature.bakedSprites[frameState] : creature.drawingData
+  const imgId = creature.bakedSprites ? `${creature.id}_${frameState}` : creature.id
 
   // ── Draw creature image (bottom-anchored: top-left at -size/2, -size) ──
   try {
-    const img = getImage(creature.id, creature.drawingData)
+    const img = getImage(imgId, base64Src)
     if (img.complete && img.naturalWidth > 0) {
       const isElderly = creature.age > creature.maxAge * 0.8;
       if (isElderly) {
         ctx.filter = 'contrast(0.8) brightness(1.2)';
       }
+      if (creature.hitTimer && creature.hitTimer > 0) {
+        const shakeX = (Math.random() - 0.5) * 2;
+        const shakeY = (Math.random() - 0.5) * 2;
+        ctx.translate(shakeX, shakeY);
+      }
+      
+      // Boss Aura for Level 5+ creatures
+      if (creature.level >= 5) {
+        const age = creature.age || 0;
+        const pulse = 0.5 + 0.5 * Math.sin(age * 3);
+        
+        // Protect against negative/NaN radius
+        const radius = Math.max(0, size * 0.6 + size * 0.1 * pulse) || 0;
+        if (radius > 0) {
+          let glowColor = `rgba(255, 215, 0, ${0.3 + 0.2 * pulse})`; // Gold for Omnivore
+          if (creature.diet === 'CARNIVORE') glowColor = `rgba(255, 50, 50, ${0.3 + 0.2 * pulse})`;
+          else if (creature.diet === 'HERBIVORE') glowColor = `rgba(50, 255, 50, ${0.3 + 0.2 * pulse})`;
+          
+          ctx.beginPath();
+          ctx.arc(0, -size / 2, radius, 0, Math.PI * 2);
+          
+          // Gradient is highly performant and achieves the same blurred glow
+          const gradient = ctx.createRadialGradient(0, -size / 2, radius * 0.5, 0, -size / 2, radius);
+          gradient.addColorStop(0, glowColor);
+          gradient.addColorStop(1, 'rgba(0,0,0,0)');
+          
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
+      }
+
       ctx.drawImage(img, -size / 2, -size, size, size)
+      
       if (isElderly) {
         ctx.filter = 'none'; // reset filter immediately
       }

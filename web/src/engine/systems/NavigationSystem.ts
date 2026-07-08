@@ -1,0 +1,107 @@
+import type { WorldState } from '../../types'
+import { evaluateThoughts } from '../ai/Thoughts'
+import { calculateBoids } from '../ai/Boids'
+import { MAX_STEERING_FORCE } from '../../constants'
+
+export const NavigationSystem = {
+  update(world: WorldState, dt: number, globalSightPenalty: number) {
+    for (let i = 0; i < world.creatures.length; i++) {
+      const c = world.creatures[i]
+      if (c.id === world.draggedEntityId) {
+        c.direction.vx = 0
+        c.direction.vy = 0
+        continue
+      }
+      
+      if (c.panicTimer > 0) {
+        c.panicTimer = Math.max(0, c.panicTimer - dt)
+      }
+
+      c.behavior = c.panicTimer > 0 ? 'FLEEING' : 'WANDERING'
+      c.targetId = null
+
+      // Carnivores get a 40% boost at night!
+      const sightMult = c.diet === 'CARNIVORE' && globalSightPenalty < 0.9 ? 1.4 : globalSightPenalty;
+      c.sightRadius = c.baseStats.sightRadius * sightMult;
+
+      const perception = evaluateThoughts(c, world, world.timeOfDay);
+      const boids = calculateBoids(c, world);
+
+      let forceX = 0;
+      let forceY = 0;
+      let remainingBudget = MAX_STEERING_FORCE;
+
+      const accumulateForce = (fX: number, fY: number) => {
+        if (remainingBudget <= 0) return;
+        const mag = Math.sqrt(fX*fX + fY*fY) || 1;
+        if (mag <= remainingBudget) {
+          forceX += fX;
+          forceY += fY;
+          remainingBudget -= mag;
+        } else {
+          forceX += (fX / mag) * remainingBudget;
+          forceY += (fY / mag) * remainingBudget;
+          remainingBudget = 0;
+        }
+      };
+
+      // 1. Separation (Highest Priority: don't crash into others)
+      if (boids.boidCount > 0) {
+        const sepMag = Math.sqrt(boids.sepX*boids.sepX + boids.sepY*boids.sepY) || 1;
+        accumulateForce((boids.sepX / sepMag) * MAX_STEERING_FORCE * 1.5, (boids.sepY / sepMag) * MAX_STEERING_FORCE * 1.5);
+      }
+
+      // 2. Fleeing / Foraging / Lure
+      if (perception.targetId && perception.targetType) {
+        c.targetId = perception.targetId;
+        if (perception.targetType === 'FLEE') {
+          c.behavior = 'FLEEING';
+          c.panicTimer = 3.0; // Stay panicked for 3 seconds even if sight is lost
+        }
+        else if (perception.targetType === 'LURE') c.behavior = 'WANDERING';
+        else c.behavior = 'FORAGING';
+
+        let dX = c.x - perception.targetX;
+        let dY = c.y - perception.targetY;
+        if (dX === 0 && dY === 0) { dX = 0.1; dY = 0.1; }
+        const dist = Math.sqrt(dX*dX + dY*dY) || 1;
+
+        if (perception.targetType === 'FLEE') {
+          const desiredX = dX / dist;
+          const desiredY = dY / dist;
+          const urgency = 1 - Math.min(1, dist / Math.max(1, c.sightRadius));
+          const applyForce = MAX_STEERING_FORCE * (0.5 + 0.5 * urgency) * 2.0;
+          accumulateForce(desiredX * applyForce, desiredY * applyForce);
+        } else {
+          // FORAGE or LURE (seek)
+          const desiredX = -dX / dist;
+          const desiredY = -dY / dist;
+          let force = MAX_STEERING_FORCE;
+          if (perception.targetType === 'LURE') force = MAX_STEERING_FORCE * 2; // Strong lure pull
+          accumulateForce(desiredX * force, desiredY * force);
+        }
+      }
+
+      // 3. Herding: Alignment & Cohesion (Only if not fleeing!)
+      if (c.mood !== 'SCARED' && boids.boidCount > 0) {
+        accumulateForce(boids.alignX * MAX_STEERING_FORCE * 0.8, boids.alignY * MAX_STEERING_FORCE * 0.8);
+        accumulateForce(boids.cohX * MAX_STEERING_FORCE * 0.5, boids.cohY * MAX_STEERING_FORCE * 0.5);
+      }
+
+      // Apply accumulated steering forces
+      if (forceX !== 0 || forceY !== 0) {
+        c.direction.vx += forceX * dt
+        c.direction.vy += forceY * dt
+        const mag = Math.sqrt(c.direction.vx*c.direction.vx + c.direction.vy*c.direction.vy)
+        if (mag === 0) {
+          const angle = Math.random() * Math.PI * 2
+          c.direction.vx = Math.cos(angle)
+          c.direction.vy = Math.sin(angle)
+        } else {
+          c.direction.vx /= mag
+          c.direction.vy /= mag
+        }
+      }
+    }
+  }
+}

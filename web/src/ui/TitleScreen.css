@@ -1,0 +1,301 @@
+/* src/ui/TitleScreen.css */
+
+.title-screen {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Notebook paper background */
+  background-color: #FFF6E5;
+  background-image: 
+    linear-gradient(90deg, transparent 79px, #FFE3B3 79px, #FFE3B3 81px, transparent 81px),
+    linear-gradient(#FFE3B3 .1em, transparent .1em);
+  background-size: 100% 100%, 100% 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 100;
+  transition: opacity 0.6s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.title-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Red margin line */
+.title-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 120px;
+  bottom: 0;
+  width: 3px;
+  background-color: #FF6B9E;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.title-screen-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+  /* Shift content to perfectly center in the usable space to the right of the margin line */
+  margin-left: 120px; 
+  width: calc(100% - 120px);
+  max-width: 800px;
+}
+
+/* Title */
+.title-logo {
+  text-shadow: 2px 4px 0px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+/* Sketchy styling for Title Screen specific buttons */
+.title-screen .btn-massive {
+  border-radius: 40px 15px 45px 15px / 15px 40px 15px 45px;
+  transform: rotate(2deg);
+  transition: all 0.2s ease;
+}
+.title-screen .btn-massive:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+.title-screen .btn-massive:active {
+  transform: translateY(10px) rotate(0deg);
+  box-shadow: 0 0 0 transparent;
+}
+
+.title-screen .btn-secondary {
+  border-radius: 10px 32px 15px 28px / 32px 10px 28px 15px;
+  transform: rotate(-1.5deg);
+  transition: all 0.2s ease;
+  color: var(--color-text) !important;
+  text-transform: uppercase;
+}
+.title-screen .btn-secondary:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+
+.title-screen .btn-secondary.settings-btn {
+  background: var(--color-primary); /* Pink */
+  box-shadow: 0 6px 0 var(--color-primary-shadow);
+}
+
+.title-screen .btn-secondary.quit-btn {
+  background: #A0938A; /* Grayish */
+  box-shadow: 0 6px 0 #7A6F68;
+}
+
+.title-screen .btn-secondary:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+.title-screen .btn-secondary:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 transparent;
+}
+
+/* Layout Utilities for 70/20/10 structure */
+.secondary-button-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-corner-controls {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  z-index: 50;
+}
+
+.icon-btn-tertiary {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 4px solid white;
+  transition: all 0.2s ease;
+  color: white;
+}
+.icon-btn-tertiary.settings-btn {
+  background: var(--color-primary);
+  box-shadow: 0 6px 0 var(--color-primary-shadow);
+}
+.icon-btn-tertiary.quit-btn {
+  background: #A0938A;
+  box-shadow: 0 6px 0 #7A6F68;
+}
+
+.icon-btn-tertiary:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+.icon-btn-tertiary:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 transparent;
+}
+
+/* Animated SVG Doodles */
+.doodle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.doodle {
+  position: absolute;
+  pointer-events: auto; /* Make clickable */
+  cursor: pointer;
+  opacity: 0.7;
+  animation-timing-function: linear;
+  transition: transform 0.2s ease, opacity 0.5s ease;
+}
+
+.doodle:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Run away animation classes */
+.doodle.run-away {
+  animation: none !important;
+  transition: transform 0.5s cubic-bezier(0.5, 0, 1, 0.5), opacity 0.5s;
+  transform: translateY(-500px) rotate(180deg) scale(0.5) !important;
+  opacity: 0 !important;
+}
+
+.doodle.run-away-right {
+  animation: none !important;
+  transition: transform 0.5s cubic-bezier(0.5, 0, 1, 0.5), opacity 0.5s;
+  transform: translateX(500px) rotate(180deg) scale(0.5) !important;
+  opacity: 0 !important;
+}
+
+/* Animations */
+.doodle-bug {
+  top: 15%;
+  left: 5%;
+  width: 60px;
+  animation: crawl 12s linear infinite, wobble 0.5s infinite alternate;
+}
+
+.doodle-blob {
+  bottom: 20%;
+  right: 10%;
+  width: 70px;
+  animation: floatBlob 8s ease-in-out infinite, wiggle 1s infinite alternate;
+}
+
+.doodle-fly {
+  top: 30%;
+  right: 25%;
+  width: 40px;
+  animation: zipAround 15s ease-in-out infinite;
+}
+
+.doodle-crawler {
+  bottom: 5%;
+  left: 20%;
+  width: 55px;
+  animation: crawlRight 14s linear infinite;
+}
+
+/* Extra Doodles */
+.doodle-star {
+  top: 60%;
+  left: 12%;
+  width: 45px;
+  animation: spinSlow 20s linear infinite, floatBlob 6s ease-in-out infinite;
+}
+
+.doodle-snake {
+  top: -10%;
+  right: 35%;
+  width: 80px;
+  animation: slitherDown 18s linear infinite;
+}
+
+@keyframes crawl {
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(100vh) rotate(15deg); opacity: 0; }
+}
+
+@keyframes crawlRight {
+  0% { transform: translateX(-100px) rotate(90deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateX(100vw) rotate(90deg); opacity: 0; }
+}
+
+@keyframes slitherDown {
+  0% { transform: translateY(0) rotate(180deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(100vh) rotate(180deg); opacity: 0; }
+}
+
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes wobble {
+  0% { margin-left: -5px; }
+  100% { margin-left: 5px; }
+}
+
+@keyframes wiggle {
+  0% { transform: scale(1) rotate(-5deg); }
+  100% { transform: scale(1.05) rotate(5deg); }
+}
+
+@keyframes floatBlob {
+  0% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-30px) translateX(-20px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+@keyframes zipAround {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0;}
+  10% { opacity: 0.7; }
+  25% { transform: translate(-50vw, -100px) rotate(-45deg); }
+  50% { transform: translate(-20vw, 200px) rotate(45deg); }
+  75% { transform: translate(50vw, 20px) rotate(90deg); }
+  90% { opacity: 0.7; }
+  100% { transform: translate(100vw, 0) rotate(0deg); opacity: 0;}
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .title-screen::before {
+    display: none; /* Hide margin line on small screens */
+  }
+  
+  .title-screen-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .title-logo svg {
+    max-width: 90vw;
+  }
+}

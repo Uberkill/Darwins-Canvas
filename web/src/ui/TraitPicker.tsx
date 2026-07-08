@@ -1,6 +1,7 @@
-import type { CreatureSize, MovementType, DietType } from '../types'
-import { SignalLow, SignalMedium, SignalHigh, Snail, Rabbit, FastForward, Leaf, Bone, Drumstick } from 'lucide-react'
 import React from 'react'
+import { Swords, Zap, Shield, Activity, Heart } from 'lucide-react'
+import { TRAIT_STATS } from '../constants'
+import { Tooltip } from './Tooltip'
 
 // ─── Size picker ──────────────────────────────────────────────────────────────
 
@@ -21,40 +22,56 @@ export function TraitPicker<T extends string>({
     <div>
       <div className="section-title">{label}</div>
       <div className="pill-group" role="radiogroup" aria-label={label}>
-        {options.map((opt) => (
-          <button
-            key={opt.value}
-            id={`trait-${label.toLowerCase().replace(/\s/g, '-')}-${opt.value.toLowerCase()}`}
-            className={`pill${value === opt.value ? ' selected' : ''}`}
-            role="radio"
-            aria-checked={value === opt.value}
-            onClick={() => onChange(opt.value)}
-          >
-            <span aria-hidden="true">{opt.icon}</span>
-            {opt.label}
-          </button>
-        ))}
+        {options.map((opt) => {
+          const statsInfo = TRAIT_STATS[opt.value];
+          return (
+            <button
+              key={opt.value}
+              id={`trait-${label.toLowerCase().replace(/\s/g, '-')}-${opt.value.toLowerCase()}`}
+              className={`pill${value === opt.value ? ' selected' : ''}`}
+              role="radio"
+              aria-checked={value === opt.value}
+              onClick={() => onChange(opt.value)}
+            >
+              {statsInfo ? (
+                <Tooltip
+                  position="top"
+                  content={
+                    <>
+                      <p className="decal-desc">{statsInfo.desc}</p>
+                      {statsInfo.stats.length > 0 && (
+                        <div className="decal-stats">
+                          {statsInfo.stats.map((stat, i) => (
+                            <div key={i} className={`decal-stat-row ${stat.isGood ? 'stat-good' : 'stat-bad'}`}>
+                              {stat.label === 'Damage' && <Swords size={14} />}
+                              {stat.label === 'Base Damage' && <Swords size={14} />}
+                              {stat.label === 'Health' && <Heart size={14} />}
+                              {stat.label === 'Speed' && <Zap size={14} />}
+                              {stat.label === 'Energy' && <Activity size={14} />}
+                              {stat.label === 'Bravery' && <Shield size={14} />}
+                              <span>{stat.value} {stat.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  }
+                >
+                  <span aria-hidden="true" style={{ display: 'flex', alignItems: 'center' }}>{opt.icon}</span>
+                  {opt.label}
+                </Tooltip>
+              ) : (
+                <>
+                  <span aria-hidden="true" style={{ display: 'flex', alignItems: 'center' }}>{opt.icon}</span>
+                  {opt.label}
+                </>
+              )}
+            </button>
+          )
+        })}
       </div>
     </div>
   )
 }
 
 // ─── Preset option arrays (imported by CreationPanel) ─────────────────────────
-
-export const SIZE_OPTIONS: { value: CreatureSize; label: string; icon: React.ReactNode }[] = [
-  { value: 'SMALL',  label: 'Tiny',    icon: <SignalLow size={16} /> },
-  { value: 'MEDIUM', label: 'Medium',  icon: <SignalMedium size={16} /> },
-  { value: 'LARGE',  label: 'Mighty',  icon: <SignalHigh size={16} /> },
-]
-
-export const MOVEMENT_OPTIONS: { value: MovementType; label: string; icon: React.ReactNode }[] = [
-  { value: 'CRAWLER', label: 'Crawler', icon: <Snail size={16} /> },
-  { value: 'HOPPER',  label: 'Hopper',  icon: <Rabbit size={16} /> },
-  { value: 'PACER',   label: 'Pacer',   icon: <FastForward size={16} /> },
-]
-
-export const DIET_OPTIONS: { value: DietType; label: string; icon: React.ReactNode }[] = [
-  { value: 'HERBIVORE', label: 'Herbivore', icon: <Leaf size={16} /> },
-  { value: 'OMNIVORE',  label: 'Omnivore',  icon: <Drumstick size={16} /> },
-  { value: 'CARNIVORE', label: 'Carnivore', icon: <Bone size={16} /> },
-]
