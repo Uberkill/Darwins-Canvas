@@ -243,6 +243,7 @@ body {
 /* Tablet Responsive */
 @media (max-width: 1024px) {
   .creation-modal-container {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
       "canvas canvas"
@@ -265,6 +266,7 @@ body {
     align-items: flex-end;
   }
   .creation-modal-container {
+    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto auto;
     grid-template-areas: 

@@ -1,23 +1,24 @@
 .time-controls-media {
-  position: fixed;
+  position: absolute;
   top: max(24px, env(safe-area-inset-top));
   left: 50%;
   transform: translateX(-50%);
-  z-index: 100;
   display: flex;
   align-items: center;
   gap: 16px;
-  background: var(--color-panel, #FFFFFF);
+  background: white;
   padding: 8px 16px 8px 8px;
   border-radius: 9999px;
   box-shadow: 0 6px 12px rgba(74, 59, 50, 0.08), 0 4px 0 #E2DDD5;
+  z-index: 90;
   pointer-events: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-height: 500px) {
   .time-controls-media {
-    top: 60px; /* Push down to avoid top-HUD */
-    transform: translateX(-50%) scale(0.85);
+    top: max(12px, env(safe-area-inset-top)); 
+    gap: 8px;
+    padding: 6px 12px 6px 6px;
   }
 }
 

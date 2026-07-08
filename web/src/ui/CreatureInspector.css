@@ -17,7 +17,7 @@
   pointer-events: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-height: 500px) {
   .inspector-panel {
     top: auto;
     bottom: 0;
@@ -29,6 +29,8 @@
     border-bottom: none;
     border-left: none;
     border-right: none;
+    padding: 12px;
+    gap: 12px;
   }
 }
 

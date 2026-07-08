@@ -299,3 +299,26 @@
     max-width: 90vw;
   }
 }
+
+/* Landscape Mobile (Short Screens) */
+@media (max-height: 500px) {
+  .title-screen-container {
+    gap: 10px;
+    padding: 10px;
+  }
+  .title-logo {
+    margin-bottom: 5px;
+  }
+  .title-logo svg {
+    max-height: 100px;
+    max-width: 80vw;
+  }
+  .bottom-corner-controls {
+    bottom: 15px;
+    right: 15px;
+  }
+  .title-screen .btn-massive {
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
+}

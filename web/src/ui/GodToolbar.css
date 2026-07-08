@@ -90,6 +90,32 @@
   }
 }
 
+.god-tool-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2.5;
+}
+
+/* Mobile & Landscape Responsive */
+@media (max-width: 768px), (max-height: 500px) {
+  .god-toolbar {
+    gap: 8px;
+    left: max(12px, env(safe-area-inset-left));
+  }
+  .god-tool-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+  }
+  .god-tool-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .god-toolbar-divider {
+    margin: 4px auto;
+  }
+}
+
 .god-toolbar-divider {
   width: 32px;
   height: 4px;
