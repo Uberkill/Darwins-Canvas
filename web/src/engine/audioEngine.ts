@@ -104,9 +104,14 @@ class AudioEngine {
   public updateTimeOfDay(timeOfDay: number) {
     let factor = 0;
     if (timeOfDay > 0.4 && timeOfDay < 0.6) {
+      // Dusk: fade to night
       factor = (timeOfDay - 0.4) / 0.2;
-    } else if (timeOfDay >= 0.6) {
+    } else if (timeOfDay >= 0.6 && timeOfDay < 0.9) {
+      // Deep night
       factor = 1;
+    } else if (timeOfDay >= 0.9 && timeOfDay <= 1.0) {
+      // Dawn: fade to day
+      factor = 1.0 - ((timeOfDay - 0.9) / 0.1);
     }
     if (this.currentCrossfade !== factor) {
       this.currentCrossfade = factor;
