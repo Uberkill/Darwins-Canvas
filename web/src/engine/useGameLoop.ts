@@ -20,6 +20,9 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
   const lastTimeRef = useRef<number>(0)
   const accumulator = useRef<number>(0)
   const rendererRef = useRef<GameRenderer | null>(null)
+  
+  const isPlayingRef = useRef(isPlaying)
+  isPlayingRef.current = isPlaying
 
   // Prevent default browser zooming/scrolling on the canvas
   useEffect(() => {
@@ -51,7 +54,7 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       // Apply timeScale
       const dt = dtRaw * storeState.timeScale
 
-      const isPaused = storeState.isPanelOpen || storeState.isTutorialOpen || !isPlaying
+      const isPaused = storeState.isPanelOpen || storeState.isTutorialOpen || !isPlayingRef.current
       if (isPaused) {
         accumulator.current = 0
       } else {
