@@ -15,7 +15,7 @@ const FIXED_TIME_STEP = 1000 / 60
  * - Renders exactly once per screen refresh
  * - Defers image cache cleanup to idle callbacks
  */
-export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
+export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>, isPlaying: boolean) {
   const rafIdRef    = useRef<number>(0)
   const lastTimeRef = useRef<number>(0)
   const accumulator = useRef<number>(0)
@@ -51,7 +51,7 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       // Apply timeScale
       const dt = dtRaw * storeState.timeScale
 
-      const isPaused = storeState.isPanelOpen || storeState.isTutorialOpen
+      const isPaused = storeState.isPanelOpen || storeState.isTutorialOpen || !isPlaying
       if (isPaused) {
         accumulator.current = 0
       } else {

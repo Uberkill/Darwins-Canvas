@@ -62,7 +62,7 @@ function App() {
     return () => window.removeEventListener('QUIT_TO_TITLE', handleQuit)
   }, [])
 
-  useGameLoop(canvasRef)
+  useGameLoop(canvasRef, isPlaying)
 
   return (
     <div className="app-container" style={{ '--ui-scale': uiScale } as React.CSSProperties}>
