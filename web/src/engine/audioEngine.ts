@@ -1,5 +1,6 @@
 import { worldRef } from './worldRef';
 import { AUDIO_ASSETS } from '../constants/audioConfig';
+import { useStore } from '../store/useStore';
 
 class AudioEngine {
   private ctx: AudioContext | null = null;
@@ -17,6 +18,7 @@ class AudioEngine {
   // State
   private isBgmPlaying = false;
   private bgmTimeoutId: number | null = null;
+  private currentPlaybackRate = 1.0;
   
   // Settings
   private volumes = {
@@ -43,6 +45,11 @@ class AudioEngine {
 
       this.updateVolumes();
       this.loadCustomAssets();
+
+      // Subscribe to timeScale changes
+      useStore.subscribe((state) => {
+        this.setTimeScale(state.timeScale);
+      });
     } catch (e) {
       console.warn('Web Audio API not supported', e);
     }
@@ -103,9 +110,9 @@ class AudioEngine {
 
   public updateTimeOfDay(timeOfDay: number) {
     let factor = 0;
-    if (timeOfDay > 0.4 && timeOfDay < 0.6) {
+    if (timeOfDay >= 0.5 && timeOfDay < 0.6) {
       // Dusk: fade to night
-      factor = (timeOfDay - 0.4) / 0.2;
+      factor = (timeOfDay - 0.5) / 0.1;
     } else if (timeOfDay >= 0.6 && timeOfDay < 0.9) {
       // Deep night
       factor = 1;
@@ -123,6 +130,15 @@ class AudioEngine {
     const masterVol = this.volumes.master * this.volumes.music * 0.5;
     if (this.dayBgm) this.dayBgm.volume = Math.max(0, Math.min(1, masterVol * (1 - this.currentCrossfade)));
     if (this.nightBgm) this.nightBgm.volume = Math.max(0, Math.min(1, masterVol * this.currentCrossfade));
+  }
+
+  public setTimeScale(scale: number) {
+    const targetRate = scale === 1 ? 1.0 : (scale === 2 ? 1.5 : 2.0);
+    if (this.currentPlaybackRate === targetRate) return;
+    
+    this.currentPlaybackRate = targetRate;
+    if (this.dayBgm) this.dayBgm.playbackRate = this.currentPlaybackRate;
+    if (this.nightBgm) this.nightBgm.playbackRate = this.currentPlaybackRate;
   }
 
   public playPop() {
@@ -268,8 +284,8 @@ class AudioEngine {
     osc.frequency.value = freq;
     
     const now = this.ctx.currentTime;
-    const attack = 1.0;
-    const release = 2.5;
+    const attack = 1.0 / this.currentPlaybackRate;
+    const release = 2.5 / this.currentPlaybackRate;
     
     gain.gain.setValueAtTime(0, now);
     gain.gain.linearRampToValueAtTime(0.3, now + attack);
@@ -281,7 +297,7 @@ class AudioEngine {
     osc.start(now);
     osc.stop(now + attack + release);
     
-    const nextTime = Math.random() * 1500 + 500; // 500ms to 2000ms
+    const nextTime = (Math.random() * 1500 + 500) / this.currentPlaybackRate; // 500ms to 2000ms scaled
     this.bgmTimeoutId = window.setTimeout(() => this.playNextBgmNote(), nextTime);
   }
   private lastPlayedEvent: Record<string, number> = {};
