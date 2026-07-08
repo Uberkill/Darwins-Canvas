@@ -105,7 +105,7 @@ export function simulate(world: WorldState, dt: number): void {
     world.scratchpad.immigrationTimer = 0;
   }
   world.scratchpad.immigrationTimer += dt;
-  if (world.scratchpad.immigrationTimer > 30) { // Check every 30 seconds
+  if (world.scratchpad.immigrationTimer > 120) { // Check every 120 seconds
     world.scratchpad.immigrationTimer = 0;
     
     let herbivores = 0, carnivores = 0, omnivores = 0;
@@ -118,8 +118,8 @@ export function simulate(world: WorldState, dt: number): void {
     }
 
     const spawnMigrant = (diet: 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE') => {
-      // 15% chance to migrate if extinct
-      if (Math.random() < 0.15) {
+      // 5% chance to migrate if extinct
+      if (Math.random() < 0.05) {
         const side = Math.random() < 0.5 ? 0 : world.worldWidth;
         const y = Math.random() * (world.worldHeight - 200) + 100;
         const migrantColor = diet === 'HERBIVORE' ? 'green' : diet === 'CARNIVORE' ? 'red' : 'purple';
