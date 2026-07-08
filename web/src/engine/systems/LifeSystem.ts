@@ -17,11 +17,11 @@ export const LifeSystem = {
       // XP & Level Logic (Non-Linear)
       let newLevel = 1;
       if (creature.diet === 'HERBIVORE') {
-        newLevel = 1 + Math.floor(Math.sqrt(creature.foodEaten / 3));
+        newLevel = 1 + Math.floor(Math.sqrt(creature.foodEaten / 5));
       } else if (creature.diet === 'CARNIVORE') {
-        newLevel = 1 + Math.floor(Math.sqrt(creature.kills));
+        newLevel = 1 + Math.floor(Math.sqrt(creature.kills * 3));
       } else if (creature.diet === 'OMNIVORE') {
-        newLevel = 1 + Math.floor(Math.sqrt((creature.kills * 1.5) + (creature.foodEaten / 6)));
+        newLevel = 1 + Math.floor(Math.sqrt((creature.kills * 2) + (creature.foodEaten / 10)));
       }
       
       const oldLevel = creature.level;
@@ -106,8 +106,8 @@ export const LifeSystem = {
       }
       if (creature.lungeTimer > 0) {
         creature.lungeTimer -= dt;
-        // EXTRA EXTREME STAMINA DRAIN: Lunging burns stamina 3x faster, meaning Carnivores exhaust themselves if they miss!
-        creature.stamina = Math.max(0, creature.stamina - (STAMINA_DRAIN_RATE * 3 * dt));
+        // EXTRA EXTREME STAMINA DRAIN: Lunging burns stamina 1.5x faster
+        creature.stamina = Math.max(0, creature.stamina - (STAMINA_DRAIN_RATE * 1.5 * dt));
       }
       if (creature.hitTimer > 0) {
         creature.hitTimer -= dt;

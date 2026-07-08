@@ -36,7 +36,7 @@ export const PASSIVE_HEAL_RATE = 10.0; // HP/sec regenerated if hunger > 80
 export const STARVATION_DAMAGE = 5.0; // HP/sec lost if hunger <= 0
 
 export const HERBIVORE_BASE_DAMAGE = 2.0;  // Weak
-export const OMNIVORE_BASE_DAMAGE  = 10.0; // Moderate
+export const OMNIVORE_BASE_DAMAGE  = 5.0; // Moderate
 export const CARNIVORE_BASE_DAMAGE = 30.0; // High
 
 // Exhaustion multipliers applied during specific BehaviorStates
@@ -51,7 +51,7 @@ export const OMNIVORE_POPULATION_CAP  = 25;
 
 // ─── Plant constants ──────────────────────────────────────────────────────────
 export const PLANT_CAP          = 100;   // max plants on screen at once
-export const PLANT_SPAWN_RATE   = 0.4;  // seconds between spawns
+export const PLANT_SPAWN_RATE   = 0.6;  // seconds between spawns
 export const PLANT_GROWTH_RATE  = 0.4;  // growthStage increase per second (0→1 in ~2.5s)
 export const PLANT_WOBBLE_SPEED = 1.2;  // radians/second for organic sway
 
@@ -62,12 +62,12 @@ export const SIGHT_RADIUS        = 400; // px
 export const MAX_STEERING_FORCE  = 120; // max velocity change per second
 
 // ─── Reproduction ─────────────────────────────────────────────────────────────
-export const HERBIVORE_REPRO_THRESHOLD = 50;
+export const HERBIVORE_REPRO_THRESHOLD = 75;
 export const HERBIVORE_REPRO_COOLDOWN  = 15; 
 export const CARNIVORE_REPRO_THRESHOLD = 75;
 export const CARNIVORE_REPRO_COOLDOWN  = 45;
 
-export const HERBIVORE_REPRO_CHANCE = 0.025; // 2.5% chance per eligible second
+export const HERBIVORE_REPRO_CHANCE = 0.05; // 5% chance per eligible second
 export const CARNIVORE_REPRO_CHANCE = 0.008; // 0.8% chance per eligible second
 export const REPRO_SPAWN_OFFSET     = 65;    // px away from parent
 

@@ -42,8 +42,12 @@ export function runCollision(world: WorldState, _dt: number): void {
           a.state = 'FIGHTING'
           b.state = 'FIGHTING'
           
-          a.health -= b.damage * _dt
-          b.health -= a.damage * _dt
+          // Double damage during the momentum of a lunge
+          const aBurst = a.lungeTimer > 0 ? 2 : 1;
+          const bBurst = b.lungeTimer > 0 ? 2 : 1;
+
+          a.health -= (b.damage * bBurst) * _dt;
+          b.health -= (a.damage * aBurst) * _dt;
           
           if (b.damage > 0) {
             if (a.hitTimer <= 0) {
@@ -126,9 +130,9 @@ export function runCollision(world: WorldState, _dt: number): void {
           if (c.diet === 'CARNIVORE') plantEnergy = 100; // Meat is perfect nutrition for carnivores
           else plantEnergy = 80;
         } else if (p.growthStage >= 1.0) {
-          plantEnergy = 80;
+          plantEnergy = 60;
         } else if (p.growthStage >= 0.5) {
-          plantEnergy = 25;
+          plantEnergy = 20;
         }
         
         if (c.diet === 'CARNIVORE' && !isMeat) {

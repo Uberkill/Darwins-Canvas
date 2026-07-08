@@ -111,7 +111,7 @@ function spawnBaby(parent: Creature, worldWidth: number, worldHeight: number, co
   }
 
   // Parent pays biological cost for reproducing
-  parent.hunger = Math.max(0, parent.hunger - 30)
+  parent.hunger = Math.max(0, parent.hunger - 40)
   parent.health = Math.max(1, parent.health - 10)
 
   return {
