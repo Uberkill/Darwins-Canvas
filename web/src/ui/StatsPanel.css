@@ -184,6 +184,38 @@
   min-height: 300px;
 }
 
+.stats-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+
+.stats-tabs button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.stats-tabs button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.stats-tabs button.active {
+  background: var(--color-blue);
+  color: #fff;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
 .graph-empty {
   display: flex;
   align-items: center;

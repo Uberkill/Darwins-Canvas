@@ -163,7 +163,9 @@ export function simulate(world: WorldState, dt: number): void {
   if (babies.length > 0) {
     for (let i = 0; i < babies.length; i++) {
       spawnCreature(world, babies[i]);
-      world.analytics.currentSecondAccumulator.births++;
+      if (babies[i].diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.birthsCarn++;
+      else if (babies[i].diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.birthsOmni++;
+      else if (babies[i].diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.birthsHerb++;
     }
   }
 
@@ -235,19 +237,30 @@ export function simulate(world: WorldState, dt: number): void {
     world.analytics.history.push({
       time: world.totalTime,
       carnivore, omnivore, herbivore, plant, meat,
-      births: world.analytics.currentSecondAccumulator.births,
-      starvationDeaths: world.analytics.currentSecondAccumulator.starvationDeaths,
-      huntedDeaths: world.analytics.currentSecondAccumulator.huntedDeaths,
-      damageDealt: world.analytics.currentSecondAccumulator.damageDealt,
-      caloriesConsumed: world.analytics.currentSecondAccumulator.caloriesConsumed,
+      birthsCarn: world.analytics.currentSecondAccumulator.birthsCarn,
+      birthsOmni: world.analytics.currentSecondAccumulator.birthsOmni,
+      birthsHerb: world.analytics.currentSecondAccumulator.birthsHerb,
+      starvationCarn: world.analytics.currentSecondAccumulator.starvationCarn,
+      starvationOmni: world.analytics.currentSecondAccumulator.starvationOmni,
+      starvationHerb: world.analytics.currentSecondAccumulator.starvationHerb,
+      huntedCarn: world.analytics.currentSecondAccumulator.huntedCarn,
+      huntedOmni: world.analytics.currentSecondAccumulator.huntedOmni,
+      huntedHerb: world.analytics.currentSecondAccumulator.huntedHerb,
+      damageCarn: world.analytics.currentSecondAccumulator.damageCarn,
+      damageOmni: world.analytics.currentSecondAccumulator.damageOmni,
+      damageHerb: world.analytics.currentSecondAccumulator.damageHerb,
+      caloriesCarn: world.analytics.currentSecondAccumulator.caloriesCarn,
+      caloriesOmni: world.analytics.currentSecondAccumulator.caloriesOmni,
+      caloriesHerb: world.analytics.currentSecondAccumulator.caloriesHerb,
       maxGeneration
     })
     
     // Zero out the interval accumulators
-    world.analytics.currentSecondAccumulator.births = 0;
-    world.analytics.currentSecondAccumulator.starvationDeaths = 0;
-    world.analytics.currentSecondAccumulator.huntedDeaths = 0;
-    world.analytics.currentSecondAccumulator.damageDealt = 0;
-    world.analytics.currentSecondAccumulator.caloriesConsumed = 0;
+    const accum = world.analytics.currentSecondAccumulator;
+    accum.birthsCarn = 0; accum.birthsOmni = 0; accum.birthsHerb = 0;
+    accum.starvationCarn = 0; accum.starvationOmni = 0; accum.starvationHerb = 0;
+    accum.huntedCarn = 0; accum.huntedOmni = 0; accum.huntedHerb = 0;
+    accum.damageCarn = 0; accum.damageOmni = 0; accum.damageHerb = 0;
+    accum.caloriesCarn = 0; accum.caloriesOmni = 0; accum.caloriesHerb = 0;
   }
 }

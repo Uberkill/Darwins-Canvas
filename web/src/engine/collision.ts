@@ -52,7 +52,13 @@ export function runCollision(world: WorldState, _dt: number): void {
           a.health -= aDmg;
           b.health -= bDmg;
           
-          world.analytics.currentSecondAccumulator.damageDealt += (aDmg + bDmg);
+          if (a.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.damageCarn += aDmg;
+          else if (a.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.damageOmni += aDmg;
+          else if (a.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.damageHerb += aDmg;
+
+          if (b.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.damageCarn += bDmg;
+          else if (b.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.damageOmni += bDmg;
+          else if (b.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.damageHerb += bDmg;
           
           if (b.damage > 0) {
             if (a.hitTimer <= 0) {
@@ -70,7 +76,9 @@ export function runCollision(world: WorldState, _dt: number): void {
           // Determine death
           if (a.health <= 0) {
             killCreature(world, a.id)
-            world.analytics.currentSecondAccumulator.huntedDeaths++;
+            if (a.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.huntedCarn++;
+            else if (a.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.huntedOmni++;
+            else if (a.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.huntedHerb++;
             spawnPlant(world, {
               id: crypto.randomUUID(),
               type: 'MEAT',
@@ -88,7 +96,9 @@ export function runCollision(world: WorldState, _dt: number): void {
           }
           if (b.health <= 0) {
             killCreature(world, b.id)
-            world.analytics.currentSecondAccumulator.huntedDeaths++;
+            if (b.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.huntedCarn++;
+            else if (b.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.huntedOmni++;
+            else if (b.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.huntedHerb++;
             spawnPlant(world, {
               id: crypto.randomUUID(),
               type: 'MEAT',
@@ -147,7 +157,9 @@ export function runCollision(world: WorldState, _dt: number): void {
         }
         
         c.hunger = Math.min(100, c.hunger + plantEnergy)
-        world.analytics.currentSecondAccumulator.caloriesConsumed += plantEnergy
+        if (c.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.caloriesCarn += plantEnergy;
+        else if (c.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.caloriesOmni += plantEnergy;
+        else if (c.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.caloriesHerb += plantEnergy;
         c.state = 'EATING'
         c.eatingTimer = (c.diet === 'CARNIVORE' && isMeat) ? 15.0 : 0.5
         c.foodEaten += 1
@@ -162,7 +174,9 @@ export function runCollision(world: WorldState, _dt: number): void {
   for (const c of world.creatures) {
     if (c.health <= 0 && !deletedCreatureIds.has(c.id)) {
       killCreature(world, c.id)
-      world.analytics.currentSecondAccumulator.starvationDeaths++;
+      if (c.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.starvationCarn++;
+      else if (c.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.starvationOmni++;
+      else if (c.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.starvationHerb++;
     }
   }
 

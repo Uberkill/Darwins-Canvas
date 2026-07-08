@@ -37,7 +37,7 @@ export const STARVATION_DAMAGE = 5.0; // HP/sec lost if hunger <= 0
 
 export const HERBIVORE_BASE_DAMAGE = 2.0;  // Weak
 export const OMNIVORE_BASE_DAMAGE  = 5.0; // Moderate
-export const CARNIVORE_BASE_DAMAGE = 30.0; // High
+export const CARNIVORE_BASE_DAMAGE = 300.0; // Instant-kill Apex Predator
 
 // Exhaustion multipliers applied during specific BehaviorStates
 export const FLEEING_HUNGER_MULTIPLIER = 1.0; // Handled by Stamina now

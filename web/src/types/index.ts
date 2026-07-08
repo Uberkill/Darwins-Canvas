@@ -119,21 +119,21 @@ export interface EcosystemDataPoint {
   herbivore: number;
   plant: number;
   meat: number;
-  births: number;
-  starvationDeaths: number;
-  huntedDeaths: number;
-  damageDealt: number;
-  caloriesConsumed: number;
+  birthsCarn: number; birthsOmni: number; birthsHerb: number;
+  starvationCarn: number; starvationOmni: number; starvationHerb: number;
+  huntedCarn: number; huntedOmni: number; huntedHerb: number;
+  damageCarn: number; damageOmni: number; damageHerb: number;
+  caloriesCarn: number; caloriesOmni: number; caloriesHerb: number;
   maxGeneration: number;
 }
 
 export interface EcosystemAnalytics {
   currentSecondAccumulator: {
-    births: number;
-    starvationDeaths: number;
-    huntedDeaths: number;
-    damageDealt: number;
-    caloriesConsumed: number;
+    birthsCarn: number; birthsOmni: number; birthsHerb: number;
+    starvationCarn: number; starvationOmni: number; starvationHerb: number;
+    huntedCarn: number; huntedOmni: number; huntedHerb: number;
+    damageCarn: number; damageOmni: number; damageHerb: number;
+    caloriesCarn: number; caloriesOmni: number; caloriesHerb: number;
   };
   history: EcosystemDataPoint[];
 }

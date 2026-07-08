@@ -93,20 +93,40 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
 
   // 2. Check Hunting Meat (Aggression, only if not scared/lured)
   if (targetType !== 'LURE' && targetType !== 'FLEE' && !isPanicking && c.hunger < 80) {
-    for (let j = 0; j < world.creatures.length; j++) {
-      const other = world.creatures[j]
-      if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
-      
-      if (hunts(c, other)) {
-        const dx = other.x - c.x
-        const dy = other.y - c.y
-        const dSq = dx * dx + dy * dy
-        if (dSq < sightSq && dSq < closestDistSq) {
-          closestDistSq = dSq
-          closestTargetX = other.x
-          closestTargetY = other.y
-          closestTargetId = other.id
-          targetType = 'HUNTS_MEAT'
+    if (c.diet === 'CARNIVORE' && c.hunger > 75) {
+      // Selective Hunting: carnivores ignore prey unless genuinely hungry to avoid extinction loops.
+    } else {
+      let bestScore = Infinity;
+      for (let j = 0; j < world.creatures.length; j++) {
+        const other = world.creatures[j]
+        if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
+        
+        if (hunts(c, other)) {
+          const dx = other.x - c.x
+          const dy = other.y - c.y
+          const dSq = dx * dx + dy * dy
+          if (dSq < sightSq) {
+            let score = dSq;
+            if (c.diet === 'CARNIVORE') {
+              const healthRatio = Math.max(0.1, other.health / other.maxHealth);
+              score = Math.sqrt(dSq) * healthRatio; 
+            }
+
+            if (targetType !== 'HUNTS_MEAT') {
+              bestScore = score
+              closestDistSq = dSq
+              closestTargetX = other.x
+              closestTargetY = other.y
+              closestTargetId = other.id
+              targetType = 'HUNTS_MEAT'
+            } else if (score < bestScore) {
+              bestScore = score
+              closestDistSq = dSq
+              closestTargetX = other.x
+              closestTargetY = other.y
+              closestTargetId = other.id
+            }
+          }
         }
       }
     }

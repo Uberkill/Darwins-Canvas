@@ -43,11 +43,11 @@ function createInitialWorldState(): WorldState {
     isPaused: false,
     analytics: {
       currentSecondAccumulator: {
-        births: 0,
-        starvationDeaths: 0,
-        huntedDeaths: 0,
-        damageDealt: 0,
-        caloriesConsumed: 0,
+        birthsCarn: 0, birthsOmni: 0, birthsHerb: 0,
+        starvationCarn: 0, starvationOmni: 0, starvationHerb: 0,
+        huntedCarn: 0, huntedOmni: 0, huntedHerb: 0,
+        damageCarn: 0, damageOmni: 0, damageHerb: 0,
+        caloriesCarn: 0, caloriesOmni: 0, caloriesHerb: 0,
       },
       history: []
     },
