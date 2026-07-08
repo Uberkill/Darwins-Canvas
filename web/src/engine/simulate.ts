@@ -202,4 +202,39 @@ export function simulate(world: WorldState, dt: number): void {
       world.activeLure = null
     }
   }
+
+  // ─── POPULATION TRACKER (1Hz) ──────────────────────────────────────────────
+  world.historyTimer += dt;
+  if (world.historyTimer >= 1.0) {
+    world.historyTimer = 0;
+    
+    let carnivore = 0;
+    let omnivore = 0;
+    let herbivore = 0;
+    for (const c of world.creatures) {
+      if (c.diet === 'CARNIVORE') carnivore++;
+      else if (c.diet === 'OMNIVORE') omnivore++;
+      else if (c.diet === 'HERBIVORE') herbivore++;
+    }
+
+    let plant = 0;
+    let meat = 0;
+    for (const p of world.plants) {
+      if (p.type === 'MEAT') meat++;
+      else plant++;
+    }
+
+    world.populationHistory.push({
+      time: world.totalTime,
+      carnivore,
+      omnivore,
+      herbivore,
+      plant,
+      meat
+    });
+
+    if (world.populationHistory.length > 200) {
+      world.populationHistory.shift();
+    }
+  }
 }

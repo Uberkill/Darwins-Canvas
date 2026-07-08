@@ -111,6 +111,16 @@ interface CameraState {
   zoom: number;
 }
 
+// ─── Population Tracking ──────────────────────────────────────────────────────
+export interface PopulationDataPoint {
+  time: number;
+  carnivore: number;
+  omnivore: number;
+  herbivore: number;
+  plant: number;
+  meat: number;
+}
+
 // ─── World state (lives in worldRef — NOT in Zustand) ────────────────────────
 interface VisualEffect {
   id: string;
@@ -153,6 +163,10 @@ export interface WorldState {
   draggedEntityId: string | null;
   // System State
   isPaused: boolean;
+  
+  // Statistics & History
+  populationHistory: PopulationDataPoint[];
+  historyTimer: number;
 }
 
 // ─── Zustand store (command bus only — zero simulation state) ─────────────────
@@ -200,6 +214,10 @@ export interface GameStore {
   isOnboardingOpen: boolean;
   openOnboarding:   () => void;
   closeOnboarding:  () => void;
+
+  isStatsOpen: boolean;
+  openStats: () => void;
+  closeStats: () => void;
 
   isPauseMenuOpen:  boolean;
   previousTimeScale: number;

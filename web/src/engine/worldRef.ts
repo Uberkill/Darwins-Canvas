@@ -41,6 +41,8 @@ function createInitialWorldState(): WorldState {
     },
     draggedEntityId: null,
     isPaused: false,
+    populationHistory: [],
+    historyTimer: 0,
   }
 }
 

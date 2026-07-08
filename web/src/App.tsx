@@ -21,6 +21,8 @@ import { PauseMenuModal } from './ui/PauseMenuModal'
 import { OnboardingModal } from './ui/OnboardingModal'
 import { useTerrariumInput } from './hooks/useTerrariumInput'
 import { PortraitLock } from './ui/PortraitLock'
+import { StatsPanel } from './ui/StatsPanel'
+import { StatsButton } from './ui/StatsButton'
 
 /** Subscribe to creature count changes via a polling interval. */
 function useCreatureCount(): number {
@@ -94,6 +96,7 @@ function App() {
         <div className="header-bar" style={{ pointerEvents: 'none' }}>
           <div style={{ pointerEvents: 'auto', display: 'flex', gap: '8px' }}>
             {isPlaying && <TutorialButton />}
+            {isPlaying && <StatsButton />}
           </div>
           
           {isPlaying && <TimeControls />}
@@ -149,6 +152,7 @@ function App() {
 
       {/* Mobile Portrait Lock */}
       <PortraitLock />
+      <StatsPanel />
     </div>
   )
 }

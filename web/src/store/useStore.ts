@@ -41,6 +41,10 @@ export const useStore = create<GameStore>()(
   openOnboarding:  () => set({ isOnboardingOpen: true }),
   closeOnboarding: () => set({ isOnboardingOpen: false }),
 
+  isStatsOpen: false,
+  openStats:  () => set({ isStatsOpen: true }),
+  closeStats: () => set({ isStatsOpen: false }),
+
   isPauseMenuOpen: false,
   previousTimeScale: 1.0,
   openPauseMenu: () => set((state) => ({ 
