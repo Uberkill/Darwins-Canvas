@@ -4,6 +4,7 @@ import {
   GLOBAL_POPULATION_CAP, CARNIVORE_POPULATION_CAP, HERBIVORE_POPULATION_CAP, OMNIVORE_POPULATION_CAP,
   HERBIVORE_REPRO_THRESHOLD, HERBIVORE_REPRO_COOLDOWN, HERBIVORE_REPRO_CHANCE,
   CARNIVORE_REPRO_THRESHOLD, CARNIVORE_REPRO_COOLDOWN, CARNIVORE_REPRO_CHANCE,
+  OMNIVORE_REPRO_THRESHOLD, OMNIVORE_REPRO_COOLDOWN, OMNIVORE_REPRO_CHANCE,
 } from '../constants'
 
 /**
@@ -39,9 +40,19 @@ export function checkReproduction(
     const isHerbivore = creature.diet === 'HERBIVORE'
     const isOmnivore = creature.diet === 'OMNIVORE'
     
-    const threshold = isCarnivore ? CARNIVORE_REPRO_THRESHOLD : HERBIVORE_REPRO_THRESHOLD
-    const cooldown  = isCarnivore ? CARNIVORE_REPRO_COOLDOWN : HERBIVORE_REPRO_COOLDOWN
-    const reproChance = isCarnivore ? CARNIVORE_REPRO_CHANCE : HERBIVORE_REPRO_CHANCE
+    let threshold = HERBIVORE_REPRO_THRESHOLD
+    let cooldown  = HERBIVORE_REPRO_COOLDOWN
+    let reproChance = HERBIVORE_REPRO_CHANCE
+    
+    if (isCarnivore) {
+      threshold = CARNIVORE_REPRO_THRESHOLD
+      cooldown = CARNIVORE_REPRO_COOLDOWN
+      reproChance = CARNIVORE_REPRO_CHANCE
+    } else if (isOmnivore) {
+      threshold = OMNIVORE_REPRO_THRESHOLD
+      cooldown = OMNIVORE_REPRO_COOLDOWN
+      reproChance = OMNIVORE_REPRO_CHANCE
+    }
 
     if (creature.hunger < threshold) continue
 

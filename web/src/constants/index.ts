@@ -66,9 +66,12 @@ export const HERBIVORE_REPRO_THRESHOLD = 75;
 export const HERBIVORE_REPRO_COOLDOWN  = 15; 
 export const CARNIVORE_REPRO_THRESHOLD = 75;
 export const CARNIVORE_REPRO_COOLDOWN  = 45;
+export const OMNIVORE_REPRO_THRESHOLD  = 85;
+export const OMNIVORE_REPRO_COOLDOWN   = 30;
 
 export const HERBIVORE_REPRO_CHANCE = 0.05; // 5% chance per eligible second
 export const CARNIVORE_REPRO_CHANCE = 0.008; // 0.8% chance per eligible second
+export const OMNIVORE_REPRO_CHANCE  = 0.015; // 1.5% chance per eligible second
 export const REPRO_SPAWN_OFFSET     = 65;    // px away from parent
 
 // ─── Hopper movement ──────────────────────────────────────────────────────────
