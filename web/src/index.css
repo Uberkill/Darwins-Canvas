@@ -1100,3 +1100,62 @@ body {
     padding: 8px;
   }
 }
+/* --- Touch-Landscape Layout (< 500px height) ----------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .creation-modal-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px max(16px, env(safe-area-inset-right)) 8px max(16px, env(safe-area-inset-left));
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .col-tools {
+    width: auto;
+    overflow-y: auto;
+    padding-right: 4px; /* Space for scrollbar */
+  }
+  .col-settings {
+    width: auto;
+    overflow-y: auto;
+    padding-left: 4px;
+  }
+  .col-canvas-area {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    justify-content: center;
+  }
+  .canvas-helper-text {
+    display: none;
+  }
+  
+  /* Icon-Only UI for Ultra-Short Screens */
+  @media (max-height: 380px) {
+    .col-tools .tool-label, .col-settings .trait-label, .col-settings .stat-label {
+      display: none !important;
+    }
+    .tool-btn {
+      min-width: 44px;
+      padding: 8px;
+      justify-content: center;
+    }
+    .feature-item {
+      padding: 8px;
+      justify-content: center;
+    }
+    .feature-item .trait-icon {
+      margin: 0;
+    }
+    .action-btn {
+      padding: 8px;
+      justify-content: center;
+    }
+    .section-title {
+      font-size: 11px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+  }
+}

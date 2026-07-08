@@ -14,9 +14,10 @@
   pointer-events: auto;
 }
 
-@media (max-width: 768px), (max-height: 500px) {
+@media (max-height: 500px) and (orientation: landscape) {
   .time-controls-media {
-    top: max(12px, env(safe-area-inset-top)); 
+    top: auto;
+    bottom: max(12px, env(safe-area-inset-bottom)); 
     gap: 8px;
     padding: 6px 12px 6px 6px;
   }

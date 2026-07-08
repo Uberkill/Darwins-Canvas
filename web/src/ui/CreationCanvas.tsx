@@ -48,7 +48,7 @@ export function CreationCanvas({
             <Dices size={24} />
           </button>
         </div>
-        <div style={{ marginTop: '8px', fontSize: '14px', color: '#66594C', fontWeight: 600, opacity: 0.8 }}>
+        <div className="canvas-helper-text" style={{ marginTop: '8px', fontSize: '14px', color: '#66594C', fontWeight: 600, opacity: 0.8 }}>
           Draw your creature facing right! ➔
         </div>
       </div>

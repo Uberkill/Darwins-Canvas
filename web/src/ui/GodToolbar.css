@@ -111,6 +111,9 @@
     width: 20px;
     height: 20px;
   }
+  .god-tool-tooltip {
+    left: calc(100% + 12px); /* Push tooltip further out to avoid overlap */
+  }
   .god-toolbar-divider {
     margin: 4px auto;
   }
