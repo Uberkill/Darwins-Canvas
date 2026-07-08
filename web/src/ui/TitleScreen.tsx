@@ -80,6 +80,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
 
   const handlePlay = async (slotId: string, isNew: boolean) => {
     useStore.getState().setActiveSaveSlot(slotId)
+    useStore.getState().setTimeScale(1.0)
     
     if (!isNew) {
       const save = await loadGame(slotId)
