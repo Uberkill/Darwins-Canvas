@@ -8,6 +8,10 @@ class AudioEngine {
   private sfxGain: GainNode | null = null;
   private bgmGain: GainNode | null = null;
 
+
+  private lastUITickTime = 0;
+  private lastUIPopTime = 0;
+
   // Hybrid Audio State
   private sfxBuffers: Record<string, AudioBuffer> = {};
   private dayBgm: HTMLAudioElement | null = null;
@@ -139,6 +143,45 @@ class AudioEngine {
     this.currentPlaybackRate = targetRate;
     if (this.dayBgm) this.dayBgm.playbackRate = this.currentPlaybackRate;
     if (this.nightBgm) this.nightBgm.playbackRate = this.currentPlaybackRate;
+  }
+
+  public playUITick() {
+    if (!this.ctx || this.ctx.state !== 'running') return;
+    const now = Date.now();
+    if (now - this.lastUITickTime < 50) return; // throttle 50ms
+    this.lastUITickTime = now;
+    
+    // Play subtle tick
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+    osc.connect(gain);
+    gain.connect(this.masterGain!);
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.05);
+  }
+
+  public playUIPop() {
+    if (!this.ctx || this.ctx.state !== 'running') return;
+    const now = Date.now();
+    if (now - this.lastUIPopTime < 50) return; // throttle 50ms
+    this.lastUIPopTime = now;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(600, this.ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+    osc.connect(gain);
+    gain.connect(this.masterGain!);
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.1);
   }
 
   public playPop() {

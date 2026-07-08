@@ -58,9 +58,29 @@ function App() {
       useStore.getState().setActiveSaveSlot(null)
       audio.stopBGM()
     }
+    
+    const handlePointerOver = (e: PointerEvent) => {
+      const target = (e.target as HTMLElement).closest('button, .fab, .pill, .tool-btn, .btn-action, .btn-secondary, .btn-massive, .btn-close, .save-slot, [role="button"], .color-chip');
+      if (target) {
+        audio.playUITick();
+      }
+    };
+    const handleGlobalPointerDown = (e: PointerEvent) => {
+      const target = (e.target as HTMLElement).closest('button, .fab, .pill, .tool-btn, .btn-action, .btn-secondary, .btn-massive, .btn-close, .save-slot, [role="button"], .color-chip');
+      if (target) {
+        audio.playUIPop();
+      }
+    };
+
     window.addEventListener('QUIT_TO_TITLE', handleQuit)
+    window.addEventListener('pointerover', handlePointerOver)
+    window.addEventListener('pointerdown', handleGlobalPointerDown)
     ;(window as any).worldRef = worldRef;
-    return () => window.removeEventListener('QUIT_TO_TITLE', handleQuit)
+    return () => {
+      window.removeEventListener('QUIT_TO_TITLE', handleQuit)
+      window.removeEventListener('pointerover', handlePointerOver)
+      window.removeEventListener('pointerdown', handleGlobalPointerDown)
+    }
   }, [])
 
   useGameLoop(canvasRef, isPlaying)
