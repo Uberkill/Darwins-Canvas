@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import type { PopulationDataPoint } from '../types';
+import type { EcosystemDataPoint } from '../types';
 
 interface Props {
-  history: PopulationDataPoint[];
+  history: EcosystemDataPoint[];
 }
 
 export function PopulationGraph({ history }: Props) {
