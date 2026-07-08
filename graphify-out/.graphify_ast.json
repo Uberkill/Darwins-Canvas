@@ -1,0 +1,1550 @@
+{
+  "nodes": [
+    {
+      "id": "web_src_engine_ai_boids_boidsforces",
+      "label": "BoidsForces",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Boids.ts",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_ai_boids_calculateboids",
+      "label": "calculateBoids",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Boids.ts",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_ai_thoughts_perceptionresult",
+      "label": "PerceptionResult",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Thoughts.ts",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_ai_thoughts_hunts",
+      "label": "hunts",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Thoughts.ts",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_ai_thoughts_evaluatethoughts",
+      "label": "evaluateThoughts",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Thoughts.ts",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_collision_runcollision",
+      "label": "runCollision",
+      "file_type": "code",
+      "source_file": "web/src/engine/collision.ts",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_movement_movecrawler",
+      "label": "moveCrawler",
+      "file_type": "code",
+      "source_file": "web/src/engine/movement.ts",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_movement_movehopper",
+      "label": "moveHopper",
+      "file_type": "code",
+      "source_file": "web/src/engine/movement.ts",
+      "source_location": "L53",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_movement_movepacer",
+      "label": "movePacer",
+      "file_type": "code",
+      "source_file": "web/src/engine/movement.ts",
+      "source_location": "L115",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_reproduction_checkreproduction",
+      "label": "checkReproduction",
+      "file_type": "code",
+      "source_file": "web/src/engine/reproduction.ts",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_simulate_simulate",
+      "label": "simulate",
+      "file_type": "code",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L30",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_simulate_calculatecreaturestats",
+      "label": "calculateCreatureStats",
+      "file_type": "code",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L454",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_simulate_buildcreature",
+      "label": "buildCreature",
+      "file_type": "code",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L502",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_spawner_tickplantspawner",
+      "label": "tickPlantSpawner",
+      "file_type": "code",
+      "source_file": "web/src/engine/spawner.ts",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_spawner_createplant",
+      "label": "createPlant",
+      "file_type": "code",
+      "source_file": "web/src/engine/spawner.ts",
+      "source_location": "L33",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_usegameloop_usegameloop",
+      "label": "useGameLoop",
+      "file_type": "code",
+      "source_file": "web/src/engine/useGameLoop.ts",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_worldref_updateworlddimensions",
+      "label": "updateWorldDimensions",
+      "file_type": "code",
+      "source_file": "web/src/engine/worldRef.ts",
+      "source_location": "L48",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_engine_worldref_clampentitiestoworld",
+      "label": "clampEntitiesToWorld",
+      "file_type": "code",
+      "source_file": "web/src/engine/worldRef.ts",
+      "source_location": "L58",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_hooks_usedrawingcanvas_drawingcanvashandle",
+      "label": "DrawingCanvasHandle",
+      "file_type": "code",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_hooks_usedrawingcanvas_usedrawingcanvas",
+      "label": "useDrawingCanvas",
+      "file_type": "code",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_renderer_gamerenderer",
+      "label": "GameRenderer",
+      "file_type": "code",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_baker_bakedsprites",
+      "label": "BakedSprites",
+      "file_type": "code",
+      "source_file": "web/src/renderer/baker.ts",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_baker_bakecreaturesprites",
+      "label": "bakeCreatureSprites",
+      "file_type": "code",
+      "source_file": "web/src/renderer/baker.ts",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_canvasutils_setupcanvas",
+      "label": "setupCanvas",
+      "file_type": "code",
+      "source_file": "web/src/renderer/canvasUtils.ts",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_canvasutils_getcanvaspoint",
+      "label": "getCanvasPoint",
+      "file_type": "code",
+      "source_file": "web/src/renderer/canvasUtils.ts",
+      "source_location": "L58",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_canvasutils_getworldpoint",
+      "label": "getWorldPoint",
+      "file_type": "code",
+      "source_file": "web/src/renderer/canvasUtils.ts",
+      "source_location": "L83",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_decals_decalstyle",
+      "label": "DecalStyle",
+      "file_type": "code",
+      "source_file": "web/src/renderer/decals.ts",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_decals_getdecaldataurl",
+      "label": "getDecalDataUrl",
+      "file_type": "code",
+      "source_file": "web/src/renderer/decals.ts",
+      "source_location": "L49",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_drawcreature_drawcreature",
+      "label": "drawCreature",
+      "file_type": "code",
+      "source_file": "web/src/renderer/drawCreature.ts",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_drawcreature_drawcreatureshadow",
+      "label": "drawCreatureShadow",
+      "file_type": "code",
+      "source_file": "web/src/renderer/drawCreature.ts",
+      "source_location": "L134",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_drawplant_drawplant",
+      "label": "drawPlant",
+      "file_type": "code",
+      "source_file": "web/src/renderer/drawPlant.ts",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_imagecache_getimage",
+      "label": "getImage",
+      "file_type": "code",
+      "source_file": "web/src/renderer/imageCache.ts",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_imagecache_preloadimage",
+      "label": "preloadImage",
+      "file_type": "code",
+      "source_file": "web/src/renderer/imageCache.ts",
+      "source_location": "L32",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_imagecache_releaseimage",
+      "label": "releaseImage",
+      "file_type": "code",
+      "source_file": "web/src/renderer/imageCache.ts",
+      "source_location": "L46",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_renderer_imagecache_generatetintedimage",
+      "label": "generateTintedImage",
+      "file_type": "code",
+      "source_file": "web/src/renderer/imageCache.ts",
+      "source_location": "L58",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_creaturesize",
+      "label": "CreatureSize",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_movementtype",
+      "label": "MovementType",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_diettype",
+      "label": "DietType",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_behaviorstate",
+      "label": "BehaviorState",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_moodtype",
+      "label": "MoodType",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_creature",
+      "label": "Creature",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_plant",
+      "label": "Plant",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L97",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_camerastate",
+      "label": "CameraState",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L108",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_visualeffect",
+      "label": "VisualEffect",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L115",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_worldstate",
+      "label": "WorldState",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L125",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_godtool",
+      "label": "GodTool",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L159",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_cameramode",
+      "label": "CameraMode",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L161",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_gamestore",
+      "label": "GameStore",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L163",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_decal",
+      "label": "Decal",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L215",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_types_index_pendingcreature",
+      "label": "PendingCreature",
+      "file_type": "code",
+      "source_file": "web/src/types/index.ts",
+      "source_location": "L224",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_brushpicker_brushpicker",
+      "label": "BrushPicker",
+      "file_type": "code",
+      "source_file": "web/src/ui/BrushPicker.tsx",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_colorpalette_colorpalette",
+      "label": "ColorPalette",
+      "file_type": "code",
+      "source_file": "web/src/ui/ColorPalette.tsx",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_emptystate_emptystate",
+      "label": "EmptyState",
+      "file_type": "code",
+      "source_file": "web/src/ui/EmptyState.tsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_fab_fab",
+      "label": "FAB",
+      "file_type": "code",
+      "source_file": "web/src/ui/FAB.tsx",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_timecontrols_timecontrols",
+      "label": "TimeControls",
+      "file_type": "code",
+      "source_file": "web/src/ui/TimeControls.tsx",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_tooltip_tooltip",
+      "label": "Tooltip",
+      "file_type": "code",
+      "source_file": "web/src/ui/Tooltip.tsx",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_ui_tutorialbutton_tutorialbutton",
+      "label": "TutorialButton",
+      "file_type": "code",
+      "source_file": "web/src/ui/TutorialButton.tsx",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_namegenerator_generaterandomname",
+      "label": "generateRandomName",
+      "file_type": "code",
+      "source_file": "web/src/utils/nameGenerator.ts",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_savesystem_saveslotmetadata",
+      "label": "SaveSlotMetadata",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_savesystem_saveslotdata",
+      "label": "SaveSlotData",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_savesystem_savegame",
+      "label": "saveGame",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L43",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_savesystem_loadgame",
+      "label": "loadGame",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L70",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_savesystem_listsaves",
+      "label": "listSaves",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L82",
+      "_origin": "ast"
+    },
+    {
+      "id": "web_src_utils_savesystem_deletegame",
+      "label": "deleteGame",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L104",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "web_src_app",
+      "target": "web_src_engine_usegameloop_usegameloop",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_engine_simulate_buildcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_renderer_imagecache_preloadimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_ui_fab_fab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_ui_emptystate_emptystate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_ui_tutorialbutton_tutorialbutton",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_ui_timecontrols_timecontrols",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_renderer_canvasutils_getworldpoint",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_app",
+      "target": "web_src_renderer_canvasutils_getcanvaspoint",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/App.tsx",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_constants_index",
+      "target": "web_src_types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/constants/index.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_constants_traits",
+      "target": "web_src_types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/constants/traits.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_constants_traits",
+      "target": "web_src_types_index_movementtype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/constants/traits.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_constants_traits",
+      "target": "web_src_types_index_diettype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/constants/traits.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_ai_boids",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/ai/Boids.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_ai_boids",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/ai/Boids.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_ai_thoughts",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/ai/Thoughts.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_ai_thoughts",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/ai/Thoughts.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_collision",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/collision.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_collision",
+      "target": "web_src_engine_ai_thoughts_hunts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/collision.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_movement",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/movement.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_reproduction",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/reproduction.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_reproduction",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/reproduction.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_reproduction",
+      "target": "web_src_renderer_imagecache_generatetintedimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/reproduction.ts",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate_test",
+      "target": "web_src_engine_simulate_calculatecreaturestats",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate_test",
+      "target": "web_src_types_index_decal",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_pendingcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_movementtype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_diettype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_types_index_decal",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_movement_movecrawler",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_movement_movehopper",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_movement_movepacer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_ai_thoughts_evaluatethoughts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_ai_boids_calculateboids",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_collision_runcollision",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_reproduction_checkreproduction",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_spawner_tickplantspawner",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_engine_worldref_clampentitiestoworld",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_simulate",
+      "target": "web_src_renderer_imagecache_releaseimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/simulate.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_spawner",
+      "target": "web_src_types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/spawner.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_spawner",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/spawner.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_usegameloop",
+      "target": "web_src_engine_worldref_updateworlddimensions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/useGameLoop.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_usegameloop",
+      "target": "web_src_engine_simulate_simulate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/useGameLoop.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_usegameloop",
+      "target": "web_src_renderer_renderer_gamerenderer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/useGameLoop.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_engine_worldref",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/worldRef.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_hooks_usedrawingcanvas",
+      "target": "web_src_renderer_canvasutils_setupcanvas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_hooks_usedrawingcanvas",
+      "target": "web_src_renderer_canvasutils_getcanvaspoint",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_hooks_usedrawingcanvas",
+      "target": "web_src_types_index_decal",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer",
+      "target": "web_src_types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer",
+      "target": "web_src_renderer_drawplant_drawplant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer",
+      "target": "web_src_renderer_drawcreature_drawcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer",
+      "target": "web_src_renderer_drawcreature_drawcreatureshadow",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_baker",
+      "target": "web_src_types_index_decal",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/baker.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_baker",
+      "target": "web_src_renderer_decals_getdecaldataurl",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/baker.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_baker",
+      "target": "web_src_renderer_decals_decalstyle",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/baker.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_drawcreature",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/drawCreature.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_drawcreature",
+      "target": "web_src_renderer_imagecache_getimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/drawCreature.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_drawplant",
+      "target": "web_src_types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/drawPlant.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_store_usestore",
+      "target": "web_src_types_index_gamestore",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/store/useStore.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_store_usestore",
+      "target": "web_src_types_index_pendingcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/store/useStore.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_types_index_movementtype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_types_index_diettype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_hooks_usedrawingcanvas_usedrawingcanvas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_ui_colorpalette_colorpalette",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_ui_brushpicker_brushpicker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_engine_simulate_calculatecreaturestats",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_utils_namegenerator_generaterandomname",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_renderer_baker_bakecreaturesprites",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_ui_tooltip_tooltip",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creationpanel",
+      "target": "web_src_renderer_decals_getdecaldataurl",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_creatureinspector",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreatureInspector.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_godtoolbar",
+      "target": "web_src_types_index_godtool",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/GodToolbar.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_pausemenumodal",
+      "target": "web_src_utils_savesystem_savegame",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/PauseMenuModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_titlescreen",
+      "target": "web_src_utils_savesystem_listsaves",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TitleScreen.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_titlescreen",
+      "target": "web_src_utils_savesystem_deletegame",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TitleScreen.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_titlescreen",
+      "target": "web_src_utils_savesystem_loadgame",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TitleScreen.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_titlescreen",
+      "target": "web_src_utils_savesystem_saveslotmetadata",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TitleScreen.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_ui_traitpicker",
+      "target": "web_src_ui_tooltip_tooltip",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TraitPicker.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_utils_savesystem",
+      "target": "web_src_types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_utils_savesystem",
+      "target": "web_src_types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_utils_savesystem",
+      "target": "web_src_types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_engine_reproduction_spawnbaby",
+      "target": "web_src_renderer_imagecache_generatetintedimage",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/engine/reproduction.ts",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_ui_creationpanel_handlerelease",
+      "target": "web_src_utils_namegenerator_generaterandomname",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_ui_creationpanel_handlerelease",
+      "target": "web_src_renderer_baker_bakecreaturesprites",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/CreationPanel.tsx",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_ui_pausemenumodal_handlemanualsave",
+      "target": "web_src_utils_savesystem_savegame",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/PauseMenuModal.tsx",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_ui_pausemenumodal_handlesaveandquit",
+      "target": "web_src_utils_savesystem_savegame",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/PauseMenuModal.tsx",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_ui_titlescreen_handleplay",
+      "target": "web_src_utils_savesystem_loadgame",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TitleScreen.tsx",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_ui_titlescreen_handledelete",
+      "target": "web_src_utils_savesystem_deletegame",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/ui/TitleScreen.tsx",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_hooks_usedrawingcanvas_undosnapshot",
+      "target": "web_src_types_index_decal",
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_hooks_usedrawingcanvas_drawingcanvashandle",
+      "target": "web_src_types_index_decal",
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/hooks/useDrawingCanvas.ts",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer_gamerenderer",
+      "target": "web_src_types_index_creature",
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_renderer_renderer_gamerenderer",
+      "target": "web_src_types_index_plant",
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_renderer_renderer_gamerenderer_draw",
+      "target": "web_src_types_index_worldstate",
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "c_users_oob_gemini_antigravity_scratch_darwins_canvas_web_src_renderer_renderer_gamerenderer_drawhealthbar",
+      "target": "web_src_types_index_creature",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/renderer/Renderer.ts",
+      "source_location": "L292",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_utils_savesystem_saveslotdata",
+      "target": "web_src_utils_savesystem_saveslotmetadata",
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_utils_savesystem_saveslotdata",
+      "target": "web_src_types_index_creature",
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "web_src_utils_savesystem_saveslotdata",
+      "target": "web_src_types_index_plant",
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "web/src/utils/saveSystem.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

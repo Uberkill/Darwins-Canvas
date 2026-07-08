@@ -1,0 +1,5492 @@
+{
+  "nodes": [
+    {
+      "id": "eslintrc",
+      "label": ".eslintrc.json",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "eslintrc_parser",
+      "label": "parser",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "eslintrc_plugins",
+      "label": "plugins",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "eslintrc_extends",
+      "label": "extends",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "eslintrc_env",
+      "label": "env",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "eslintrc_env_browser",
+      "label": "browser",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "eslintrc_env_es2022",
+      "label": "es2022",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "eslintrc_rules",
+      "label": "rules",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "eslintrc_rules_typescript_eslint_no_unused_vars",
+      "label": "@typescript-eslint/no-unused-vars",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "eslintrc_rules_typescript_eslint_explicit_module_boundary_types",
+      "label": "@typescript-eslint/explicit-module-boundary-types",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "eslintrc_rules_typescript_eslint_no_non_null_assertion",
+      "label": "@typescript-eslint/no-non-null-assertion",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "eslintrc_ignorepatterns",
+      "label": "ignorePatterns",
+      "file_type": "code",
+      "source_file": ".eslintrc.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "oxlintrc",
+      "label": ".oxlintrc.json",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "oxlintrc_schema",
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "oxlintrc_plugins",
+      "label": "plugins",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "oxlintrc_rules",
+      "label": "rules",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "oxlintrc_rules_react_rules_of_hooks",
+      "label": "react/rules-of-hooks",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "oxlintrc_rules_react_only_export_components",
+      "label": "react/only-export-components",
+      "file_type": "code",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "package_private",
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "package_type",
+      "label": "type",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_lint",
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_preview",
+      "label": "preview",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "package_scripts_test",
+      "label": "test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "package_scripts_test_run",
+      "label": "test:run",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "package_dependencies",
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "package_dependencies_lucide_react",
+      "label": "lucide-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "package_dependencies_react",
+      "label": "react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "package_dependencies_react_dom",
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "package_dependencies_zustand",
+      "label": "zustand",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "package_devdependencies",
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "package_devdependencies_testing_library_jest_dom",
+      "label": "@testing-library/jest-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "package_devdependencies_testing_library_react",
+      "label": "@testing-library/react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "package_devdependencies_testing_library_user_event",
+      "label": "@testing-library/user-event",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "package_devdependencies_types_node",
+      "label": "@types/node",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
+      "id": "package_devdependencies_types_react",
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L26"
+    },
+    {
+      "id": "package_devdependencies_typescript_eslint_eslint_plugin",
+      "label": "@typescript-eslint/eslint-plugin",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "package_devdependencies_typescript_eslint_parser",
+      "label": "@typescript-eslint/parser",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "package_devdependencies_vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "package_devdependencies_eslint",
+      "label": "eslint",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L30"
+    },
+    {
+      "id": "package_devdependencies_eslint_config_prettier",
+      "label": "eslint-config-prettier",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L31"
+    },
+    {
+      "id": "package_devdependencies_jsdom",
+      "label": "jsdom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L32"
+    },
+    {
+      "id": "package_devdependencies_oxlint",
+      "label": "oxlint",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L33"
+    },
+    {
+      "id": "package_devdependencies_prettier",
+      "label": "prettier",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L34"
+    },
+    {
+      "id": "package_devdependencies_typescript",
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L35"
+    },
+    {
+      "id": "package_devdependencies_vite",
+      "label": "vite",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L36"
+    },
+    {
+      "id": "package_devdependencies_vitest",
+      "label": "vitest",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L37"
+    },
+    {
+      "id": "src_app",
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_usecreaturecount",
+      "label": "useCreatureCount()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_app_app",
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L23"
+    },
+    {
+      "id": "engine_collision_test",
+      "label": "collision.test.ts",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_collision_test_makeworld",
+      "label": "makeWorld()",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "engine_collision_test_makecreature",
+      "label": "makeCreature()",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "engine_collision_test_makeplant",
+      "label": "makePlant()",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "engine_movement_test",
+      "label": "movement.test.ts",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_movement_test_makecreature",
+      "label": "makeCreature()",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "engine_simulate_test",
+      "label": "simulate.test.ts",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_simulate_test_makeworld",
+      "label": "makeWorld()",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "engine_simulate_test_makereadycreature",
+      "label": "makeReadyCreature()",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L87"
+    },
+    {
+      "id": "engine_usegameloop_test",
+      "label": "useGameLoop.test.tsx",
+      "file_type": "code",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "constants_index",
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "constants_index_getworldwidth",
+      "label": "getWorldWidth()",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "constants_index_getworldheight",
+      "label": "getWorldHeight()",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "constants_index_size_stats",
+      "label": "SIZE_STATS",
+      "file_type": "code",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "engine_collision",
+      "label": "collision.ts",
+      "file_type": "code",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_collision_collisionresult",
+      "label": "CollisionResult",
+      "file_type": "code",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "engine_collision_runcollision",
+      "label": "runCollision()",
+      "file_type": "code",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "engine_movement",
+      "label": "movement.ts",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_movement_movecrawler",
+      "label": "moveCrawler()",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "engine_movement_movehopper",
+      "label": "moveHopper()",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L46"
+    },
+    {
+      "id": "engine_movement_movepacer",
+      "label": "movePacer()",
+      "file_type": "code",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L97"
+    },
+    {
+      "id": "engine_reproduction",
+      "label": "reproduction.ts",
+      "file_type": "code",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_reproduction_checkreproduction",
+      "label": "checkReproduction()",
+      "file_type": "code",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "engine_reproduction_spawnbaby",
+      "label": "spawnBaby()",
+      "file_type": "code",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "engine_simulate",
+      "label": "simulate.ts",
+      "file_type": "code",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_simulate_simulate",
+      "label": "simulate()",
+      "file_type": "code",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "engine_simulate_buildcreature",
+      "label": "buildCreature()",
+      "file_type": "code",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L73"
+    },
+    {
+      "id": "engine_spawner",
+      "label": "spawner.ts",
+      "file_type": "code",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_spawner_tickplantspawner",
+      "label": "tickPlantSpawner()",
+      "file_type": "code",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L12"
+    },
+    {
+      "id": "engine_spawner_createplant",
+      "label": "createPlant()",
+      "file_type": "code",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L35"
+    },
+    {
+      "id": "engine_usegameloop",
+      "label": "useGameLoop.ts",
+      "file_type": "code",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_usegameloop_usegameloop",
+      "label": "useGameLoop()",
+      "file_type": "code",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "engine_worldref",
+      "label": "worldRef.ts",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "engine_worldref_worldref",
+      "label": "worldRef",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "engine_worldref_createinitialworldstate",
+      "label": "createInitialWorldState()",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "engine_worldref_updateworlddimensions",
+      "label": "updateWorldDimensions()",
+      "file_type": "code",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L33"
+    },
+    {
+      "id": "hooks_usedrawingcanvas",
+      "label": "useDrawingCanvas.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_drawingtool",
+      "label": "DrawingTool",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_drawingcanvashandle",
+      "label": "DrawingCanvasHandle",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "label": "useDrawingCanvas()",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_applybrushsettings",
+      "label": "applyBrushSettings()",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L223"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_hextorgb",
+      "label": "hexToRgb()",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L232"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_floodfill",
+      "label": "floodFill()",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L242"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_checkisempty",
+      "label": "checkIsEmpty()",
+      "file_type": "code",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L295"
+    },
+    {
+      "id": "src_main",
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "renderer_canvasutils",
+      "label": "canvasUtils.ts",
+      "file_type": "code",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "renderer_canvasutils_setupcanvas",
+      "label": "setupCanvas()",
+      "file_type": "code",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": "L24"
+    },
+    {
+      "id": "renderer_canvasutils_getcanvaspoint",
+      "label": "getCanvasPoint()",
+      "file_type": "code",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": "L58"
+    },
+    {
+      "id": "renderer_drawcreature",
+      "label": "drawCreature.ts",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "renderer_drawcreature_drawcreature",
+      "label": "drawCreature()",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "renderer_drawcreature_drawcreatureshadow",
+      "label": "drawCreatureShadow()",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L80"
+    },
+    {
+      "id": "renderer_drawcreature_drawfallback",
+      "label": "drawFallback()",
+      "file_type": "code",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L100"
+    },
+    {
+      "id": "renderer_drawplant",
+      "label": "drawPlant.ts",
+      "file_type": "code",
+      "source_file": "src/renderer/drawPlant.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "renderer_drawplant_drawplant",
+      "label": "drawPlant()",
+      "file_type": "code",
+      "source_file": "src/renderer/drawPlant.ts",
+      "source_location": "L12"
+    },
+    {
+      "id": "renderer_imagecache",
+      "label": "imageCache.ts",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "renderer_imagecache_cache",
+      "label": "cache",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "renderer_imagecache_getimage",
+      "label": "getImage()",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "renderer_imagecache_preloadimage",
+      "label": "preloadImage()",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L32"
+    },
+    {
+      "id": "renderer_imagecache_releaseimage",
+      "label": "releaseImage()",
+      "file_type": "code",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L46"
+    },
+    {
+      "id": "store_usestore",
+      "label": "useStore.ts",
+      "file_type": "code",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "store_usestore_usestore",
+      "label": "useStore",
+      "file_type": "code",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_test_setup",
+      "label": "test-setup.ts",
+      "file_type": "code",
+      "source_file": "src/test-setup.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "types_index",
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "types_index_creaturesize",
+      "label": "CreatureSize",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "types_index_movementtype",
+      "label": "MovementType",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "types_index_diettype",
+      "label": "DietType",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "types_index_creaturestate",
+      "label": "CreatureState",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "types_index_creature",
+      "label": "Creature",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "types_index_plant",
+      "label": "Plant",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "types_index_worldstate",
+      "label": "WorldState",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "types_index_gamestore",
+      "label": "GameStore",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L69"
+    },
+    {
+      "id": "types_index_pendingcreature",
+      "label": "PendingCreature",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L79"
+    },
+    {
+      "id": "ui_brushpicker",
+      "label": "BrushPicker.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_brushpicker_brush_sizes",
+      "label": "BRUSH_SIZES",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_brushpicker_brushpickerprops",
+      "label": "BrushPickerProps",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "ui_brushpicker_brushpicker",
+      "label": "BrushPicker()",
+      "file_type": "code",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "ui_colorpalette",
+      "label": "ColorPalette.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_colorpalette_palette",
+      "label": "PALETTE",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_colorpalette_colorpaletteprops",
+      "label": "ColorPaletteProps",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "ui_colorpalette_colorpalette",
+      "label": "ColorPalette()",
+      "file_type": "code",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "ui_creationpanel",
+      "label": "CreationPanel.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_creationpanel_creationpanel",
+      "label": "CreationPanel()",
+      "file_type": "code",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "ui_emptystate",
+      "label": "EmptyState.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/EmptyState.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_emptystate_emptystate",
+      "label": "EmptyState()",
+      "file_type": "code",
+      "source_file": "src/ui/EmptyState.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "ui_fab",
+      "label": "FAB.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_fab_fabprops",
+      "label": "FABProps",
+      "file_type": "code",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "ui_fab_fab",
+      "label": "FAB()",
+      "file_type": "code",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "ui_titlescreen",
+      "label": "TitleScreen.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/TitleScreen.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_titlescreen_titlescreenprops",
+      "label": "TitleScreenProps",
+      "file_type": "code",
+      "source_file": "src/ui/TitleScreen.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "ui_titlescreen_titlescreen",
+      "label": "TitleScreen()",
+      "file_type": "code",
+      "source_file": "src/ui/TitleScreen.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "ui_traitpicker",
+      "label": "TraitPicker.tsx",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "ui_traitpicker_traitpickerprops",
+      "label": "TraitPickerProps",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "ui_traitpicker_traitpicker",
+      "label": "TraitPicker()",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "ui_traitpicker_size_options",
+      "label": "SIZE_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L42"
+    },
+    {
+      "id": "ui_traitpicker_movement_options",
+      "label": "MOVEMENT_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L48"
+    },
+    {
+      "id": "ui_traitpicker_diet_options",
+      "label": "DIET_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L54"
+    },
+    {
+      "id": "utils_namegenerator",
+      "label": "nameGenerator.ts",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_namegenerator_adjectives",
+      "label": "ADJECTIVES",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_namegenerator_nouns",
+      "label": "NOUNS",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "utils_namegenerator_generaterandomname",
+      "label": "generateRandomName()",
+      "file_type": "code",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "tsconfig_app",
+      "label": "tsconfig.app.json",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "tsconfig_app_compileroptions",
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_tsbuildinfofile",
+      "label": "tsBuildInfoFile",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_target",
+      "label": "target",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_lib",
+      "label": "lib",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_types",
+      "label": "types",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_allowarbitraryextensions",
+      "label": "allowArbitraryExtensions",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_skiplibcheck",
+      "label": "skipLibCheck",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_moduleresolution",
+      "label": "moduleResolution",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_allowimportingtsextensions",
+      "label": "allowImportingTsExtensions",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_verbatimmodulesyntax",
+      "label": "verbatimModuleSyntax",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_moduledetection",
+      "label": "moduleDetection",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_noemit",
+      "label": "noEmit",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_jsx",
+      "label": "jsx",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_nounusedlocals",
+      "label": "noUnusedLocals",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_nounusedparameters",
+      "label": "noUnusedParameters",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_erasablesyntaxonly",
+      "label": "erasableSyntaxOnly",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "label": "noFallthroughCasesInSwitch",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "tsconfig_app_include",
+      "label": "include",
+      "file_type": "code",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "tsconfig",
+      "label": "tsconfig.json",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "tsconfig_files",
+      "label": "files",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "tsconfig_references",
+      "label": "references",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "tsconfig_node",
+      "label": "tsconfig.node.json",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "tsconfig_node_compileroptions",
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_tsbuildinfofile",
+      "label": "tsBuildInfoFile",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_target",
+      "label": "target",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_lib",
+      "label": "lib",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_types",
+      "label": "types",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_skiplibcheck",
+      "label": "skipLibCheck",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_module",
+      "label": "module",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_allowimportingtsextensions",
+      "label": "allowImportingTsExtensions",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "label": "verbatimModuleSyntax",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_moduledetection",
+      "label": "moduleDetection",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_noemit",
+      "label": "noEmit",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_nounusedlocals",
+      "label": "noUnusedLocals",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_nounusedparameters",
+      "label": "noUnusedParameters",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_erasablesyntaxonly",
+      "label": "erasableSyntaxOnly",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "label": "noFallthroughCasesInSwitch",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "tsconfig_node_include",
+      "label": "include",
+      "file_type": "code",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "vite_config",
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "vite.config.ts",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "eslintrc",
+      "target": "eslintrc_parser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc",
+      "target": "eslintrc_plugins",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_plugins",
+      "target": "ref_typescript_eslint",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "eslintrc",
+      "target": "eslintrc_extends",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_extends",
+      "target": "ref_eslint_recommended",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "eslintrc_extends",
+      "target": "ref_plugin_typescript_eslint_recommended",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "eslintrc_extends",
+      "target": "ref_prettier",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "eslintrc",
+      "target": "eslintrc_env",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_env",
+      "target": "eslintrc_env_browser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_env",
+      "target": "eslintrc_env_es2022",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc",
+      "target": "eslintrc_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_rules",
+      "target": "eslintrc_rules_typescript_eslint_no_unused_vars",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_rules_typescript_eslint_no_unused_vars",
+      "target": "ref_warn",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "eslintrc_rules",
+      "target": "eslintrc_rules_typescript_eslint_explicit_module_boundary_types",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_rules",
+      "target": "eslintrc_rules_typescript_eslint_no_non_null_assertion",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc",
+      "target": "eslintrc_ignorepatterns",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "eslintrc_ignorepatterns",
+      "target": "ref_dist",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "eslintrc_ignorepatterns",
+      "target": "ref_node_modules",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".eslintrc.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "oxlintrc",
+      "target": "oxlintrc_schema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "oxlintrc",
+      "target": "oxlintrc_plugins",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "oxlintrc_plugins",
+      "target": "ref_react",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "oxlintrc_plugins",
+      "target": "ref_typescript",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "oxlintrc_plugins",
+      "target": "ref_oxc",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "oxlintrc",
+      "target": "oxlintrc_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "oxlintrc_rules",
+      "target": "oxlintrc_rules_react_rules_of_hooks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "oxlintrc_rules",
+      "target": "oxlintrc_rules_react_only_export_components",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "oxlintrc_rules_react_only_export_components",
+      "target": "ref_warn",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".oxlintrc.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package",
+      "target": "package_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_private",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_version",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_type",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_scripts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_dev",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_lint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_preview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_test",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_test_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
+      "target": "package_dependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_lucide_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "package_dependencies_lucide_react",
+      "target": "lucide_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "package_dependencies_react",
+      "target": "react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "package_dependencies_react_dom",
+      "target": "react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_zustand",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "package_dependencies_zustand",
+      "target": "zustand",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package",
+      "target": "package_devdependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_testing_library_jest_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_testing_library_jest_dom",
+      "target": "testing_library_jest_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_testing_library_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_testing_library_react",
+      "target": "testing_library_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_testing_library_user_event",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_testing_library_user_event",
+      "target": "testing_library_user_event",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_types_node",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_types_node",
+      "target": "types_node",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_types_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_types_react",
+      "target": "types_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_types_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_types_react_dom",
+      "target": "types_react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_typescript_eslint_eslint_plugin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_typescript_eslint_eslint_plugin",
+      "target": "typescript_eslint_eslint_plugin",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_typescript_eslint_parser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_typescript_eslint_parser",
+      "target": "typescript_eslint_parser",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_vitejs_plugin_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_vitejs_plugin_react",
+      "target": "vitejs_plugin_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L29",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_eslint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_eslint",
+      "target": "eslint",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L30",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_eslint_config_prettier",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_eslint_config_prettier",
+      "target": "eslint_config_prettier",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L31",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_jsdom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_jsdom",
+      "target": "jsdom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L32",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_oxlint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_oxlint",
+      "target": "oxlint",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L33",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_prettier",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_prettier",
+      "target": "prettier",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L34",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_typescript",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_typescript",
+      "target": "typescript",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L35",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_vite",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_vite",
+      "target": "vite",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L36",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_vitest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "package_devdependencies_vitest",
+      "target": "vitest",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L37",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "src_app",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "c_users_oob_gemini_antigravity_scratch_fish_tank_web_src_index_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "engine_usegameloop",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "engine_usegameloop_usegameloop",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "engine_worldref",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "engine_worldref_worldref",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "store_usestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "store_usestore_usestore",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_fab",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_fab_fab",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_creationpanel",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_creationpanel_creationpanel",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_emptystate",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_emptystate_emptystate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_titlescreen",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "ui_titlescreen_titlescreen",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "renderer_canvasutils",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "renderer_canvasutils_getcanvaspoint",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_app_usecreaturecount",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_app_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_app",
+      "target": "src_app_usecreaturecount",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "vitest",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "engine_collision",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "engine_collision_runcollision",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "constants_index_carnivore_eat_range",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "constants_index_herbivore_eat_range",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "engine_collision_test_makeworld",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "engine_collision_test_makecreature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision_test",
+      "target": "engine_collision_test_makeplant",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/collision.test.ts",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "vitest",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "engine_movement",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "engine_movement_movecrawler",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "engine_movement_movehopper",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "engine_movement_movepacer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "constants_index_hop_pause_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "constants_index_pacer_move_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "constants_index_pacer_pause_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement_test",
+      "target": "engine_movement_test_makecreature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/movement.test.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "vitest",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_simulate",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_simulate_buildcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_reproduction",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_reproduction_checkreproduction",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_spawner",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_spawner_tickplantspawner",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_spawner_createplant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "types_index_pendingcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_base_speed",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_base_hunger_drain",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_starting_hunger",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_size_stats",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_repro_hunger_threshold",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_repro_cooldown",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_population_cap",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_plant_cap",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "constants_index_plant_spawn_rate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_simulate_test_makeworld",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test",
+      "target": "engine_simulate_test_makereadycreature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "vitest",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "engine_usegameloop",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "engine_usegameloop_usegameloop",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "engine_worldref",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "engine_worldref_worldref",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop_test",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/__tests__/engine/useGameLoop.test.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "constants_index",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "constants_index",
+      "target": "types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "constants_index",
+      "target": "constants_index_getworldwidth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "constants_index",
+      "target": "constants_index_getworldheight",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "constants_index",
+      "target": "constants_index_size_stats",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/constants/index.ts",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "constants_index_carnivore_eat_range",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "constants_index_herbivore_eat_range",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "engine_collision_collisionresult",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_collision",
+      "target": "engine_collision_runcollision",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/collision.ts",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index_hop_height",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index_hop_speed",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index_hop_pause_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index_pacer_move_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index_pacer_pause_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "constants_index_base_render_size",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "engine_movement_movecrawler",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "engine_movement_movehopper",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_movement",
+      "target": "engine_movement_movepacer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/movement.ts",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index_repro_hunger_threshold",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index_repro_chance_per_sec",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index_repro_cooldown",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index_repro_spawn_offset",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index_population_cap",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "constants_index_starting_hunger",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "engine_reproduction_checkreproduction",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction",
+      "target": "engine_reproduction_spawnbaby",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_reproduction_checkreproduction",
+      "target": "engine_reproduction_spawnbaby",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/reproduction.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "types_index_pendingcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_movement",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_movement_movecrawler",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_movement_movehopper",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_movement_movepacer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_collision",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_collision_runcollision",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_reproduction",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_reproduction_checkreproduction",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_spawner",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_spawner_tickplantspawner",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "constants_index_base_speed",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "constants_index_base_hunger_drain",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "constants_index_starting_hunger",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "constants_index_size_stats",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "constants_index_pacer_move_duration",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_simulate_simulate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate",
+      "target": "engine_simulate_buildcreature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "constants_index_plant_cap",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "constants_index_plant_spawn_rate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "constants_index_plant_wobble_speed",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "constants_index_plant_growth_rate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "engine_spawner_tickplantspawner",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner",
+      "target": "engine_spawner_createplant",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_spawner_tickplantspawner",
+      "target": "engine_spawner_createplant",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/spawner.ts",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_worldref",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_worldref_worldref",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_worldref_updateworlddimensions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "store_usestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "store_usestore_usestore",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "constants_index_max_delta_time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "constants_index_base_render_size",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_simulate",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_simulate_simulate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_simulate_buildcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_drawplant",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_drawplant_drawplant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_drawcreature",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_drawcreature_drawcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_drawcreature_drawcreatureshadow",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_imagecache",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_imagecache_preloadimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_imagecache_releaseimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_canvasutils",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "renderer_canvasutils_setupcanvas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_usegameloop",
+      "target": "engine_usegameloop_usegameloop",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/useGameLoop.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "types_index_worldstate",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "constants_index_getworldwidth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "constants_index_getworldheight",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "engine_worldref_worldref",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "engine_worldref_createinitialworldstate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref",
+      "target": "engine_worldref_updateworlddimensions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "renderer_canvasutils",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "renderer_canvasutils_setupcanvas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "renderer_canvasutils_getcanvaspoint",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_drawingtool",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_drawingcanvashandle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_applybrushsettings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_hextorgb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_floodfill",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L242",
+      "weight": 1.0
+    },
+    {
+      "source": "hooks_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_checkisempty",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDrawingCanvas.ts",
+      "source_location": "L295",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "client",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "c_users_oob_gemini_antigravity_scratch_fish_tank_web_src_index_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_main",
+      "target": "src_app",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_canvasutils",
+      "target": "renderer_canvasutils_setupcanvas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_canvasutils",
+      "target": "renderer_canvasutils_getcanvaspoint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/canvasUtils.ts",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "types_index_creature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "constants_index_base_render_size",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "renderer_imagecache",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "renderer_imagecache_getimage",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "renderer_drawcreature_drawcreature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "renderer_drawcreature_drawcreatureshadow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature",
+      "target": "renderer_drawcreature_drawfallback",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature_drawcreature",
+      "target": "renderer_drawcreature_drawfallback",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawplant",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawPlant.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawplant",
+      "target": "types_index_plant",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawPlant.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawplant",
+      "target": "renderer_drawplant_drawplant",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/drawPlant.ts",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_imagecache",
+      "target": "renderer_imagecache_cache",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_imagecache",
+      "target": "renderer_imagecache_getimage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_imagecache",
+      "target": "renderer_imagecache_preloadimage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_imagecache",
+      "target": "renderer_imagecache_releaseimage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/renderer/imageCache.ts",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "store_usestore",
+      "target": "zustand",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "store_usestore",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "store_usestore",
+      "target": "types_index_gamestore",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "store_usestore",
+      "target": "types_index_pendingcreature",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "store_usestore",
+      "target": "store_usestore_usestore",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/store/useStore.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_test_setup",
+      "target": "jest_dom",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/test-setup.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_creaturesize",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_movementtype",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_diettype",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_creaturestate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_creature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_plant",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_worldstate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_gamestore",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "types_index",
+      "target": "types_index_pendingcreature",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_brushpicker",
+      "target": "ui_brushpicker_brush_sizes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_brushpicker",
+      "target": "ui_brushpicker_brushpickerprops",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_brushpicker",
+      "target": "ui_brushpicker_brushpicker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/BrushPicker.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_colorpalette",
+      "target": "ui_colorpalette_palette",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_colorpalette",
+      "target": "ui_colorpalette_colorpaletteprops",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_colorpalette",
+      "target": "ui_colorpalette_colorpalette",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/ColorPalette.tsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "store_usestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "store_usestore_usestore",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "types_index_movementtype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "types_index_diettype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "hooks_usedrawingcanvas",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_colorpalette",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_colorpalette_colorpalette",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_brushpicker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_brushpicker_brushpicker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_traitpicker",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_traitpicker_traitpicker",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_traitpicker_size_options",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_traitpicker_movement_options",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_traitpicker_diet_options",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "utils_namegenerator",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "utils_namegenerator_generaterandomname",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel",
+      "target": "ui_creationpanel_creationpanel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_emptystate",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/EmptyState.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_emptystate",
+      "target": "constants_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/EmptyState.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_emptystate",
+      "target": "constants_index_empty_state_delay_ms",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/EmptyState.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_emptystate",
+      "target": "ui_emptystate_emptystate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/EmptyState.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_fab",
+      "target": "store_usestore",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_fab",
+      "target": "store_usestore_usestore",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_fab",
+      "target": "ui_fab_fabprops",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_fab",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_fab",
+      "target": "ui_fab_fab",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_titlescreen",
+      "target": "react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TitleScreen.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_titlescreen",
+      "target": "ui_titlescreen_titlescreenprops",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TitleScreen.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_titlescreen",
+      "target": "ui_titlescreen_titlescreen",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TitleScreen.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "types_index",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "types_index_creaturesize",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "types_index_movementtype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "types_index_diettype",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "ui_traitpicker_traitpickerprops",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "ui_traitpicker_traitpicker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "ui_traitpicker_size_options",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "ui_traitpicker_movement_options",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_traitpicker",
+      "target": "ui_traitpicker_diet_options",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/TraitPicker.tsx",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "utils_namegenerator",
+      "target": "utils_namegenerator_adjectives",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "utils_namegenerator",
+      "target": "utils_namegenerator_nouns",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "utils_namegenerator",
+      "target": "utils_namegenerator_generaterandomname",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/utils/nameGenerator.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app",
+      "target": "tsconfig_app_compileroptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_tsbuildinfofile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_target",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_lib",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions_lib",
+      "target": "ref_es2023",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "tsconfig_app_compileroptions_lib",
+      "target": "ref_dom",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_types",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions_types",
+      "target": "ref_vite_client",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_allowarbitraryextensions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_skiplibcheck",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_moduleresolution",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_allowimportingtsextensions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_verbatimmodulesyntax",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_moduledetection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_noemit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_jsx",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_nounusedlocals",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_nounusedparameters",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_erasablesyntaxonly",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_compileroptions",
+      "target": "tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app",
+      "target": "tsconfig_app_include",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_app_include",
+      "target": "ref_src",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.app.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "tsconfig",
+      "target": "tsconfig_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig",
+      "target": "tsconfig_references",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node",
+      "target": "tsconfig_node_compileroptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_tsbuildinfofile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_target",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_lib",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions_lib",
+      "target": "ref_es2023",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_types",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions_types",
+      "target": "ref_node",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_skiplibcheck",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_module",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_allowimportingtsextensions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_moduledetection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_noemit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_nounusedlocals",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_nounusedparameters",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_erasablesyntaxonly",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_compileroptions",
+      "target": "tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node",
+      "target": "tsconfig_node_include",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "tsconfig_node_include",
+      "target": "ref_vite_config_ts",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.node.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "vite_config",
+      "target": "vite",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "vite.config.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config",
+      "target": "plugin_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "vite.config.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_handlepointerevent",
+      "target": "renderer_canvasutils_getcanvaspoint",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_createinitialworldstate",
+      "target": "constants_index_getworldwidth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_createinitialworldstate",
+      "target": "constants_index_getworldheight",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel_handlerelease",
+      "target": "utils_namegenerator_generaterandomname",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_app",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_app",
+      "target": "engine_usegameloop_usegameloop",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.tsx",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_test_makereadycreature",
+      "target": "engine_simulate_buildcreature",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/__tests__/engine/simulate.test.ts",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_movement_movecrawler",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_movement_movehopper",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_movement_movepacer",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_collision_runcollision",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_reproduction_checkreproduction",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_spawner_tickplantspawner",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/simulate.ts",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_updateworlddimensions",
+      "target": "constants_index_getworldwidth",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "engine_worldref_updateworlddimensions",
+      "target": "constants_index_getworldheight",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/engine/worldRef.ts",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "renderer_drawcreature_drawcreature",
+      "target": "renderer_imagecache_getimage",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/renderer/drawCreature.ts",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/CreationPanel.tsx",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "ui_fab_fab",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ui/FAB.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

@@ -1,0 +1,437 @@
+{
+  "communities": {
+    "0": [
+      "constants_index",
+      "constants_index_carnivore_eat_range",
+      "constants_index_herbivore_eat_range",
+      "constants_index_size_stats",
+      "engine_collision",
+      "engine_collision_collisionresult",
+      "engine_collision_runcollision",
+      "engine_collision_test",
+      "engine_collision_test_makecreature",
+      "engine_collision_test_makeplant",
+      "engine_collision_test_makeworld",
+      "engine_collision_zgate",
+      "engine_movement",
+      "engine_movement_movecrawler",
+      "engine_movement_movehopper",
+      "engine_movement_movepacer",
+      "engine_movement_test",
+      "engine_movement_test_makecreature",
+      "engine_reproduction",
+      "engine_reproduction_asexual",
+      "engine_reproduction_checkreproduction",
+      "engine_reproduction_spawnbaby",
+      "engine_simulate",
+      "engine_simulate_simulate",
+      "engine_simulate_test",
+      "engine_simulate_test_makeworld",
+      "engine_spawner",
+      "engine_spawner_createplant",
+      "engine_spawner_tickplantspawner",
+      "renderer_drawplant",
+      "renderer_drawplant_drawplant",
+      "types_index",
+      "types_index_creature",
+      "types_index_creaturestate",
+      "types_index_plant",
+      "types_index_worldstate"
+    ],
+    "1": [
+      "package",
+      "package_dependencies",
+      "package_dependencies_lucide_react",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_dependencies_zustand",
+      "package_devdependencies",
+      "package_devdependencies_eslint",
+      "package_devdependencies_eslint_config_prettier",
+      "package_devdependencies_jsdom",
+      "package_devdependencies_oxlint",
+      "package_devdependencies_prettier",
+      "package_devdependencies_testing_library_jest_dom",
+      "package_devdependencies_testing_library_react",
+      "package_devdependencies_testing_library_user_event",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "package_devdependencies_typescript_eslint_eslint_plugin",
+      "package_devdependencies_typescript_eslint_parser",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitejs_plugin_react",
+      "package_devdependencies_vitest",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_preview",
+      "package_scripts_test",
+      "package_scripts_test_run",
+      "package_type",
+      "package_version"
+    ],
+    "2": [
+      "constants_index_getworldheight",
+      "constants_index_getworldwidth",
+      "engine_simulate_buildcreature",
+      "engine_simulate_test_makereadycreature",
+      "engine_usegameloop",
+      "engine_usegameloop_test",
+      "engine_usegameloop_usegameloop",
+      "engine_worldref",
+      "engine_worldref_createinitialworldstate",
+      "engine_worldref_updateworlddimensions",
+      "engine_worldref_worldref",
+      "renderer_canvasutils",
+      "renderer_canvasutils_getcanvaspoint",
+      "renderer_canvasutils_setupcanvas",
+      "renderer_drawcreature",
+      "renderer_drawcreature_drawcreature",
+      "renderer_drawcreature_drawcreatureshadow",
+      "renderer_drawcreature_drawfallback",
+      "renderer_imagecache",
+      "renderer_imagecache_cache",
+      "renderer_imagecache_caching_strategy",
+      "renderer_imagecache_getimage",
+      "renderer_imagecache_preloadimage",
+      "renderer_imagecache_releaseimage",
+      "src_app",
+      "src_app_app",
+      "src_app_usecreaturecount",
+      "src_main",
+      "ui_emptystate",
+      "ui_emptystate_emptystate",
+      "ui_titlescreen",
+      "ui_titlescreen_titlescreen",
+      "ui_titlescreen_titlescreenprops"
+    ],
+    "3": [
+      "types_index_creaturesize",
+      "types_index_diettype",
+      "types_index_movementtype",
+      "ui_brushpicker",
+      "ui_brushpicker_brush_sizes",
+      "ui_brushpicker_brushpicker",
+      "ui_brushpicker_brushpickerprops",
+      "ui_colorpalette",
+      "ui_colorpalette_colorpalette",
+      "ui_colorpalette_colorpaletteprops",
+      "ui_colorpalette_palette",
+      "ui_creationpanel",
+      "ui_creationpanel_creationpanel",
+      "ui_traitpicker",
+      "ui_traitpicker_diet_options",
+      "ui_traitpicker_movement_options",
+      "ui_traitpicker_size_options",
+      "ui_traitpicker_traitpicker",
+      "ui_traitpicker_traitpickerprops",
+      "utils_namegenerator",
+      "utils_namegenerator_adjectives",
+      "utils_namegenerator_generaterandomname",
+      "utils_namegenerator_nouns"
+    ],
+    "4": [
+      "tsconfig_app",
+      "tsconfig_app_compileroptions",
+      "tsconfig_app_compileroptions_allowarbitraryextensions",
+      "tsconfig_app_compileroptions_allowimportingtsextensions",
+      "tsconfig_app_compileroptions_erasablesyntaxonly",
+      "tsconfig_app_compileroptions_jsx",
+      "tsconfig_app_compileroptions_lib",
+      "tsconfig_app_compileroptions_module",
+      "tsconfig_app_compileroptions_moduledetection",
+      "tsconfig_app_compileroptions_moduleresolution",
+      "tsconfig_app_compileroptions_noemit",
+      "tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_app_compileroptions_nounusedlocals",
+      "tsconfig_app_compileroptions_nounusedparameters",
+      "tsconfig_app_compileroptions_skiplibcheck",
+      "tsconfig_app_compileroptions_target",
+      "tsconfig_app_compileroptions_tsbuildinfofile",
+      "tsconfig_app_compileroptions_types",
+      "tsconfig_app_compileroptions_verbatimmodulesyntax",
+      "tsconfig_app_include"
+    ],
+    "5": [
+      "tsconfig_node",
+      "tsconfig_node_compileroptions",
+      "tsconfig_node_compileroptions_allowimportingtsextensions",
+      "tsconfig_node_compileroptions_erasablesyntaxonly",
+      "tsconfig_node_compileroptions_lib",
+      "tsconfig_node_compileroptions_module",
+      "tsconfig_node_compileroptions_moduledetection",
+      "tsconfig_node_compileroptions_noemit",
+      "tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_node_compileroptions_nounusedlocals",
+      "tsconfig_node_compileroptions_nounusedparameters",
+      "tsconfig_node_compileroptions_skiplibcheck",
+      "tsconfig_node_compileroptions_target",
+      "tsconfig_node_compileroptions_tsbuildinfofile",
+      "tsconfig_node_compileroptions_types",
+      "tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "tsconfig_node_include"
+    ],
+    "6": [
+      "eslintrc",
+      "eslintrc_env",
+      "eslintrc_env_browser",
+      "eslintrc_env_es2022",
+      "eslintrc_extends",
+      "eslintrc_ignorepatterns",
+      "eslintrc_parser",
+      "eslintrc_plugins",
+      "eslintrc_rules",
+      "eslintrc_rules_typescript_eslint_explicit_module_boundary_types",
+      "eslintrc_rules_typescript_eslint_no_non_null_assertion",
+      "eslintrc_rules_typescript_eslint_no_unused_vars"
+    ],
+    "7": [
+      "hooks_usedrawingcanvas",
+      "hooks_usedrawingcanvas_applybrushsettings",
+      "hooks_usedrawingcanvas_checkisempty",
+      "hooks_usedrawingcanvas_drawingcanvashandle",
+      "hooks_usedrawingcanvas_drawingtool",
+      "hooks_usedrawingcanvas_floodfill",
+      "hooks_usedrawingcanvas_hextorgb",
+      "hooks_usedrawingcanvas_usedrawingcanvas",
+      "hooks_usedrawingcanvas_zerocostcrop"
+    ],
+    "8": [
+      "store_usestore",
+      "store_usestore_command_bus_pattern",
+      "store_usestore_usestore",
+      "types_index_gamestore",
+      "types_index_pendingcreature",
+      "ui_fab",
+      "ui_fab_fab",
+      "ui_fab_fabprops"
+    ],
+    "9": [
+      "oxlintrc",
+      "oxlintrc_plugins",
+      "oxlintrc_rules",
+      "oxlintrc_rules_react_only_export_components",
+      "oxlintrc_rules_react_rules_of_hooks",
+      "oxlintrc_schema"
+    ],
+    "10": [
+      "tsconfig",
+      "tsconfig_files",
+      "tsconfig_references"
+    ],
+    "11": [
+      "assets_hero_isometric_layers",
+      "assets_hero_layered_architecture"
+    ],
+    "12": [
+      "assets_react_react",
+      "assets_react_react_logo"
+    ],
+    "13": [
+      "assets_vite_vite"
+    ],
+    "14": [
+      "public_favicon_logo"
+    ],
+    "15": [
+      "public_icons_bluesky_icon"
+    ],
+    "16": [
+      "public_icons_discord_icon"
+    ],
+    "17": [
+      "public_icons_documentation_icon"
+    ],
+    "18": [
+      "public_icons_github_icon"
+    ],
+    "19": [
+      "public_icons_social_icon"
+    ],
+    "20": [
+      "public_icons_x_icon"
+    ],
+    "21": [
+      "src_test_setup"
+    ],
+    "22": [
+      "vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.15714285714285714,
+    "1": 0.05714285714285714,
+    "2": 0.13636363636363635,
+    "3": 0.20553359683794467,
+    "4": 0.1,
+    "5": 0.11764705882352941,
+    "6": 0.16666666666666666,
+    "7": 0.3333333333333333,
+    "8": 0.4642857142857143,
+    "9": 0.3333333333333333,
+    "10": 0.6666666666666666,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0
+  },
+  "gods": [
+    {
+      "id": "tsconfig_app_compileroptions",
+      "label": "compilerOptions",
+      "degree": 18
+    },
+    {
+      "id": "tsconfig_node_compileroptions",
+      "label": "compilerOptions",
+      "degree": 15
+    },
+    {
+      "id": "ui_creationpanel_creationpanel",
+      "label": "CreationPanel()",
+      "degree": 14
+    },
+    {
+      "id": "types_index_creature",
+      "label": "Creature",
+      "degree": 13
+    },
+    {
+      "id": "engine_usegameloop_usegameloop",
+      "label": "useGameLoop()",
+      "degree": 11
+    },
+    {
+      "id": "store_usestore_usestore",
+      "label": "useStore",
+      "degree": 11
+    },
+    {
+      "id": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "label": "useDrawingCanvas()",
+      "degree": 10
+    },
+    {
+      "id": "types_index_worldstate",
+      "label": "WorldState",
+      "degree": 10
+    },
+    {
+      "id": "engine_simulate_simulate",
+      "label": "simulate()",
+      "degree": 9
+    },
+    {
+      "id": "types_index_pendingcreature",
+      "label": "PendingCreature",
+      "degree": 9
+    }
+  ],
+  "surprises": [
+    {
+      "source": "makeWorld()",
+      "target": "makeWorld()",
+      "source_files": [
+        "src/__tests__/engine/collision.test.ts",
+        "src/__tests__/engine/simulate.test.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "makeCreature()",
+      "target": "makeCreature()",
+      "source_files": [
+        "src/__tests__/engine/collision.test.ts",
+        "src/__tests__/engine/movement.test.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "TraitPicker()",
+      "target": "Creature",
+      "source_files": [
+        "src/ui/TraitPicker.tsx",
+        "src/types/index.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "App()",
+      "target": "useStore",
+      "source_files": [
+        "src/App.tsx",
+        "src/store/useStore.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "makeReadyCreature()",
+      "target": "buildCreature()",
+      "source_files": [
+        "src/__tests__/engine/simulate.test.ts",
+        "src/engine/simulate.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `makeReadyCreature()` unexpectedly reaches hub `buildCreature()`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `useDrawingCanvas()` connect `Community 7` to `Community 2`, `Community 3`?",
+      "why": "High betweenness centrality (0.015) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `useStore` connect `Community 8` to `Community 2`, `Community 3`?",
+      "why": "High betweenness centrality (0.014) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `parser`, `plugins`, `extends` to the rest of the system?",
+      "why": "99 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 1` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 2` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.13636363636363635 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 4` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.1 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 5` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

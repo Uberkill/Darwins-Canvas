@@ -1,0 +1,5 @@
+- `npm run dev`: start development server
+- `npm run build`: build for production
+- `npm run preview`: locally preview production build
+- `npm run lint`: run oxlint and eslint
+- `npm test`: run vitest
