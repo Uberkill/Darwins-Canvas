@@ -2,8 +2,8 @@ export const AUDIO_ASSETS = {
   // Background Music (OGG recommended for seamless looping)
   // Drop your files in public/audio/music/ and update these paths.
   bgm: {
-    dayTheme: 'audio/music/day-theme.ogg',
-    nightTheme: 'audio/music/night-theme.ogg'
+    dayTheme: 'audio/music/daybugmusic.ogg',
+    nightTheme: 'audio/music/bluehuddle.ogg'
   },
   
   // Sound Effects (MP3 recommended for small size)
