@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Drumstick, Utensils, Leaf, Sprout, Bone, X, Download, Egg, Ghost, Swords, FastForward } from 'lucide-react';
+import { Flame, Dna, Leaf, Sprout, Bone, X, HelpCircle, Download } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { worldRef } from '../engine/worldRef';
 import { MetricsGraph, type GraphLine } from './MetricsGraph';
@@ -40,6 +40,7 @@ export function StatsPanel() {
   const isStatsOpen = useStore((s) => s.isStatsOpen);
   const closeStats = useStore((s) => s.closeStats);
   const [history, setHistory] = useState<EcosystemDataPoint[]>([]);
+  const [showHelp, setShowHelp] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('POPULATION');
 
   useEffect(() => {
@@ -107,40 +108,71 @@ export function StatsPanel() {
         </button>
         
         <div className="stats-header">
-          <h2 className="stats-title">Ecosystem Analytics</h2>
+          <h2 className="stats-title">Ecosystem Statistics</h2>
+          <button className="icon-btn" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-text-muted)' }} onClick={() => setShowHelp(!showHelp)} title="What do these mean?">
+            <HelpCircle size={24} />
+          </button>
           <button className="export-btn" onClick={handleExport}>
             <Download size={16} /> Export CSV
           </button>
         </div>
 
-        <div className="stats-layout-new">
-          {/* Top Row: KPIs */}
-          <div className="stats-kpi-row">
-            <div className="kpi-card herbivore">
-              <Leaf size={32} />
-              <div className="kpi-info">
-                <span>Herbivores</span>
-                <strong>{current.herbivore}</strong>
+        {showHelp && (
+          <div className="stats-help">
+            <p><strong>Births:</strong> Creatures born in the last second.</p>
+            <p><strong>Starvations:</strong> Creatures that died from hunger/old age.</p>
+            <p><strong>Hunted:</strong> Creatures killed in combat.</p>
+            <p><strong>Max Gen:</strong> Highest lineage depth alive.</p>
+            <p>Switch tabs on the right to view graphs of these specific metrics over time, color-coded by diet!</p>
+          </div>
+        )}
+
+        <div className="stats-layout">
+          {/* Left Column: Real-time Stats */}
+          <div className="stats-column-left">
+            <div className="stat-card carnivore">
+              <div className="stat-icon"><Flame size={32} /></div>
+              <div className="stat-info">
+                <h3>Carnivores</h3>
+                <span className="stat-value">{current.carnivore}</span>
               </div>
             </div>
-            <div className="kpi-card omnivore">
-              <Utensils size={32} />
-              <div className="kpi-info">
-                <span>Omnivores</span>
-                <strong>{current.omnivore}</strong>
+
+            <div className="stat-card omnivore">
+              <div className="stat-icon"><Dna size={32} /></div>
+              <div className="stat-info">
+                <h3>Omnivores</h3>
+                <span className="stat-value">{current.omnivore}</span>
               </div>
             </div>
-            <div className="kpi-card carnivore">
-              <Drumstick size={32} />
-              <div className="kpi-info">
-                <span>Carnivores</span>
-                <strong>{current.carnivore}</strong>
+
+            <div className="stat-card herbivore">
+              <div className="stat-icon"><Leaf size={32} /></div>
+              <div className="stat-info">
+                <h3>Herbivores</h3>
+                <span className="stat-value">{current.herbivore}</span>
               </div>
+            </div>
+            
+            <div className="stat-card resources">
+              <div className="stat-info-sm plant">
+                <Sprout size={16} /> Plants: {current.plant}
+              </div>
+              <div className="stat-info-sm meat">
+                <Bone size={16} /> Meat: {current.meat}
+              </div>
+            </div>
+            
+            <div className="stat-card analytics">
+              <div className="stat-info-sm">Births (1s): {current.birthsCarn + current.birthsOmni + current.birthsHerb}</div>
+              <div className="stat-info-sm">Starvations: {current.starvationCarn + current.starvationOmni + current.starvationHerb}</div>
+              <div className="stat-info-sm">Hunted: {current.huntedCarn + current.huntedOmni + current.huntedHerb}</div>
+              <div className="stat-info-sm">Max Gen: {current.maxGeneration}</div>
             </div>
           </div>
 
-          {/* Middle Row: The Graph */}
-          <div className="stats-graph-section">
+          {/* Right Column: The Graph */}
+          <div className="stats-column-right">
             <div className="stats-tabs">
               <button className={activeTab === 'POPULATION' ? 'active' : ''} onClick={() => setActiveTab('POPULATION')}>Populations</button>
               <button className={activeTab === 'BIRTHS' ? 'active' : ''} onClick={() => setActiveTab('BIRTHS')}>Births</button>
@@ -148,19 +180,7 @@ export function StatsPanel() {
               <button className={activeTab === 'HUNTED' ? 'active' : ''} onClick={() => setActiveTab('HUNTED')}>Hunted</button>
               <button className={activeTab === 'ENERGY' ? 'active' : ''} onClick={() => setActiveTab('ENERGY')}>Calories</button>
             </div>
-            <div className="graph-container-styled">
-              <MetricsGraph history={history} lines={graphLines[activeTab]} />
-            </div>
-          </div>
-
-          {/* Bottom Row: Analytics Pulse */}
-          <div className="stats-pulse-row">
-            <div className="pulse-badge plant"><Sprout size={16}/> {current.plant} Plants</div>
-            <div className="pulse-badge meat"><Bone size={16}/> {current.meat} Meat</div>
-            <div className="pulse-badge"><Egg size={16}/> {current.birthsCarn + current.birthsOmni + current.birthsHerb}/s Births</div>
-            <div className="pulse-badge"><Ghost size={16}/> {current.starvationCarn + current.starvationOmni + current.starvationHerb}/s Starved</div>
-            <div className="pulse-badge"><Swords size={16}/> {current.huntedCarn + current.huntedOmni + current.huntedHerb}/s Hunted</div>
-            <div className="pulse-badge"><FastForward size={16}/> Gen {current.maxGeneration}</div>
+            <MetricsGraph history={history} lines={graphLines[activeTab]} />
           </div>
         </div>
       </div>
