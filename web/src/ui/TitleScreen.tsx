@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { Play, Trash2, Plus, Clock, Settings, X, Volume2, Power } from 'lucide-react'
 import { listSaves, deleteGame, loadGame } from '../utils/saveSystem'
 import type { SaveSlotMetadata } from '../utils/saveSystem'
-import { useStore } from '../store/useStore'
 import { worldRef } from '../engine/worldRef'
 import { setEntities, clearEntities } from '../engine/entityManager'
 import { audio } from '../engine/audioEngine'
 import './PauseMenuModal.css'
 import './TitleScreen.css'
+import { useSettingsStore } from '../store/useSettingsStore';
+import { useEngineStore } from '../store/useEngineStore';
+import { useUIStore } from '../store/useUIStore';
 
 interface TitleScreenProps {
   onPlay: () => void
@@ -19,11 +21,11 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
   const [isHiding, setIsHiding] = useState(false)
   const [frightened, setFrightened] = useState<Record<number, boolean>>({})
   const [menuState, setMenuState] = useState<MenuState>('ROOT')
-  const masterVolume = useStore((s) => s.masterVolume)
-  const sfxVolume = useStore((s) => s.sfxVolume)
-  const musicVolume = useStore((s) => s.musicVolume)
-  const uiScale = useStore((s) => s.uiScale)
-  const setSettings = useStore((s) => s.setSettings)
+  const masterVolume = useSettingsStore((s) => s.masterVolume)
+  const sfxVolume = useSettingsStore((s) => s.sfxVolume)
+  const musicVolume = useSettingsStore((s) => s.musicVolume)
+  const uiScale = useSettingsStore((s) => s.uiScale)
+  const setSettings = useSettingsStore((s) => s.setSettings)
   
   const [saves, setSaves] = useState<Record<string, SaveSlotMetadata | null>>({
     'slot_1': null,
@@ -79,8 +81,8 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
   }, null)
 
   const handlePlay = async (slotId: string, isNew: boolean) => {
-    useStore.getState().setActiveSaveSlot(slotId)
-    useStore.getState().setTimeScale(1.0)
+    useEngineStore.getState().setActiveSaveSlot(slotId)
+    useEngineStore.getState().setTimeScale(1.0)
     
     if (!isNew) {
       const save = await loadGame(slotId)
@@ -98,7 +100,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
       worldRef.current.totalTime = 0
       
       // Trigger onboarding for new games
-      useStore.getState().openOnboarding()
+      useUIStore.getState().openOnboarding()
     }
 
     setIsHiding(true)

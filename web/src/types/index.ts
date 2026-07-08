@@ -137,7 +137,7 @@ export interface EcosystemAnalytics {
 }
 
 // ─── World state (lives in worldRef — NOT in Zustand) ────────────────────────
-interface VisualEffect {
+export interface VisualEffect {
   id: string;
   type: 'LIGHTNING' | 'HEAL' | 'SPAWN';
   x: number;
@@ -189,16 +189,9 @@ export type GodTool = 'POINTER' | 'SMITE' | 'HEAL' | 'FEED' | 'LURE' | 'GRAB';
 
 type CameraMode = 'FREE' | 'TRACKING';
 
-export interface GameStore {
+export interface UIStore {
   activeTool:      GodTool;
   setActiveTool:   (tool: GodTool) => void;
-
-  timeScale:       number;
-  setTimeScale:    (scale: number) => void;
-
-  // Save System
-  activeSaveSlot:  string | null;
-  setActiveSaveSlot: (slot: string | null) => void;
 
   // Selection UI
   selectedCreatureId: string | null;
@@ -215,13 +208,6 @@ export interface GameStore {
   keys: { up: boolean; down: boolean; left: boolean; right: boolean };
   setKeys: (keys: Partial<{ up: boolean; down: boolean; left: boolean; right: boolean }>) => void;
   panSpeed: number;
-
-  // ─── Settings ─────────────────────────────────────────────────────────────
-  masterVolume: number;
-  sfxVolume: number;
-  musicVolume: number;
-  uiScale: number;
-  setSettings: (settings: Partial<{ masterVolume: number; sfxVolume: number; musicVolume: number; uiScale: number }>) => void;
 
   isPanelOpen:     boolean;
   openPanel:       () => void;
@@ -240,13 +226,31 @@ export interface GameStore {
   closeStats: () => void;
 
   isPauseMenuOpen:  boolean;
-  previousTimeScale: number;
   openPauseMenu:    () => void;
   closePauseMenu:   () => void;
+}
+
+export interface EngineStore {
+  timeScale:       number;
+  setTimeScale:    (scale: number) => void;
+
+  // Save System
+  activeSaveSlot:  string | null;
+  setActiveSaveSlot: (slot: string | null) => void;
+
+
 
   pendingCreature: PendingCreature | null;
   queueCreature:   (c: PendingCreature) => void;
   clearQueue:      () => void;
+}
+
+export interface SettingsStore {
+  masterVolume: number;
+  sfxVolume: number;
+  musicVolume: number;
+  uiScale: number;
+  setSettings: (settings: Partial<{ masterVolume: number; sfxVolume: number; musicVolume: number; uiScale: number }>) => void;
 }
 
 // ─── What the creation panel hands off on "Release" ──────────────────────────

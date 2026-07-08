@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useStore } from '../store/useStore';
 import { worldRef } from '../engine/worldRef';
 import type { Creature } from '../types';
 import { Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
 import './CreatureInspector.css';
+import { useUIStore } from '../store/useUIStore';
 
 const getMoodIcon = (mood: string) => {
   switch (mood) {
@@ -17,8 +17,8 @@ const getMoodIcon = (mood: string) => {
 }
 
 export const CreatureInspector: React.FC = () => {
-  const selectedCreatureId = useStore((s) => s.selectedCreatureId);
-  const setSelectedCreatureId = useStore((s) => s.setSelectedCreatureId);
+  const selectedCreatureId = useUIStore((s) => s.selectedCreatureId);
+  const setSelectedCreatureId = useUIStore((s) => s.setSelectedCreatureId);
   const [creature, setCreature] = useState<Creature | null>(null);
 
   useEffect(() => {

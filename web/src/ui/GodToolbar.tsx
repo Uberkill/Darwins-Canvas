@@ -1,9 +1,10 @@
 import React from 'react'
 import { MousePointer2, Zap, Heart, Leaf, Magnet, Hand } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import { audio } from '../engine/audioEngine'
 import type { GodTool } from '../types'
 import './GodToolbar.css'
+import { useUIStore } from '../store/useUIStore';
+import { useEngineStore } from '../store/useEngineStore';
 
 const TOOLS: { id: GodTool; icon: React.ReactNode; tooltip: string }[] = [
   { id: 'POINTER', icon: <MousePointer2 size={24} />, tooltip: 'Pointer' },
@@ -15,9 +16,9 @@ const TOOLS: { id: GodTool; icon: React.ReactNode; tooltip: string }[] = [
 ]
 
 export function GodToolbar() {
-  const activeTool = useStore((s) => s.activeTool)
-  const setActiveTool = useStore((s) => s.setActiveTool)
-  const clearQueue = useStore((s) => s.clearQueue)
+  const activeTool = useUIStore((s) => s.activeTool)
+  const setActiveTool = useUIStore((s) => s.setActiveTool)
+  const clearQueue = useEngineStore((s) => s.clearQueue)
 
   return (
     <div 

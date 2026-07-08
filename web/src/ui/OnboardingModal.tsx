@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Sprout, Brush, Dna, Zap } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import './OnboardingModal.css'
+import { useUIStore } from '../store/useUIStore';
 
 interface OnboardingStep {
   id: string
@@ -43,8 +43,8 @@ const ONBOARDING_STEPS: OnboardingStep[] = [
 ]
 
 export function OnboardingModal() {
-  const isOpen = useStore((s) => s.isOnboardingOpen)
-  const close = useStore((s) => s.closeOnboarding)
+  const isOpen = useUIStore((s) => s.isOnboardingOpen)
+  const close = useUIStore((s) => s.closeOnboarding)
   const [currentStep, setCurrentStep] = useState(0)
 
   useEffect(() => {

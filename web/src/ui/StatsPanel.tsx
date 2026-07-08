@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Drumstick, Utensils, Leaf, Sprout, Bone, X, Download, Egg, Ghost, Swords, FastForward } from 'lucide-react';
-import { useStore } from '../store/useStore';
+
 import { worldRef } from '../engine/worldRef';
 import { MetricsGraph, type GraphLine } from './MetricsGraph';
 import type { EcosystemDataPoint } from '../types';
 import './StatsPanel.css';
+import { useUIStore } from '../store/useUIStore';
 
 const graphLines: Record<string, GraphLine[]> = {
   POPULATION: [
@@ -37,8 +38,8 @@ const graphLines: Record<string, GraphLine[]> = {
 };
 
 export function StatsPanel() {
-  const isStatsOpen = useStore((s) => s.isStatsOpen);
-  const closeStats = useStore((s) => s.closeStats);
+  const isStatsOpen = useUIStore((s) => s.isStatsOpen);
+  const closeStats = useUIStore((s) => s.closeStats);
   const [history, setHistory] = useState<EcosystemDataPoint[]>([]);
   const [activeTab, setActiveTab] = useState<string>('POPULATION');
 

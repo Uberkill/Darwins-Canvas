@@ -5,7 +5,10 @@ import { worldRef } from './engine/worldRef'
 import { audio } from './engine/audioEngine'
 import { resetWorld } from './engine/entityManager'
 import { Settings } from 'lucide-react'
-import { useStore } from './store/useStore'
+
+import { useSettingsStore } from './store/useSettingsStore';
+import { useEngineStore } from './store/useEngineStore';
+import { AudioController } from './components/AudioController';
 import { FAB } from './ui/FAB'
 import { CreationPanel } from './ui/CreationPanel'
 
@@ -23,6 +26,7 @@ import { useTerrariumInput } from './hooks/useTerrariumInput'
 import { PortraitLock } from './ui/PortraitLock'
 import { StatsPanel } from './ui/StatsPanel'
 import { StatsButton } from './ui/StatsButton'
+import { useUIStore } from './store/useUIStore';
 
 /** Subscribe to creature count changes via a polling interval. */
 function useCreatureCount(): number {
@@ -38,8 +42,8 @@ function useCreatureCount(): number {
 function App() {
   const canvasRef     = useRef<HTMLCanvasElement>(null)
   const creatureCount = useCreatureCount()
-  const isPanelOpen   = useStore((s) => s.isPanelOpen)
-  const uiScale       = useStore((s) => s.uiScale)
+  const isPanelOpen   = useUIStore((s) => s.isPanelOpen)
+  const uiScale       = useSettingsStore((s) => s.uiScale)
   
   const [isPlaying, setIsPlaying] = useState(false)
   const { handlePointerMove, handlePointerDown, handlePointerUp, handleWheel } = useTerrariumInput(canvasRef)
@@ -53,9 +57,9 @@ function App() {
   useEffect(() => {
     const handleQuit = () => {
       setIsPlaying(false)
-      useStore.getState().setTimeScale(1.0)
+      useEngineStore.getState().setTimeScale(1.0)
       resetWorld(worldRef.current)
-      useStore.getState().setActiveSaveSlot(null)
+      useEngineStore.getState().setActiveSaveSlot(null)
       audio.stopBGM()
     }
     
@@ -93,6 +97,8 @@ function App() {
         setIsPlaying(true)
       }} />}
 
+      <AudioController isPlaying={isPlaying} />
+
       {/* Full-screen terrarium canvas */}
       <canvas
         ref={canvasRef}
@@ -109,7 +115,7 @@ function App() {
       {/* Terrarium Overlay UI */}
       <div className="terrarium-overlay">
         {isPlaying && <HoverOverlay />}
-        {useStore((s) => s.pendingCreature) && (
+        {useEngineStore((s) => s.pendingCreature) && (
           <div className="toast-notification">
             Click anywhere to drop your creature!
           </div>
@@ -135,7 +141,7 @@ function App() {
             className="settings-btn-top-right"
             onClick={() => {
               audio.playUIClick()
-              useStore.getState().openPauseMenu()
+              useUIStore.getState().openPauseMenu()
             }}
             aria-label="Open Settings"
           >

@@ -1,6 +1,5 @@
 import { worldRef } from './worldRef';
 import { AUDIO_ASSETS } from '../constants/audioConfig';
-import { useStore } from '../store/useStore';
 
 class AudioEngine {
   private ctx: AudioContext | null = null;
@@ -49,11 +48,6 @@ class AudioEngine {
 
       this.updateVolumes();
       this.loadCustomAssets();
-
-      // Subscribe to timeScale changes
-      useStore.subscribe((state) => {
-        this.setTimeScale(state.timeScale);
-      });
     } catch (e) {
       console.warn('Web Audio API not supported', e);
     }
@@ -136,11 +130,10 @@ class AudioEngine {
     if (this.nightBgm) this.nightBgm.volume = Math.max(0, Math.min(1, masterVol * this.currentCrossfade));
   }
 
-  public setTimeScale(scale: number) {
-    const targetRate = scale === 1 ? 1.0 : (scale === 2 ? 1.5 : 2.0);
-    if (this.currentPlaybackRate === targetRate) return;
+  public setPlaybackRate(rate: number) {
+    if (this.currentPlaybackRate === rate) return;
     
-    this.currentPlaybackRate = targetRate;
+    this.currentPlaybackRate = rate;
     if (this.dayBgm) this.dayBgm.playbackRate = this.currentPlaybackRate;
     if (this.nightBgm) this.nightBgm.playbackRate = this.currentPlaybackRate;
   }

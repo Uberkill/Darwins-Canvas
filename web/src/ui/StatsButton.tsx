@@ -1,11 +1,11 @@
 import { LineChart } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import { audio } from '../engine/audioEngine'
 // Re-using tutorial-button styles for consistency
 import './TutorialModal.css'
+import { useUIStore } from '../store/useUIStore';
 
 export function StatsButton() {
-  const openStats = useStore((s) => s.openStats)
+  const openStats = useUIStore((s) => s.openStats)
 
   return (
     <button className="tutorial-button" onClick={() => {

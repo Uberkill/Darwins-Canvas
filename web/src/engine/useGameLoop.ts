@@ -1,8 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { worldRef, updateWorldDimensions } from './worldRef'
-import { useStore } from '../store/useStore'
+import { useEngineStore } from '../store/useEngineStore'
+import { useUIStore } from '../store/useUIStore'
 import { simulate } from './simulate'
 import { GameRenderer } from '../renderer/Renderer'
+import { CameraSystem } from './systems/CameraSystem'
+import { InteractionSystem } from './systems/InteractionSystem'
+import { AnalyticsSystem } from './systems/AnalyticsSystem'
 
 const FIXED_TIME_STEP = 1000 / 60
 
@@ -44,7 +48,8 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
     function tick(timestamp: number) {
       if (!active || !canvasRef.current || !rendererRef.current) return
 
-      const storeState = useStore.getState()
+      const engineState = useEngineStore.getState()
+      const uiState = useUIStore.getState()
       let dtRaw = lastTimeRef.current === 0 ? 0 : Math.max(0, timestamp - lastTimeRef.current)
       lastTimeRef.current = timestamp
 
@@ -53,9 +58,9 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
 
       try {
       // Apply timeScale
-      const dt = dtRaw * storeState.timeScale
+      const dt = dtRaw * engineState.timeScale
 
-      const isPaused = storeState.isPanelOpen || storeState.isTutorialOpen || !isPlayingRef.current
+      const isPaused = uiState.isPanelOpen || uiState.isTutorialOpen || uiState.isPauseMenuOpen || uiState.isOnboardingOpen || !isPlayingRef.current
       if (isPaused) {
         accumulator.current = 0
       } else {
@@ -71,6 +76,7 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       while (accumulator.current >= FIXED_TIME_STEP && steps < 60) {
         const dtSec = FIXED_TIME_STEP / 1000;
         simulate(world, dtSec);
+        AnalyticsSystem.update(world, dtSec);
         
         steps++
 
@@ -79,52 +85,15 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
 
       // ── Camera State Machine & Lerping (Uncoupled from game time) ──
       const dtRealSec = dtRaw / 1000;
-      const store = useStore.getState();
-      const cam = world.camera;
-
-      // Smooth zoom
-      cam.zoom += (store.targetZoom - cam.zoom) * (1 - Math.exp(-dtRealSec * 5));
-
-      if (store.cameraMode === 'TRACKING' && store.selectedCreatureId) {
-        const target = world.creatures.find(c => c.id === store.selectedCreatureId);
-        if (target) {
-          // Track target smoothly
-          cam.x += (target.x - cam.x) * (1 - Math.exp(-dtRealSec * 5));
-          cam.y += (target.y - cam.y) * (1 - Math.exp(-dtRealSec * 5));
-        } else {
-          // Target died/despawned — Fallback to FREE mode exactly where they vanished
-          store.setCameraMode('FREE');
-          store.setSelectedCreatureId(null);
-        }
-      } else {
-        // FREE MODE: Keyboard Panning
-        const panAmount = store.panSpeed * dtRealSec;
-        if (store.keys.up) cam.y -= panAmount;
-        if (store.keys.down) cam.y += panAmount;
-        if (store.keys.left) cam.x -= panAmount;
-        if (store.keys.right) cam.x += panAmount;
+      const store = useUIStore.getState();
+      const canvas = canvasRef.current;
+      
+      if (canvas) {
+        CameraSystem.update(world, store, dtRealSec, canvas.width, canvas.height, window.devicePixelRatio);
       }
 
-      // Frustum Clamping
-      if (rendererRef.current) {
-        const canvas = canvasRef.current;
-        if (canvas) {
-          const visibleW = (canvas.width / window.devicePixelRatio) / cam.zoom;
-          const visibleH = (canvas.height / window.devicePixelRatio) / cam.zoom;
-          
-          let minX = visibleW / 2;
-          let maxX = world.worldWidth - visibleW / 2;
-          let minY = visibleH / 2;
-          let maxY = world.worldHeight - visibleH / 2;
-
-          if (minX > maxX) { minX = world.worldWidth / 2; maxX = world.worldWidth / 2; }
-          if (minY > maxY) { minY = world.worldHeight / 2; maxY = world.worldHeight / 2; }
-
-          // Clamp
-          cam.x = Math.max(minX, Math.min(maxX, cam.x));
-          cam.y = Math.max(minY, Math.min(maxY, cam.y));
-        }
-      }
+      // ── Hit Detection (Uncoupled from physics timestep) ──
+      InteractionSystem.update(world);
 
       // ── 2. Render ──
       rendererRef.current.draw(world)

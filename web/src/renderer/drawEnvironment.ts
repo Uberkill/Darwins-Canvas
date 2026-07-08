@@ -1,0 +1,42 @@
+import type { WorldState } from '../types';
+
+export function drawEnvironment(ctx: CanvasRenderingContext2D, world: Readonly<WorldState>) {
+  const { worldWidth, worldHeight, totalTime, weather, timeOfDay } = world;
+
+  // Draw Weather Overlay (Rain / Drought)
+  if (weather === 'RAIN') {
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    // Create a scrolling rain effect using totalTime
+    const dropCount = 100;
+    for (let i = 0; i < dropCount; i++) {
+      const x = (i * 20 + totalTime * 100) % worldWidth;
+      const y = (i * 30 + totalTime * 400) % worldHeight;
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - 5, y + 15); // slanted drops
+    }
+    ctx.stroke();
+    ctx.restore();
+  } else if (weather === 'DROUGHT') {
+    // Light sepia/orange overlay for drought
+    ctx.fillStyle = 'rgba(211, 84, 0, 0.1)';
+    ctx.fillRect(0, 0, worldWidth, worldHeight);
+  }
+
+  // Draw Day/Night Overlay
+  let darknessAlpha = 0;
+  if (timeOfDay > 0.6 && timeOfDay < 0.9) {
+    darknessAlpha = 0.6;
+  } else if (timeOfDay >= 0.5 && timeOfDay <= 0.6) {
+    darknessAlpha = 0.6 * ((timeOfDay - 0.5) / 0.1);
+  } else if (timeOfDay >= 0.9 && timeOfDay <= 1.0) {
+    darknessAlpha = 0.6 * (1.0 - ((timeOfDay - 0.9) / 0.1));
+  }
+  
+  if (darknessAlpha > 0) {
+    ctx.fillStyle = `rgba(10, 10, 40, ${darknessAlpha})`;
+    ctx.fillRect(0, 0, worldWidth, worldHeight);
+  }
+}

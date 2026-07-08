@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useStore } from '../store/useStore'
 import type { CreatureSize, MovementType, DietType } from '../types'
 import { useDrawingCanvas } from '../hooks/useDrawingCanvas'
 import { generateRandomName } from '../utils/nameGenerator'
@@ -7,12 +6,15 @@ import { bakeCreatureSprites } from '../renderer/baker'
 import { CreationTools } from './CreationTools'
 import { CreationSettings } from './CreationSettings'
 import { CreationCanvas } from './CreationCanvas'
+import { useUIStore } from '../store/useUIStore';
+import { useEngineStore } from '../store/useEngineStore';
+import { useSettingsStore } from '../store/useSettingsStore';
 
 export function CreationPanel() {
-  const isPanelOpen   = useStore((s) => s.isPanelOpen)
-  const closePanel    = useStore((s) => s.closePanel)
-  const queueCreature = useStore((s) => s.queueCreature)
-  const uiScale       = useStore((s) => s.uiScale)
+  const isPanelOpen   = useUIStore((s) => s.isPanelOpen)
+  const closePanel    = useUIStore((s) => s.closePanel)
+  const queueCreature = useEngineStore((s) => s.queueCreature)
+  const uiScale       = useSettingsStore((s) => s.uiScale)
 
   // Settings state
   const [brushSize,  setBrushSize]  = useState(10)

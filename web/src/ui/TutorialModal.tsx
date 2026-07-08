@@ -6,15 +6,15 @@ import {
   Flame, Hand, Droplets,
   Sun, Moon, CloudRain, Activity, Swords, Hourglass, RefreshCw
 } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import './TutorialModal.css'
+import { useUIStore } from '../store/useUIStore';
 
 type Tab = 'QUICKSTART' | 'GUIDE'
 type Chapter = 'DRAWING' | 'DIETS' | 'EVOLUTION' | 'TOOLS' | 'WEATHER' | 'COMBAT' | 'LIFECYCLE'
 
 export function TutorialModal() {
-  const isTutorialOpen = useStore((s) => s.isTutorialOpen)
-  const closeTutorial = useStore((s) => s.closeTutorial)
+  const isTutorialOpen = useUIStore((s) => s.isTutorialOpen)
+  const closeTutorial = useUIStore((s) => s.closeTutorial)
   
   const [activeTab, setActiveTab] = useState<Tab>('QUICKSTART')
   const [activeChapter, setActiveChapter] = useState<Chapter>('DRAWING')

@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from 'react'
 import { Sun, Moon, Play, FastForward, Zap } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import { worldRef } from '../engine/worldRef'
 import { audio } from '../engine/audioEngine'
 import { DAY_NIGHT_CYCLE_DURATION } from '../constants'
 import './TimeControls.css'
+import { useEngineStore } from '../store/useEngineStore';
 
 export function TimeControls() {
-  const timeScale = useStore((s) => s.timeScale)
-  const setTimeScale = useStore((s) => s.setTimeScale)
+  const timeScale = useEngineStore((s) => s.timeScale)
+  const setTimeScale = useEngineStore((s) => s.setTimeScale)
 
   const [day, setDay] = useState(1)
   const [isDayTime, setIsDayTime] = useState(true)

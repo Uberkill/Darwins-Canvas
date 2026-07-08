@@ -1,9 +1,9 @@
 import { HelpCircle } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import './TutorialModal.css'
+import { useUIStore } from '../store/useUIStore';
 
 export function TutorialButton() {
-  const openTutorial = useStore((s) => s.openTutorial)
+  const openTutorial = useUIStore((s) => s.openTutorial)
 
   return (
     <button className="tutorial-button" onClick={openTutorial}>

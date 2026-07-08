@@ -1,16 +1,16 @@
 import React from 'react';
-import { useStore } from '../store/useStore';
 import { worldRef } from '../engine/worldRef';
 import './CameraControls.css';
 
 import { Crosshair, Globe2 } from 'lucide-react';
+import { useUIStore } from '../store/useUIStore';
 
 export const CameraControls: React.FC = () => {
-  const cameraMode = useStore((s) => s.cameraMode);
-  const setCameraMode = useStore((s) => s.setCameraMode);
-  const targetZoom = useStore((s) => s.targetZoom);
-  const setTargetZoom = useStore((s) => s.setTargetZoom);
-  const setSelectedCreatureId = useStore((s) => s.setSelectedCreatureId);
+  const cameraMode = useUIStore((s) => s.cameraMode);
+  const setCameraMode = useUIStore((s) => s.setCameraMode);
+  const targetZoom = useUIStore((s) => s.targetZoom);
+  const setTargetZoom = useUIStore((s) => s.setTargetZoom);
+  const setSelectedCreatureId = useUIStore((s) => s.setSelectedCreatureId);
 
   const handleZoomIn = () => {
     setTargetZoom(Math.min(4.0, targetZoom + 0.5));

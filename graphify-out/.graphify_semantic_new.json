@@ -1,0 +1,1358 @@
+{
+  "nodes": [
+    {
+      "id": "src_app_app",
+      "label": "App",
+      "file_type": "code",
+      "source_file": "web/src/App.tsx"
+    },
+    {
+      "id": "src_app_usecreaturecount",
+      "label": "useCreatureCount",
+      "file_type": "code",
+      "source_file": "web/src/App.tsx"
+    },
+    {
+      "id": "ai_thoughts_evaluatethoughts",
+      "label": "evaluateThoughts",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Thoughts.ts"
+    },
+    {
+      "id": "ai_thoughts_hunts",
+      "label": "hunts",
+      "file_type": "code",
+      "source_file": "web/src/engine/ai/Thoughts.ts"
+    },
+    {
+      "id": "engine_audioengine_audioengine",
+      "label": "AudioEngine",
+      "file_type": "code",
+      "source_file": "web/src/engine/audioEngine.ts"
+    },
+    {
+      "id": "engine_collision_runcollision",
+      "label": "runCollision",
+      "file_type": "code",
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "id": "engine_creaturefactory_calculatecreaturestats",
+      "label": "calculateCreatureStats",
+      "file_type": "code",
+      "source_file": "web/src/engine/creatureFactory.ts"
+    },
+    {
+      "id": "engine_creaturefactory_buildcreature",
+      "label": "buildCreature",
+      "file_type": "code",
+      "source_file": "web/src/engine/creatureFactory.ts"
+    },
+    {
+      "id": "engine_entitymanager_spawncreature",
+      "label": "spawnCreature",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_entitymanager_spawnplant",
+      "label": "spawnPlant",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_entitymanager_killcreature",
+      "label": "killCreature",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_entitymanager_killplant",
+      "label": "killPlant",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_entitymanager_flushdeadentities",
+      "label": "flushDeadEntities",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_entitymanager_clearentities",
+      "label": "clearEntities",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_entitymanager_resetworld",
+      "label": "resetWorld",
+      "file_type": "code",
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "engine_reproduction_checkreproduction",
+      "label": "checkReproduction",
+      "file_type": "code",
+      "source_file": "web/src/engine/reproduction.ts"
+    },
+    {
+      "id": "engine_reproduction_spawnbaby",
+      "label": "spawnBaby",
+      "file_type": "code",
+      "source_file": "web/src/engine/reproduction.ts"
+    },
+    {
+      "id": "engine_simulate_simulate",
+      "label": "simulate",
+      "file_type": "code",
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "id": "engine_spawner_tickplantspawner",
+      "label": "tickPlantSpawner",
+      "file_type": "code",
+      "source_file": "web/src/engine/spawner.ts"
+    },
+    {
+      "id": "engine_spawner_createplant",
+      "label": "createPlant",
+      "file_type": "code",
+      "source_file": "web/src/engine/spawner.ts"
+    },
+    {
+      "id": "systems_lifesystem_update",
+      "label": "LifeSystem.update",
+      "file_type": "code",
+      "source_file": "web/src/engine/systems/LifeSystem.ts"
+    },
+    {
+      "id": "systems_navigationsystem_update",
+      "label": "NavigationSystem.update",
+      "file_type": "code",
+      "source_file": "web/src/engine/systems/NavigationSystem.ts"
+    },
+    {
+      "id": "concept_worldstate",
+      "label": "WorldState",
+      "file_type": "concept",
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "id": "engine_usegameloop_usegameloop",
+      "label": "useGameLoop",
+      "file_type": "code",
+      "source_file": "engine/useGameLoop.ts"
+    },
+    {
+      "id": "engine_usegameloop_fixed_timestep_accumulator",
+      "label": "Fixed Timestep Accumulator",
+      "file_type": "concept",
+      "source_file": "engine/useGameLoop.ts",
+      "rationale": "Accumulates real delta time, Runs fixed `simulate` steps, Renders exactly once per screen refresh, Defers image cache cleanup to idle callbacks"
+    },
+    {
+      "id": "engine_worldref_worldref",
+      "label": "worldRef",
+      "file_type": "code",
+      "source_file": "engine/worldRef.ts",
+      "rationale": "The mutable, single source of truth for all simulation state. Plain JS object reference, not React state. Avoids re-renders."
+    },
+    {
+      "id": "engine_worldref_updateworlddimensions",
+      "label": "updateWorldDimensions",
+      "file_type": "code",
+      "source_file": "engine/worldRef.ts"
+    },
+    {
+      "id": "engine_worldref_clampentitiestoworld",
+      "label": "clampEntitiesToWorld",
+      "file_type": "code",
+      "source_file": "engine/worldRef.ts"
+    },
+    {
+      "id": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "label": "useDrawingCanvas",
+      "file_type": "code",
+      "source_file": "hooks/useDrawingCanvas.ts",
+      "rationale": "Manages all drawing state for the creation canvas."
+    },
+    {
+      "id": "hooks_usedrawingcanvas_floodfill",
+      "label": "floodFill",
+      "file_type": "code",
+      "source_file": "hooks/useDrawingCanvas.ts",
+      "rationale": "Iterative flood fill — BFS on physical pixel buffer. Uses Uint8Array for visited tracking (fast, zero GC)."
+    },
+    {
+      "id": "hooks_usedrawingcanvas_exportbase64",
+      "label": "exportBase64",
+      "file_type": "code",
+      "source_file": "hooks/useDrawingCanvas.ts",
+      "rationale": "Zero-Cost Auto-Crop Export. Explicitly zero the buffer to release GPU memory on iOS/Safari."
+    },
+    {
+      "id": "hooks_usedrawingcanvas_getpixelbounds",
+      "label": "getPixelBounds",
+      "file_type": "code",
+      "source_file": "hooks/useDrawingCanvas.ts"
+    },
+    {
+      "id": "hooks_useterrariuminput_useterrariuminput",
+      "label": "useTerrariumInput",
+      "file_type": "code",
+      "source_file": "hooks/useTerrariumInput.ts"
+    },
+    {
+      "id": "renderer_renderer_gamerenderer",
+      "label": "GameRenderer",
+      "file_type": "code",
+      "source_file": "renderer/Renderer.ts",
+      "rationale": "Strictly paints pixels. It does not mutate world state. Uses a pre-allocated renderBuffer to prevent Garbage Collection (GC) micro-stutters during the 60fps loop."
+    },
+    {
+      "id": "renderer_renderer_zerogcbuffer",
+      "label": "Zero-GC Buffer",
+      "file_type": "concept",
+      "source_file": "renderer/Renderer.ts",
+      "rationale": "Avoids allocating a new array via .filter() or .concat() every frame by using a pre-allocated array and nulling trailing indices."
+    },
+    {
+      "id": "renderer_baker_bakecreaturesprites",
+      "label": "bakeCreatureSprites",
+      "file_type": "code",
+      "source_file": "renderer/baker.ts",
+      "rationale": "Bakes the base body pixels and SVG decals into 4 discrete state frames. Must enforce DPR=1 to avoid Retina mobile memory crash."
+    },
+    {
+      "id": "renderer_decals_decal_svgs",
+      "label": "DECAL_SVGS",
+      "file_type": "code",
+      "source_file": "renderer/decals.ts"
+    },
+    {
+      "id": "renderer_decals_getdecaldataurl",
+      "label": "getDecalDataUrl",
+      "file_type": "code",
+      "source_file": "renderer/decals.ts"
+    },
+    {
+      "id": "renderer_drawcreature_drawcreature",
+      "label": "drawCreature",
+      "file_type": "code",
+      "source_file": "renderer/drawCreature.ts",
+      "rationale": "Renders a single creature on the canvas. Bottom-anchored, wobble rotation, squash/stretch, breathing idle animation."
+    },
+    {
+      "id": "renderer_drawcreature_drawcreatureshadow",
+      "label": "drawCreatureShadow",
+      "file_type": "code",
+      "source_file": "renderer/drawCreature.ts"
+    },
+    {
+      "id": "renderer_drawcreature_drawfallback",
+      "label": "drawFallback",
+      "file_type": "code",
+      "source_file": "renderer/drawCreature.ts",
+      "rationale": "Coloured circle when image fails — render loop never crashes."
+    },
+    {
+      "id": "renderer_imagecache_cache",
+      "label": "cache",
+      "file_type": "code",
+      "source_file": "renderer/imageCache.ts",
+      "rationale": "Pre-built HTMLImageElement cache for creature drawings. Prevents GC pauses from creating new Image() every frame."
+    },
+    {
+      "id": "renderer_imagecache_getimage",
+      "label": "getImage",
+      "file_type": "code",
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "id": "renderer_imagecache_preloadimage",
+      "label": "preloadImage",
+      "file_type": "code",
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "id": "renderer_imagecache_generatetintedimage",
+      "label": "generateTintedImage",
+      "file_type": "code",
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "id": "store_usestore_usestore",
+      "label": "useStore",
+      "file_type": "code",
+      "source_file": "store/useStore.ts",
+      "rationale": "Zustand command bus (NOT simulation state). Only handles UI state and the bridge between creation panel and game loop. Never written to by simulation engine."
+    },
+    {
+      "id": "test_factories_createmockworld",
+      "label": "createMockWorld",
+      "file_type": "code",
+      "source_file": "test/factories.ts"
+    },
+    {
+      "id": "test_factories_createmockcreature",
+      "label": "createMockCreature",
+      "file_type": "code",
+      "source_file": "test/factories.ts"
+    },
+    {
+      "id": "types_index_creature",
+      "label": "Creature",
+      "file_type": "code",
+      "source_file": "types/index.ts"
+    },
+    {
+      "id": "types_index_worldstate",
+      "label": "WorldState",
+      "file_type": "code",
+      "source_file": "types/index.ts"
+    },
+    {
+      "id": "ui_creationcanvas_creationcanvas",
+      "label": "CreationCanvas",
+      "file_type": "code",
+      "source_file": "ui/CreationCanvas.tsx"
+    },
+    {
+      "id": "ui_creationpanel_creationpanel",
+      "label": "CreationPanel",
+      "file_type": "code",
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "id": "ui_creationsettings_creationsettings",
+      "label": "CreationSettings",
+      "file_type": "code",
+      "source_file": "ui/CreationSettings.tsx"
+    },
+    {
+      "id": "ui_creationtools_creationtools",
+      "label": "CreationTools",
+      "file_type": "code",
+      "source_file": "ui/CreationTools.tsx"
+    },
+    {
+      "id": "ui_creatureinspector_creatureinspector",
+      "label": "CreatureInspector",
+      "file_type": "code",
+      "source_file": "ui/CreatureInspector.tsx"
+    },
+    {
+      "id": "ui_godtoolbar_godtoolbar",
+      "label": "GodToolbar",
+      "file_type": "code",
+      "source_file": "ui/GodToolbar.tsx"
+    },
+    {
+      "id": "ui_metricsgraph_metricsgraph",
+      "label": "MetricsGraph",
+      "file_type": "code",
+      "source_file": "ui/MetricsGraph.tsx"
+    },
+    {
+      "id": "ui_onboardingmodal_onboardingmodal",
+      "label": "OnboardingModal",
+      "file_type": "code",
+      "source_file": "ui/OnboardingModal.tsx"
+    },
+    {
+      "id": "web_src_ui_pausemenumodal_pausemenumodal",
+      "label": "PauseMenuModal",
+      "file_type": "code",
+      "source_file": "web/src/ui/PauseMenuModal.tsx"
+    },
+    {
+      "id": "web_src_ui_populationgraph_populationgraph",
+      "label": "PopulationGraph",
+      "file_type": "code",
+      "source_file": "web/src/ui/PopulationGraph.tsx"
+    },
+    {
+      "id": "web_src_ui_portraitlock_portraitlock",
+      "label": "PortraitLock",
+      "file_type": "code",
+      "source_file": "web/src/ui/PortraitLock.tsx"
+    },
+    {
+      "id": "web_src_ui_statsbutton_statsbutton",
+      "label": "StatsButton",
+      "file_type": "code",
+      "source_file": "web/src/ui/StatsButton.tsx"
+    },
+    {
+      "id": "web_src_ui_statspanel_statspanel",
+      "label": "StatsPanel",
+      "file_type": "code",
+      "source_file": "web/src/ui/StatsPanel.tsx"
+    },
+    {
+      "id": "web_src_ui_timecontrols_timecontrols",
+      "label": "TimeControls",
+      "file_type": "code",
+      "source_file": "web/src/ui/TimeControls.tsx"
+    },
+    {
+      "id": "web_src_ui_titlescreen_test_titlescreen_test",
+      "label": "TitleScreen.test",
+      "file_type": "code",
+      "source_file": "web/src/ui/TitleScreen.test.tsx"
+    },
+    {
+      "id": "web_src_ui_titlescreen_titlescreen",
+      "label": "TitleScreen",
+      "file_type": "code",
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "id": "web_src_ui_tutorialmodal_tutorialmodal",
+      "label": "TutorialModal",
+      "file_type": "code",
+      "source_file": "web/src/ui/TutorialModal.tsx"
+    },
+    {
+      "id": "web_src_utils_savesystem_test_savesystem_test",
+      "label": "saveSystem.test",
+      "file_type": "code",
+      "source_file": "web/src/utils/saveSystem.test.ts"
+    },
+    {
+      "id": "docs_architecture_3_tier_separation",
+      "label": "3-Tier Separation",
+      "file_type": "rationale",
+      "source_file": "docs/architecture.md"
+    },
+    {
+      "id": "docs_architecture_7_pillar_physics_engine",
+      "label": "7-Pillar Physics Engine",
+      "file_type": "rationale",
+      "source_file": "docs/architecture.md"
+    },
+    {
+      "id": "docs_design_immigration",
+      "label": "Immigration System",
+      "file_type": "concept",
+      "source_file": "docs/design.md"
+    },
+    {
+      "id": "docs_design_evolution",
+      "label": "Evolution and Genetics",
+      "file_type": "concept",
+      "source_file": "docs/design.md"
+    },
+    {
+      "id": "docs_style_guide_ui_style_guide",
+      "label": "UI & Style Guide Restrictions",
+      "file_type": "rationale",
+      "source_file": "docs/style-guide.md"
+    },
+    {
+      "id": "web_docs_ecosystem_math_carrying_capacity",
+      "label": "Carrying Capacity Math",
+      "file_type": "rationale",
+      "source_file": "web/docs/ecosystem_math.md"
+    },
+    {
+      "id": "web_docs_ecosystem_math_senescence",
+      "label": "Senescence Math",
+      "file_type": "rationale",
+      "source_file": "web/docs/ecosystem_math.md"
+    },
+    {
+      "id": "web_vite_config_vite_config",
+      "label": "vite.config",
+      "file_type": "code",
+      "source_file": "web/vite.config.ts"
+    },
+    {
+      "id": "web_index_html_index",
+      "label": "index.html",
+      "file_type": "document",
+      "source_file": "web/index.html"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_app_app",
+      "target": "src_app_usecreaturecount",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/App.tsx"
+    },
+    {
+      "source": "src_app_app",
+      "target": "engine_audioengine_audioengine",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/App.tsx"
+    },
+    {
+      "source": "src_app_app",
+      "target": "engine_entitymanager_resetworld",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/App.tsx"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "systems_navigationsystem_update",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "systems_lifesystem_update",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_collision_runcollision",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_reproduction_checkreproduction",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_spawner_tickplantspawner",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_entitymanager_spawncreature",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_entitymanager_spawnplant",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_entitymanager_killcreature",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "engine_entitymanager_flushdeadentities",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_simulate_simulate",
+      "target": "concept_worldstate",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "concept_worldstate",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "source": "engine_reproduction_checkreproduction",
+      "target": "concept_worldstate",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/reproduction.ts"
+    },
+    {
+      "source": "systems_lifesystem_update",
+      "target": "concept_worldstate",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/systems/LifeSystem.ts"
+    },
+    {
+      "source": "systems_navigationsystem_update",
+      "target": "concept_worldstate",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/systems/NavigationSystem.ts"
+    },
+    {
+      "source": "engine_spawner_tickplantspawner",
+      "target": "concept_worldstate",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/spawner.ts"
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "ai_thoughts_hunts",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "engine_audioengine_audioengine",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "engine_entitymanager_killcreature",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "engine_entitymanager_spawnplant",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "source": "engine_collision_runcollision",
+      "target": "engine_entitymanager_killplant",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/collision.ts"
+    },
+    {
+      "source": "engine_reproduction_checkreproduction",
+      "target": "engine_reproduction_spawnbaby",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/reproduction.ts"
+    },
+    {
+      "source": "engine_reproduction_spawnbaby",
+      "target": "engine_creaturefactory_calculatecreaturestats",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/reproduction.ts"
+    },
+    {
+      "source": "engine_spawner_tickplantspawner",
+      "target": "engine_spawner_createplant",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/spawner.ts"
+    },
+    {
+      "source": "engine_spawner_tickplantspawner",
+      "target": "engine_entitymanager_spawnplant",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/spawner.ts"
+    },
+    {
+      "source": "systems_lifesystem_update",
+      "target": "engine_audioengine_audioengine",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/systems/LifeSystem.ts"
+    },
+    {
+      "source": "systems_navigationsystem_update",
+      "target": "ai_thoughts_evaluatethoughts",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/systems/NavigationSystem.ts"
+    },
+    {
+      "source": "systems_lifesystem_update",
+      "target": "systems_navigationsystem_update",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "web/src/engine/systems/LifeSystem.ts"
+    },
+    {
+      "source": "engine_entitymanager_killcreature",
+      "target": "engine_entitymanager_killplant",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_usegameloop_fixed_timestep_accumulator",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/useGameLoop.ts"
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/useGameLoop.ts"
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "engine_worldref_updateworlddimensions",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/useGameLoop.ts"
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/useGameLoop.ts"
+    },
+    {
+      "source": "engine_usegameloop_usegameloop",
+      "target": "renderer_renderer_gamerenderer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/useGameLoop.ts"
+    },
+    {
+      "source": "engine_worldref_updateworlddimensions",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/worldRef.ts"
+    },
+    {
+      "source": "engine_worldref_clampentitiestoworld",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "engine/worldRef.ts"
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_floodfill",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "hooks/useDrawingCanvas.ts"
+    },
+    {
+      "source": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "target": "hooks_usedrawingcanvas_exportbase64",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "hooks/useDrawingCanvas.ts"
+    },
+    {
+      "source": "hooks_usedrawingcanvas_exportbase64",
+      "target": "hooks_usedrawingcanvas_getpixelbounds",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "hooks/useDrawingCanvas.ts"
+    },
+    {
+      "source": "hooks_useterrariuminput_useterrariuminput",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "hooks/useTerrariumInput.ts"
+    },
+    {
+      "source": "hooks_useterrariuminput_useterrariuminput",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "hooks/useTerrariumInput.ts"
+    },
+    {
+      "source": "renderer_renderer_gamerenderer",
+      "target": "renderer_renderer_zerogcbuffer",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/Renderer.ts"
+    },
+    {
+      "source": "renderer_renderer_gamerenderer",
+      "target": "renderer_drawcreature_drawcreatureshadow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/Renderer.ts"
+    },
+    {
+      "source": "renderer_renderer_gamerenderer",
+      "target": "renderer_drawcreature_drawcreature",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/Renderer.ts"
+    },
+    {
+      "source": "renderer_renderer_gamerenderer",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/Renderer.ts"
+    },
+    {
+      "source": "renderer_baker_bakecreaturesprites",
+      "target": "renderer_decals_getdecaldataurl",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/baker.ts"
+    },
+    {
+      "source": "renderer_decals_getdecaldataurl",
+      "target": "renderer_decals_decal_svgs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/decals.ts"
+    },
+    {
+      "source": "renderer_drawcreature_drawcreature",
+      "target": "renderer_imagecache_getimage",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/drawCreature.ts"
+    },
+    {
+      "source": "renderer_drawcreature_drawcreature",
+      "target": "renderer_drawcreature_drawfallback",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/drawCreature.ts"
+    },
+    {
+      "source": "renderer_imagecache_getimage",
+      "target": "renderer_imagecache_cache",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "source": "renderer_imagecache_preloadimage",
+      "target": "renderer_imagecache_cache",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "source": "renderer_imagecache_generatetintedimage",
+      "target": "renderer_imagecache_preloadimage",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "source": "renderer_imagecache_generatetintedimage",
+      "target": "renderer_imagecache_cache",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "renderer/imageCache.ts"
+    },
+    {
+      "source": "store_usestore_usestore",
+      "target": "engine_worldref_worldref",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "store/useStore.ts"
+    },
+    {
+      "source": "test_factories_createmockworld",
+      "target": "types_index_worldstate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/factories.ts"
+    },
+    {
+      "source": "test_factories_createmockcreature",
+      "target": "types_index_creature",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/factories.ts"
+    },
+    {
+      "source": "ui_creationcanvas_creationcanvas",
+      "target": "renderer_decals_getdecaldataurl",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationCanvas.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "hooks_usedrawingcanvas_usedrawingcanvas",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "renderer_baker_bakecreaturesprites",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_creationtools_creationtools",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_creationcanvas_creationcanvas",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationpanel_creationpanel",
+      "target": "ui_creationsettings_creationsettings",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "source": "ui_creationtools_creationtools",
+      "target": "renderer_decals_getdecaldataurl",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreationTools.tsx"
+    },
+    {
+      "source": "ui_creatureinspector_creatureinspector",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreatureInspector.tsx"
+    },
+    {
+      "source": "ui_creatureinspector_creatureinspector",
+      "target": "engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/CreatureInspector.tsx"
+    },
+    {
+      "source": "ui_godtoolbar_godtoolbar",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/GodToolbar.tsx"
+    },
+    {
+      "source": "ui_onboardingmodal_onboardingmodal",
+      "target": "store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ui/OnboardingModal.tsx"
+    },
+    {
+      "source": "renderer_renderer_zerogcbuffer",
+      "target": "hooks_usedrawingcanvas_floodfill",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "renderer/Renderer.ts"
+    },
+    {
+      "source": "renderer_renderer_zerogcbuffer",
+      "target": "renderer_imagecache_cache",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "renderer/Renderer.ts"
+    },
+    {
+      "source": "web_src_ui_pausemenumodal_pausemenumodal",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/PauseMenuModal.tsx"
+    },
+    {
+      "source": "web_src_ui_pausemenumodal_pausemenumodal",
+      "target": "web_src_utils_savesystem_savegame",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/PauseMenuModal.tsx"
+    },
+    {
+      "source": "web_src_ui_pausemenumodal_pausemenumodal",
+      "target": "web_src_engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/PauseMenuModal.tsx"
+    },
+    {
+      "source": "web_src_ui_populationgraph_populationgraph",
+      "target": "web_types_ecosystemdatapoint",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/PopulationGraph.tsx"
+    },
+    {
+      "source": "web_src_ui_statsbutton_statsbutton",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/StatsButton.tsx"
+    },
+    {
+      "source": "web_src_ui_statsbutton_statsbutton",
+      "target": "web_src_engine_audioengine_audio",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/StatsButton.tsx"
+    },
+    {
+      "source": "web_src_ui_statspanel_statspanel",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/StatsPanel.tsx"
+    },
+    {
+      "source": "web_src_ui_statspanel_statspanel",
+      "target": "web_src_engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/StatsPanel.tsx"
+    },
+    {
+      "source": "web_src_ui_statspanel_statspanel",
+      "target": "web_src_ui_metricsgraph_metricsgraph",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/StatsPanel.tsx"
+    },
+    {
+      "source": "web_src_ui_timecontrols_timecontrols",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TimeControls.tsx"
+    },
+    {
+      "source": "web_src_ui_timecontrols_timecontrols",
+      "target": "web_src_engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TimeControls.tsx"
+    },
+    {
+      "source": "web_src_ui_timecontrols_timecontrols",
+      "target": "web_src_engine_audioengine_audio",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TimeControls.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_test_titlescreen_test",
+      "target": "web_src_ui_titlescreen_titlescreen",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.test.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_test_titlescreen_test",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.test.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_utils_savesystem_listsaves",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_utils_savesystem_deletegame",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_utils_savesystem_loadgame",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_engine_worldref_worldref",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_engine_entitymanager_setentities",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_engine_entitymanager_clearentities",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_titlescreen_titlescreen",
+      "target": "web_src_engine_audioengine_audio",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    },
+    {
+      "source": "web_src_ui_tutorialmodal_tutorialmodal",
+      "target": "web_src_store_usestore_usestore",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/ui/TutorialModal.tsx"
+    },
+    {
+      "source": "web_src_utils_savesystem_test_savesystem_test",
+      "target": "web_src_utils_savesystem_loadgame",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/utils/saveSystem.test.ts"
+    },
+    {
+      "source": "web_src_utils_savesystem_test_savesystem_test",
+      "target": "web_src_utils_savesystem_savegame",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/utils/saveSystem.test.ts"
+    },
+    {
+      "source": "web_src_utils_savesystem_test_savesystem_test",
+      "target": "web_test_factories_createmockworld",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/utils/saveSystem.test.ts"
+    },
+    {
+      "source": "docs_design_immigration",
+      "target": "web_docs_ecosystem_math_carrying_capacity",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/design.md"
+    },
+    {
+      "source": "web_docs_ecosystem_math_senescence",
+      "target": "docs_design_evolution",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "web/docs/ecosystem_math.md"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "game_loop_systems",
+      "label": "Game Loop Systems",
+      "nodes": [
+        "engine_simulate_simulate",
+        "systems_navigationsystem_update",
+        "systems_lifesystem_update",
+        "engine_collision_runcollision",
+        "engine_reproduction_checkreproduction",
+        "engine_spawner_tickplantspawner"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/simulate.ts"
+    },
+    {
+      "id": "entity_management",
+      "label": "Entity Management Actions",
+      "nodes": [
+        "engine_entitymanager_spawncreature",
+        "engine_entitymanager_spawnplant",
+        "engine_entitymanager_killcreature",
+        "engine_entitymanager_killplant",
+        "engine_entitymanager_flushdeadentities",
+        "engine_entitymanager_clearentities"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "web/src/engine/entityManager.ts"
+    },
+    {
+      "id": "state_management_architecture",
+      "label": "State Management Architecture",
+      "nodes": [
+        "store_usestore_usestore",
+        "engine_worldref_worldref",
+        "engine_usegameloop_usegameloop"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "store/useStore.ts"
+    },
+    {
+      "id": "drawing_and_baking_pipeline",
+      "label": "Drawing and Baking Pipeline",
+      "nodes": [
+        "hooks_usedrawingcanvas_usedrawingcanvas",
+        "renderer_baker_bakecreaturesprites",
+        "ui_creationpanel_creationpanel"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "ui/CreationPanel.tsx"
+    },
+    {
+      "id": "ui_components_using_store",
+      "label": "UI Components Using Zustand Store",
+      "nodes": [
+        "web_src_ui_pausemenumodal_pausemenumodal",
+        "web_src_ui_statsbutton_statsbutton",
+        "web_src_ui_statspanel_statspanel",
+        "web_src_ui_timecontrols_timecontrols",
+        "web_src_ui_titlescreen_titlescreen",
+        "web_src_ui_tutorialmodal_tutorialmodal"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "web/src/ui/TitleScreen.tsx"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

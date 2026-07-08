@@ -1,20 +1,22 @@
 import { useState } from 'react'
 import { Play, Save, Settings, LogOut, Check, Volume2 } from 'lucide-react'
-import { useStore } from '../store/useStore'
 import { saveGame } from '../utils/saveSystem'
 import { worldRef } from '../engine/worldRef'
 import './PauseMenuModal.css'
+import { useUIStore } from '../store/useUIStore';
+import { useEngineStore } from '../store/useEngineStore';
+import { useSettingsStore } from '../store/useSettingsStore';
 
 export function PauseMenuModal() {
-  const isOpen = useStore((s) => s.isPauseMenuOpen)
-  const close = useStore((s) => s.closePauseMenu)
-  const activeSaveSlot = useStore((s) => s.activeSaveSlot)
+  const isOpen = useUIStore((s) => s.isPauseMenuOpen)
+  const close = useUIStore((s) => s.closePauseMenu)
+  const activeSaveSlot = useEngineStore((s) => s.activeSaveSlot)
   
-  const masterVolume = useStore((s) => s.masterVolume)
-  const sfxVolume = useStore((s) => s.sfxVolume)
-  const musicVolume = useStore((s) => s.musicVolume)
-  const uiScale = useStore((s) => s.uiScale)
-  const setSettings = useStore((s) => s.setSettings)
+  const masterVolume = useSettingsStore((s) => s.masterVolume)
+  const sfxVolume = useSettingsStore((s) => s.sfxVolume)
+  const musicVolume = useSettingsStore((s) => s.musicVolume)
+  const uiScale = useSettingsStore((s) => s.uiScale)
+  const setSettings = useSettingsStore((s) => s.setSettings)
 
   const [isSaving, setIsSaving] = useState(false)
   const [saveSuccess, setSaveSuccess] = useState(false)

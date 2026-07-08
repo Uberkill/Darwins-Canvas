@@ -1,0 +1,1 @@
+{"nodes": [{"id": "engine_creaturefactory_calculatecreaturestats", "label": "calculateCreatureStats", "file_type": "code", "source_file": "web/src/engine/creatureFactory.ts"}, {"id": "engine_creaturefactory_buildcreature", "label": "buildCreature", "file_type": "code", "source_file": "web/src/engine/creatureFactory.ts"}], "edges": [], "hyperedges": []}

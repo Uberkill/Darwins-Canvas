@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect, type RefObject } from 'react'
-import { useStore } from '../store/useStore'
 import { worldRef } from '../engine/worldRef'
 import { spawnCreature, spawnPlant, killCreature } from '../engine/entityManager'
 import { buildCreature } from '../engine/creatureFactory'
 import { preloadImage } from '../renderer/imageCache'
 import { getWorldPoint, getCanvasPoint } from '../renderer/canvasUtils'
 import { audio } from '../engine/audioEngine'
+import { useUIStore } from '../store/useUIStore';
+import { useEngineStore } from '../store/useEngineStore';
 
 export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>) {
   const [isDragging, setIsDragging] = useState(false)
@@ -13,13 +14,13 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const { setKeys, cameraMode } = useStore.getState();
+      const { setKeys, cameraMode } = useUIStore.getState();
       
       // If we start panning with keyboard, break out of tracking
       const isPanKey = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd'].includes(e.key);
       if (isPanKey && cameraMode === 'TRACKING') {
-        useStore.getState().setCameraMode('FREE');
-        useStore.getState().setSelectedCreatureId(null);
+        useUIStore.getState().setCameraMode('FREE');
+        useUIStore.getState().setSelectedCreatureId(null);
       }
 
       switch (e.key) {
@@ -43,7 +44,7 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
     };
 
     const handleKeyUp = (e: KeyboardEvent) => {
-      const { setKeys } = useStore.getState();
+      const { setKeys } = useUIStore.getState();
       switch (e.key) {
         case 'ArrowUp':
         case 'w':
@@ -86,9 +87,9 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
       worldRef.current.camera.y -= (dy / worldRef.current.camera.zoom) / pointerCount;
       activePointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
       
-      if (useStore.getState().cameraMode === 'TRACKING') {
-        useStore.getState().setCameraMode('FREE');
-        useStore.getState().setSelectedCreatureId(null);
+      if (useUIStore.getState().cameraMode === 'TRACKING') {
+        useUIStore.getState().setCameraMode('FREE');
+        useUIStore.getState().setSelectedCreatureId(null);
       }
     }
     
@@ -124,13 +125,13 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
 
   const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!canvasRef.current) return
-    const activeTool = useStore.getState().activeTool
+    const activeTool = useUIStore.getState().activeTool
     const canvasPt = getCanvasPoint(canvasRef.current, e.nativeEvent)
     const pt = getWorldPoint(canvasPt.x, canvasPt.y, canvasRef.current.width, canvasRef.current.height, worldRef.current.camera)
     worldRef.current.mouseX = pt.x
     worldRef.current.mouseY = pt.y
 
-    const pending = useStore.getState().pendingCreature
+    const pending = useEngineStore.getState().pendingCreature
     if (pending) {
       const creature = buildCreature(pending, worldRef.current.worldWidth, worldRef.current.worldHeight)
       creature.x = pt.x
@@ -150,7 +151,7 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
         seed: Math.random()
       })
       
-      useStore.getState().clearQueue()
+      useEngineStore.getState().clearQueue()
       return
     }
 
@@ -196,11 +197,11 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
     if (activeTool === 'POINTER') {
       if (hitId) {
         audio.playGodTool('POINTER')
-        useStore.getState().setSelectedCreatureId(hitId)
-        useStore.getState().setCameraMode('TRACKING')
-        useStore.getState().setTargetZoom(3.0)
+        useUIStore.getState().setSelectedCreatureId(hitId)
+        useUIStore.getState().setCameraMode('TRACKING')
+        useUIStore.getState().setTargetZoom(3.0)
       } else {
-        useStore.getState().setSelectedCreatureId(null)
+        useUIStore.getState().setSelectedCreatureId(null)
       }
     } else if (activeTool === 'SMITE') {
       if (hitId) {
@@ -238,8 +239,8 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
     const minZoomX = window.innerWidth / worldRef.current.worldWidth;
     const minZoomY = window.innerHeight / worldRef.current.worldHeight;
     const minZoom = Math.max(minZoomX, minZoomY);
-    const newZoom = Math.max(minZoom, Math.min(4.0, useStore.getState().targetZoom - e.deltaY * 0.001));
-    useStore.getState().setTargetZoom(newZoom);
+    const newZoom = Math.max(minZoom, Math.min(4.0, useUIStore.getState().targetZoom - e.deltaY * 0.001));
+    useUIStore.getState().setTargetZoom(newZoom);
   }
 
   return {

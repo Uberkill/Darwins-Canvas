@@ -1,17 +1,17 @@
-import { useStore } from '../store/useStore'
 
 interface FABProps {
   creatureCount: number
 }
 
 import { Plus } from 'lucide-react'
+import { useUIStore } from '../store/useUIStore';
 
 /**
  * FAB — floating action button that opens the creation panel.
  * Pulses when the ecosystem is empty to guide the first-time user.
  */
 export function FAB({ creatureCount }: FABProps) {
-  const openPanel = useStore((s) => s.openPanel)
+  const openPanel = useUIStore((s) => s.openPanel)
 
   return (
     <button

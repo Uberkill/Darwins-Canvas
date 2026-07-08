@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
 import { worldRef } from '../engine/worldRef';
 import { BASE_RENDER_SIZE } from '../constants';
-import { useStore } from '../store/useStore';
 import './HoverOverlay.css';
+import { useSettingsStore } from '../store/useSettingsStore';
 
 const getMoodIcon = (mood: string) => {
   switch (mood) {
@@ -46,7 +46,7 @@ export const HoverOverlay: React.FC = () => {
           const worldX = hoveredCreature.x;
           const worldY = hoveredCreature.y - hoveredCreature.z - size - 10; // slightly above
 
-          const uiScale = useStore.getState().uiScale;
+          const uiScale = useSettingsStore.getState().uiScale;
 
           // Logical screen bounds
           const logicalW = window.innerWidth;

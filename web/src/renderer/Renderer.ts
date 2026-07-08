@@ -2,7 +2,9 @@ import type { WorldState, Creature, Plant } from '../types'
 import { drawPlant } from './drawPlant'
 import { drawCreature, drawCreatureShadow } from './drawCreature'
 import { BASE_RENDER_SIZE } from '../constants'
-import { useStore } from '../store/useStore'
+import { useEngineStore } from '../store/useEngineStore';
+import { drawEnvironment } from './drawEnvironment'
+import { drawEffects } from './drawEffects'
 
 /**
  * GameRenderer strictly paints pixels. It does not mutate world state.
@@ -146,7 +148,7 @@ export class GameRenderer {
     // 6. Draw Tooltip (Removed in favor of React HoverOverlay)
 
     // 7. Draw Pending Creature Ghost
-    const pending = useStore.getState().pendingCreature;
+    const pending = useEngineStore.getState().pendingCreature;
     if (pending) {
       this.ctx.save();
       this.ctx.globalAlpha = 0.5;
@@ -172,150 +174,12 @@ export class GameRenderer {
       this.ctx.restore();
     }
 
-    // 8. Draw Weather Overlay (Rain)
-    if (world.weather === 'RAIN') {
-      this.ctx.save()
-      this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'
-      this.ctx.lineWidth = 1
-      this.ctx.beginPath()
-      // Create a scrolling rain effect using totalTime
-      const dropCount = 100
-      for (let i = 0; i < dropCount; i++) {
-        const x = (i * 20 + world.totalTime * 100) % worldWidth
-        const y = (i * 30 + world.totalTime * 400) % worldHeight
-        this.ctx.moveTo(x, y)
-        this.ctx.lineTo(x - 5, y + 15) // slanted drops
-      }
-      this.ctx.stroke()
-      this.ctx.restore()
-    } else if (world.weather === 'DROUGHT') {
-      // Light sepia/orange overlay for drought
-      this.ctx.fillStyle = 'rgba(211, 84, 0, 0.1)'
-      this.ctx.fillRect(0, 0, worldWidth, worldHeight)
-    }
+    // 8. Draw Weather and Day/Night Overlays
+    drawEnvironment(this.ctx, world);
 
-    // 8. Draw Day/Night Overlay
-    let darknessAlpha = 0;
-    if (world.timeOfDay > 0.6 && world.timeOfDay < 0.9) {
-      darknessAlpha = 0.6;
-    } else if (world.timeOfDay >= 0.5 && world.timeOfDay <= 0.6) {
-      darknessAlpha = 0.6 * ((world.timeOfDay - 0.5) / 0.1);
-    } else if (world.timeOfDay >= 0.9 && world.timeOfDay <= 1.0) {
-      darknessAlpha = 0.6 * (1.0 - ((world.timeOfDay - 0.9) / 0.1));
-    }
-    
-    if (darknessAlpha > 0) {
-      this.ctx.fillStyle = `rgba(10, 10, 40, ${darknessAlpha})`;
-      this.ctx.fillRect(0, 0, worldWidth, worldHeight);
-    }
-
-    // 9. Draw Visual Effects (Lightning)
+    // 9. Draw Visual Effects (Lightning, Heal, Spawn)
     if (world.visualEffects) {
-      for (const effect of world.visualEffects) {
-        if (effect.type === 'LIGHTNING') {
-          this.ctx.save();
-          // Fade out based on timer
-          const alpha = Math.max(0, effect.timer / effect.maxTimer);
-          this.ctx.strokeStyle = `rgba(255, 255, 100, ${alpha})`;
-          this.ctx.lineWidth = 4;
-          this.ctx.lineCap = 'round';
-          this.ctx.lineJoin = 'round';
-          
-          // Seeded random for consistent jaggedness per effect
-          let seed = effect.seed;
-          const random = () => {
-            seed = (seed * 9301 + 49297) % 233280;
-            return seed / 233280;
-          };
-
-          this.ctx.beginPath();
-          // Start from sky (far above)
-          let currentX = effect.x + (random() - 0.5) * 100;
-          let currentY = effect.y - 1000;
-          this.ctx.moveTo(currentX, currentY);
-
-          // Draw jagged line down to target
-          while (currentY < effect.y) {
-            currentY += 50 + random() * 50;
-            if (currentY > effect.y) currentY = effect.y;
-            currentX += (random() - 0.5) * 80;
-            if (currentY === effect.y) currentX = effect.x; // Ensure it hits the target exactly
-            this.ctx.lineTo(currentX, currentY);
-          }
-          this.ctx.stroke();
-
-          // Flash core
-          this.ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-          this.ctx.lineWidth = 1;
-          this.ctx.stroke();
-          
-          this.ctx.restore();
-        } else if (effect.type === 'HEAL') {
-          this.ctx.save();
-          const progress = 1.0 - (effect.timer / effect.maxTimer); // 0 to 1
-          const alpha = Math.max(0, effect.timer / effect.maxTimer);
-          
-          // Floating green crosses
-          this.ctx.fillStyle = `rgba(46, 204, 113, ${alpha})`;
-          
-          let seed = effect.seed;
-          const random = () => {
-            seed = (seed * 9301 + 49297) % 233280;
-            return seed / 233280;
-          };
-
-          for (let i = 0; i < 5; i++) {
-            const rx = (random() - 0.5) * 60;
-            const ry = (random() - 0.5) * 40;
-            const rise = progress * (50 + random() * 50);
-            
-            const px = effect.x + rx;
-            const py = effect.y - 20 + ry - rise;
-            
-            const size = 4 + random() * 6;
-            
-            this.ctx.beginPath();
-            // Draw a plus sign (+)
-            this.ctx.rect(px - size/2, py - size/6, size, size/3);
-            this.ctx.rect(px - size/6, py - size/2, size/3, size);
-            this.ctx.fill();
-          }
-          this.ctx.restore();
-        } else if (effect.type === 'SPAWN') {
-          this.ctx.save();
-          const alpha = Math.max(0, effect.timer / effect.maxTimer); // 1.0 to 0.0
-          
-          // Pillar of Light from sky down to spawn point
-          const topY = effect.y - 3000;
-          const gradient = this.ctx.createLinearGradient(effect.x, topY, effect.x, effect.y);
-          gradient.addColorStop(0, `rgba(255, 255, 200, 0)`);
-          gradient.addColorStop(0.5, `rgba(255, 255, 220, ${alpha * 0.6})`);
-          gradient.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
-
-          this.ctx.fillStyle = gradient;
-          
-          const widthTop = 200 * alpha;
-          const widthBottom = 60 * alpha;
-          
-          this.ctx.beginPath();
-          this.ctx.moveTo(effect.x - widthTop, topY);
-          this.ctx.lineTo(effect.x + widthTop, topY);
-          this.ctx.lineTo(effect.x + widthBottom, effect.y);
-          this.ctx.lineTo(effect.x - widthBottom, effect.y);
-          this.ctx.fill();
-
-          // Shockwave ring on the ground
-          const progress = 1.0 - alpha; // 0.0 to 1.0
-          const radius = progress * 150;
-          this.ctx.beginPath();
-          this.ctx.ellipse(effect.x, effect.y, radius, radius * 0.35, 0, 0, Math.PI * 2);
-          this.ctx.lineWidth = 4 * alpha;
-          this.ctx.strokeStyle = `rgba(255, 255, 200, ${alpha})`;
-          this.ctx.stroke();
-
-          this.ctx.restore();
-        }
-      }
+      drawEffects(this.ctx, world.visualEffects);
     }
 
     // Restore context scaling and camera matrix

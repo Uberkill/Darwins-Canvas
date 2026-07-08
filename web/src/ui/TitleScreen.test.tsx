@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import { TitleScreen } from './TitleScreen'
-import { useStore } from '../store/useStore'
+import { useUIStore } from '../store/useUIStore';
 
 // Mock the save system because it relies on localStorage/IndexedDB
 vi.mock('../utils/saveSystem', () => ({
@@ -20,7 +20,7 @@ vi.mock('../engine/audioEngine', () => ({
 describe('TitleScreen Component', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    useStore.setState({ isOnboardingOpen: false })
+    useUIStore.setState({ isOnboardingOpen: false })
   })
 
   it('renders the game title', () => {
@@ -41,6 +41,6 @@ describe('TitleScreen Component', () => {
     })
     
     // Check Zustand store to ensure onboarding was triggered
-    expect(useStore.getState().isOnboardingOpen).toBe(true)
+    expect(useUIStore.getState().isOnboardingOpen).toBe(true)
   })
 })
