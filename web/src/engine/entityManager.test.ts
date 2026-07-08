@@ -26,6 +26,8 @@ describe('entityManager', () => {
       draggedEntityId: null,
       hoveredEntityId: null,
       activeLure: null,
+      populationHistory: [],
+      historyTimer: 0,
       mouseX: 0,
       mouseY: 0
     }

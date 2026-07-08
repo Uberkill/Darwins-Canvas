@@ -1,4 +1,3 @@
-import React from 'react'
 import { LineChart } from 'lucide-react'
 import { useStore } from '../store/useStore'
 import { audio } from '../engine/audioEngine'

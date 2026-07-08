@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flame, Dna, Leaf, Sprout, Bone, X } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { worldRef } from '../engine/worldRef';
