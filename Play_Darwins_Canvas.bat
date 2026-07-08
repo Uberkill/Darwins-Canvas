@@ -1,0 +1,3 @@
+@echo off
+echo Opening Darwin's Canvas in your default web browser...
+start https://uberkill.github.io/Darwins-Canvas/
