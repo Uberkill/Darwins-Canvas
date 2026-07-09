@@ -96,28 +96,6 @@
   stroke-width: 2.5;
 }
 
-/* Mobile & Landscape Responsive */
-@media (max-width: 768px) and (pointer: coarse), (max-height: 500px) and (pointer: coarse) {
-  .god-toolbar {
-    gap: 8px;
-    left: max(12px, env(safe-area-inset-left));
-  }
-  .god-tool-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-sm);
-  }
-  .god-tool-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-  .god-tool-tooltip {
-    left: calc(100% + 12px); /* Push tooltip further out to avoid overlap */
-  }
-  .god-toolbar-divider {
-    margin: 4px auto;
-  }
-}
 
 .god-toolbar-divider {
   width: 32px;
@@ -149,10 +127,23 @@
     bottom: max(100px, env(safe-area-inset-bottom));
     transform: translateX(-50%);
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
     padding: 10px;
     background: rgba(244, 240, 234, 0.9);
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .god-tool-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+  }
+  .god-tool-btn svg {
+    width: 20px;
+    height: 20px;
   }
 
   .god-toolbar-divider {

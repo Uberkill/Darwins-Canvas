@@ -68,12 +68,12 @@ export function useGodTools() {
         type: 'PLANT',
         x: pt.x,
         y: pt.y,
-        growthStage: 0,
+        growthStage: 1, // fully grown so it can be eaten immediately
         wobblePhase: Math.random() * Math.PI * 2,
       });
     } else if (activeTool === 'LURE') {
       audio.playGodTool('LURE');
-      worldRef.current.activeLure = { x: pt.x, y: pt.y, timer: 1 };
+      worldRef.current.activeLure = { x: pt.x, y: pt.y, timer: 2 };
     } else if (activeTool === 'CLONE') {
       if (hitId) {
         if (worldRef.current.creatures.length >= GLOBAL_POPULATION_CAP) {
@@ -86,8 +86,13 @@ export function useGodTools() {
             
             const baby = spawnBaby(target, worldRef.current.worldWidth, worldRef.current.worldHeight, target.reproductionCooldown);
             
+            // Restore parent stats
             target.health = oldHealth;
             target.hunger = oldHunger;
+            
+            // Clone shouldn't inherit the parent's current starvation/damage state when spawned by a God Tool
+            baby.health = baby.maxHealth;
+            baby.hunger = 100;
             
             spawnCreature(worldRef.current, baby);
             

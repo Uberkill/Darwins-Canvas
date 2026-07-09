@@ -342,6 +342,7 @@ class AudioEngine {
 
   public playSpawn() {
     this.init();
+    if (this.playCustomSfx('godClone')) return;
     if (!this.ctx || !this.sfxGain) return;
     generateSpawnChime(this.ctx, this.sfxGain);
   }

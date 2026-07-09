@@ -18,6 +18,7 @@ export const AUDIO_ASSETS = {
     godSmite: 'audio/sfx/smite.mp3',
     godFeed: 'audio/sfx/feed.mp3',
     godLure: 'audio/sfx/lure.mp3',
-    godHeal: 'audio/sfx/heal.mp3'
+    godHeal: 'audio/sfx/heal.mp3',
+    godClone: 'audio/sfx/clone.mp3'
   }
 }
