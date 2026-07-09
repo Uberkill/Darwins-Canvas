@@ -12,10 +12,6 @@ interface Props {
 }
 
 export function MetricsGraph({ history, lines }: Props) {
-  if (history.length === 0) {
-    return <div className="graph-empty">Collecting data...</div>;
-  }
-
   const { points, maxY } = useMemo(() => {
     let maxFound = 10;
     for (const h of history) {
@@ -43,6 +39,10 @@ export function MetricsGraph({ history, lines }: Props) {
 
     return { points: pointsObj, maxY };
   }, [history, lines]);
+
+  if (history.length === 0) {
+    return <div className="graph-empty">Collecting data...</div>;
+  }
 
   return (
     <div className="population-graph-container">

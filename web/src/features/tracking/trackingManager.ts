@@ -22,7 +22,9 @@ export class TrackingManager {
       // 4. Play alert sound
       try {
         audio.playUIPop();
-      } catch(e) {}
+      } catch {
+        // Ignore audio errors during rapid state changes
+      }
     }
   }
 }

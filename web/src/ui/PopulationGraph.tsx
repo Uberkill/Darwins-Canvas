@@ -6,11 +6,6 @@ interface Props {
 }
 
 export function PopulationGraph({ history }: Props) {
-  // If no history, render empty
-  if (history.length === 0) {
-    return <div className="graph-empty">Collecting data...</div>;
-  }
-
   const { points, maxY } = useMemo(() => {
     // 1. Find max Y
     let maxFound = 10; // minimum cap
@@ -56,6 +51,11 @@ export function PopulationGraph({ history }: Props) {
       maxY
     };
   }, [history]);
+
+  // If no history, render empty
+  if (history.length === 0) {
+    return <div className="graph-empty">Collecting data...</div>;
+  }
 
   return (
     <div className="population-graph-container">

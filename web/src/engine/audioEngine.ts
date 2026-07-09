@@ -107,7 +107,9 @@ class AudioEngine {
           const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
           this.sfxBuffers[key] = audioBuffer;
         }
-      } catch (e) {} // Fallback to procedural
+      } catch {
+        // Fallback to procedural
+      }
     }
   }
 
