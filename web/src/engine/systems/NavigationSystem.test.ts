@@ -7,7 +7,7 @@ vi.mock('../audioEngine', () => ({
   audio: { playLevelUp: vi.fn(), playCreatureEvent: vi.fn() }
 }))
 
-function makeWorld(creatures = []) {
+function makeWorld(creatures: any[] = []) {
   const world = createMockWorld({ creatures })
   world.scratchpad.spatialGrid = new SpatialGrid(1000, 1000, 150)
   for (const c of creatures) world.scratchpad.spatialGrid.insertCreature(c)

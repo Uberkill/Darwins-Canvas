@@ -11,7 +11,7 @@ vi.mock('../audioEngine', () => ({
   }
 }))
 
-function makeWorld(creatures = []): WorldState {
+function makeWorld(creatures: any[] = []): WorldState {
   return createMockWorld({ creatures }) as WorldState
 }
 

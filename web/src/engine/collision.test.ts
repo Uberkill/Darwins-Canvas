@@ -16,7 +16,7 @@ vi.mock('./ai/Thoughts', async (importOriginal) => {
   return actual
 })
 
-function makeWorld(creatures = [], plants = []) {
+function makeWorld(creatures: any[] = [], plants: any[] = []) {
   const world = createMockWorld({ creatures, plants })
   world.scratchpad.spatialGrid = new SpatialGrid(2000, 2000, 150)
   for (const c of creatures) world.scratchpad.spatialGrid.insertCreature(c)
