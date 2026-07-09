@@ -19,7 +19,7 @@ export const LifeSystem = {
       if (creature.diet === 'HERBIVORE') {
         newLevel = 1 + Math.floor(Math.sqrt(creature.foodEaten / 5));
       } else if (creature.diet === 'CARNIVORE') {
-        newLevel = 1 + Math.floor(Math.sqrt(creature.kills * 3));
+        newLevel = 1 + Math.floor(Math.sqrt(creature.kills * 2)); // was *3 — slowed to delay boss tier
       } else if (creature.diet === 'OMNIVORE') {
         newLevel = 1 + Math.floor(Math.sqrt((creature.kills * 2) + (creature.foodEaten / 10)));
       }
@@ -84,8 +84,8 @@ export const LifeSystem = {
       if (creature.behavior !== 'FLEEING' && creature.health > 50) {
         if (isNight && creature.diet !== 'CARNIVORE' && creature.hunger > 30) {
           shouldSleep = true; // Herbivores/Omnivores sleep at night (unless starving)
-        } else if (!isNight && creature.diet === 'CARNIVORE' && creature.hunger > 60) {
-          shouldSleep = true; // Carnivores catnap during the day (unless hungry)
+        } else if (!isNight && creature.diet === 'CARNIVORE' && creature.hunger > 85) {
+          shouldSleep = true; // Carnivores only catnap when very full (>85) — forces active hunting when hungry
         }
       }
       

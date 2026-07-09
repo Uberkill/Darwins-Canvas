@@ -7,6 +7,9 @@ import { GameRenderer } from '../renderer/Renderer'
 import { CameraSystem } from './systems/CameraSystem'
 import { InteractionSystem } from './systems/InteractionSystem'
 import { AnalyticsSystem } from './systems/AnalyticsSystem'
+import { getCollectionMetadata, getCollectionBlob } from '../features/collection/collectionDB'
+import { spawnCreature } from './entityManager'
+import { buildCreature } from './creatureFactory'
 
 const FIXED_TIME_STEP = 1000 / 60
 
@@ -81,6 +84,73 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
         steps++
 
         accumulator.current -= FIXED_TIME_STEP;
+      }
+
+      // ─── Process Async Immigration Queue ───
+      if (world.scratchpad.pendingImmigrations && world.scratchpad.pendingImmigrations.length > 0) {
+        // Synchronously copy and clear the queue to prevent race conditions
+        const pending = [...world.scratchpad.pendingImmigrations];
+        world.scratchpad.pendingImmigrations = [];
+        
+        // Launch async fetch without blocking the physics loop
+        (async () => {
+          try {
+            const meta = await getCollectionMetadata();
+            for (const diet of pending) {
+              // Try to find an exact diet match first
+              let matching = meta.filter(m => m.diet === diet);
+              
+              // If no exact match, fallback to ANY creature in the book!
+              if (matching.length === 0 && meta.length > 0) {
+                matching = meta;
+              }
+
+              const side = Math.random() < 0.5 ? 0 : world.worldWidth;
+              const y = Math.random() * (world.worldHeight - 200) + 100;
+
+              let migrant;
+              if (matching.length > 0) {
+                // Pick a random saved creature
+                const choice = matching[Math.floor(Math.random() * matching.length)];
+                const blob = await getCollectionBlob(choice.id);
+                if (blob) {
+                  migrant = buildCreature({
+                    name: choice.name || 'Migrant',
+                    diet: diet, // FORCE the requested diet to maintain ecosystem balance
+                    size: choice.size,
+                    movement: choice.movement,
+                    drawingData: blob.drawingData,
+                    decals: blob.decals || [],
+                    bakedSprites: blob.bakedSprites
+                  }, world.worldWidth, world.worldHeight);
+                }
+              }
+
+              if (!migrant) {
+                // Fallback to default colored circle if DB fetch fails or no matches found
+                const color = diet === 'HERBIVORE' ? 'green' : diet === 'CARNIVORE' ? 'red' : 'purple';
+                const svg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="${color}"/></svg>`;
+                migrant = buildCreature({
+                  name: 'Migrant ' + diet.charAt(0) + diet.slice(1).toLowerCase(),
+                  diet, size: 'MEDIUM', movement: 'CRAWLER', drawingData: svg, decals: []
+                }, world.worldWidth, world.worldHeight);
+              }
+
+              // Override coordinates to ensure they spawn on the map edges
+              migrant.x = side;
+              migrant.y = y;
+              
+              spawnCreature(world, migrant);
+
+              // Keep analytics in sync for accurate population graphs
+              if (migrant.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.birthsCarn++;
+              else if (migrant.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.birthsOmni++;
+              else if (migrant.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.birthsHerb++;
+            }
+          } catch (err) {
+            console.error('Failed to process async immigration', err);
+          }
+        })();
       }
 
       // ── Camera State Machine & Lerping (Uncoupled from game time) ──

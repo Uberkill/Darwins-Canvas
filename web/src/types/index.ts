@@ -177,6 +177,7 @@ export interface WorldState {
     deletedPlantIds:    Set<string>;
     spatialGrid:        SpatialGrid;
     immigrationTimer?:  number;
+    pendingImmigrations?: DietType[];
   };
   // Drag and Drop
   draggedEntityId: string | null;

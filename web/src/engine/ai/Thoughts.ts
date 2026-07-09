@@ -105,8 +105,9 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
 
   // 2. Check Hunting Meat (Aggression, only if not scared/lured)
   if (targetType !== 'LURE' && targetType !== 'FLEE' && !isPanicking && c.hunger < 80) {
-    if (c.diet === 'CARNIVORE' && c.hunger > 75) {
-      // Selective Hunting: carnivores ignore prey unless genuinely hungry to avoid extinction loops.
+    if (c.diet === 'CARNIVORE' && c.hunger > 85) {
+      // Selective Hunting: carnivores rest when well-fed, but hunt sooner than before
+      // (was >75 — now >85 gives a wider active hunting window)
     } else {
       let bestScore = Infinity;
       for (let j = 0; j < nearbyCreatures.length; j++) {

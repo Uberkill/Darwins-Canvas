@@ -88,9 +88,11 @@
 }
 
 .tutorial-tab.active {
-  background: var(--color-text);
-  border-color: var(--color-text);
+  /* DS: Active tabs use secondary green, not plain dark text */
+  background: var(--color-secondary);
+  border-color: white;
   color: white;
+  box-shadow: 0 4px 0 var(--color-secondary-shadow);
 }
 
 .tutorial-close {
@@ -194,13 +196,17 @@
 }
 
 .guide-nav-item:hover {
-  background: rgba(0, 0, 0, 0.05);
+  /* DS: Visible hover — rgba(0,0,0,0.05) was nearly invisible */
+  background: rgba(74, 59, 50, 0.07);
+  color: var(--color-text);
 }
 
 .guide-nav-item.active {
-  background: white;
-  border-color: #E2DDD5;
-  color: var(--color-text);
+  /* DS: Bold pink accent with hard shadow — flat white was easy to miss */
+  background: var(--color-primary);
+  border-color: white;
+  color: white;
+  box-shadow: 0 4px 0 var(--color-primary-shadow);
 }
 
 .guide-body {

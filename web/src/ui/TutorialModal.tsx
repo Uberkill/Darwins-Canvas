@@ -88,7 +88,7 @@ export function TutorialModal() {
                 </div>
               </div>
               <div className="quickstart-step">
-                <div className="quickstart-icon" style={{ background: '#e74c3c' }}><Target size={32} /></div>
+                <div className="quickstart-icon" style={{ background: 'var(--color-danger)' }}><Target size={32} /></div>
                 <div className="quickstart-text">
                   <h3>5. Track Favorites</h3>
                   <p>See a creature you love? Click the crosshair target icon to pin their health bar to the top-right of your screen! You can track up to 3 creatures at once.</p>
@@ -324,7 +324,7 @@ export function TutorialModal() {
                       </div>
                     </div>
                     <div className="guide-topic">
-                      <X className="guide-topic-icon" size={24} style={{color: '#e74c3c'}} />
+                      <X className="guide-topic-icon" size={24} style={{color: 'var(--color-danger)'}} />
                       <div className="guide-topic-content">
                         <h4>Ghost Eviction</h4>
                         <p>If a tracked creature dies (or gets smited by you!), their tracker will automatically clear out so you can find a new favorite to watch.</p>

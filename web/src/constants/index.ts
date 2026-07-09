@@ -29,7 +29,7 @@ export const SIZE_STATS: Record<CreatureSize, {
 // ─── Diet-Specific Tuning ─────────────────────────────────────────────────────
 export const HERBIVORE_BASE_HUNGER_DRAIN = 2.5; // 40 seconds to starve
 export const CARNIVORE_BASE_HUNGER_DRAIN = 1.5; // ~66 seconds to starve (Stamina/Endurance buff)
-export const OMNIVORE_BASE_HUNGER_DRAIN  = 2.8; 
+export const OMNIVORE_BASE_HUNGER_DRAIN  = 2.3;  // Slightly more efficient than herbivore — opportunistic feeders
 
 // ─── Health & Combat Stats ────────────────────────────────────────────────────
 export const BASE_HEALTH = 100;
@@ -38,7 +38,7 @@ export const STARVATION_DAMAGE = 5.0; // HP/sec lost if hunger <= 0
 
 export const HERBIVORE_BASE_DAMAGE = 2.0;  // Weak
 export const OMNIVORE_BASE_DAMAGE  = 5.0; // Moderate
-export const CARNIVORE_BASE_DAMAGE = 300.0; // Instant-kill Apex Predator
+export const CARNIVORE_BASE_DAMAGE = 40.0;  // 2.5s kill window — prey can flee if they detect early
 
 // Exhaustion multipliers applied during specific BehaviorStates
 export const FLEEING_HUNGER_MULTIPLIER = 1.0; // Handled by Stamina now
@@ -53,7 +53,7 @@ export const getOmnivorePopulationCap = (w: number, h: number) => Math.floor(25 
 
 // ─── Plant constants ──────────────────────────────────────────────────────────
 export const getPlantCap = (w: number, h: number) => Math.floor(100 * ((w * h) / BASE_AREA));
-export const PLANT_SPAWN_RATE   = 0.6;  // seconds between spawns
+export const PLANT_SPAWN_RATE   = 0.3;  // seconds between spawns (was 0.6 — doubled to support larger herds)
 export const PLANT_GROWTH_RATE  = 0.4;  // growthStage increase per second (0→1 in ~2.5s)
 export const PLANT_WOBBLE_SPEED = 1.2;  // radians/second for organic sway
 
@@ -73,7 +73,7 @@ export const OMNIVORE_REPRO_COOLDOWN   = 30;
 
 export const HERBIVORE_REPRO_CHANCE = 0.05; // 5% chance per eligible second
 export const CARNIVORE_REPRO_CHANCE = 0.008; // 0.8% chance per eligible second
-export const OMNIVORE_REPRO_CHANCE  = 0.015; // 1.5% chance per eligible second
+export const OMNIVORE_REPRO_CHANCE  = 0.030; // 3.0% — doubled to sustain viable mid-tier population
 export const REPRO_SPAWN_OFFSET     = 65;    // px away from parent
 
 // ─── Hopper movement ──────────────────────────────────────────────────────────
@@ -89,13 +89,13 @@ export const PACER_PAUSE_DURATION = 2.0; // seconds of pause
 
 // ─── Stamina & Combat Dynamics ───────────────────────────────────────────────
 export const MAX_STAMINA = 100;
-export const STAMINA_DRAIN_RATE = 20; // 5 seconds of sprinting
-export const STAMINA_REGEN_RATE = 10; // 10 seconds to recover fully
+export const STAMINA_DRAIN_RATE = 15; // 6.7 seconds of pursuit before exhaustion
+export const STAMINA_REGEN_RATE = 15; // symmetric 6.7s recovery between hunts
 export const EXHAUSTION_SPEED_PENALTY = 0.5; // 50% slower when stamina is 0
 
-export const LUNGE_DURATION = 1.5; // seconds
-export const LUNGE_COOLDOWN = 4.0; // seconds
-export const LUNGE_SPEED_MULTIPLIER = 2.5; // 150% faster (Apex Predator Burst)
+export const LUNGE_DURATION = 2.5;          // seconds — longer burst to close the gap
+export const LUNGE_COOLDOWN = 3.5;          // seconds — shorter cooldown between attempts
+export const LUNGE_SPEED_MULTIPLIER = 2.5;  // 150% faster burst
 
 // ─── Macro Systems (Day/Night & Weather) ─────────────────────────────────────
 export const DAY_NIGHT_CYCLE_DURATION = 120; // 120 real seconds for a full 24h cycle (1 min day, 1 min night)

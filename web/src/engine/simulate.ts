@@ -108,7 +108,7 @@ export function simulate(world: WorldState, dt: number): void {
   if (world.weather === 'DROUGHT') weatherMultiplier = DROUGHT_PLANT_SPAWN_MULTIPLIER;
   tickPlantSpawner(world, dt * weatherMultiplier);
 
-  babies.push(...ImmigrationSystem.update(world, dt));
+  ImmigrationSystem.update(world, dt);
 
   // ─── 7. Flush dead entities ──
   // Process any creatures that starved this frame

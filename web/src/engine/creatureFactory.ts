@@ -43,7 +43,9 @@ export function calculateCreatureStats(
     else if (d.style === 'BALEEN') { decalDrainMult -= 0.10; decalSpeedMult -= 0.08 }
   }
 
-  const speed = Math.min(BASE_SPEED * stats.speedMultiplier * decalSpeedMult, BASE_SPEED * 3)
+  // Diet-based speed: carnivores are apex hunters, omnivores are opportunistic
+  const dietSpeedMult = diet === 'CARNIVORE' ? 1.35 : diet === 'OMNIVORE' ? 1.1 : 1.0;
+  const speed = Math.min(BASE_SPEED * stats.speedMultiplier * decalSpeedMult * dietSpeedMult, BASE_SPEED * 3)
   const drain = Math.max(0.5, baseDrain * stats.hungerDrainMultiplier * decalDrainMult)
   const damage = Math.min(baseDamage * stats.damageMultiplier * decalDamageMult, baseDamage * 5)
   const sight = Math.min(SIGHT_RADIUS * decalSightMult, 800)

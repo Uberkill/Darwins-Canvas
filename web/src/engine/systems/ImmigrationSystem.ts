@@ -1,25 +1,31 @@
-import type { WorldState, Creature } from '../../types';
-import { buildCreature } from '../creatureFactory';
+import type { WorldState } from '../../types';
 import { getGlobalPopulationCap } from '../../constants';
 
 export class ImmigrationSystem {
   /**
-   * Re-seeds extinct populations by dropping migrants from the sky.
-   * Returns an array of new migrant creatures to be safely added to the world.
+   * Re-seeds extinct populations by queuing migrants to be dropped from the sky.
+   * Migrants are processed asynchronously by the outer game loop so it can query
+   * the local database for saved creatures without stalling the physics engine.
+   *
+   * Guards:
+   *   - Herbivores only arrive when carnivore count ≤ 3 (safe enough to survive & reproduce)
+   *   - Carnivores only arrive when herbivore prey count ≥ 3 (enough food to sustain them)
+   *   - Omnivores arrive when carnivore count ≤ 5 (tougher, can eat plants as fallback)
    */
-  static update(world: WorldState, dt: number): Creature[] {
-    const migrants: Creature[] = [];
-
+  static update(world: WorldState, dt: number): void {
     if (!world.scratchpad.immigrationTimer) {
       world.scratchpad.immigrationTimer = 0;
+    }
+    if (!world.scratchpad.pendingImmigrations) {
+      world.scratchpad.pendingImmigrations = [];
     }
     
     world.scratchpad.immigrationTimer += dt;
     
-    if (world.scratchpad.immigrationTimer > 120) { // Check every 120 seconds
+    if (world.scratchpad.immigrationTimer > 60) { // Check every 60 seconds
       world.scratchpad.immigrationTimer = 0;
       
-      if (world.creatures.length >= getGlobalPopulationCap(world.worldWidth, world.worldHeight)) return [];
+      if (world.creatures.length >= getGlobalPopulationCap(world.worldWidth, world.worldHeight)) return;
 
       let herbivores = 0, carnivores = 0, omnivores = 0;
       for (const c of world.creatures) {
@@ -30,32 +36,31 @@ export class ImmigrationSystem {
          }
       }
 
-      const spawnMigrant = (diet: 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE') => {
-        // 5% chance to migrate if extinct
-        if (Math.random() < 0.05) {
-          const side = Math.random() < 0.5 ? 0 : world.worldWidth;
-          const y = Math.random() * (world.worldHeight - 200) + 100;
-          const migrantColor = diet === 'HERBIVORE' ? 'green' : diet === 'CARNIVORE' ? 'red' : 'purple';
-          const migrantSVG = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="${migrantColor}"/></svg>`;
-          const migrant = buildCreature({
-             name: 'Migrant ' + diet.charAt(0) + diet.slice(1).toLowerCase(),
-             diet,
-             size: 'MEDIUM',
-             movement: 'CRAWLER',
-             drawingData: migrantSVG,
-             decals: []
-          }, world.worldWidth, world.worldHeight);
-          migrant.x = side;
-          migrant.y = y;
-          migrants.push(migrant);
-        }
+      // Guaranteed spawn — no RNG gate. Used for founding pairs.
+      const queueAlways = (diet: 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE') => {
+        world.scratchpad.pendingImmigrations!.push(diet);
       };
 
-      if (herbivores === 0) spawnMigrant('HERBIVORE');
-      if (carnivores === 0) spawnMigrant('CARNIVORE');
-      if (omnivores === 0) spawnMigrant('OMNIVORE');
-    }
+      // 25% chance spawn — used for bonus slots.
+      const queueChance = (diet: 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE', chance = 0.25) => {
+        if (Math.random() < chance) world.scratchpad.pendingImmigrations!.push(diet);
+      };
 
-    return migrants;
+      // ── Herbivores: only send when carnivores ≤ 3 so immigrants can survive long enough to breed ──
+      if (herbivores === 0 && carnivores <= 3) {
+        queueAlways('HERBIVORE');  // guaranteed — founding pair member 1
+        queueAlways('HERBIVORE');  // guaranteed — founding pair member 2
+        queueChance('HERBIVORE', 0.50); // 50% bonus third
+      }
+
+      // ── Carnivore: apex migrant — only when prey exists to sustain it ──
+      if (carnivores === 0 && herbivores >= 3) queueChance('CARNIVORE');
+
+      // ── Omnivore: send pair when not too many carnivores around ──
+      if (omnivores === 0 && carnivores <= 5) {
+        queueAlways('OMNIVORE');  // guaranteed
+        queueChance('OMNIVORE', 0.50); // 50% bonus
+      }
+    }
   }
 }

@@ -50,6 +50,15 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        design: 'design-system.html',
+        preview: 'refactor-preview.html'
+      }
+    }
+  },
   test: {
     environment: 'jsdom',
     globals: true,

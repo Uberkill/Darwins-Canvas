@@ -1,0 +1,50 @@
+.ds-tabs {
+  display: flex;
+  gap: 12px;
+}
+
+.ds-tabs-horizontal {
+  flex-direction: row;
+  border-bottom: 3px solid #E2DDD5;
+  padding-bottom: 4px;
+}
+
+.ds-tabs-vertical {
+  flex-direction: column;
+  border-right: 3px solid #E2DDD5;
+  padding-right: 12px;
+}
+
+.ds-tab {
+  font-family: var(--font-body, 'Nunito', sans-serif);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--color-text-muted, #8F7B6E);
+  background: transparent;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-full, 9999px);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  outline: none;
+}
+
+.ds-tab:hover {
+  background: white;
+  color: var(--color-text, #4A3B32);
+}
+
+.ds-tab.active {
+  background: var(--color-secondary, #00D8A1);
+  color: white;
+  box-shadow: 0 4px 0 var(--color-secondary-shadow, #00A67C);
+  transform: translateY(-2px);
+}
+
+.ds-tab.active:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 transparent;
+}
