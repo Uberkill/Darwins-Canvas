@@ -1,4 +1,4 @@
-/// <reference types="vite-plugin-pwa/client" />
+import { useState } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { saveGame } from '../../utils/saveSystem'
 import { worldRef } from '../../engine/worldRef'
@@ -19,8 +19,10 @@ export function UpdatePrompt() {
     },
   })
 
+  const [isMinimized, setIsMinimized] = useState(false);
+
   const close = () => {
-    setNeedRefresh(false)
+    setIsMinimized(true)
   }
 
   const handleUpdate = async () => {
@@ -34,6 +36,19 @@ export function UpdatePrompt() {
   }
 
   if (!needRefresh) return null
+
+  if (isMinimized) {
+    return (
+      <button 
+        className="update-prompt-minimized" 
+        onClick={handleUpdate}
+        aria-label="Update Available"
+      >
+        <AlertCircle size={18} />
+        Update Ready
+      </button>
+    )
+  }
 
   return (
     <div className="update-prompt-overlay">
