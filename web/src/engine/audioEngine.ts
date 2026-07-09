@@ -630,11 +630,12 @@ class AudioEngine {
     }
   }
 
-  public playGodTool(type: 'POINTER' | 'SMITE' | 'HEAL' | 'FEED' | 'LURE' | 'GRAB') {
+  public playGodTool(type: 'POINTER' | 'SMITE' | 'HEAL' | 'FEED' | 'LURE' | 'GRAB' | 'CLONE') {
     if (type === 'SMITE') this.playZap();
     else if (type === 'FEED') this.playCrunch();
     else if (type === 'LURE') this.playPop();
     else if (type === 'HEAL') this.playHeal();
+    else if (type === 'CLONE') this.playSpawn();
     else this.playUIClick();
   }
 }

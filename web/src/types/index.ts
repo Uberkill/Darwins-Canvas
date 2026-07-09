@@ -185,7 +185,7 @@ export interface WorldState {
 }
 
 // ─── Zustand store (command bus only — zero simulation state) ─────────────────
-export type GodTool = 'POINTER' | 'SMITE' | 'HEAL' | 'FEED' | 'LURE' | 'GRAB';
+export type GodTool = 'POINTER' | 'SMITE' | 'HEAL' | 'FEED' | 'LURE' | 'GRAB' | 'CLONE';
 
 type CameraMode = 'FREE' | 'TRACKING';
 

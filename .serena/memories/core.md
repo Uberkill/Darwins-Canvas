@@ -1,0 +1,6 @@
+- Darwin's Canvas is a highly optimized React/Canvas-based life simulation engine.
+- Source code is located in `web/src/`.
+- Refer to `mem:tech_stack` for languages and frameworks used.
+- Refer to `mem:conventions` for strict Zero-GC and ECS architectural rules.
+- Refer to `mem:suggested_commands` for dev and build scripts.
+- Refer to `mem:task_completion` for how to verify work before committing.

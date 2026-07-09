@@ -1,0 +1,5 @@
+- TypeScript 6.0.2
+- React 19.2.7 with Vite
+- Zustand 5.0.14 for UI and Engine state
+- Vitest and React Testing Library for testing
+- oxlint and eslint for linting

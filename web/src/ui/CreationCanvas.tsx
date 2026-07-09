@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Dices, X } from 'lucide-react'
+import { Dices, X, PaintBucket } from 'lucide-react'
 import { generateRandomName } from '../utils/nameGenerator'
 import { getDecalDataUrl } from '../renderer/decals'
 import type { useDrawingCanvas } from '../hooks/useDrawingCanvas'
@@ -121,6 +121,35 @@ export function CreationCanvas({
 
           {/* Custom Brush Cursor */}
           {showCursor && (() => {
+            if (drawing.activeTool === 'FILL') {
+              return (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    pointerEvents: 'none',
+                    transform: `translate(${cursorPos.x - 12}px, ${cursorPos.y - 12}px)`,
+                    color: brushColor,
+                    filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.5))',
+                    zIndex: 10
+                  }}
+                >
+                  <PaintBucket size={24} />
+                  <div style={{
+                    position: 'absolute',
+                    top: '20px',
+                    left: '2px',
+                    width: '4px',
+                    height: '4px',
+                    backgroundColor: 'white',
+                    border: '1px solid black',
+                    borderRadius: '50%'
+                  }} />
+                </div>
+              );
+            }
+
             // If stamping, cursor should reflect stamp size
             const currentBrushSize = drawing.activeTool === 'STAMP' ? Math.max(120, brushSize * 6) : brushSize;
             const cssSize = currentBrushSize * cursorPos.scale;
@@ -137,7 +166,8 @@ export function CreationCanvas({
                   borderRadius: '50%',
                   backgroundColor: drawing.activeTool === 'ERASER' ? 'white' : brushColor,
                   border: drawing.activeTool === 'ERASER' ? '3px solid #E2DDD5' : 'none',
-                  opacity: drawing.activeTool === 'FILL' ? 0 : 0.8,
+                  boxShadow: drawing.activeTool !== 'ERASER' ? '0 0 0 1px white, 0 0 0 2px black' : 'none',
+                  opacity: 0.8,
                   zIndex: 10
                 }}
               />

@@ -1,0 +1,4 @@
+- ECS Architecture: Physics logic is contained in `web/src/engine/systems/` and runs strictly inside `simulate.ts`. Do not put physics logic in UI components.
+- Zero-GC Rendering: `Renderer.ts` and `drawEnvironment`/`drawEffects` strictly avoid creating garbage objects or arrays within the 60fps render loop. They use pre-allocated buffers.
+- Type Imports: Must use `import type { ... }` due to `verbatimModuleSyntax` TS config.
+- State: `useUIStore.ts` handles pure React UI state, while `useEngineStore.ts` handles simulation config. Simulation entities (creatures) live in a mutable `WorldState` ref, NOT in Zustand.

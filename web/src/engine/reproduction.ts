@@ -85,7 +85,7 @@ export function checkReproduction(
 import { generateTintedImage } from '../renderer/imageCache'
 import { calculateCreatureStats } from './creatureFactory'
 
-function spawnBaby(parent: Creature, worldWidth: number, worldHeight: number, cooldown: number): Creature {
+export function spawnBaby(parent: Creature, worldWidth: number, worldHeight: number, cooldown: number): Creature {
   const rawX  = parent.x + parent.direction.vx * REPRO_SPAWN_OFFSET
   const rawY  = parent.y + parent.direction.vy * REPRO_SPAWN_OFFSET
   

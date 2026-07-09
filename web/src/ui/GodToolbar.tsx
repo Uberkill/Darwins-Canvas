@@ -1,5 +1,5 @@
 import React from 'react'
-import { MousePointer2, Zap, Heart, Leaf, Magnet, Hand } from 'lucide-react'
+import { MousePointer2, Zap, Heart, Leaf, Magnet, Hand, Copy } from 'lucide-react'
 import { audio } from '../engine/audioEngine'
 import type { GodTool } from '../types'
 import './GodToolbar.css'
@@ -13,6 +13,7 @@ const TOOLS: { id: GodTool; icon: React.ReactNode; tooltip: string }[] = [
   { id: 'HEAL', icon: <Heart size={24} />, tooltip: 'Heal (Restore)' },
   { id: 'FEED', icon: <Leaf size={24} />, tooltip: 'Feed (Spawn Plant)' },
   { id: 'LURE', icon: <Magnet size={24} />, tooltip: 'Lure (Attract All)' },
+  { id: 'CLONE', icon: <Copy size={24} />, tooltip: 'Clone (Copy Creature)' },
 ]
 
 export function GodToolbar() {
