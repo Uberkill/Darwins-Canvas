@@ -3,9 +3,9 @@
 Darwin's Canvas uses React, Vite, and HTML5 Canvas. It implements a strict 3-Tier Separation and a modular 7-Pillar physics engine to ensure 60FPS performance.
 
 ## 3-Tier Separation
-1. **Data Layer (Zustand):** `useStore.ts` manages high-level UI state. It DOES NOT store raw simulation arrays to prevent React re-render flooding.
+1. **Data Layer (Zustand & IndexedDB):** `useStore.ts` manages high-level UI state. `collectionDB.ts` interfaces with IndexedDB to persist saved creatures and generated lore across sessions. This layer DOES NOT store raw simulation arrays to prevent React re-render flooding.
 2. **Simulation Layer (Mutable Ref):** `worldRef.ts` holds the living arrays (`creatures`, `plants`). The game loop mutates these directly.
-3. **Render Layer (HTML5 Canvas):** `Renderer.ts` reads from `worldRef` and draws entities to the DOM canvas. React has zero knowledge of the actual pixel positions of creatures.
+3. **Render Layer (HTML5 Canvas):** `Renderer.ts` reads from `worldRef` and draws entities to the DOM canvas. React has zero knowledge of the actual pixel positions of creatures, except when extracted via `useTrackingStore.ts` for HUD rendering.
 
 ## The 7-Pillar Physics Engine
 The core simulation (`simulate.ts`) is strictly modularized into isolated systems:

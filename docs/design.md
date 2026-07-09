@@ -33,9 +33,9 @@ To prevent irreversible ecosystem collapse, if any species (Herbivore, Carnivore
 
 ## God Tools (Player Intervention)
 The player possesses interactive tools to influence the simulation:
-- **Clone:** Instantly duplicate an existing creature.
-- **Lure:** Drop a temporary scent marker that attracts the entire ecosystem, causing chaos or forced interactions.
-- **Kill:** Smite a creature from existence.
+- **Smite:** Strike a creature with lightning to deal heavy damage and trigger fear behaviors.
+- **Feed:** Spawn plant matter at a specific coordinate to assist starving creatures.
+- **Grab:** Physically relocate a creature to a new coordinate coordinate.
 
 ## Evolution & Genetics
 When a creature eats enough food, it builds up `reproduction reserve`. Once the reserve hits 100, it undergoes asexual reproduction.
@@ -45,7 +45,12 @@ When a creature eats enough food, it builds up `reproduction reserve`. Once the 
 - **Stat Mutations:** Speed, vision radius, and metabolic efficiency can fluctuate up or down by small percentages.
 - **Hue Shift:** The offspring's visual color shifts slightly to represent its genetic lineage.
 
-## Ecosystem Analytics
+## Ecosystem Analytics & Tracking
 - The game tracks historical data (Populations, Births, Starvations, Kills, Calories) at exactly 1Hz.
-- To guarantee save-file stability and prevent memory leaks, data is strictly capped at a 1-hour rolling window (3,600 data points).
-- This data powers the in-game Statistics Dashboard.
+- Data is strictly capped at a 1-hour rolling window (3,600 data points) to guarantee save-file stability.
+- **Active Research HUD:** Players can pin up to 3 creatures to track their real-time vitals. If a tracked creature dies, the tracking slot is automatically cleared (Ghost Eviction).
+
+## Darwinpedia Collection
+Players can save individual creatures to a persistent catalog:
+- **Lore Generation:** Saving a creature generates a deterministic backstory based on its lifetime statistics (e.g., kills, food eaten).
+- **Spawning:** Saved creatures can be spawned back into any terrarium state.
