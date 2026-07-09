@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Settings, X, Power } from 'lucide-react'
+import { Settings, X, Power, FileText } from 'lucide-react'
 import { audio } from '../engine/audioEngine'
 import { useSaves } from '../hooks/useSaves'
 import { DoodleLayer } from './components/DoodleLayer'
 import { SettingsModal } from './components/SettingsModal'
 import { SaveSlotsModal } from './components/SaveSlotsModal'
+import { PatchNotesModal } from './components/PatchNotesModal'
 import './PauseMenuModal.css'
 import './TitleScreen.css'
 
@@ -12,7 +13,7 @@ interface TitleScreenProps {
   onPlay: () => void
 }
 
-type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS'
+type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS' | 'PATCH_NOTES'
 
 export function TitleScreen({ onPlay }: TitleScreenProps) {
   const [isHiding, setIsHiding] = useState(false)
@@ -122,6 +123,9 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
       </div>
 
       <div className="bottom-corner-controls">
+        <button className="icon-btn-tertiary patch-btn" title="Patch Notes" onClick={() => setMenuState('PATCH_NOTES')}>
+          <FileText size={24} />
+        </button>
         <button className="icon-btn-tertiary settings-btn" title="Settings" onClick={() => setMenuState('SETTINGS')}>
           <Settings size={24} />
         </button>
@@ -140,6 +144,10 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
             
             {menuState === 'SETTINGS' && (
               <SettingsModal onClose={() => setMenuState('ROOT')} />
+            )}
+
+            {menuState === 'PATCH_NOTES' && (
+              <PatchNotesModal onClose={() => setMenuState('ROOT')} />
             )}
 
             {(menuState === 'SLOT_MODAL_NEW' || menuState === 'SLOT_MODAL_LOAD') && (

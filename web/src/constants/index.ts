@@ -7,6 +7,7 @@ export const getWorldHeight = (): number => window.innerHeight;
 // ─── Creature base render size ────────────────────────────────────────────────
 // MEDIUM creature renders at 80×80 px in the ecosystem.
 // SMALL = 40×40 px (renderScale 0.5) | LARGE = 160×160 px (renderScale 2.0)
+export const GAME_VERSION = 'v0.1.0 Alpha';
 export const BASE_RENDER_SIZE = 80; // px
 
 // ─── Creature stats by size ───────────────────────────────────────────────────
