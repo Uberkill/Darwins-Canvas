@@ -64,13 +64,19 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
         ))}
       </div>
 
-      <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'flex-end', 
+        marginTop: '24px', 
+        borderTop: '2px solid #E2DDD5', 
+        paddingTop: '24px' 
+      }}>
+        <EmergencyResetButton />
         <button className="btn-massive" onClick={onClose} style={{ fontSize: '1.2rem', padding: '12px 32px' }}>
           Done
         </button>
       </div>
-
-      <EmergencyResetButton />
     </div>
   );
 }
