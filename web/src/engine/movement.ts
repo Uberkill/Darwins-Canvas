@@ -12,38 +12,42 @@ import {
  * They receive delta time in seconds so they are frame-rate independent.
  */
 
+// Helper to strictly enforce wall boundaries based on dynamic scale
+function applyWallBounds(creature: Creature, worldWidth: number, worldHeight: number, trueRadius: number): void {
+  if (creature.x < trueRadius) {
+    creature.x = trueRadius
+    if (creature.direction.vx < 0) creature.direction.vx *= -1
+  } else if (creature.x > worldWidth - trueRadius) {
+    creature.x = worldWidth - trueRadius
+    if (creature.direction.vx > 0) creature.direction.vx *= -1
+  }
+
+  if (creature.y < trueRadius) {
+    creature.y = trueRadius
+    if (creature.direction.vy < 0) creature.direction.vy *= -1
+  } else if (creature.y > worldHeight - trueRadius) {
+    creature.y = worldHeight - trueRadius
+    if (creature.direction.vy > 0) creature.direction.vy *= -1
+  }
+}
+
 // ─── CRAWLER ─────────────────────────────────────────────────────────────────
 // Moves continuously in 2D space. Bounces off 4 walls.
 
 export function moveCrawler(creature: Creature, dt: number, worldWidth: number, worldHeight: number): void {
-  const radius = (BASE_RENDER_SIZE * creature.renderScale) / 2
+  const trueRadius = (BASE_RENDER_SIZE * creature.renderScale * creature.currentScale) / 2
   let moveX = creature.speed * creature.direction.vx * dt
   let moveY = creature.speed * creature.direction.vy * dt
   const stepDist = Math.sqrt(moveX*moveX + moveY*moveY) || 1
-  if (stepDist > radius) {
-    moveX = (moveX / stepDist) * radius
-    moveY = (moveY / stepDist) * radius
+  if (stepDist > trueRadius) {
+    moveX = (moveX / stepDist) * trueRadius
+    moveY = (moveY / stepDist) * trueRadius
   }
   creature.x += moveX
   creature.y += moveY
   creature.state = 'MOVING'
 
-  // Boundary flip — clamp position to prevent overshoot (4 walls)
-  if (creature.x < radius) {
-    creature.x = radius
-    if (creature.direction.vx < 0) creature.direction.vx *= -1
-  } else if (creature.x > worldWidth - radius) {
-    creature.x = worldWidth - radius
-    if (creature.direction.vx > 0) creature.direction.vx *= -1
-  }
-
-  if (creature.y < radius) {
-    creature.y = radius
-    if (creature.direction.vy < 0) creature.direction.vy *= -1
-  } else if (creature.y > worldHeight - radius) {
-    creature.y = worldHeight - radius
-    if (creature.direction.vy > 0) creature.direction.vy *= -1
-  }
+  applyWallBounds(creature, worldWidth, worldHeight, trueRadius);
 }
 
 // ─── HOPPER ──────────────────────────────────────────────────────────────────
@@ -73,33 +77,18 @@ export function moveHopper(creature: Creature, dt: number, worldWidth: number, w
   creature.state = creature.z > 5 ? 'JUMPING' : 'MOVING'
 
   // X/Y movement
-  const radius = (BASE_RENDER_SIZE * creature.renderScale) / 2
+  const trueRadius = (BASE_RENDER_SIZE * creature.renderScale * creature.currentScale) / 2
   let moveX = creature.speed * creature.direction.vx * dt
   let moveY = creature.speed * creature.direction.vy * dt
   const stepDist = Math.sqrt(moveX*moveX + moveY*moveY) || 1
-  if (stepDist > radius) {
-    moveX = (moveX / stepDist) * radius
-    moveY = (moveY / stepDist) * radius
+  if (stepDist > trueRadius) {
+    moveX = (moveX / stepDist) * trueRadius
+    moveY = (moveY / stepDist) * trueRadius
   }
   creature.x += moveX
   creature.y += moveY
 
-  // Boundary flip
-  if (creature.x < radius) {
-    creature.x = radius
-    if (creature.direction.vx < 0) creature.direction.vx *= -1
-  } else if (creature.x > worldWidth - radius) {
-    creature.x = worldWidth - radius
-    if (creature.direction.vx > 0) creature.direction.vx *= -1
-  }
-
-  if (creature.y < radius) {
-    creature.y = radius
-    if (creature.direction.vy < 0) creature.direction.vy *= -1
-  } else if (creature.y > worldHeight - radius) {
-    creature.y = worldHeight - radius
-    if (creature.direction.vy > 0) creature.direction.vy *= -1
-  }
+  applyWallBounds(creature, worldWidth, worldHeight, trueRadius);
 
   // After one full hop cycle (π radians = half sine), trigger pause
   if (creature.hopPhase >= Math.PI) {
@@ -132,35 +121,20 @@ export function movePacer(creature: Creature, dt: number, worldWidth: number, wo
     }
   } else {
     // ── Burst phase ──
-    const radius = (BASE_RENDER_SIZE * creature.renderScale) / 2
+    const trueRadius = (BASE_RENDER_SIZE * creature.renderScale * creature.currentScale) / 2
     let moveX = creature.speed * creature.direction.vx * dt
     let moveY = creature.speed * creature.direction.vy * dt
     const stepDist = Math.sqrt(moveX*moveX + moveY*moveY) || 1
-    if (stepDist > radius) {
-      moveX = (moveX / stepDist) * radius
-      moveY = (moveY / stepDist) * radius
+    if (stepDist > trueRadius) {
+      moveX = (moveX / stepDist) * trueRadius
+      moveY = (moveY / stepDist) * trueRadius
     }
     creature.x += moveX
     creature.y += moveY
     creature.state = 'MOVING'
     creature.pacerMoveTimer -= dt
 
-    // Boundary flip
-    if (creature.x < radius) {
-      creature.x = radius
-      if (creature.direction.vx < 0) creature.direction.vx *= -1
-    } else if (creature.x > worldWidth - radius) {
-      creature.x = worldWidth - radius
-      if (creature.direction.vx > 0) creature.direction.vx *= -1
-    }
-
-    if (creature.y < radius) {
-      creature.y = radius
-      if (creature.direction.vy < 0) creature.direction.vy *= -1
-    } else if (creature.y > worldHeight - radius) {
-      creature.y = worldHeight - radius
-      if (creature.direction.vy > 0) creature.direction.vy *= -1
-    }
+    applyWallBounds(creature, worldWidth, worldHeight, trueRadius);
 
     if (creature.pacerMoveTimer <= 0 && !isAdrenaline) {
       // Enter pause phase

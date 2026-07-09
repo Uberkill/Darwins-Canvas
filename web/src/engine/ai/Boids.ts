@@ -1,4 +1,6 @@
 import type { Creature, WorldState } from '../../types'
+import { hunts } from './Thoughts'
+import { BASE_RENDER_SIZE } from '../../constants'
 
 export interface BoidsForces {
   sepX: number;
@@ -18,30 +20,38 @@ export function calculateBoids(c: Creature, world: WorldState): BoidsForces {
 
   const sightSq = c.sightRadius * c.sightRadius
 
-  if (c.diet === 'HERBIVORE' || c.diet === 'CARNIVORE') {
-    for (let j = 0; j < world.creatures.length; j++) {
-      const other = world.creatures[j]
-      if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
-      if (other.id === world.draggedEntityId) continue
-      if (other.diet !== c.diet) continue
+  // Calculate this creature's true visual radius
+  const cRadius = (BASE_RENDER_SIZE * c.currentScale * c.renderScale) / 2
 
-      let dx = c.x - other.x
-      let dy = c.y - other.y
-      
-      // Math Safety: Avoid pure zero distances
-      if (dx === 0 && dy === 0) { dx = 0.001; dy = 0.001; }
-      
-      const dSq = dx * dx + dy * dy
+  for (let j = 0; j < world.creatures.length; j++) {
+    const other = world.creatures[j]
+    if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
+    if (other.id === world.draggedEntityId) continue
 
-      if (dSq > 0 && dSq < sightSq) {
-        const dist = Math.sqrt(dSq)
-        // Separation triggers much closer
-        if (dist < 40) {
-          sepX += (dx / dist) / dist
-          sepY += (dy / dist) / dist
-        }
-        
-        // Alignment & Cohesion (Herding)
+    let dx = c.x - other.x
+    let dy = c.y - other.y
+    
+    // Math Safety: Avoid pure zero distances
+    if (dx === 0 && dy === 0) { dx = 0.001; dy = 0.001; }
+    
+    const dSq = dx * dx + dy * dy
+
+    if (dSq > 0 && dSq < sightSq) {
+      const dist = Math.sqrt(dSq)
+      
+      // Calculate other creature's true visual radius
+      const otherRadius = (BASE_RENDER_SIZE * other.currentScale * other.renderScale) / 2
+      // Separation triggers based on combined visual radii
+      const minSeparation = (cRadius + otherRadius) * 0.8
+      
+      // Predators ignore separation forces against their prey to prevent invisible forcefields
+      if (dist < minSeparation && !hunts(c, other)) {
+        sepX += (dx / dist) / dist
+        sepY += (dy / dist) / dist
+      }
+      
+      // Alignment & Cohesion (Herding) is STRICTLY limited to the same diet
+      if (other.diet === c.diet) {
         alignX += other.direction.vx
         alignY += other.direction.vy
         cohX += other.x
