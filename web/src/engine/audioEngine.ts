@@ -1,5 +1,15 @@
 import { worldRef } from './worldRef';
 import { AUDIO_ASSETS } from '../constants/audioConfig';
+import { calculateSpatialGain } from './spatialAudioUtils';
+import { 
+  generatePop, 
+  generateZap, 
+  generateCrunch, 
+  generateSpawnChime, 
+  generateHealChime, 
+  generateCreatureEvent, 
+  generateLevelUpChime 
+} from './proceduralSfx';
 
 class AudioEngine {
   private ctx: AudioContext | null = null;
@@ -181,85 +191,21 @@ class AudioEngine {
     this.init();
     if (this.playCustomSfx('godLure')) return;
     if (!this.ctx || !this.sfxGain) return;
-
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    
-    osc.type = 'sine';
-    
-    const now = this.ctx.currentTime;
-    osc.frequency.setValueAtTime(400, now);
-    osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
-    
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.8, now + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-    
-    osc.connect(gain);
-    gain.connect(this.sfxGain);
-    
-    osc.start(now);
-    osc.stop(now + 0.1);
+    generatePop(this.ctx, this.sfxGain);
   }
 
   public playZap() {
     this.init();
     if (this.playCustomSfx('godSmite')) return;
     if (!this.ctx || !this.sfxGain) return;
-
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    
-    osc.type = 'triangle';
-    
-    const now = this.ctx.currentTime;
-    osc.frequency.setValueAtTime(1200, now);
-    osc.frequency.exponentialRampToValueAtTime(300, now + 0.15);
-    
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.5, now + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
-    
-    osc.connect(gain);
-    gain.connect(this.sfxGain);
-    
-    osc.start(now);
-    osc.stop(now + 0.15);
+    generateZap(this.ctx, this.sfxGain);
   }
 
   public playCrunch() {
     this.init();
     if (this.playCustomSfx('godFeed')) return;
     if (!this.ctx || !this.sfxGain) return;
-
-    const bufferSize = this.ctx.sampleRate * 0.15;
-    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      data[i] = Math.random() * 2 - 1;
-    }
-    
-    const noise = this.ctx.createBufferSource();
-    noise.buffer = buffer;
-    
-    const filter = this.ctx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 1500;
-    
-    const gain = this.ctx.createGain();
-    
-    const now = this.ctx.currentTime;
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.7, now + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.1, now + 0.05); 
-    gain.gain.linearRampToValueAtTime(0.6, now + 0.06); 
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15); 
-    
-    noise.connect(filter);
-    filter.connect(gain);
-    gain.connect(this.sfxGain);
-    
-    noise.start(now);
+    generateCrunch(this.ctx, this.sfxGain);
   }
 
   public startBGM() {
@@ -340,31 +286,7 @@ class AudioEngine {
   public playSpawn() {
     this.init();
     if (!this.ctx || !this.sfxGain) return;
-
-    const ctx = this.ctx;
-    const now = ctx.currentTime;
-    
-    // Create a magical ascending chime
-    const notes = [400, 500, 600, 800, 1200];
-    
-    notes.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      
-      const startTime = now + (i * 0.05);
-      osc.frequency.setValueAtTime(freq, startTime);
-      
-      // Fast attack, slow decay per note
-      gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(0.4, startTime + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.5);
-      
-      osc.connect(gain);
-      gain.connect(this.sfxGain!);
-      osc.start(startTime);
-      osc.stop(startTime + 0.5);
-    });
+    generateSpawnChime(this.ctx, this.sfxGain);
   }
 
   private lastPlayedEvent: Record<string, number> = {};
@@ -380,137 +302,32 @@ class AudioEngine {
     if (!this.ctx || !this.sfxGain) return;
 
     // --- Spatial Hard Cull ---
-    // If the sound is too far away, we abort immediately before checking debounce.
-    // This prevents off-screen creatures from silencing on-screen creatures (Debounce Masking Fix).
     const cam = worldRef.current?.camera;
-    // We assume max view width is ~2000px at zoom 1. We cull at distance 1500 (squared = 2250000).
-    // The culling distance scales with zoom: zoom in (zoom=2) means we cull closer (dist 750).
-    const cullDist = 1500 / (cam?.zoom || 1);
-    let distSq = 0;
     if (cam) {
-      const dx = cam.x - x;
-      const dy = cam.y - y;
-      distSq = dx * dx + dy * dy;
-      if (distSq > cullDist * cullDist) {
-        return; // Too far away, completely silent! (Hard cull saves CPU and avoids masking)
+      const { distanceGain, isCulled } = calculateSpatialGain(x, y, cam.x, cam.y, cam.zoom);
+      if (isCulled) return;
+
+      const now = this.ctx.currentTime;
+      const eventKey = `${event}_${diet}`;
+      const debounceTimes = { EAT: 0.15, HURT: 0.1, SLEEP: 2.0, ATTACK: 0.5 };
+      const delay = debounceTimes[event] || 0.2;
+      
+      if (this.lastPlayedEvent[eventKey] && now - this.lastPlayedEvent[eventKey] < delay) {
+        return;
       }
-    }
+      this.lastPlayedEvent[eventKey] = now;
 
-    const now = this.ctx.currentTime;
-    // Debounce to prevent audio spam
-    const eventKey = `${event}_${diet}`;
-    const debounceTimes = { EAT: 0.15, HURT: 0.1, SLEEP: 2.0, ATTACK: 0.5 };
-    const delay = debounceTimes[event] || 0.2;
-    
-    if (this.lastPlayedEvent[eventKey] && now - this.lastPlayedEvent[eventKey] < delay) {
-      return;
-    }
-    this.lastPlayedEvent[eventKey] = now;
-
-    // --- Spatial Attenuation ---
-    // Calculate precise distance for volume fading (only if it passed the hard cull).
-    let distanceGain = 1.0;
-    if (distSq > 0 && cullDist > 0) {
-      const distance = Math.sqrt(distSq);
-      distanceGain = Math.max(0.01, 1.0 - (distance / cullDist));
-    }
-
-    let customKey: keyof typeof AUDIO_ASSETS.sfx | null = null;
-    if (event === 'EAT') customKey = 'creatureEat';
-    else if (event === 'HURT') customKey = 'creatureHurt';
-    else if (event === 'ATTACK') customKey = 'creatureAttack';
-    else if (event === 'SLEEP') customKey = 'creatureSleep';
-    
-    if (customKey && this.playCustomSfx(customKey, distanceGain, 1.0 / scale)) {
-      return;
-    }
-
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    
-    // Size changes base frequency
-    const baseFreq = event === 'HURT' ? 600 : event === 'ATTACK' ? 150 : event === 'SLEEP' ? 300 : 400;
-    const freq = baseFreq / scale;
-
-    // Diet changes waveform
-    osc.type = diet === 'HERBIVORE' ? 'sine' : diet === 'CARNIVORE' ? 'sawtooth' : 'square';
-    
-    // Map event to envelope and sweep
-    if (event === 'EAT') {
-      // Replaced sharp oscillator with a natural soft crunch
-      const bufferSize = this.ctx.sampleRate * 0.15;
-      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
+      let customKey: keyof typeof AUDIO_ASSETS.sfx | null = null;
+      if (event === 'EAT') customKey = 'creatureEat';
+      else if (event === 'HURT') customKey = 'creatureHurt';
+      else if (event === 'ATTACK') customKey = 'creatureAttack';
+      else if (event === 'SLEEP') customKey = 'creatureSleep';
+      
+      if (customKey && this.playCustomSfx(customKey, distanceGain, 1.0 / scale)) {
+        return;
       }
-      
-      const noise = this.ctx.createBufferSource();
-      noise.buffer = buffer;
-      
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = diet === 'HERBIVORE' ? 800 : 1200;
-      
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.4 * distanceGain, now + 0.02);
-      gain.gain.linearRampToValueAtTime(0.1 * distanceGain, now + 0.05);
-      gain.gain.linearRampToValueAtTime(0.3 * distanceGain, now + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
-      
-      noise.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.sfxGain);
-      noise.start(now);
-    } 
-    else if (event === 'HURT') {
-      osc.frequency.setValueAtTime(freq * 1.5, now);
-      osc.frequency.exponentialRampToValueAtTime(freq * 0.5, now + 0.1);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.4 * distanceGain, now + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-      
-      // Soften the hurt beep so it doesn't sound like a harsh arcade error
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 1200; 
-      
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.sfxGain);
-      osc.start(now);
-      osc.stop(now + 0.1);
-    } 
-    else if (event === 'ATTACK') {
-      osc.frequency.setValueAtTime(freq * 0.8, now);
-      osc.frequency.linearRampToValueAtTime(freq * 1.5, now + 0.15);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.6 * distanceGain, now + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-      
-      // Low pass filter to make it a deep growl instead of harsh buzz
-      const filter = this.ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 800;
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.sfxGain);
-      
-      osc.start(now);
-      osc.stop(now + 0.2);
-    } 
-    else if (event === 'SLEEP') {
-      osc.type = 'sine'; // Always sine for sleeping to stay soft
-      osc.frequency.setValueAtTime(freq, now);
-      osc.frequency.linearRampToValueAtTime(freq * 0.8, now + 0.5);
-      osc.frequency.linearRampToValueAtTime(freq, now + 1.0);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.2 * distanceGain, now + 0.5);
-      gain.gain.linearRampToValueAtTime(0.01, now + 1.0);
-      osc.connect(gain);
-      gain.connect(this.sfxGain);
-      osc.start(now);
-      osc.stop(now + 1.0);
+
+      generateCreatureEvent(this.ctx, this.sfxGain, event, scale, diet, distanceGain);
     }
   }
 
@@ -564,69 +381,24 @@ class AudioEngine {
     this.init();
     if (this.playCustomSfx('godHeal')) return;
     if (!this.ctx || !this.sfxGain) return;
-
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.type = 'sine';
-    const now = this.ctx.currentTime;
-    
-    // Magical rising arpeggio / chime effect
-    osc.frequency.setValueAtTime(400, now);
-    osc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
-    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.3);
-    
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.3, now + 0.1);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-    
-    osc.connect(gain);
-    gain.connect(this.sfxGain);
-    
-    osc.start(now);
-    osc.stop(now + 0.5);
+    generateHealChime(this.ctx, this.sfxGain);
   }
 
   public playLevelUp(x: number, y: number) {
     this.init();
 
     const cam = worldRef.current?.camera;
-    const cullDist = 1500 / (cam?.zoom || 1);
-    let distanceGain = 1.0;
-    
     if (cam) {
-      const distSq = (cam.x - x)**2 + (cam.y - y)**2;
-      if (distSq > cullDist * cullDist) return; // Hard cull
-      distanceGain = Math.max(0.01, 1.0 - (Math.sqrt(distSq) / cullDist));
-    }
-    
-    if (this.playCustomSfx('levelUp', distanceGain)) return;
-
-    const ctx = this.ctx;
-    const sfxGain = this.sfxGain;
-    if (!ctx || !sfxGain) return;
-
-    if (cam) {
-      const now = ctx.currentTime;
-      // Arpeggio: C5 -> E5 -> G5
-      const notes = [523.25, 659.25, 783.99];
+      const { distanceGain, isCulled } = calculateSpatialGain(x, y, cam.x, cam.y, cam.zoom);
+      if (isCulled) return;
       
-      notes.forEach((freq, i) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        
-        const startTime = now + (i * 0.1);
-        osc.frequency.setValueAtTime(freq, startTime);
-        
-        gain.gain.setValueAtTime(0, startTime);
-        gain.gain.linearRampToValueAtTime(0.4 * distanceGain, startTime + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.3);
-        
-        osc.connect(gain);
-        gain.connect(sfxGain);
-        osc.start(startTime);
-        osc.stop(startTime + 0.3);
-      });
+      if (this.playCustomSfx('levelUp', distanceGain)) return;
+
+      const ctx = this.ctx;
+      const sfxGain = this.sfxGain;
+      if (!ctx || !sfxGain) return;
+
+      generateLevelUpChime(ctx, sfxGain, distanceGain);
     }
   }
 
