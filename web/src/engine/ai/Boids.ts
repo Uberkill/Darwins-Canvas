@@ -46,8 +46,11 @@ export function calculateBoids(c: Creature, world: WorldState): BoidsForces {
       
       // Predators ignore separation forces against their prey to prevent invisible forcefields
       if (dist < minSeparation && !hunts(c, other)) {
-        sepX += (dx / dist) / dist
-        sepY += (dy / dist) / dist
+        // Calculate penetration depth (0 at edge, 1 at exact center)
+        const penetration = 1 - (dist / minSeparation);
+        // Force scales linearly with how deeply they overlap, eliminating bang-bang jitter
+        sepX += (dx / dist) * penetration * 4.0;
+        sepY += (dy / dist) * penetration * 4.0;
       }
       
       // Alignment & Cohesion (Herding) is STRICTLY limited to the same diet

@@ -46,9 +46,10 @@ export const NavigationSystem = {
       };
 
       // 1. Separation (Highest Priority: don't crash into others)
-      if (boids.boidCount > 0) {
-        const sepMag = Math.sqrt(boids.sepX*boids.sepX + boids.sepY*boids.sepY) || 1;
-        accumulateForce((boids.sepX / sepMag) * MAX_STEERING_FORCE * 1.5, (boids.sepY / sepMag) * MAX_STEERING_FORCE * 1.5);
+      if (boids.sepX !== 0 || boids.sepY !== 0) {
+        // We use the raw accumulated penetration vectors. 
+        // Small overlaps = small force. Deep overlaps = massive force that eats the whole budget.
+        accumulateForce(boids.sepX * MAX_STEERING_FORCE, boids.sepY * MAX_STEERING_FORCE);
       }
 
       // 2. Fleeing / Foraging / Lure
