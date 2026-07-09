@@ -1,5 +1,5 @@
 import type { WorldState } from '../types'
-import { CARNIVORE_EAT_RANGE, HERBIVORE_EAT_RANGE } from '../constants'
+import { CARNIVORE_EAT_RANGE, HERBIVORE_EAT_RANGE, BASE_RENDER_SIZE } from '../constants'
 import { audio } from './audioEngine'
 import { hunts } from './ai/Thoughts'
 import { spawnPlant, killCreature, killPlant } from './entityManager'
@@ -13,8 +13,7 @@ export function runCollision(world: WorldState, _dt: number): void {
   const deletedCreatureIds = world.scratchpad.deletedCreatureIds;
   const deletedPlantIds    = world.scratchpad.deletedPlantIds;
 
-  const carnRangeSq = CARNIVORE_EAT_RANGE * CARNIVORE_EAT_RANGE
-  const herbRangeSq = HERBIVORE_EAT_RANGE * HERBIVORE_EAT_RANGE
+  // We compute range per-creature now based on their dynamic size
 
   // Combat loop
   for (let i = 0; i < world.creatures.length; i++) {
@@ -37,7 +36,17 @@ export function runCollision(world: WorldState, _dt: number): void {
       const bHuntsA = hunts(b, a);
 
       if (aHuntsB || bHuntsA) {
-        if (distSq < carnRangeSq) {
+        // Combat reach scales with the attacker's physical size
+        const aRadius = (BASE_RENDER_SIZE * a.currentScale * a.renderScale) / 2;
+        const bRadius = (BASE_RENDER_SIZE * b.currentScale * b.renderScale) / 2;
+        
+        // Attack range is the attacker's body radius + base eat range
+        let combatRange = 0;
+        if (aHuntsB && bHuntsA) combatRange = Math.max(aRadius, bRadius) + CARNIVORE_EAT_RANGE;
+        else if (aHuntsB) combatRange = aRadius + CARNIVORE_EAT_RANGE;
+        else if (bHuntsA) combatRange = bRadius + CARNIVORE_EAT_RANGE;
+
+        if (distSq < combatRange * combatRange) {
           // Combat happens!
           a.state = 'FIGHTING'
           b.state = 'FIGHTING'
@@ -139,7 +148,10 @@ export function runCollision(world: WorldState, _dt: number): void {
 
       const dx = c.x - p.x
       const dy = c.y - p.y
-      if (dx * dx + dy * dy < herbRangeSq) {
+      const cRadius = (BASE_RENDER_SIZE * c.currentScale * c.renderScale) / 2;
+      const eatRange = cRadius + (isMeat ? CARNIVORE_EAT_RANGE : HERBIVORE_EAT_RANGE);
+      
+      if (dx * dx + dy * dy < eatRange * eatRange) {
         killPlant(world, p.id)
         
         let plantEnergy = 15;
