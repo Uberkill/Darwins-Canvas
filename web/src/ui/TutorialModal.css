@@ -294,3 +294,18 @@
     text-align: center;
   }
 }
+
+@keyframes jiggle {
+  0% { transform: scale(1) rotate(0deg); }
+  10% { transform: scale(1.1) rotate(-5deg); }
+  20% { transform: scale(1.1) rotate(5deg); }
+  30% { transform: scale(1.1) rotate(-5deg); }
+  40% { transform: scale(1.1) rotate(5deg); }
+  50% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.notification-jiggle {
+  animation: jiggle 2s infinite ease-in-out;
+  background-color: var(--color-primary); /* glow green */
+}

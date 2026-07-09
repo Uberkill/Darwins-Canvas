@@ -1,0 +1,841 @@
+{
+  "communities": {
+    "0": [
+      "web_src_constants_index",
+      "web_src_constants_index_getcarnivorepopulationcap",
+      "web_src_constants_index_getglobalpopulationcap",
+      "web_src_constants_index_getherbivorepopulationcap",
+      "web_src_constants_index_getomnivorepopulationcap",
+      "web_src_constants_index_getplantcap",
+      "web_src_constants_index_trait_stats",
+      "web_src_engine_ai_boids",
+      "web_src_engine_ai_boids_boidsforces",
+      "web_src_engine_ai_boids_calculateboids",
+      "web_src_engine_ai_boids_nearbyboids",
+      "web_src_engine_ai_boids_sharedboidsresult",
+      "web_src_engine_ai_thoughts",
+      "web_src_engine_ai_thoughts_evaluatethoughts",
+      "web_src_engine_ai_thoughts_hunts",
+      "web_src_engine_ai_thoughts_nearbycreatures",
+      "web_src_engine_ai_thoughts_nearbyplants",
+      "web_src_engine_ai_thoughts_perceptionresult",
+      "web_src_engine_ai_thoughts_sharedresult",
+      "web_src_engine_ai_thoughts_sizevalue",
+      "web_src_engine_collision",
+      "web_src_engine_collision_runcollision",
+      "web_src_engine_collision_test",
+      "web_src_engine_entitymanager_test",
+      "web_src_engine_movement",
+      "web_src_engine_movement_applywallbounds",
+      "web_src_engine_movement_movecrawler",
+      "web_src_engine_movement_movehopper",
+      "web_src_engine_movement_movepacer",
+      "web_src_engine_reproduction",
+      "web_src_engine_reproduction_checkreproduction",
+      "web_src_engine_reproduction_spawnbaby",
+      "web_src_engine_simulate",
+      "web_src_engine_simulate_fuzz_test",
+      "web_src_engine_simulate_simulate",
+      "web_src_engine_spatialgrid",
+      "web_src_engine_spatialgrid_spatialgrid",
+      "web_src_engine_spatialgrid_spatialgrid_clear",
+      "web_src_engine_spatialgrid_spatialgrid_constructor",
+      "web_src_engine_spatialgrid_spatialgrid_getcellindex",
+      "web_src_engine_spatialgrid_spatialgrid_getnearbycreatures",
+      "web_src_engine_spatialgrid_spatialgrid_getnearbyplants",
+      "web_src_engine_spatialgrid_spatialgrid_insertcreature",
+      "web_src_engine_spatialgrid_spatialgrid_insertplant",
+      "web_src_engine_spatialgrid_spatialgrid_resize",
+      "web_src_engine_spatialgrid_test",
+      "web_src_engine_spawner",
+      "web_src_engine_spawner_createplant",
+      "web_src_engine_spawner_scratchnearbycreatures",
+      "web_src_engine_spawner_scratchnearbyplants",
+      "web_src_engine_spawner_tickplantspawner",
+      "web_src_engine_systems_environmentsystem",
+      "web_src_engine_systems_environmentsystem_environmentsystem",
+      "web_src_engine_systems_environmentsystem_environmentsystem_update",
+      "web_src_engine_systems_immigrationsystem",
+      "web_src_engine_systems_immigrationsystem_immigrationsystem",
+      "web_src_engine_systems_immigrationsystem_immigrationsystem_update",
+      "web_src_engine_systems_navigationsystem",
+      "web_src_engine_systems_navigationsystem_navigationsystem",
+      "web_src_engine_systems_navigationsystem_test",
+      "web_src_engine_worldref_clampentitiestoworld",
+      "web_src_hooks_usegodtools",
+      "web_src_hooks_usegodtools_usegodtools",
+      "web_src_test_factories",
+      "web_src_test_factories_createmockcreature",
+      "web_src_test_factories_createmockplant",
+      "web_src_test_factories_createmockworld",
+      "web_src_tests_engine_collision_test_makecreature",
+      "web_src_tests_engine_collision_test_makeplant",
+      "web_src_tests_engine_collision_test_makeworld",
+      "web_src_tests_engine_movement_test",
+      "web_src_tests_engine_movement_test_makecreature",
+      "web_src_tests_engine_simulate_test",
+      "web_src_tests_engine_simulate_test_makereadycreature",
+      "web_src_tests_engine_simulate_test_makeworld",
+      "web_src_types_index_creature",
+      "web_src_types_index_plant",
+      "web_src_types_index_worldstate",
+      "web_src_utils_savesystem_saveslotdata"
+    ],
+    "1": [
+      "web_src_app",
+      "web_src_app_app",
+      "web_src_app_usecreaturecount",
+      "web_src_components_audiocontroller",
+      "web_src_components_audiocontroller_audiocontroller",
+      "web_src_components_audiocontroller_props",
+      "web_src_constants_index_getworldheight",
+      "web_src_constants_index_getworldwidth",
+      "web_src_engine_audioengine_audio",
+      "web_src_engine_usegameloop_usegameloop",
+      "web_src_engine_worldref",
+      "web_src_engine_worldref_createinitialworldstate",
+      "web_src_engine_worldref_updateworlddimensions",
+      "web_src_engine_worldref_worldref",
+      "web_src_hooks_usecameracontrols",
+      "web_src_hooks_usecameracontrols_usecameracontrols",
+      "web_src_hooks_useterrariuminput",
+      "web_src_hooks_useterrariuminput_useterrariuminput",
+      "web_src_main",
+      "web_src_store_useenginestore",
+      "web_src_store_useenginestore_useenginestore",
+      "web_src_store_usesettingsstore",
+      "web_src_store_usesettingsstore_usesettingsstore",
+      "web_src_store_useuistore",
+      "web_src_store_useuistore_useuistore",
+      "web_src_ui_cameracontrols",
+      "web_src_ui_cameracontrols_cameracontrols",
+      "web_src_ui_components_updateprompt",
+      "web_src_ui_components_updateprompt_updateprompt",
+      "web_src_ui_creationpanel",
+      "web_src_ui_creationpanel_creationpanel",
+      "web_src_ui_creatureinspector",
+      "web_src_ui_creatureinspector_creatureinspector",
+      "web_src_ui_creatureinspector_getmoodicon",
+      "web_src_ui_fab",
+      "web_src_ui_fab_fab",
+      "web_src_ui_fab_fabprops",
+      "web_src_ui_godtoolbar",
+      "web_src_ui_godtoolbar_godtoolbar",
+      "web_src_ui_godtoolbar_tools",
+      "web_src_ui_hoveroverlay",
+      "web_src_ui_hoveroverlay_getmoodicon",
+      "web_src_ui_hoveroverlay_hoveroverlay",
+      "web_src_ui_onboardingmodal",
+      "web_src_ui_onboardingmodal_onboarding_steps",
+      "web_src_ui_onboardingmodal_onboardingmodal",
+      "web_src_ui_onboardingmodal_onboardingstep",
+      "web_src_ui_pausemenumodal",
+      "web_src_ui_pausemenumodal_pausemenumodal",
+      "web_src_ui_statsbutton",
+      "web_src_ui_statsbutton_statsbutton",
+      "web_src_ui_statspanel",
+      "web_src_ui_statspanel_graphlines",
+      "web_src_ui_statspanel_statspanel",
+      "web_src_ui_timecontrols",
+      "web_src_ui_timecontrols_timecontrols",
+      "web_src_ui_titlescreen_test",
+      "web_src_ui_titlescreen_titlescreen",
+      "web_src_ui_tutorialbutton",
+      "web_src_ui_tutorialbutton_tutorialbutton",
+      "web_src_ui_tutorialmodal",
+      "web_src_ui_tutorialmodal_chapter",
+      "web_src_ui_tutorialmodal_tab",
+      "web_src_ui_tutorialmodal_tutorialmodal"
+    ],
+    "2": [
+      "web_package",
+      "web_package_dependencies",
+      "web_package_dependencies_lucide_react",
+      "web_package_dependencies_react",
+      "web_package_dependencies_react_dom",
+      "web_package_dependencies_zustand",
+      "web_package_devdependencies",
+      "web_package_devdependencies_eslint",
+      "web_package_devdependencies_eslint_config_prettier",
+      "web_package_devdependencies_fake_indexeddb",
+      "web_package_devdependencies_fast_check",
+      "web_package_devdependencies_gh_pages",
+      "web_package_devdependencies_jsdom",
+      "web_package_devdependencies_oxlint",
+      "web_package_devdependencies_testing_library_jest_dom",
+      "web_package_devdependencies_testing_library_react",
+      "web_package_devdependencies_types_node",
+      "web_package_devdependencies_types_react",
+      "web_package_devdependencies_types_react_dom",
+      "web_package_devdependencies_typescript",
+      "web_package_devdependencies_typescript_eslint_eslint_plugin",
+      "web_package_devdependencies_typescript_eslint_parser",
+      "web_package_devdependencies_vite",
+      "web_package_devdependencies_vite_plugin_pwa",
+      "web_package_devdependencies_vitejs_plugin_react",
+      "web_package_devdependencies_vitest",
+      "web_package_name",
+      "web_package_private",
+      "web_package_scripts",
+      "web_package_scripts_build",
+      "web_package_scripts_deploy",
+      "web_package_scripts_dev",
+      "web_package_scripts_lint",
+      "web_package_scripts_preview",
+      "web_package_scripts_test",
+      "web_package_scripts_test_run",
+      "web_package_type",
+      "web_package_version"
+    ],
+    "3": [
+      "web_src_constants_audioconfig",
+      "web_src_constants_audioconfig_audio_assets",
+      "web_src_engine_audioengine",
+      "web_src_engine_audioengine_audioengine",
+      "web_src_engine_audioengine_audioengine_crossfadeto",
+      "web_src_engine_audioengine_audioengine_init",
+      "web_src_engine_audioengine_audioengine_loadcustomassets",
+      "web_src_engine_audioengine_audioengine_playcreatureevent",
+      "web_src_engine_audioengine_audioengine_playcrunch",
+      "web_src_engine_audioengine_audioengine_playcustomsfx",
+      "web_src_engine_audioengine_audioengine_playgodtool",
+      "web_src_engine_audioengine_audioengine_playheal",
+      "web_src_engine_audioengine_audioengine_playlevelup",
+      "web_src_engine_audioengine_audioengine_playnextbgmnote",
+      "web_src_engine_audioengine_audioengine_playpop",
+      "web_src_engine_audioengine_audioengine_playspawn",
+      "web_src_engine_audioengine_audioengine_playuiclick",
+      "web_src_engine_audioengine_audioengine_playuipop",
+      "web_src_engine_audioengine_audioengine_playuitick",
+      "web_src_engine_audioengine_audioengine_playzap",
+      "web_src_engine_audioengine_audioengine_setplaybackrate",
+      "web_src_engine_audioengine_audioengine_setvolumes",
+      "web_src_engine_audioengine_audioengine_startbgm",
+      "web_src_engine_audioengine_audioengine_stopbgm",
+      "web_src_engine_audioengine_audioengine_updatetimeofday",
+      "web_src_engine_audioengine_audioengine_updatevolumes",
+      "web_src_engine_proceduralsfx",
+      "web_src_engine_proceduralsfx_generatecreatureevent",
+      "web_src_engine_proceduralsfx_generatecrunch",
+      "web_src_engine_proceduralsfx_generatehealchime",
+      "web_src_engine_proceduralsfx_generatelevelupchime",
+      "web_src_engine_proceduralsfx_generatepop",
+      "web_src_engine_proceduralsfx_generatespawnchime",
+      "web_src_engine_proceduralsfx_generatezap",
+      "web_src_engine_spatialaudioutils",
+      "web_src_engine_spatialaudioutils_calculatespatialgain",
+      "web_src_engine_systems_lifesystem",
+      "web_src_engine_systems_lifesystem_update"
+    ],
+    "4": [
+      "fish_tank_architecture_layering",
+      "web_src_constants_index_size_stats",
+      "web_src_engine_creaturefactory",
+      "web_src_engine_creaturefactory_buildcreature",
+      "web_src_engine_creaturefactory_calculatecreaturestats",
+      "web_src_engine_creaturefactory_test",
+      "web_src_engine_systems_lifesystem_test",
+      "web_src_store_usestore",
+      "web_src_store_usestore_test",
+      "web_src_store_usestore_usestore",
+      "web_src_types_index",
+      "web_src_types_index_behaviorstate",
+      "web_src_types_index_cameramode",
+      "web_src_types_index_camerastate",
+      "web_src_types_index_creaturesize",
+      "web_src_types_index_creaturestate",
+      "web_src_types_index_diettype",
+      "web_src_types_index_ecosystemanalytics",
+      "web_src_types_index_ecosystemdatapoint",
+      "web_src_types_index_enginestore",
+      "web_src_types_index_godtool",
+      "web_src_types_index_moodtype",
+      "web_src_types_index_movementtype",
+      "web_src_types_index_pendingcreature",
+      "web_src_types_index_settingsstore",
+      "web_src_ui_creationsettings",
+      "web_src_ui_metricsgraph",
+      "web_src_ui_metricsgraph_graphline",
+      "web_src_ui_metricsgraph_props",
+      "web_src_ui_populationgraph",
+      "web_src_ui_populationgraph_props",
+      "web_src_ui_tooltip_tooltip",
+      "web_src_ui_traitpicker",
+      "web_src_ui_traitpicker_diet_options",
+      "web_src_ui_traitpicker_movement_options",
+      "web_src_ui_traitpicker_size_options",
+      "web_src_ui_traitpicker_traitpickerprops"
+    ],
+    "5": [
+      "hooks_usedrawingcanvas_exportbase64",
+      "web_src_constants_index_decal_stats",
+      "web_src_hooks_usecanvashistory",
+      "web_src_hooks_usecanvashistory_undosnapshot",
+      "web_src_hooks_usecanvashistory_usecanvashistory",
+      "web_src_hooks_usedrawingcanvas",
+      "web_src_hooks_usedrawingcanvas_drawingcanvashandle",
+      "web_src_hooks_usedrawingcanvas_drawingtool",
+      "web_src_hooks_usedrawingcanvas_usedrawingcanvas",
+      "web_src_renderer_baker",
+      "web_src_renderer_baker_bakecreaturesprites",
+      "web_src_renderer_baker_bakedsprites",
+      "web_src_renderer_baker_loadimage",
+      "web_src_renderer_canvasutils_getcanvaspoint",
+      "web_src_renderer_canvasutils_setupcanvas",
+      "web_src_renderer_decals",
+      "web_src_renderer_decals_decal_svgs",
+      "web_src_renderer_decals_decalstyle",
+      "web_src_renderer_decals_getdecaldataurl",
+      "web_src_types_index_decal",
+      "web_src_ui_creationcanvas",
+      "web_src_ui_creationcanvas_creationcanvas",
+      "web_src_ui_creationcanvas_creationcanvasprops",
+      "web_src_ui_creationtools",
+      "web_src_utils_drawingutils",
+      "web_src_utils_drawingutils_applybrushsettings",
+      "web_src_utils_drawingutils_checkisempty",
+      "web_src_utils_drawingutils_floodfill",
+      "web_src_utils_drawingutils_getpixelbounds",
+      "web_src_utils_drawingutils_hextorgb",
+      "web_src_utils_drawingutils_test"
+    ],
+    "6": [
+      "renderer_renderer_renderer_renderer_zerogcbuffer",
+      "web_src_engine_entitymanager",
+      "web_src_engine_entitymanager_clearentities",
+      "web_src_engine_entitymanager_flushdeadentities",
+      "web_src_engine_entitymanager_killcreature",
+      "web_src_engine_entitymanager_killplant",
+      "web_src_engine_entitymanager_resetworld",
+      "web_src_engine_entitymanager_setentities",
+      "web_src_renderer_drawcreature",
+      "web_src_renderer_drawcreature_drawcreatureshadow",
+      "web_src_renderer_drawcreature_drawfallback",
+      "web_src_renderer_draweffects",
+      "web_src_renderer_draweffects_draweffects",
+      "web_src_renderer_drawenvironment",
+      "web_src_renderer_drawenvironment_drawenvironment",
+      "web_src_renderer_imagecache",
+      "web_src_renderer_imagecache_cache",
+      "web_src_renderer_imagecache_generatetintedimage",
+      "web_src_renderer_imagecache_getimage",
+      "web_src_renderer_imagecache_preloadimage",
+      "web_src_renderer_imagecache_releaseimage",
+      "web_src_renderer_renderer",
+      "web_src_renderer_renderer_gamerenderer",
+      "web_src_renderer_renderer_gamerenderer_constructor",
+      "web_src_renderer_renderer_gamerenderer_dispose",
+      "web_src_renderer_renderer_gamerenderer_draw",
+      "web_src_renderer_renderer_gamerenderer_drawhealthbar",
+      "web_src_renderer_renderer_gamerenderer_resize",
+      "web_src_types_index_visualeffect"
+    ],
+    "7": [
+      "web_src_hooks_usesaves",
+      "web_src_hooks_usesaves_usesaves",
+      "web_src_ui_components_doodlelayer",
+      "web_src_ui_components_doodlelayer_doodlelayer",
+      "web_src_ui_components_emergencyresetbutton",
+      "web_src_ui_components_emergencyresetbutton_emergencyresetbutton",
+      "web_src_ui_components_mapsizepromptmodal",
+      "web_src_ui_components_mapsizepromptmodal_mapsizepromptmodal",
+      "web_src_ui_components_mapsizepromptmodal_mapsizepromptmodalprops",
+      "web_src_ui_components_patchnotesmodal",
+      "web_src_ui_components_patchnotesmodal_patchnotesmodal",
+      "web_src_ui_components_patchnotesmodal_patchnotesmodalprops",
+      "web_src_ui_components_saveslotsmodal",
+      "web_src_ui_components_saveslotsmodal_saveslotsmodal",
+      "web_src_ui_components_saveslotsmodal_saveslotsmodalprops",
+      "web_src_ui_components_settingsmodal",
+      "web_src_ui_components_settingsmodal_settingsmodal",
+      "web_src_ui_components_settingsmodal_settingsmodalprops",
+      "web_src_ui_titlescreen",
+      "web_src_ui_titlescreen_menustate",
+      "web_src_ui_titlescreen_titlescreenprops",
+      "web_src_utils_savesystem",
+      "web_src_utils_savesystem_deletegame",
+      "web_src_utils_savesystem_getdb",
+      "web_src_utils_savesystem_listsaves",
+      "web_src_utils_savesystem_loadgame",
+      "web_src_utils_savesystem_savegame",
+      "web_src_utils_savesystem_saveslotmetadata",
+      "web_src_utils_savesystem_test"
+    ],
+    "8": [
+      "c_users_oob_gemini_antigravity_scratch_fish_tank_web_tsconfig_app_json",
+      "web_tsconfig_app_compileroptions",
+      "web_tsconfig_app_compileroptions_allowarbitraryextensions",
+      "web_tsconfig_app_compileroptions_allowimportingtsextensions",
+      "web_tsconfig_app_compileroptions_erasablesyntaxonly",
+      "web_tsconfig_app_compileroptions_jsx",
+      "web_tsconfig_app_compileroptions_lib",
+      "web_tsconfig_app_compileroptions_module",
+      "web_tsconfig_app_compileroptions_moduledetection",
+      "web_tsconfig_app_compileroptions_moduleresolution",
+      "web_tsconfig_app_compileroptions_noemit",
+      "web_tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "web_tsconfig_app_compileroptions_nounusedlocals",
+      "web_tsconfig_app_compileroptions_nounusedparameters",
+      "web_tsconfig_app_compileroptions_skiplibcheck",
+      "web_tsconfig_app_compileroptions_target",
+      "web_tsconfig_app_compileroptions_tsbuildinfofile",
+      "web_tsconfig_app_compileroptions_types",
+      "web_tsconfig_app_compileroptions_verbatimmodulesyntax",
+      "web_tsconfig_app_include"
+    ],
+    "9": [
+      "c_users_oob_gemini_antigravity_scratch_fish_tank_web_tsconfig_node_json",
+      "web_tsconfig_node_compileroptions",
+      "web_tsconfig_node_compileroptions_allowimportingtsextensions",
+      "web_tsconfig_node_compileroptions_erasablesyntaxonly",
+      "web_tsconfig_node_compileroptions_lib",
+      "web_tsconfig_node_compileroptions_module",
+      "web_tsconfig_node_compileroptions_moduledetection",
+      "web_tsconfig_node_compileroptions_noemit",
+      "web_tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "web_tsconfig_node_compileroptions_nounusedlocals",
+      "web_tsconfig_node_compileroptions_nounusedparameters",
+      "web_tsconfig_node_compileroptions_skiplibcheck",
+      "web_tsconfig_node_compileroptions_target",
+      "web_tsconfig_node_compileroptions_tsbuildinfofile",
+      "web_tsconfig_node_compileroptions_types",
+      "web_tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "web_tsconfig_node_include"
+    ],
+    "10": [
+      "engine_usegameloop_fixed_timestep_accumulator",
+      "web_src_engine_systems_analyticssystem",
+      "web_src_engine_systems_analyticssystem_analyticssystem",
+      "web_src_engine_systems_analyticssystem_analyticssystem_update",
+      "web_src_engine_systems_camerasystem",
+      "web_src_engine_systems_camerasystem_camerasystem",
+      "web_src_engine_systems_camerasystem_camerasystem_update",
+      "web_src_engine_systems_interactionsystem",
+      "web_src_engine_systems_interactionsystem_interactionsystem",
+      "web_src_engine_systems_interactionsystem_interactionsystem_update",
+      "web_src_engine_usegameloop",
+      "web_src_tests_engine_usegameloop_test",
+      "web_src_types_index_uistore"
+    ],
+    "11": [
+      "c_users_oob_gemini_antigravity_scratch_fish_tank_web_eslintrc_json",
+      "web_eslintrc_env",
+      "web_eslintrc_env_browser",
+      "web_eslintrc_env_es2022",
+      "web_eslintrc_extends",
+      "web_eslintrc_ignorepatterns",
+      "web_eslintrc_parser",
+      "web_eslintrc_plugins",
+      "web_eslintrc_rules",
+      "web_eslintrc_rules_typescript_eslint_explicit_module_boundary_types",
+      "web_eslintrc_rules_typescript_eslint_no_non_null_assertion",
+      "web_eslintrc_rules_typescript_eslint_no_unused_vars"
+    ],
+    "12": [
+      "src_02_system_architecture_render_layer",
+      "src_02_system_architecture_simulation_layer",
+      "src_02_system_architecture_tech_stack",
+      "src_04_workflows_and_logic_ecosystem_game_loop",
+      "src_05_implementation_plan_renderer",
+      "src_05_implementation_plan_simulation_engine",
+      "web_serena_memories_conventions_rendering_buffer",
+      "web_serena_memories_conventions_state_management",
+      "web_serena_memories_core_fish_tank_project",
+      "web_serena_memories_suggested_commands",
+      "web_serena_memories_task_completion_workflow",
+      "web_serena_memories_tech_stack_project_stack"
+    ],
+    "13": [
+      "c_users_oob_gemini_antigravity_scratch_fish_tank_web_oxlintrc_json",
+      "web_oxlintrc_plugins",
+      "web_oxlintrc_rules",
+      "web_oxlintrc_rules_react_only_export_components",
+      "web_oxlintrc_rules_react_rules_of_hooks",
+      "web_oxlintrc_schema"
+    ],
+    "14": [
+      "docs_design_carnivores",
+      "docs_design_herbivores",
+      "docs_design_immigration",
+      "docs_design_scavengers",
+      "web_docs_ecosystem_math_carrying_capacity"
+    ],
+    "15": [
+      "web_serena_memories_memory_maintenance",
+      "web_serena_memories_memory_maintenance_add_update_threshold",
+      "web_serena_memories_memory_maintenance_discovery_model",
+      "web_serena_memories_memory_maintenance_maintenance_actions",
+      "web_serena_memories_memory_maintenance_style"
+    ],
+    "16": [
+      "docs_architecture_game_loop",
+      "docs_architecture_render_layer",
+      "docs_architecture_simulation_layer",
+      "docs_design_core_game_loop"
+    ],
+    "17": [
+      "src_03_design_and_creatures_visual_style",
+      "src_04_workflows_and_logic_creation_workflow",
+      "src_05_implementation_plan_creation_lab",
+      "web_public_design_system_html"
+    ],
+    "18": [
+      "c_users_oob_gemini_antigravity_scratch_fish_tank_web_tsconfig_json",
+      "web_tsconfig_files",
+      "web_tsconfig_references"
+    ],
+    "19": [
+      "docs_design_evolution",
+      "docs_design_evolution_genetics",
+      "web_docs_ecosystem_math_senescence"
+    ],
+    "20": [
+      "web_public_icons_bluesky_icon",
+      "web_public_icons_social_icon",
+      "web_public_icons_x_icon"
+    ],
+    "21": [
+      "fish_tank_zen_terrarium_sandbox",
+      "src_01_prd_core_concept_zen_terrarium_sandbox"
+    ],
+    "22": [
+      "src_02_system_architecture_data_layer",
+      "src_05_implementation_plan_foundation"
+    ],
+    "23": [
+      "docs_architecture_3_tier_separation"
+    ],
+    "24": [
+      "docs_architecture_7_pillar_physics_engine"
+    ],
+    "25": [
+      "docs_architecture_boids_algorithm"
+    ],
+    "26": [
+      "docs_architecture_data_layer"
+    ],
+    "27": [
+      "docs_architecture_spatial_grid"
+    ],
+    "28": [
+      "docs_style_guide_ui_aesthetics"
+    ],
+    "29": [
+      "docs_style_guide_ui_style_guide"
+    ],
+    "30": [
+      "fish_tank_creature_matrix"
+    ],
+    "31": [
+      "fish_tank_simulation_loop"
+    ],
+    "32": [
+      "src_01_prd_core_concept_mvp_boundaries"
+    ],
+    "33": [
+      "src_03_design_and_creatures_diet_logic"
+    ],
+    "34": [
+      "src_03_design_and_creatures_movement_behaviors"
+    ],
+    "35": [
+      "src_03_design_and_creatures_size_matrix"
+    ],
+    "36": [
+      "web_index_html"
+    ],
+    "37": [
+      "web_index_html_index"
+    ],
+    "38": [
+      "web_public_favicon_image"
+    ],
+    "39": [
+      "web_public_icons_discord_icon"
+    ],
+    "40": [
+      "web_public_icons_documentation_icon"
+    ],
+    "41": [
+      "web_public_icons_github_icon"
+    ],
+    "42": [
+      "web_readme_darwins_canvas"
+    ],
+    "43": [
+      "web_scratch"
+    ],
+    "44": [
+      "web_serena_memories_conventions"
+    ],
+    "45": [
+      "web_serena_memories_core"
+    ],
+    "46": [
+      "web_serena_memories_task_completion"
+    ],
+    "47": [
+      "web_serena_memories_tech_stack"
+    ],
+    "48": [
+      "web_serena_project_config"
+    ],
+    "49": [
+      "web_src_assets_hero_image"
+    ],
+    "50": [
+      "web_src_assets_react_react_logo"
+    ],
+    "51": [
+      "web_src_assets_vite_vite"
+    ],
+    "52": [
+      "web_src_engine_entitymanager_spawncreature"
+    ],
+    "53": [
+      "web_src_engine_entitymanager_spawnplant"
+    ],
+    "54": [
+      "web_src_renderer_canvasutils_getworldpoint"
+    ],
+    "55": [
+      "web_src_renderer_drawplant_drawplant"
+    ],
+    "56": [
+      "web_src_test_setup"
+    ],
+    "57": [
+      "web_src_ui_brushpicker_brushpicker"
+    ],
+    "58": [
+      "web_src_ui_colorpalette_colorpalette"
+    ],
+    "59": [
+      "web_src_ui_emptystate_emptystate"
+    ],
+    "60": [
+      "web_src_ui_portraitlock"
+    ],
+    "61": [
+      "web_src_utils_namegenerator_generaterandomname"
+    ],
+    "62": [
+      "web_src_utils_serviceworker_test"
+    ],
+    "63": [
+      "web_vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.0688088283024992,
+    "1": 0.09474206349206349,
+    "2": 0.05263157894736842,
+    "3": 0.11948790896159317,
+    "4": 0.08858858858858859,
+    "5": 0.12258064516129032,
+    "6": 0.10837438423645321,
+    "7": 0.1206896551724138,
+    "8": 0.1,
+    "9": 0.11764705882352941,
+    "10": 0.20512820512820512,
+    "11": 0.16666666666666666,
+    "12": 0.18181818181818182,
+    "13": 0.3333333333333333,
+    "14": 0.5,
+    "15": 0.4,
+    "16": 0.5,
+    "17": 0.6666666666666666,
+    "18": 0.6666666666666666,
+    "19": 0.6666666666666666,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0,
+    "48": 1.0,
+    "49": 1.0,
+    "50": 1.0,
+    "51": 1.0,
+    "52": 1.0,
+    "53": 1.0,
+    "54": 1.0,
+    "55": 1.0,
+    "56": 1.0,
+    "57": 1.0,
+    "58": 1.0,
+    "59": 1.0,
+    "60": 1.0,
+    "61": 1.0,
+    "62": 1.0,
+    "63": 1.0
+  },
+  "gods": [
+    {
+      "id": "web_src_store_useuistore_useuistore",
+      "label": "useUIStore",
+      "degree": 33
+    },
+    {
+      "id": "web_src_types_index_worldstate",
+      "label": "WorldState",
+      "degree": 31
+    },
+    {
+      "id": "web_src_types_index_creature",
+      "label": "Creature",
+      "degree": 27
+    },
+    {
+      "id": "web_src_engine_audioengine_audioengine",
+      "label": "AudioEngine",
+      "degree": 23
+    },
+    {
+      "id": "web_src_engine_spatialgrid_spatialgrid",
+      "label": "SpatialGrid",
+      "degree": 20
+    },
+    {
+      "id": "web_src_engine_worldref_worldref",
+      "label": "worldRef",
+      "degree": 19
+    },
+    {
+      "id": "web_tsconfig_app_compileroptions",
+      "label": "compilerOptions",
+      "degree": 18
+    },
+    {
+      "id": "web_src_store_useenginestore_useenginestore",
+      "label": "useEngineStore",
+      "degree": 18
+    },
+    {
+      "id": "web_tsconfig_node_compileroptions",
+      "label": "compilerOptions",
+      "degree": 15
+    },
+    {
+      "id": "web_src_types_index_plant",
+      "label": "Plant",
+      "degree": 15
+    }
+  ],
+  "surprises": [
+    {
+      "source": "useStore",
+      "target": "Architecture Layering",
+      "source_files": [
+        "web/src/store/useStore.ts",
+        "FISH_TANK.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "implements",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ code); connects across different repos/directories; peripheral node `Architecture Layering` unexpectedly reaches hub `useStore`"
+    },
+    {
+      "source": "Zero-GC Buffer",
+      "target": "cache",
+      "source_files": [
+        "renderer/Renderer.ts",
+        "web/src/renderer/imageCache.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link; peripheral node `Zero-GC Buffer` unexpectedly reaches hub `cache`"
+    },
+    {
+      "source": "Zen Terrarium Sandbox",
+      "target": "Zen Terrarium Sandbox",
+      "source_files": [
+        "FISH_TANK.md",
+        "src/01_PRD_Core_Concept.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Tech Stack Overview",
+      "target": "Serena Tech Stack Note",
+      "source_files": [
+        "src/02_System_Architecture.md",
+        "web/.serena/memories/tech_stack.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "State Management Conventions",
+      "target": "Simulation Layer",
+      "source_files": [
+        "web/.serena/memories/conventions.md",
+        "src/02_System_Architecture.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `WorldState` connect `Community 0` to `Community 1`, `Community 3`, `Community 4`, `Community 6`, `Community 7`, `Community 10`?",
+      "why": "High betweenness centrality (0.027) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Creature` connect `Community 0` to `Community 1`, `Community 4`, `Community 6`, `Community 7`?",
+      "why": "High betweenness centrality (0.021) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `parser`, `plugins`, `extends` to the rest of the system?",
+      "why": "173 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.0688088283024992 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 1` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09474206349206349 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 2` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.05263157894736842 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 3` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11948790896159317 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

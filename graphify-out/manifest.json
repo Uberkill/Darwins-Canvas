@@ -94,11 +94,6 @@
     "ast_hash": "2bfef70e199e40de3d955540ee4c0157",
     "semantic_hash": ""
   },
-  "web/src/store/useStore.ts": {
-    "mtime": 1783350894.634744,
-    "ast_hash": "f5f578c38370125889f111505c98f8ed",
-    "semantic_hash": ""
-  },
   "web/src/test-setup.ts": {
     "mtime": 1783186404.3326924,
     "ast_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9",
@@ -295,19 +290,19 @@
     "semantic_hash": "029f4905006c1fffd96bc863e2d98d3e"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\package.json": {
-    "mtime": 1783529659.1737723,
-    "ast_hash": "030c24f2dda5b29e19e30d315eda0cdf",
-    "semantic_hash": "030c24f2dda5b29e19e30d315eda0cdf"
+    "mtime": 1783577244.8039317,
+    "ast_hash": "1977851128c2b4c55a38eaaf6b9d1659",
+    "semantic_hash": "1977851128c2b4c55a38eaaf6b9d1659"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\App.tsx": {
-    "mtime": 1783537138.5284598,
-    "ast_hash": "45a0716d77ec1848eccb803d0d33ab1d",
-    "semantic_hash": "45a0716d77ec1848eccb803d0d33ab1d"
+    "mtime": 1783577557.3240807,
+    "ast_hash": "bd4cc5b621bcebb15cb934657b15287b",
+    "semantic_hash": "bd4cc5b621bcebb15cb934657b15287b"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\constants\\index.ts": {
-    "mtime": 1783523772.8590772,
-    "ast_hash": "e771526c72012bbbd7d2f5015de0e3d6",
-    "semantic_hash": "e771526c72012bbbd7d2f5015de0e3d6"
+    "mtime": 1783588674.4893947,
+    "ast_hash": "7b3ea75241ca2f6d362b719207fa733a",
+    "semantic_hash": "7b3ea75241ca2f6d362b719207fa733a"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\constants\\traits.tsx": {
     "mtime": 1783448445.444455,
@@ -315,34 +310,34 @@
     "semantic_hash": "5b3f681d21a71d6a1f31f4f3c337dfc3"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\ai\\Boids.ts": {
-    "mtime": 1783364781.6378138,
-    "ast_hash": "70764362b4fafdfb9334ac2bb1c72bc4",
-    "semantic_hash": "70764362b4fafdfb9334ac2bb1c72bc4"
+    "mtime": 1783589408.2647352,
+    "ast_hash": "1ec442afa74932225bb620fc208bc165",
+    "semantic_hash": "1ec442afa74932225bb620fc208bc165"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\ai\\Thoughts.ts": {
-    "mtime": 1783523787.373859,
-    "ast_hash": "5b8703ea7a4f833e78640fa58b0347a0",
-    "semantic_hash": "5b8703ea7a4f833e78640fa58b0347a0"
+    "mtime": 1783590421.3407505,
+    "ast_hash": "7fffc636557da18772ffc68a79e3992f",
+    "semantic_hash": "7fffc636557da18772ffc68a79e3992f"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\audioEngine.ts": {
-    "mtime": 1783537149.4297566,
-    "ast_hash": "1f29ad7cf92e167e2162ed06a91178d5",
-    "semantic_hash": "1f29ad7cf92e167e2162ed06a91178d5"
+    "mtime": 1783573083.5805302,
+    "ast_hash": "0f265aaf31c7741d71ce89ab22a8e0a8",
+    "semantic_hash": "0f265aaf31c7741d71ce89ab22a8e0a8"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\collision.ts": {
-    "mtime": 1783523846.535797,
-    "ast_hash": "f8a3184b497edef6196c85ec84585d39",
-    "semantic_hash": "f8a3184b497edef6196c85ec84585d39"
+    "mtime": 1783587357.9246514,
+    "ast_hash": "468bf940aa5c58bbbb0ee72cc5f14df4",
+    "semantic_hash": "468bf940aa5c58bbbb0ee72cc5f14df4"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\movement.ts": {
-    "mtime": 1783397619.6627042,
-    "ast_hash": "9456cde80028e6b9b40b8ee17a74c5fd",
-    "semantic_hash": "9456cde80028e6b9b40b8ee17a74c5fd"
+    "mtime": 1783573828.7887797,
+    "ast_hash": "131aa49d6ee1106d9c0bd1521fecb698",
+    "semantic_hash": "131aa49d6ee1106d9c0bd1521fecb698"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\reproduction.ts": {
-    "mtime": 1783533949.9628403,
-    "ast_hash": "0e1d50a486e350c9fc186b22c125f96f",
-    "semantic_hash": "0e1d50a486e350c9fc186b22c125f96f"
+    "mtime": 1783588674.7494278,
+    "ast_hash": "46495c7f45c24f9ef7d7eb0f7622165e",
+    "semantic_hash": "46495c7f45c24f9ef7d7eb0f7622165e"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\simulate.test.ts": {
     "mtime": 1783529672.9516795,
@@ -350,39 +345,39 @@
     "semantic_hash": "4781b9ab14ecd9c31a3320c49924163b"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\simulate.ts": {
-    "mtime": 1783530074.98941,
-    "ast_hash": "88da72d0debb51f34c212a3422d89052",
-    "semantic_hash": "88da72d0debb51f34c212a3422d89052"
+    "mtime": 1783587337.211347,
+    "ast_hash": "2285aab853710351e15dff22d975d835",
+    "semantic_hash": "2285aab853710351e15dff22d975d835"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\spawner.ts": {
-    "mtime": 1783499538.3857267,
-    "ast_hash": "8ba34f570fc86d394c66d25968ddecf6",
-    "semantic_hash": "8ba34f570fc86d394c66d25968ddecf6"
+    "mtime": 1783590421.3452492,
+    "ast_hash": "a6da51376ffb53be829295a354136421",
+    "semantic_hash": "a6da51376ffb53be829295a354136421"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\useGameLoop.ts": {
-    "mtime": 1783529206.7879198,
-    "ast_hash": "aace07cf84158dfafbdaebbac226d4b6",
-    "semantic_hash": "aace07cf84158dfafbdaebbac226d4b6"
+    "mtime": 1783540805.2791526,
+    "ast_hash": "e6015fc9146366b76fb8361b13117da0",
+    "semantic_hash": "e6015fc9146366b76fb8361b13117da0"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\worldRef.ts": {
-    "mtime": 1783523764.5558658,
-    "ast_hash": "a76d02e78c1d6d4513726fbcec8d31ea",
-    "semantic_hash": "a76d02e78c1d6d4513726fbcec8d31ea"
+    "mtime": 1783590436.0301242,
+    "ast_hash": "7a2a008f551e1edf820cc4f4f35287ae",
+    "semantic_hash": "7a2a008f551e1edf820cc4f4f35287ae"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\hooks\\useDrawingCanvas.ts": {
-    "mtime": 1783499242.306148,
-    "ast_hash": "c8fcc9fae814b916fffa51dbe72a32de",
-    "semantic_hash": "c8fcc9fae814b916fffa51dbe72a32de"
+    "mtime": 1783570352.62812,
+    "ast_hash": "7acd0666dd0c8110139b8dd07cf5fa28",
+    "semantic_hash": "7acd0666dd0c8110139b8dd07cf5fa28"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\main.tsx": {
-    "mtime": 1783186343.0695612,
-    "ast_hash": "787e5a07efeb2bf6209d5937195f2f68",
-    "semantic_hash": "787e5a07efeb2bf6209d5937195f2f68"
+    "mtime": 1783577365.185626,
+    "ast_hash": "09492dba08b40c0fe50e87eed7bf36fc",
+    "semantic_hash": "09492dba08b40c0fe50e87eed7bf36fc"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\renderer\\Renderer.ts": {
-    "mtime": 1783531988.543565,
-    "ast_hash": "ce3791747edca784207267817996a037",
-    "semantic_hash": "ce3791747edca784207267817996a037"
+    "mtime": 1783589680.7428403,
+    "ast_hash": "f74817b01207440388288ed5a7e1564c",
+    "semantic_hash": "f74817b01207440388288ed5a7e1564c"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\renderer\\baker.ts": {
     "mtime": 1783499255.9315987,
@@ -414,20 +409,15 @@
     "ast_hash": "f17795997ca9d47eb20114938aaee328",
     "semantic_hash": "f17795997ca9d47eb20114938aaee328"
   },
-  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\store\\useStore.ts": {
-    "mtime": 1783533731.219144,
-    "ast_hash": "35dcb59802fdaaf007b992173fc87934",
-    "semantic_hash": "35dcb59802fdaaf007b992173fc87934"
-  },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\test-setup.ts": {
     "mtime": 1783186404.3326924,
     "ast_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9",
     "semantic_hash": "994c5bf3f0f8742b450d0ab09b0d6bb9"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\types\\index.ts": {
-    "mtime": 1783533885.1930575,
-    "ast_hash": "fb3a3e28eea23d622c0487dfc16b1eee",
-    "semantic_hash": "fb3a3e28eea23d622c0487dfc16b1eee"
+    "mtime": 1783588641.5080743,
+    "ast_hash": "5d4945b5e6580bca332f089e9eb7c823",
+    "semantic_hash": "5d4945b5e6580bca332f089e9eb7c823"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\BrushPicker.tsx": {
     "mtime": 1783235196.031114,
@@ -435,9 +425,9 @@
     "semantic_hash": "7d7df511049993a0efec8e81fecae637"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\CameraControls.tsx": {
-    "mtime": 1783326680.2393537,
-    "ast_hash": "3e8d81e001dd3f618b4fb052c6c68177",
-    "semantic_hash": "3e8d81e001dd3f618b4fb052c6c68177"
+    "mtime": 1783539624.7786326,
+    "ast_hash": "104b430690fa87434f52a83d8a705b64",
+    "semantic_hash": "104b430690fa87434f52a83d8a705b64"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\ColorPalette.tsx": {
     "mtime": 1783235583.9918628,
@@ -445,49 +435,49 @@
     "semantic_hash": "0eeef62769662d6ff1f8f6ff5391f709"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\CreationPanel.tsx": {
-    "mtime": 1783492747.1144066,
-    "ast_hash": "7a553f7daf336386e3e4aefa3b54cb02",
-    "semantic_hash": "7a553f7daf336386e3e4aefa3b54cb02"
+    "mtime": 1783539624.7796304,
+    "ast_hash": "8d37322dfd41f77fc928b42d90cd41df",
+    "semantic_hash": "8d37322dfd41f77fc928b42d90cd41df"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\CreatureInspector.tsx": {
-    "mtime": 1783533965.663504,
-    "ast_hash": "4bf72626da1e40fdb1883a7359249409",
-    "semantic_hash": "4bf72626da1e40fdb1883a7359249409"
+    "mtime": 1783539624.7801304,
+    "ast_hash": "6ce6e98e6fb385592c5bd7decbd50cf9",
+    "semantic_hash": "6ce6e98e6fb385592c5bd7decbd50cf9"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\FAB.tsx": {
-    "mtime": 1783333379.1487923,
-    "ast_hash": "a92de4b3ced2f5ba05f57ee380c5b1f1",
-    "semantic_hash": "a92de4b3ced2f5ba05f57ee380c5b1f1"
+    "mtime": 1783539624.7806304,
+    "ast_hash": "0f6b4d96ae27d9ee1b6f576a5bdef91c",
+    "semantic_hash": "0f6b4d96ae27d9ee1b6f576a5bdef91c"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\GodToolbar.tsx": {
-    "mtime": 1783498165.6244853,
-    "ast_hash": "59e8d3b460178e4d08da74f4e77cf879",
-    "semantic_hash": "59e8d3b460178e4d08da74f4e77cf879"
+    "mtime": 1783568251.5241542,
+    "ast_hash": "de5963b3df386604aef6714488f688be",
+    "semantic_hash": "de5963b3df386604aef6714488f688be"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\HoverOverlay.tsx": {
-    "mtime": 1783449583.665306,
-    "ast_hash": "441f631b28f8ab21bc970d4969cefa0f",
-    "semantic_hash": "441f631b28f8ab21bc970d4969cefa0f"
+    "mtime": 1783539624.782132,
+    "ast_hash": "cca706dc34995ee873db03f16b8061c2",
+    "semantic_hash": "cca706dc34995ee873db03f16b8061c2"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\OnboardingModal.tsx": {
-    "mtime": 1783530391.1592686,
-    "ast_hash": "c6be84037616de6b1c16b85de4863b6b",
-    "semantic_hash": "c6be84037616de6b1c16b85de4863b6b"
+    "mtime": 1783539624.78263,
+    "ast_hash": "27e8ad7a54acbf6c7eee00757239fb3d",
+    "semantic_hash": "27e8ad7a54acbf6c7eee00757239fb3d"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\PauseMenuModal.tsx": {
-    "mtime": 1783489072.8168743,
-    "ast_hash": "442b0728ccd725722f3442cc8269732e",
-    "semantic_hash": "442b0728ccd725722f3442cc8269732e"
+    "mtime": 1783539624.783131,
+    "ast_hash": "2e7057585a681ff2c66f6e4212197302",
+    "semantic_hash": "2e7057585a681ff2c66f6e4212197302"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\TimeControls.tsx": {
-    "mtime": 1783498114.5929053,
-    "ast_hash": "904fbdb6e952d8de7eded2cdb0886d12",
-    "semantic_hash": "904fbdb6e952d8de7eded2cdb0886d12"
+    "mtime": 1783539624.7846339,
+    "ast_hash": "aecb5b189dfefb442a1aca90529cc5c8",
+    "semantic_hash": "aecb5b189dfefb442a1aca90529cc5c8"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\TitleScreen.tsx": {
-    "mtime": 1783527112.19197,
-    "ast_hash": "b79402cce60a6a7aa4489127ba0a5af4",
-    "semantic_hash": "b79402cce60a6a7aa4489127ba0a5af4"
+    "mtime": 1783588804.8221538,
+    "ast_hash": "b6d19d8f471462ce429f0fdb580a8a33",
+    "semantic_hash": "b6d19d8f471462ce429f0fdb580a8a33"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\Tooltip.tsx": {
     "mtime": 1783448397.9619727,
@@ -500,14 +490,14 @@
     "semantic_hash": "dfe370460966a226114897e9d7bf6a79"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\TutorialButton.tsx": {
-    "mtime": 1783350927.3082612,
-    "ast_hash": "e19a9b35c73f2effeeafff292fc22384",
-    "semantic_hash": "e19a9b35c73f2effeeafff292fc22384"
+    "mtime": 1783539624.7861311,
+    "ast_hash": "1999321a105d08b72c0021376309759a",
+    "semantic_hash": "1999321a105d08b72c0021376309759a"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\TutorialModal.tsx": {
-    "mtime": 1783530409.979941,
-    "ast_hash": "4957b135da6bd08c035e4a74933945d0",
-    "semantic_hash": "4957b135da6bd08c035e4a74933945d0"
+    "mtime": 1783539624.7866309,
+    "ast_hash": "3e62880c47b7f7d2c97b838be3cfbbad",
+    "semantic_hash": "3e62880c47b7f7d2c97b838be3cfbbad"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\utils\\nameGenerator.ts": {
     "mtime": 1783234493.0342314,
@@ -515,9 +505,9 @@
     "semantic_hash": "ea1c57c86c6ab9b704789d72c705d12f"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\utils\\saveSystem.ts": {
-    "mtime": 1783395552.978584,
-    "ast_hash": "2306f0c0030b235aee6b13e0cefee2c8",
-    "semantic_hash": "2306f0c0030b235aee6b13e0cefee2c8"
+    "mtime": 1783588771.4428804,
+    "ast_hash": "28e49d4f04cb1bd8aa75dcb332a2f43f",
+    "semantic_hash": "28e49d4f04cb1bd8aa75dcb332a2f43f"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\tsconfig.app.json": {
     "mtime": 1783186342.939731,
@@ -535,19 +525,19 @@
     "semantic_hash": "f9cb81ddcea69ffdab672fc8c48dca66"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\vite.config.ts": {
-    "mtime": 1783501248.6869638,
-    "ast_hash": "4a28e1cf2d548e069906ce0fd633ac27",
-    "semantic_hash": "4a28e1cf2d548e069906ce0fd633ac27"
+    "mtime": 1783577253.1591668,
+    "ast_hash": "6b0881d032b4d397331f49bc731144d6",
+    "semantic_hash": "6b0881d032b4d397331f49bc731144d6"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\docs\\architecture.md": {
-    "mtime": 1783532381.1471195,
-    "ast_hash": "37774945162ee1f688fb2ffd65b40b4a",
-    "semantic_hash": "37774945162ee1f688fb2ffd65b40b4a"
+    "mtime": 1783591584.7160292,
+    "ast_hash": "b2ebe8d918f479d9f6bb8bd5c2c6ee39",
+    "semantic_hash": "b2ebe8d918f479d9f6bb8bd5c2c6ee39"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\docs\\design.md": {
-    "mtime": 1783532392.0005682,
-    "ast_hash": "e82e56d051561cbcbdce9bf552fcbdad",
-    "semantic_hash": "e82e56d051561cbcbdce9bf552fcbdad"
+    "mtime": 1783591601.30909,
+    "ast_hash": "74f618f1416d9436400464583b5bd0b5",
+    "semantic_hash": "74f618f1416d9436400464583b5bd0b5"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\docs\\style-guide.md": {
     "mtime": 1783532412.0863035,
@@ -640,14 +630,14 @@
     "semantic_hash": "9960a24288958394ac50e57ff638b036"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\constants\\audioConfig.ts": {
-    "mtime": 1783503789.6506028,
-    "ast_hash": "09e56c06f2cf921f2029bd93c1e55ba5",
-    "semantic_hash": "09e56c06f2cf921f2029bd93c1e55ba5"
+    "mtime": 1783573077.431709,
+    "ast_hash": "e8234a8815052103337d7d2330f7f418",
+    "semantic_hash": "e8234a8815052103337d7d2330f7f418"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\collision.test.ts": {
-    "mtime": 1783529667.5559943,
-    "ast_hash": "96712554a253a1bacaeb13a65a76b5d6",
-    "semantic_hash": "96712554a253a1bacaeb13a65a76b5d6"
+    "mtime": 1783587442.2399647,
+    "ast_hash": "30f70eb84da36e9a9bdd55aa0a9d54b6",
+    "semantic_hash": "30f70eb84da36e9a9bdd55aa0a9d54b6"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\creatureFactory.test.ts": {
     "mtime": 1783492066.8570485,
@@ -660,9 +650,9 @@
     "semantic_hash": "6b0924f6313c3921b0d48faeaf97c9e3"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\entityManager.test.ts": {
-    "mtime": 1783523764.8259525,
-    "ast_hash": "a8e0c2645ca98b5a4e55b96226bc3121",
-    "semantic_hash": "a8e0c2645ca98b5a4e55b96226bc3121"
+    "mtime": 1783590482.0359886,
+    "ast_hash": "7b5eda39eddecfc1fa623f6bb29715fd",
+    "semantic_hash": "7b5eda39eddecfc1fa623f6bb29715fd"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\entityManager.ts": {
     "mtime": 1783499344.2000954,
@@ -685,34 +675,29 @@
     "semantic_hash": "3a9f09c7b83eb18975084fa3e9314ec9"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\NavigationSystem.test.ts": {
-    "mtime": 1783492747.3449624,
-    "ast_hash": "2ce0b7d35b9398c784906039324e8759",
-    "semantic_hash": "2ce0b7d35b9398c784906039324e8759"
+    "mtime": 1783590476.1320093,
+    "ast_hash": "a6821aecd4ba422535c170b33d32106a",
+    "semantic_hash": "a6821aecd4ba422535c170b33d32106a"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\NavigationSystem.ts": {
-    "mtime": 1783492142.3970468,
-    "ast_hash": "50251bf007e99b28c4db26493dd07bc7",
-    "semantic_hash": "50251bf007e99b28c4db26493dd07bc7"
+    "mtime": 1783574386.432154,
+    "ast_hash": "5e6335e20d052fcdff41176202d58382",
+    "semantic_hash": "5e6335e20d052fcdff41176202d58382"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\hooks\\useTerrariumInput.ts": {
-    "mtime": 1783531939.1940103,
-    "ast_hash": "c613973c4b14803054086b05a96fd4a7",
-    "semantic_hash": "c613973c4b14803054086b05a96fd4a7"
-  },
-  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\store\\useStore.test.ts": {
-    "mtime": 1783529611.840304,
-    "ast_hash": "b4c5d3ad77d50e03b52806d6be1e57dd",
-    "semantic_hash": "b4c5d3ad77d50e03b52806d6be1e57dd"
+    "mtime": 1783570698.585421,
+    "ast_hash": "a141a3831c4d29020d03414f3c052caa",
+    "semantic_hash": "a141a3831c4d29020d03414f3c052caa"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\test\\factories.ts": {
-    "mtime": 1783533954.84989,
-    "ast_hash": "0f2a0f728fef4183723fec725b321a7d",
-    "semantic_hash": "0f2a0f728fef4183723fec725b321a7d"
+    "mtime": 1783590511.620313,
+    "ast_hash": "a7251e400e94a4c19be451269b04f3d8",
+    "semantic_hash": "a7251e400e94a4c19be451269b04f3d8"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\CreationCanvas.tsx": {
-    "mtime": 1783515325.557734,
-    "ast_hash": "fb4632a24f880b59c6dd66c7325eb082",
-    "semantic_hash": "fb4632a24f880b59c6dd66c7325eb082"
+    "mtime": 1783568531.913483,
+    "ast_hash": "20520f5d2ef8cf087776247c28702bcb",
+    "semantic_hash": "20520f5d2ef8cf087776247c28702bcb"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\CreationSettings.tsx": {
     "mtime": 1783492665.9992564,
@@ -740,19 +725,19 @@
     "semantic_hash": "54f0e4049c93515e1a29bfc12ae05355"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\StatsButton.tsx": {
-    "mtime": 1783521707.5774913,
-    "ast_hash": "4f21054b308c780129d4136e36baaf16",
-    "semantic_hash": "4f21054b308c780129d4136e36baaf16"
+    "mtime": 1783539624.7836363,
+    "ast_hash": "b735c729c5568690698d17bc7fe158a3",
+    "semantic_hash": "b735c729c5568690698d17bc7fe158a3"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\StatsPanel.tsx": {
-    "mtime": 1783536890.2118268,
-    "ast_hash": "233e65ab7509b09dd2486b4520cdb112",
-    "semantic_hash": "233e65ab7509b09dd2486b4520cdb112"
+    "mtime": 1783539624.7841308,
+    "ast_hash": "264c994ef6479eb1c190ff63ccb4b6d0",
+    "semantic_hash": "264c994ef6479eb1c190ff63ccb4b6d0"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\TitleScreen.test.tsx": {
-    "mtime": 1783529688.6680393,
-    "ast_hash": "2ab185c75cc9e5c9c08f0c72cb36e271",
-    "semantic_hash": "2ab185c75cc9e5c9c08f0c72cb36e271"
+    "mtime": 1783588827.5062077,
+    "ast_hash": "1818d3119ce13e84a08ce02099e3e44a",
+    "semantic_hash": "1818d3119ce13e84a08ce02099e3e44a"
   },
   "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\utils\\saveSystem.test.ts": {
     "mtime": 1783533846.0652916,
@@ -778,5 +763,210 @@
     "mtime": 1783503159.5971217,
     "ast_hash": "31d006e5034786cbbc65fe3b084f6b22",
     "semantic_hash": "31d006e5034786cbbc65fe3b084f6b22"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\components\\AudioController.tsx": {
+    "mtime": 1783540136.3897429,
+    "ast_hash": "893268af429b861163d0d5c15ec4da7f",
+    "semantic_hash": "893268af429b861163d0d5c15ec4da7f"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\SpatialGrid.ts": {
+    "mtime": 1783587387.6157608,
+    "ast_hash": "dcf4ef58374ebf4fae4863fe3802dae6",
+    "semantic_hash": "dcf4ef58374ebf4fae4863fe3802dae6"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\proceduralSfx.ts": {
+    "mtime": 1783571268.3111029,
+    "ast_hash": "0c2cb500a549cd4afa8f8d4451fc5916",
+    "semantic_hash": "0c2cb500a549cd4afa8f8d4451fc5916"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\spatialAudioUtils.ts": {
+    "mtime": 1783571274.8004727,
+    "ast_hash": "45fa774b36af537bc29edc41bbbc0bcd",
+    "semantic_hash": "45fa774b36af537bc29edc41bbbc0bcd"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\spatialGrid.test.ts": {
+    "mtime": 1783590456.586789,
+    "ast_hash": "37f578dcb6088bb1059aea32da959e10",
+    "semantic_hash": "37f578dcb6088bb1059aea32da959e10"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\AnalyticsSystem.ts": {
+    "mtime": 1783589842.6656475,
+    "ast_hash": "84d45ff0b00e74bd2f0ca14ae8ca7476",
+    "semantic_hash": "84d45ff0b00e74bd2f0ca14ae8ca7476"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\CameraSystem.ts": {
+    "mtime": 1783540820.3683598,
+    "ast_hash": "f517d72b10aa6c1899ee6795c5a5473c",
+    "semantic_hash": "f517d72b10aa6c1899ee6795c5a5473c"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\EnvironmentSystem.ts": {
+    "mtime": 1783541361.2947261,
+    "ast_hash": "d3d77df425fe248c027052c85805b7d9",
+    "semantic_hash": "d3d77df425fe248c027052c85805b7d9"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\ImmigrationSystem.ts": {
+    "mtime": 1783588714.1135314,
+    "ast_hash": "dc3250cbdc285facbd5a1a2ee516437f",
+    "semantic_hash": "dc3250cbdc285facbd5a1a2ee516437f"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\engine\\systems\\InteractionSystem.ts": {
+    "mtime": 1783540820.4283602,
+    "ast_hash": "dc83217b3f9e712625b121de80c0e5c3",
+    "semantic_hash": "dc83217b3f9e712625b121de80c0e5c3"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\hooks\\useCameraControls.ts": {
+    "mtime": 1783570397.786909,
+    "ast_hash": "174e861c7c98a480f0941646dd8d8e36",
+    "semantic_hash": "174e861c7c98a480f0941646dd8d8e36"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\hooks\\useCanvasHistory.ts": {
+    "mtime": 1783570302.6683135,
+    "ast_hash": "bbb3f7bbb8dc75ece2c22d46e822b09d",
+    "semantic_hash": "bbb3f7bbb8dc75ece2c22d46e822b09d"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\hooks\\useGodTools.ts": {
+    "mtime": 1783588705.0639076,
+    "ast_hash": "698dd630d2d07418f30061bb8f27e9f6",
+    "semantic_hash": "698dd630d2d07418f30061bb8f27e9f6"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\hooks\\useSaves.ts": {
+    "mtime": 1783588780.4642053,
+    "ast_hash": "2379731d820f748ef2b7f7be13814edc",
+    "semantic_hash": "2379731d820f748ef2b7f7be13814edc"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\renderer\\drawEffects.ts": {
+    "mtime": 1783541396.0352356,
+    "ast_hash": "1e55eaea2016d99855af3a2eebafc4d7",
+    "semantic_hash": "1e55eaea2016d99855af3a2eebafc4d7"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\renderer\\drawEnvironment.ts": {
+    "mtime": 1783541395.974235,
+    "ast_hash": "4b6ad08f40bcc1999c0835d752903f71",
+    "semantic_hash": "4b6ad08f40bcc1999c0835d752903f71"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\store\\useEngineStore.ts": {
+    "mtime": 1783540726.7450998,
+    "ast_hash": "6a90714311def8703b4c1e14e9693ccf",
+    "semantic_hash": "6a90714311def8703b4c1e14e9693ccf"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\store\\useSettingsStore.ts": {
+    "mtime": 1783539404.4113522,
+    "ast_hash": "c824e4afc1e552d4ee6a416d3ffbb917",
+    "semantic_hash": "c824e4afc1e552d4ee6a416d3ffbb917"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\store\\useUIStore.ts": {
+    "mtime": 1783540726.5160565,
+    "ast_hash": "df8743209df0e23e92a55e90b573b489",
+    "semantic_hash": "df8743209df0e23e92a55e90b573b489"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\DoodleLayer.tsx": {
+    "mtime": 1783571374.8748686,
+    "ast_hash": "3c16b3bad0b51474e59b6738e152d6d6",
+    "semantic_hash": "3c16b3bad0b51474e59b6738e152d6d6"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\EmergencyResetButton.tsx": {
+    "mtime": 1783584543.541351,
+    "ast_hash": "4787566471c01c13dbb95bab1735a070",
+    "semantic_hash": "4787566471c01c13dbb95bab1735a070"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\MapSizePromptModal.tsx": {
+    "mtime": 1783590454.398798,
+    "ast_hash": "43b95d6fc653603900461019e8fe8621",
+    "semantic_hash": "43b95d6fc653603900461019e8fe8621"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\PatchNotesModal.tsx": {
+    "mtime": 1783590450.265423,
+    "ast_hash": "47d846be5c20d3aa382b710db9ec98dd",
+    "semantic_hash": "47d846be5c20d3aa382b710db9ec98dd"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\SaveSlotsModal.tsx": {
+    "mtime": 1783571394.6124177,
+    "ast_hash": "a044c1219c7aa80a3131763f58ee2650",
+    "semantic_hash": "a044c1219c7aa80a3131763f58ee2650"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\SettingsModal.tsx": {
+    "mtime": 1783584543.248342,
+    "ast_hash": "87b80cbf3f396f4ed4d24f19da23c99a",
+    "semantic_hash": "87b80cbf3f396f4ed4d24f19da23c99a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\ui\\components\\UpdatePrompt.tsx": {
+    "mtime": 1783590716.6739962,
+    "ast_hash": "28fb0cd9c43d9574409a2554813d0e36",
+    "semantic_hash": "28fb0cd9c43d9574409a2554813d0e36"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\utils\\drawingUtils.test.ts": {
+    "mtime": 1783570371.550383,
+    "ast_hash": "442e4cdef143ac71121d8551b287f11d",
+    "semantic_hash": "442e4cdef143ac71121d8551b287f11d"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\utils\\drawingUtils.ts": {
+    "mtime": 1783570294.6295745,
+    "ast_hash": "b5da13bc50216112b3ce3d79a98b6d57",
+    "semantic_hash": "b5da13bc50216112b3ce3d79a98b6d57"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\src\\utils\\serviceWorker.test.ts": {
+    "mtime": 1783577557.5606098,
+    "ast_hash": "f86af1779d5a2682641f2614d203f5de",
+    "semantic_hash": "f86af1779d5a2682641f2614d203f5de"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.agents\\AGENTS.md": {
+    "mtime": 1783568720.3275917,
+    "ast_hash": "6a9bcbb306c7c536b284f6e98203070a",
+    "semantic_hash": "6a9bcbb306c7c536b284f6e98203070a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\memories\\conventions.md": {
+    "mtime": 1783566148.6709564,
+    "ast_hash": "567abd38de789c224eb53871bb1202c1",
+    "semantic_hash": "567abd38de789c224eb53871bb1202c1"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\memories\\core.md": {
+    "mtime": 1783566145.2458854,
+    "ast_hash": "a72fbb9b988e5928f4137844d55b92bf",
+    "semantic_hash": "a72fbb9b988e5928f4137844d55b92bf"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\memories\\memory_maintenance.md": {
+    "mtime": 1783565944.2427962,
+    "ast_hash": "17877e37a829c58bb20c04228b985ab8",
+    "semantic_hash": "17877e37a829c58bb20c04228b985ab8"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\memories\\suggested_commands.md": {
+    "mtime": 1783566148.0643344,
+    "ast_hash": "49a48946f15e34234886e2c6536a7a27",
+    "semantic_hash": "49a48946f15e34234886e2c6536a7a27"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\memories\\task_completion.md": {
+    "mtime": 1783566149.3779564,
+    "ast_hash": "e4c0ef57859e5d49fd0db66a7cdf899a",
+    "semantic_hash": "e4c0ef57859e5d49fd0db66a7cdf899a"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\memories\\tech_stack.md": {
+    "mtime": 1783566146.8556266,
+    "ast_hash": "cecbb43bff5c14592a5a413175db1591",
+    "semantic_hash": "cecbb43bff5c14592a5a413175db1591"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\project.local.yml": {
+    "mtime": 1783565881.8339024,
+    "ast_hash": "80d87878a5dcaa57ac055afdac265ad1",
+    "semantic_hash": "80d87878a5dcaa57ac055afdac265ad1"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\.serena\\project.yml": {
+    "mtime": 1783565881.8284006,
+    "ast_hash": "071293cc7c2d723d5eaeb1374ed13908",
+    "semantic_hash": "071293cc7c2d723d5eaeb1374ed13908"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\FUTURE_FEATURES.md": {
+    "mtime": 1783575402.0489154,
+    "ast_hash": "63fd7e50d4f6a2e56b6fbc97a47e9643",
+    "semantic_hash": "63fd7e50d4f6a2e56b6fbc97a47e9643"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\public\\audio\\sfx\\feed.mp3": {
+    "mtime": 1783572714.7879395,
+    "ast_hash": "a8d13e95c95ff274a96b999b95cd6b94",
+    "semantic_hash": "a8d13e95c95ff274a96b999b95cd6b94"
+  },
+  "C:\\Users\\oob\\.gemini\\antigravity\\scratch\\darwins-canvas\\web\\public\\audio\\sfx\\smite.mp3": {
+    "mtime": 1783572609.797747,
+    "ast_hash": "7e3527c638d926720f78db6ce913ac71",
+    "semantic_hash": "7e3527c638d926720f78db6ce913ac71"
   }
 }

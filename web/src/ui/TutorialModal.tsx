@@ -4,13 +4,14 @@ import {
   Leaf, Drumstick, Utensils, 
   Dna, Route, Orbit,
   Flame, Hand, Droplets,
-  Sun, Moon, CloudRain, Activity, Swords, Hourglass, RefreshCw
+  Sun, Moon, CloudRain, Activity, Swords, Hourglass, RefreshCw,
+  Book, Star, Download, Target
 } from 'lucide-react'
 import './TutorialModal.css'
 import { useUIStore } from '../store/useUIStore';
 
 type Tab = 'QUICKSTART' | 'GUIDE'
-type Chapter = 'DRAWING' | 'DIETS' | 'EVOLUTION' | 'TOOLS' | 'WEATHER' | 'COMBAT' | 'LIFECYCLE'
+type Chapter = 'DRAWING' | 'DIETS' | 'EVOLUTION' | 'TOOLS' | 'WEATHER' | 'COMBAT' | 'LIFECYCLE' | 'COLLECTION' | 'RESEARCH'
 
 export function TutorialModal() {
   const isTutorialOpen = useUIStore((s) => s.isTutorialOpen)
@@ -79,6 +80,20 @@ export function TutorialModal() {
                   <p>Use the tools at the bottom to mess with the world! Zap creatures with lightning, feed your favorites, or pick them up and drop them. Oh, and the game auto-saves every 40 seconds!</p>
                 </div>
               </div>
+              <div className="quickstart-step">
+                <div className="quickstart-icon" style={{ background: 'var(--color-tertiary)' }}><Book size={32} /></div>
+                <div className="quickstart-text">
+                  <h3>4. Build your Collection</h3>
+                  <p>Click on any creature you love to open the Inspector, then save them to the Darwinpedia! You'll get a holographic trading card with a unique backstory based on their life, and you can spawn them into any world!</p>
+                </div>
+              </div>
+              <div className="quickstart-step">
+                <div className="quickstart-icon" style={{ background: '#e74c3c' }}><Target size={32} /></div>
+                <div className="quickstart-text">
+                  <h3>5. Track Favorites</h3>
+                  <p>See a creature you love? Click the crosshair target icon to pin their health bar to the top-right of your screen! You can track up to 3 creatures at once.</p>
+                </div>
+              </div>
             </div>
           ) : (
             <>
@@ -103,6 +118,12 @@ export function TutorialModal() {
                 </button>
                 <button className={`guide-nav-item ${activeChapter === 'LIFECYCLE' ? 'active' : ''}`} onClick={() => setActiveChapter('LIFECYCLE')}>
                   <Hourglass size={20} /> Circle of Life
+                </button>
+                <button className={`guide-nav-item ${activeChapter === 'COLLECTION' ? 'active' : ''}`} onClick={() => setActiveChapter('COLLECTION')}>
+                  <Book size={20} /> Collection
+                </button>
+                <button className={`guide-nav-item ${activeChapter === 'RESEARCH' ? 'active' : ''}`} onClick={() => setActiveChapter('RESEARCH')}>
+                  <Target size={20} /> Research
                 </button>
               </div>
               <div className="guide-body">
@@ -263,6 +284,50 @@ export function TutorialModal() {
                       <div className="guide-topic-content">
                         <h4>Immigration</h4>
                         <p>If an entire species goes extinct, don't panic! Migrants may eventually wander in from the edges of the map to re-seed the population.</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {activeChapter === 'COLLECTION' && (
+                  <>
+                    <div className="guide-chapter-header">
+                      <Book className="guide-chapter-icon" size={40} />
+                      <h2 className="guide-chapter-title">The Darwinpedia</h2>
+                    </div>
+                    <div className="guide-topic">
+                      <Star className="guide-topic-icon" size={24} style={{color: 'var(--color-secondary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Saving Life</h4>
+                        <p>Whenever you see a creature doing amazing things, click on them to open the Inspector. Hitting "Save" will record their lifetime stats (like kills and food eaten) and generate a unique lore backstory for them!</p>
+                      </div>
+                    </div>
+                    <div className="guide-topic">
+                      <Download className="guide-topic-icon" size={24} style={{color: 'var(--color-primary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Trading Cards & Spawning</h4>
+                        <p>Open the Darwinpedia (the book icon in the top left) to view all your saved creatures as holographic trading cards. You can hit 'Spawn' to drop them right back into the world, complete with a confetti celebration!</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {activeChapter === 'RESEARCH' && (
+                  <>
+                    <div className="guide-chapter-header">
+                      <Target className="guide-chapter-icon" size={40} />
+                      <h2 className="guide-chapter-title">Active Research</h2>
+                    </div>
+                    <div className="guide-topic">
+                      <Eye className="guide-topic-icon" size={24} style={{color: 'var(--color-secondary)'}} />
+                      <div className="guide-topic-content">
+                        <h4>Tracking Targets</h4>
+                        <p>You don't have to follow creatures with your camera all day! Click the Target icon in their inspector to pin their vitals to your Active Research HUD on the top right. You can track up to 3 creatures at the same time.</p>
+                      </div>
+                    </div>
+                    <div className="guide-topic">
+                      <X className="guide-topic-icon" size={24} style={{color: '#e74c3c'}} />
+                      <div className="guide-topic-content">
+                        <h4>Ghost Eviction</h4>
+                        <p>If a tracked creature dies (or gets smited by you!), their tracker will automatically clear out so you can find a new favorite to watch.</p>
                       </div>
                     </div>
                   </>

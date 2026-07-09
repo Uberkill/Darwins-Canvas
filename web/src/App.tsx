@@ -28,6 +28,9 @@ import { StatsPanel } from './ui/StatsPanel'
 import { StatsButton } from './ui/StatsButton'
 import { useUIStore } from './store/useUIStore';
 import { UpdatePrompt } from './ui/components/UpdatePrompt';
+import { CollectionButton } from './features/collection/CollectionButton';
+import { CollectionModal } from './features/collection/CollectionModal';
+import { ActiveResearchHUD } from './features/tracking/ActiveResearchHUD';
 
 /** Subscribe to creature count changes via a polling interval. */
 function useCreatureCount(): number {
@@ -125,6 +128,7 @@ function App() {
           <div style={{ pointerEvents: 'auto', display: 'flex', gap: '8px' }}>
             {isPlaying && <TutorialButton />}
             {isPlaying && <StatsButton />}
+            {isPlaying && <CollectionButton />}
           </div>
           
           {isPlaying && <TimeControls />}
@@ -135,6 +139,9 @@ function App() {
             </div>
           )}
         </div>
+
+        {/* Active Research HUD */}
+        {isPlaying && <ActiveResearchHUD />}
 
         {/* Top-Right Settings Button */}
         {isPlaying && (
@@ -181,6 +188,7 @@ function App() {
       {/* Mobile Portrait Lock */}
       <PortraitLock />
       <StatsPanel />
+      <CollectionModal />
       
       {/* PWA Update Prompt */}
       <UpdatePrompt />

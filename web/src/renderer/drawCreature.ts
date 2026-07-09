@@ -199,3 +199,39 @@ function drawFallback(ctx: CanvasRenderingContext2D, size: number, creature: Cre
   ctx.lineWidth = 1.5
   ctx.stroke()
 }
+
+/**
+ * drawTrackingMarker — renders the visual crosshair/diamond above a tracked creature.
+ * Called in Pass 2 of the renderer to ensure it floats above all sprites.
+ */
+export function drawTrackingMarker(ctx: CanvasRenderingContext2D, creature: Creature, timestamp: number): void {
+  const size = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0);
+  
+  ctx.save();
+  // Anchor to creature's head
+  ctx.translate(creature.x, creature.y - creature.z - size - 20);
+  
+  // Pulse animation using timestamp (O(1) CPU, no React state)
+  const pulse = Math.sin(timestamp / 200);
+  const scale = 1 + pulse * 0.15;
+  ctx.scale(scale, scale);
+  
+  // Draw glowing diamond
+  ctx.beginPath();
+  ctx.moveTo(0, -10);
+  ctx.lineTo(10, 0);
+  ctx.lineTo(0, 10);
+  ctx.lineTo(-10, 0);
+  ctx.closePath();
+  
+  ctx.fillStyle = '#FF6B9E'; // primary pink
+  ctx.shadowColor = '#FF6B9E';
+  ctx.shadowBlur = 10;
+  ctx.fill();
+  
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = 'white';
+  ctx.stroke();
+  
+  ctx.restore();
+}

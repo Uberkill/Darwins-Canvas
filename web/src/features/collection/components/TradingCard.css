@@ -1,0 +1,38 @@
+.trading-card-perspective {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1;
+  margin-bottom: 15px;
+}
+
+.trading-card-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 6px solid var(--color-text);
+  border-radius: 24px;
+  box-shadow: 0 8px 0 var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.trading-card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.2s;
+}
+
+.trading-card-container img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  z-index: 5;
+  pointer-events: none;
+  transform: translateZ(20px); /* Make image pop out slightly during tilt */
+}

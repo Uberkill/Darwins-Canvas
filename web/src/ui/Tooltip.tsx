@@ -5,10 +5,12 @@ interface TooltipProps {
   children: React.ReactNode;
   content: React.ReactNode;
   position?: 'top' | 'bottom';
+  align?: 'center' | 'left' | 'right';
+  variant?: 'decal' | 'god';
   className?: string;
 }
 
-export function Tooltip({ children, content, position = 'top', className = '' }: TooltipProps) {
+export function Tooltip({ children, content, position = 'top', align = 'center', variant = 'decal', className = '' }: TooltipProps) {
   const [show, setShow] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,10 +18,15 @@ export function Tooltip({ children, content, position = 'top', className = '' }:
   const updatePosition = () => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
+    
+    let leftPos = rect.left + rect.width / 2;
+    if (align === 'left') leftPos = rect.left;
+    if (align === 'right') leftPos = rect.right;
+
     if (position === 'top') {
-      setCoords({ top: rect.top - 8, left: rect.left + rect.width / 2 });
+      setCoords({ top: rect.top - 8, left: leftPos });
     } else {
-      setCoords({ top: rect.bottom + 8, left: rect.left + rect.width / 2 });
+      setCoords({ top: rect.bottom + 8, left: leftPos });
     }
   };
 
@@ -34,7 +41,16 @@ export function Tooltip({ children, content, position = 'top', className = '' }:
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show, position]);
+  }, [show, position, align]);
+
+  const getTransform = () => {
+    let x = '-50%';
+    if (align === 'left') x = '0%';
+    if (align === 'right') x = '-100%';
+    return position === 'top' ? `translate(${x}, -100%) scale(1)` : `translate(${x}, 0) scale(1)`;
+  };
+
+  const variantClass = variant === 'god' ? 'god-tooltip-fixed' : 'decal-tooltip';
 
   return (
     <div
@@ -46,7 +62,7 @@ export function Tooltip({ children, content, position = 'top', className = '' }:
       {children}
       {show && typeof document !== 'undefined' && createPortal(
         <div
-          className={`decal-tooltip tooltip-${position} ${className}`}
+          className={`${variantClass} tooltip-${position} ${className}`}
           style={{
             position: 'fixed',
             top: coords.top,
@@ -55,9 +71,9 @@ export function Tooltip({ children, content, position = 'top', className = '' }:
             right: 'auto',
             zIndex: 99999,
             pointerEvents: 'none',
-            opacity: 1, // force visible since hover state is managed by React
+            opacity: 1, 
             visibility: 'visible',
-            transform: position === 'top' ? 'translate(-50%, -100%) scale(1)' : 'translate(-50%, 0) scale(1)'
+            transform: getTransform()
           }}
         >
           {content}

@@ -1,0 +1,28 @@
+.confetti-container {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 100;
+  border-radius: 9999px; /* constrain to the spawn button */
+}
+
+.confetti-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  bottom: 0;
+  animation: confetti-shoot forwards ease-out;
+  border-radius: 2px;
+}
+
+.confetti-color-0 { background-color: #e74c3c; }
+.confetti-color-1 { background-color: #2ecc71; }
+.confetti-color-2 { background-color: #f1c40f; }
+.confetti-color-3 { background-color: #3498db; }
+
+@keyframes confetti-shoot {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}

@@ -1,5 +1,6 @@
 import type { Creature, Plant, WorldState } from '../types'
 import { releaseImage } from '../renderer/imageCache'
+import { TrackingManager } from '../features/tracking/trackingManager'
 
 /**
  * Safely adds a creature to the world.
@@ -73,6 +74,9 @@ export function flushDeadEntities(world: WorldState): void {
     for (let i = world.creatures.length - 1; i >= 0; i--) {
       const c = world.creatures[i];
       if (world.scratchpad.deletedCreatureIds.has(c.id)) {
+        // Tag & Track hook
+        TrackingManager.checkDeath(c);
+        
         releaseImage(c.id)
         world.creatures.splice(i, 1)
         if (world.draggedEntityId === c.id) world.draggedEntityId = null

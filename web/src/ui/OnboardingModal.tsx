@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Sprout, Brush, Dna, Zap } from 'lucide-react'
+import { Sprout, Brush, Dna, Zap, Target } from 'lucide-react'
 import './OnboardingModal.css'
 import { useUIStore } from '../store/useUIStore';
 
@@ -39,6 +39,13 @@ const ONBOARDING_STEPS: OnboardingStep[] = [
     description: "Use God Tools to zap, feed, or drag creatures around. (Tip: Use WASD or Arrow Keys to pan the camera!)",
     icon: <Zap size={40} color="white" />,
     color: "#FBC02D" // Yellow/Gold
+  },
+  {
+    id: 'tracking',
+    title: "Track Champions!",
+    description: "Click the crosshair button on any creature to pin their health bar to your screen. Keep a close eye on your favorites!",
+    icon: <Target size={40} color="white" />,
+    color: "#e74c3c" // Red
   }
 ]
 

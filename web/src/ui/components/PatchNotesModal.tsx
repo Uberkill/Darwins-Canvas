@@ -13,29 +13,43 @@ export function PatchNotesModal({ onClose }: PatchNotesModalProps) {
       
       <div style={{ background: 'var(--color-sand)', padding: '16px', borderRadius: '12px', marginBottom: '16px', border: '2px solid rgba(0,0,0,0.1)' }}>
         <h3 style={{ fontSize: '1.4rem', marginBottom: '12px', color: '#6A5ACD', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Zap size={20} /> Latest Update (Today)
+          <Zap size={20} /> Latest Updates
         </h3>
         
         <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
             <FileText size={18} style={{ marginTop: '2px', color: '#56B6C2', flexShrink: 0 }} />
             <div>
-              <strong>Huge Maps!</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>You can now pick 2x (Vast) and 3x (Epic) map sizes when starting a new game to build way bigger ecosystems.</div>
+              <strong>Darwinpedia Catalog System</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Added the ability to save creatures to a persistent catalog. Generates detailed lore and lifetime statistics for saved entities. Implemented a 2-pane UI layout.</div>
+            </div>
+          </li>
+          <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+            <FileText size={18} style={{ marginTop: '2px', color: '#56B6C2', flexShrink: 0 }} />
+            <div>
+              <strong>Active Research Tracking</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Introduced a targeting system. Players can now pin and monitor vital statistics for up to 3 creatures simultaneously via the HUD. HUD dynamically resizes based on active tracking.</div>
+            </div>
+          </li>
+          <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+            <FileText size={18} style={{ marginTop: '2px', color: '#56B6C2', flexShrink: 0 }} />
+            <div>
+              <strong>Map Expansion Support</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Added 2x and 3x map generation options during initialization.</div>
             </div>
           </li>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
             <Zap size={18} style={{ marginTop: '2px', color: '#facc15', flexShrink: 0 }} />
             <div>
-              <strong>Butter-Smooth Performance</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Rewrote the AI and physics to handle thousands of creatures easily. Creatures are way smarter about finding food and running away without tanking your framerate.</div>
+              <strong>Performance Optimization</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Refactored spatial AI and physics calculations. Improved pathfinding efficiency.</div>
             </div>
           </li>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
             <Bug size={18} style={{ marginTop: '2px', color: '#E06C75', flexShrink: 0 }} />
             <div>
-              <strong>No More Memory Leaks</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Fixed the game freezing and crashing if you left the tab running overnight or spammed the clone tool.</div>
+              <strong>Stability Fixes</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Resolved memory leak issues causing runtime crashes during extended simulation sessions.</div>
             </div>
           </li>
         </ul>

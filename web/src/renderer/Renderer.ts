@@ -1,8 +1,9 @@
 import type { WorldState, Creature, Plant } from '../types'
 import { drawPlant } from './drawPlant'
-import { drawCreature, drawCreatureShadow } from './drawCreature'
+import { drawCreature, drawCreatureShadow, drawTrackingMarker } from './drawCreature'
 import { BASE_RENDER_SIZE } from '../constants'
 import { useEngineStore } from '../store/useEngineStore';
+import { useTrackingStore } from '../features/tracking/useTrackingStore';
 import { drawEnvironment } from './drawEnvironment'
 import { drawEffects } from './drawEffects'
 
@@ -145,6 +146,22 @@ export class GameRenderer {
         // Draw Health Bar if damaged or hovered
         if (creature.health < creature.maxHealth || creature.id === world.hoveredEntityId) {
           this.drawHealthBar(creature)
+        }
+      }
+    }
+
+    // 5.5. Draw Tracking Markers (Two-Pass Render for Z-Index)
+    // Hoist the timestamp and Zustand state exactly once per frame
+    const trackedIds = useTrackingStore.getState().trackedIds;
+    if (trackedIds.size > 0) {
+      const now = performance.now();
+      for (let i = 0; i < this.entityCount; i++) {
+        const entity = this.renderBuffer[i];
+        if (!('growthStage' in entity)) {
+          const creature = entity as Creature;
+          if (trackedIds.has(creature.id)) {
+            drawTrackingMarker(this.ctx, creature, now);
+          }
         }
       }
     }

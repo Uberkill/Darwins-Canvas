@@ -1182,3 +1182,25 @@ body {
     }
   }
 }
+
+/* Custom Tooltip Fixed */
+.god-tooltip-fixed {
+  background: var(--color-text);
+  color: white;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+.god-tooltip-fixed.tooltip-bottom {
+  margin-top: 8px;
+}
+
+.god-tooltip-fixed.tooltip-top {
+  margin-top: -8px;
+}
+
+

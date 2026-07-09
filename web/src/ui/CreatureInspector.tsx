@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { worldRef } from '../engine/worldRef';
 import type { Creature } from '../types';
-import { Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
+import { Flame, AlertTriangle, Moon, Smile, Meh, Search, Target } from 'lucide-react';
 import './CreatureInspector.css';
 import { useUIStore } from '../store/useUIStore';
+import { useTrackingStore } from '../features/tracking/useTrackingStore';
+import { audio } from '../engine/audioEngine';
+
 
 const getMoodIcon = (mood: string) => {
   switch (mood) {
@@ -20,6 +23,15 @@ export const CreatureInspector: React.FC = () => {
   const selectedCreatureId = useUIStore((s) => s.selectedCreatureId);
   const setSelectedCreatureId = useUIStore((s) => s.setSelectedCreatureId);
   const [creature, setCreature] = useState<Creature | null>(null);
+  
+  // Targeted selectors to prevent 60fps re-renders
+  const isTrackingFull = useTrackingStore((s) => s.trackedIds.size >= 3);
+  const isTracked = useTrackingStore((s) => s.trackedIds.has(selectedCreatureId || ''));
+  const tagCreature = useTrackingStore((s) => s.tagCreature);
+
+  useEffect(() => {
+    // setIsSaved removed
+  }, [selectedCreatureId]);
 
   useEffect(() => {
     if (!selectedCreatureId) {
@@ -140,6 +152,22 @@ export const CreatureInspector: React.FC = () => {
         </div>
       </div>
       
+      <button 
+        className="inspector-save-btn" 
+        onClick={() => {
+          tagCreature(creature.id);
+          audio.playUIPop();
+        }}
+        disabled={isTracked || (!isTracked && isTrackingFull)}
+        style={{
+          background: isTracked ? 'var(--color-primary)' : (!isTracked && isTrackingFull) ? '#ccc' : 'var(--color-blue)',
+          borderColor: (!isTracked && isTrackingFull) ? '#999' : 'var(--color-text)',
+        }}
+      >
+        <Target size={24} strokeWidth={3} style={{ marginRight: '8px' }} />
+        {isTracked ? 'Tracking Active ✓' : isTrackingFull ? 'Research Capacity Full!' : 'Tag for Research'}
+      </button>
+
       {/* Inner Thoughts */}
       <div className="inspector-intent">
         "{creature.intent}"
@@ -163,7 +191,7 @@ export const CreatureInspector: React.FC = () => {
         <div className="inspector-bar-group">
           <div className="inspector-bar-header">
             <span className="inspector-bar-label">Lifespan ({lifespanPct}%)</span>
-            <span className="inspector-bar-text">{Math.round(creature.age)}s / {creature.maxAge}s</span>
+            <span className="inspector-bar-text">{Math.round(creature.age)}s / {Math.round(creature.maxAge)}s</span>
           </div>
           <div className="inspector-bar-bg">
             <div 
