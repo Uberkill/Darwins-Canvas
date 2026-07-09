@@ -1,11 +1,12 @@
 # Game Design & Mechanics ("Rules of the Universe")
 
-Darwin's Canvas is a hands-off, Zen digital terrarium. Users interact by creating life and observing the ecosystem, not by micromanaging it.
+Darwin's Canvas is primarily a hands-off, Zen digital terrarium. Users generally interact by creating life and observing the ecosystem, though they may intervene through specific God Tools.
 
 ## Core Game Loop
-1. **Creation:** User draws a shape on a canvas and selects three traits: Size, Diet, and Movement.
-2. **Release:** The creature is spawned into the world.
-3. **Observation:** The creature lives, eats, starves, mates, and dies automatically based on its AI (boids + ecosystem rules).
+1. **World Setup:** User selects Map Size (1x Vast, 2x Huge, 3x Epic) prior to entering the terrarium.
+2. **Creation:** User draws a shape on a canvas and selects three traits: Size, Diet, and Movement.
+3. **Release:** The creature is spawned into the world.
+4. **Observation:** The creature lives, eats, starves, mates, and dies automatically based on its AI (boids + ecosystem rules).
 
 ## Ecosystem Mechanics
 
@@ -30,6 +31,12 @@ The ecosystem transitions through three deterministic weather states:
 ### Immigration (Anti-Extinction)
 To prevent irreversible ecosystem collapse, if any species (Herbivore, Carnivore, Omnivore) population drops to exactly `0`, the system begins an immigration check. Every `120` seconds, there is a `5%` chance for a new migrant of that species to wander onto the map.
 
+## God Tools (Player Intervention)
+The player possesses interactive tools to influence the simulation:
+- **Clone:** Instantly duplicate an existing creature.
+- **Lure:** Drop a temporary scent marker that attracts the entire ecosystem, causing chaos or forced interactions.
+- **Kill:** Smite a creature from existence.
+
 ## Evolution & Genetics
 When a creature eats enough food, it builds up `reproduction reserve`. Once the reserve hits 100, it undergoes asexual reproduction.
 
@@ -40,4 +47,5 @@ When a creature eats enough food, it builds up `reproduction reserve`. Once the 
 
 ## Ecosystem Analytics
 - The game tracks historical data (Populations, Births, Starvations, Kills, Calories) at exactly 1Hz.
+- To guarantee save-file stability and prevent memory leaks, data is strictly capped at a 1-hour rolling window (3,600 data points).
 - This data powers the in-game Statistics Dashboard.

@@ -9,17 +9,17 @@ Darwin's Canvas uses React, Vite, and HTML5 Canvas. It implements a strict 3-Tie
 
 ## The 7-Pillar Physics Engine
 The core simulation (`simulate.ts`) is strictly modularized into isolated systems:
-1. **NavigationSystem.ts:** Sensory perception and Boids flocking AI (Separation, Alignment, Cohesion).
+1. **NavigationSystem.ts:** Sensory perception and Boids flocking AI (Separation, Alignment, Cohesion). Leverages `SpatialGrid` for O(1) performance.
 2. **LifeSystem.ts:** Age, stamina, and hunger drain. Applies senescence (old age penalties).
 3. **movement.ts:** Pure movement math (Crawler, Hopper, Pacer) and boundary checks.
-4. **collision.ts:** Hit detection for feeding (herbivores/plants, carnivores/meat).
+4. **collision.ts:** Hit detection for feeding and physical Boids repulsion (push-back using dynamic bounding radii).
 5. **reproduction.ts:** Tracks population caps and spawns offspring with mutations.
-6. **spawner.ts:** Handles plant generation.
+6. **spawner.ts:** Handles plant generation using `SpatialGrid` for O(1) empty-space checks.
 7. **entityManager.ts:** Zero-GC deferred deletion (using `scratchpad.deletedCreatureIds` and `flushDeadEntities`).
 
 ## Presentation Layer (Audio & VFX)
 - **VFX (Renderer.ts):** All visual effects (e.g., Pillar of Light spawn bounce, Lightning) are mathematical offsets applied strictly in `Renderer.ts` (e.g., using `ctx.translate()`). They NEVER mutate core physics (`creature.z` or `creature.y`).
-- **Audio (audioEngine.ts):** Uses the Web Audio API (`OscillatorNode`, `GainNode`) for procedural sound synthesis. No external audio files are loaded.
+- **Audio:** Split into `audioEngine.ts` (BGM Manager featuring a dual-deck DJ Crossfader for seamless day/night transitions without memory leaks) and `proceduralSfx.ts` (Web Audio API synthesis). No external audio files are loaded.
 
 ## Save / Load System
 - Handled by `saveSystem.ts`.
@@ -28,5 +28,6 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 
 ## Performance Constraints
 - NO React State for creature positions.
-- NO heavy object instantiation inside the fixed loop.
+- NO heavy object instantiation inside the fixed loop. Use Zero-GC module-level scratch arrays or `world.scratchpad` to prevent heap allocations.
 - USE `requestAnimationFrame` for all canvas mutations.
+- Analytics loops MUST use rolling caps (e.g., 3600 points) to prevent runaway memory usage during long simulations.
