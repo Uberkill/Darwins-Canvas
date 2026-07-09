@@ -12,6 +12,30 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
   const uiScale = useSettingsStore((s) => s.uiScale);
   const setSettings = useSettingsStore((s) => s.setSettings);
 
+  const handleEmergencyReset = async () => {
+    if (confirm('This will completely reset the game cache and force a hard reload. Continue?')) {
+      if ('serviceWorker' in navigator) {
+        try {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          for (const reg of registrations) {
+            await reg.unregister();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      try {
+        const cacheKeys = await caches.keys();
+        for (const key of cacheKeys) {
+          await caches.delete(key);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="pause-menu-content" style={{ textAlign: 'left', width: '100%', maxWidth: '400px', margin: '0 auto' }}>
       <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', marginBottom: '16px', textAlign: 'center', color: 'var(--color-text)' }}>Settings</h2>
@@ -66,6 +90,15 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
       <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'center' }}>
         <button className="btn-massive" onClick={onClose} style={{ fontSize: '1.2rem', padding: '12px 32px' }}>
           Done
+        </button>
+      </div>
+
+      <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'center' }}>
+        <button 
+          onClick={handleEmergencyReset} 
+          style={{ background: 'none', border: 'none', color: '#ff4444', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.85rem' }}
+        >
+          Emergency App Reset
         </button>
       </div>
     </div>

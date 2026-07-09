@@ -27,6 +27,7 @@ import { PortraitLock } from './ui/PortraitLock'
 import { StatsPanel } from './ui/StatsPanel'
 import { StatsButton } from './ui/StatsButton'
 import { useUIStore } from './store/useUIStore';
+import { UpdatePrompt } from './ui/components/UpdatePrompt';
 
 /** Subscribe to creature count changes via a polling interval. */
 function useCreatureCount(): number {
@@ -180,6 +181,9 @@ function App() {
       {/* Mobile Portrait Lock */}
       <PortraitLock />
       <StatsPanel />
+      
+      {/* PWA Update Prompt */}
+      <UpdatePrompt />
     </div>
   )
 }
