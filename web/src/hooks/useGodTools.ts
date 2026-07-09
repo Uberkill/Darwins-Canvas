@@ -9,7 +9,7 @@ import { useUIStore } from '../store/useUIStore';
 import { useEngineStore } from '../store/useEngineStore';
 
 export function useGodTools() {
-  const handleGodToolClick = (pt: { x: number, y: number }, hitId: string | null, activeTool: string) => {
+  const handleSummon = (pt: { x: number, y: number }): boolean => {
     const pending = useEngineStore.getState().pendingCreature;
     if (pending) {
       const creature = buildCreature(pending, worldRef.current.worldWidth, worldRef.current.worldHeight);
@@ -31,10 +31,12 @@ export function useGodTools() {
       });
       
       useEngineStore.getState().clearQueue();
-      return;
+      return true;
     }
+    return false;
+  };
 
-    if (activeTool === 'POINTER') {
+  const handleGodToolClick = (pt: { x: number, y: number }, hitId: string | null, activeTool: string) => {    if (activeTool === 'POINTER') {
       if (hitId) {
         audio.playGodTool('POINTER');
         useUIStore.getState().setSelectedCreatureId(hitId);
@@ -119,5 +121,5 @@ export function useGodTools() {
     setPointerCapture();
   };
 
-  return { handleGodToolClick, handleGrabStart };
+  return { handleGodToolClick, handleGrabStart, handleSummon };
 }

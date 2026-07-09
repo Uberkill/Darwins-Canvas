@@ -10,7 +10,7 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
   const activePointersRef = useRef<Map<number, {x: number, y: number}>>(new Map());
   
   const { panCamera, zoomCamera } = useCameraControls();
-  const { handleGodToolClick, handleGrabStart } = useGodTools();
+  const { handleGodToolClick, handleGrabStart, handleSummon } = useGodTools();
 
   const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!canvasRef.current) return;
@@ -62,6 +62,9 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
     const canvasPt = getCanvasPoint(canvasRef.current, e.nativeEvent);
     const pt = getWorldPoint(canvasPt.x, canvasPt.y, canvasRef.current.width, canvasRef.current.height, worldRef.current.camera);
     
+    // Check pending creature summon BEFORE anything else
+    if (handleSummon(pt)) return;
+
     worldRef.current.mouseX = pt.x;
     worldRef.current.mouseY = pt.y;
 
