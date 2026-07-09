@@ -1,4 +1,4 @@
-import type { Plant, WorldState } from '../types'
+import type { Plant, WorldState, Creature } from '../types'
 import { getPlantCap, PLANT_SPAWN_RATE, PLANT_WOBBLE_SPEED, PLANT_GROWTH_RATE } from '../constants'
 import { spawnPlant } from './entityManager'/**
  * spawner.ts — plant spawning and growth logic.

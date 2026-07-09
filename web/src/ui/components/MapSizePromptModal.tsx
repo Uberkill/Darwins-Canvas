@@ -1,4 +1,3 @@
-import React from 'react'
 import { Leaf, TreePine, Trees } from 'lucide-react'
 
 interface MapSizePromptModalProps {

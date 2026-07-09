@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { spawnCreature, spawnPlant, killCreature, flushDeadEntities, clearEntities } from './entityManager'
+import { SpatialGrid } from './SpatialGrid'
 import type { WorldState, Creature, Plant } from '../types'
 
 describe('entityManager', () => {
@@ -10,8 +11,9 @@ describe('entityManager', () => {
       creatures: [],
       plants: [],
       visualEffects: [],
-      worldWidth: 2000,
-      worldHeight: 2000,
+      worldWidth: 800,
+      worldHeight: 600,
+      mapSizeMultiplier: 1,
       totalTime: 0,
       timeOfDay: 0,
       plantSpawnTimer: 0,
@@ -20,7 +22,8 @@ describe('entityManager', () => {
       flags: { boundsChanged: false },
       scratchpad: {
         deletedCreatureIds: new Set(),
-        deletedPlantIds: new Set()
+        deletedPlantIds: new Set(),
+        spatialGrid: new SpatialGrid(800, 600, 100)
       },
       camera: { x: 0, y: 0, zoom: 1 },
       draggedEntityId: null,

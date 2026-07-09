@@ -1,5 +1,6 @@
 import type { WorldState, Creature, Plant } from '../types'
 import { calculateCreatureStats } from '../engine/creatureFactory'
+import { SpatialGrid } from '../engine/SpatialGrid'
 
 export function createMockWorld(overrides: Partial<WorldState> = {}): WorldState {
   return {
@@ -10,6 +11,7 @@ export function createMockWorld(overrides: Partial<WorldState> = {}): WorldState
     totalTime: 0,
     worldWidth: 2560,
     worldHeight: 1267,
+    mapSizeMultiplier: 1,
     mouseX: 0,
     mouseY: 0,
     hoveredEntityId: null,
@@ -19,7 +21,8 @@ export function createMockWorld(overrides: Partial<WorldState> = {}): WorldState
     camera: { x: 1280, y: 633.5, zoom: 1.0 },
     scratchpad: {
       deletedCreatureIds: new Set(),
-      deletedPlantIds: new Set()
+      deletedPlantIds: new Set(),
+      spatialGrid: new SpatialGrid(800, 600, 100)
     },
     draggedEntityId: null,
     isPaused: false,
@@ -73,14 +76,15 @@ export function createMockCreature(overrides: Partial<Creature> = {}): Creature 
     generation: overrides.generation || 1,
     currentScale: overrides.currentScale || 1.0,
     panicTimer: overrides.panicTimer || 0,
-    stamina: overrides.stamina ?? 100,
-    maxStamina: overrides.maxStamina ?? 100,
-    lungeTimer: overrides.lungeTimer || 0,
+
     lungeCooldownTimer: overrides.lungeCooldownTimer || 0,
     eatingTimer: overrides.eatingTimer || 0,
     hopPhase: overrides.hopPhase || 0,
     hopPauseTimer: overrides.hopPauseTimer || 0,
     pacerMoveTimer: overrides.pacerMoveTimer || 0,
+    stamina: overrides.stamina ?? 100,
+    maxStamina: overrides.maxStamina ?? 100,
+    lungeTimer: overrides.lungeTimer || 0,
     pacerPauseTimer: overrides.pacerPauseTimer || 0,
     pacerPaused: overrides.pacerPaused || false,
     reproductionCooldown: overrides.reproductionCooldown || 0,

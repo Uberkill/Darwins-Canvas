@@ -1,4 +1,4 @@
-import type { Creature, WorldState } from '../../types'
+import type { Creature, WorldState, Plant } from '../../types'
 
 export interface PerceptionResult {
   targetType: 'FLEE' | 'HUNTS_PLANT' | 'HUNTS_MEAT' | 'HUNTS_SCAVENGE' | 'LURE' | null;

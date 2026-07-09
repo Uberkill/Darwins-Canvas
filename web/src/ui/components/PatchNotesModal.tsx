@@ -1,4 +1,4 @@
-import { FileText, Bug, Zap, Hand } from 'lucide-react';
+import { FileText, Bug, Zap } from 'lucide-react';
 import { GAME_VERSION } from '../../constants';
 
 interface PatchNotesModalProps {

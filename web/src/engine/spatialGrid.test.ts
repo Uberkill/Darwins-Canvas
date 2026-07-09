@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { SpatialGrid } from './SpatialGrid'
-import type { Creature, Plant } from '../types'
+import type { Creature } from '../types'
 
 describe('SpatialGrid', () => {
   it('initializes correct number of cells', () => {

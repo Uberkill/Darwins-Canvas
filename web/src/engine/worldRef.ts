@@ -1,4 +1,5 @@
 import type { WorldState } from '../types'
+import { SpatialGrid } from './SpatialGrid'
 import { getWorldWidth, getWorldHeight, BASE_RENDER_SIZE } from '../constants'
 
 /**
@@ -39,6 +40,7 @@ function createInitialWorldState(): WorldState {
     scratchpad: {
       deletedCreatureIds: new Set(),
       deletedPlantIds: new Set(),
+      spatialGrid: new SpatialGrid(800, 600, 100),
     },
     draggedEntityId: null,
     isPaused: false,

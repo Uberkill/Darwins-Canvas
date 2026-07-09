@@ -22,7 +22,7 @@ describe('NavigationSystem', () => {
   })
 
   it('should apply wandering forces when no targets exist', () => {
-    const c = createMockCreature({ x: 100, y: 100, behavior: 'IDLE' })
+    const c = createMockCreature({ x: 100, y: 100, behavior: 'WANDERING' })
     const world = createMockWorld({ creatures: [c] })
     world.scratchpad.spatialGrid = new SpatialGrid(1000, 1000, 150)
     world.scratchpad.spatialGrid.insertCreature(c)
