@@ -16,26 +16,26 @@ export function PatchNotesModal({ onClose }: PatchNotesModalProps) {
           <Zap size={20} /> Latest Update (Today)
         </h3>
         
-        <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-            <Bug size={18} style={{ marginTop: '2px', color: '#E06C75' }} />
+            <Bug size={18} style={{ marginTop: '2px', color: '#E06C75', flexShrink: 0 }} />
             <div>
               <strong>Complete Physics Overhaul</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '2px' }}>Fixed the infamous "Starvation Circle" and Boids twitching glitches. Creatures now physically push each other apart smoothly and use dynamic radii to reach their food.</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Fixed the infamous "Starvation Circle" and Boids twitching glitches. Creatures now physically push each other apart smoothly and use dynamic radii to reach their food.</div>
             </div>
           </li>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-            <Hand size={18} style={{ marginTop: '2px', color: '#98C379' }} />
+            <Hand size={18} style={{ marginTop: '2px', color: '#98C379', flexShrink: 0 }} />
             <div>
               <strong>New God Tools: Clone & Lure</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '2px' }}>Added the ability to instantly duplicate your favorite creatures, or drop a Lure to attract the entire ecosystem to a single spot for chaos.</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Added the ability to instantly duplicate your favorite creatures, or drop a Lure to attract the entire ecosystem to a single spot for chaos.</div>
             </div>
           </li>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-            <FileText size={18} style={{ marginTop: '2px', color: '#56B6C2' }} />
+            <FileText size={18} style={{ marginTop: '2px', color: '#56B6C2', flexShrink: 0 }} />
             <div>
               <strong>Audio Engine Rewrite</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '2px' }}>Implemented a robust Web Audio API "DJ Crossfader" to seamlessly transition between Day and Night music without memory leaks, alongside fully procedural spatial sound effects.</div>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Implemented a robust Web Audio API "DJ Crossfader" to seamlessly transition between Day and Night music without memory leaks, alongside fully procedural spatial sound effects.</div>
             </div>
           </li>
         </ul>

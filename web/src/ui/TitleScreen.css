@@ -137,6 +137,10 @@
   background: var(--color-primary);
   box-shadow: 0 6px 0 var(--color-primary-shadow);
 }
+.icon-btn-tertiary.patch-btn {
+  background: #6A5ACD; /* Nice purple */
+  box-shadow: 0 6px 0 #4B3E99;
+}
 .icon-btn-tertiary.quit-btn {
   background: #A0938A;
   box-shadow: 0 6px 0 #7A6F68;
