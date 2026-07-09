@@ -1,3 +1,4 @@
+/// <reference types="vite-plugin-pwa/client" />
 import { useState } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { saveGame } from '../../utils/saveSystem'
@@ -8,7 +9,7 @@ import './UpdatePrompt.css'
 
 export function UpdatePrompt() {
   const {
-    needRefresh: [needRefresh, setNeedRefresh],
+    needRefresh: [needRefresh],
     updateServiceWorker,
   } = useRegisterSW({
     onRegistered(r: ServiceWorkerRegistration | undefined) {
