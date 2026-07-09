@@ -23,10 +23,17 @@ class AudioEngine {
 
   // Hybrid Audio State
   private sfxBuffers: Record<string, AudioBuffer> = {};
-  private dayBgm: HTMLAudioElement | null = null;
-  private nightBgm: HTMLAudioElement | null = null;
+  
+  // DJ Crossfader State
+  private deckA: HTMLAudioElement | null = null;
+  private deckB: HTMLAudioElement | null = null;
+  private fadeGainA: GainNode | null = null;
+  private fadeGainB: GainNode | null = null;
+  private activeDeck: 'A' | 'B' = 'A';
+  private currentTrackSrc: string | null = null;
+  private isTransitioning = false;
+
   private isAssetLoading = false;
-  private currentCrossfade = 0; // 0 = day, 1 = night
 
   // State
   private isBgmPlaying = false;
@@ -68,11 +75,29 @@ class AudioEngine {
     this.isAssetLoading = true;
     
     // Create HTML Audio synchronously so startBGM doesn't fall back to procedural!
-    this.dayBgm = new Audio(AUDIO_ASSETS.bgm.dayTheme);
-    this.dayBgm.loop = true;
-    this.nightBgm = new Audio(AUDIO_ASSETS.bgm.nightTheme);
-    this.nightBgm.loop = true;
-    this.syncHtmlAudioVolumes();
+    this.deckA = new Audio();
+    this.deckA.loop = true;
+    this.deckA.crossOrigin = 'anonymous'; // Important for MediaElementSource
+    
+    this.deckB = new Audio();
+    this.deckB.loop = true;
+    this.deckB.crossOrigin = 'anonymous';
+
+    this.fadeGainA = this.ctx.createGain();
+    this.fadeGainB = this.ctx.createGain();
+    this.fadeGainA.gain.value = 1.0;
+    this.fadeGainB.gain.value = 0.0;
+    
+    if (this.bgmGain) {
+      this.fadeGainA.connect(this.bgmGain);
+      this.fadeGainB.connect(this.bgmGain);
+    }
+    
+    // Route elements to the graph exactly once to prevent InvalidStateError
+    const sourceA = this.ctx.createMediaElementSource(this.deckA);
+    const sourceB = this.ctx.createMediaElementSource(this.deckB);
+    sourceA.connect(this.fadeGainA);
+    sourceB.connect(this.fadeGainB);
 
     for (const [key, url] of Object.entries(AUDIO_ASSETS.sfx)) {
       try {
@@ -112,40 +137,73 @@ class AudioEngine {
     this.masterGain.gain.setTargetAtTime(this.volumes.master, now, 0.1);
     this.sfxGain.gain.setTargetAtTime(this.volumes.sfx, now, 0.1);
     this.bgmGain.gain.setTargetAtTime(this.volumes.music * 0.5, now, 0.1); // BGM naturally quieter
+  }
+
+  public updateTimeOfDay(timeOfDay: number, _weather: string = 'CLEAR') {
+    if (!this.ctx || !this.deckA || !this.deckB || !this.fadeGainA || !this.fadeGainB) return;
     
-    this.syncHtmlAudioVolumes();
+    // Determine Target Track based on state
+    // In the future, this can easily support rainTheme, bossTheme, etc.
+    let targetSrc = AUDIO_ASSETS.bgm.dayTheme;
+    if (timeOfDay >= 0.5 && timeOfDay < 0.9) {
+      targetSrc = AUDIO_ASSETS.bgm.nightTheme;
+    }
+
+    if (this.currentTrackSrc === targetSrc || this.isTransitioning || !this.isBgmPlaying) return;
+    
+    this.crossfadeTo(targetSrc);
   }
 
-  public updateTimeOfDay(timeOfDay: number) {
-    let factor = 0;
-    if (timeOfDay >= 0.5 && timeOfDay < 0.6) {
-      // Dusk: fade to night
-      factor = (timeOfDay - 0.5) / 0.1;
-    } else if (timeOfDay >= 0.6 && timeOfDay < 0.9) {
-      // Deep night
-      factor = 1;
-    } else if (timeOfDay >= 0.9 && timeOfDay <= 1.0) {
-      // Dawn: fade to day
-      factor = 1.0 - ((timeOfDay - 0.9) / 0.1);
-    }
-    if (this.currentCrossfade !== factor) {
-      this.currentCrossfade = factor;
-      this.syncHtmlAudioVolumes();
-    }
-  }
-
-  private syncHtmlAudioVolumes() {
-    const masterVol = this.volumes.master * this.volumes.music * 0.5;
-    if (this.dayBgm) this.dayBgm.volume = Math.max(0, Math.min(1, masterVol * (1 - this.currentCrossfade)));
-    if (this.nightBgm) this.nightBgm.volume = Math.max(0, Math.min(1, masterVol * this.currentCrossfade));
+  private crossfadeTo(targetSrc: string) {
+    if (!this.ctx || !this.deckA || !this.deckB || !this.fadeGainA || !this.fadeGainB) return;
+    
+    this.isTransitioning = true;
+    this.currentTrackSrc = targetSrc;
+    
+    const now = this.ctx.currentTime;
+    const fadeDuration = 3.0; // 3 seconds equal-power crossfade
+    
+    const isPlayingA = this.activeDeck === 'A';
+    const activeDeck = isPlayingA ? this.deckA : this.deckB;
+    const idleDeck = isPlayingA ? this.deckB : this.deckA;
+    const activeGain = isPlayingA ? this.fadeGainA : this.fadeGainB;
+    const idleGain = isPlayingA ? this.fadeGainB : this.fadeGainA;
+    
+    // Load new track into idle deck
+    idleDeck.src = targetSrc;
+    idleDeck.playbackRate = this.currentPlaybackRate;
+    
+    idleDeck.play().then(() => {
+      // Ensure starting volumes are clean
+      activeGain.gain.setValueAtTime(1.0, now);
+      idleGain.gain.setValueAtTime(0.0, now);
+      
+      // Equal power crossfade uses cosine/sine curve for smooth perceptual volume
+      // We simulate it closely enough with linear/exponential combinations, or just a straight linearRamp for web audio nodes since they handle logarithmic decibels natively if we use exponentialRamp
+      // Actually, linearRampToValueAtTime on GainNode feels very natural for crossfading when opposite ramps are used
+      activeGain.gain.linearRampToValueAtTime(0.0, now + fadeDuration);
+      idleGain.gain.linearRampToValueAtTime(1.0, now + fadeDuration);
+      
+      this.activeDeck = isPlayingA ? 'B' : 'A';
+      
+      // Cleanup after fade
+      setTimeout(() => {
+        activeDeck.pause();
+        this.isTransitioning = false;
+      }, fadeDuration * 1000);
+      
+    }).catch((err) => {
+      console.warn("Crossfade playback blocked:", err);
+      this.isTransitioning = false;
+    });
   }
 
   public setPlaybackRate(rate: number) {
     if (this.currentPlaybackRate === rate) return;
     
     this.currentPlaybackRate = rate;
-    if (this.dayBgm) this.dayBgm.playbackRate = this.currentPlaybackRate;
-    if (this.nightBgm) this.nightBgm.playbackRate = this.currentPlaybackRate;
+    if (this.deckA) this.deckA.playbackRate = this.currentPlaybackRate;
+    if (this.deckB) this.deckB.playbackRate = this.currentPlaybackRate;
   }
 
   public playUITick() {
@@ -212,31 +270,30 @@ class AudioEngine {
     this.init();
     if (!this.ctx) return;
     
-    // AudioContext might be suspended if startBGM is called before a user gesture
     if (this.ctx.state === 'suspended') {
       this.ctx.resume();
     }
 
     this.isBgmPlaying = true;
     
-    if (this.dayBgm && this.nightBgm) {
-      this.syncHtmlAudioVolumes();
+    if (this.deckA && this.deckB) {
+      const activeDeck = this.activeDeck === 'A' ? this.deckA : this.deckB;
       
-      if (this.dayBgm.paused) {
-        this.dayBgm.play().then(() => {
-          // If HTML audio successfully starts, forcibly kill any procedural timeouts just in case!
+      // If we haven't assigned a track yet, set the default day theme
+      if (!this.currentTrackSrc) {
+        this.currentTrackSrc = AUDIO_ASSETS.bgm.dayTheme;
+        activeDeck.src = this.currentTrackSrc;
+      }
+      
+      if (activeDeck.paused) {
+        activeDeck.play().then(() => {
           if (this.bgmTimeoutId !== null) {
             clearTimeout(this.bgmTimeoutId);
             this.bgmTimeoutId = null;
           }
         }).catch(() => {
-          // Do NOT fall back to procedural if HTML audio fails (e.g. autoplay block).
-          // We will just retry on the next user interaction.
+          // Blocked by autoplay policy
         });
-      }
-      
-      if (this.nightBgm.paused) {
-        this.nightBgm.play().catch(() => {});
       }
     } else {
       if (this.bgmTimeoutId === null) {
@@ -251,8 +308,8 @@ class AudioEngine {
       clearTimeout(this.bgmTimeoutId);
       this.bgmTimeoutId = null;
     }
-    if (this.dayBgm) this.dayBgm.pause();
-    if (this.nightBgm) this.nightBgm.pause();
+    if (this.deckA) this.deckA.pause();
+    if (this.deckB) this.deckB.pause();
   }
 
   private playNextBgmNote() {
@@ -335,19 +392,23 @@ class AudioEngine {
 
   public playUIClick() {
     this.init();
-    // Subagent fix: Explicitly resume AudioContext upon first UI interaction!
     if (this.ctx?.state === 'suspended') {
       this.ctx.resume();
     }
     
-    if (this.isBgmPlaying && this.dayBgm && this.dayBgm.paused) {
-      this.dayBgm.play().then(() => {
-        if (this.bgmTimeoutId !== null) {
-          clearTimeout(this.bgmTimeoutId);
-          this.bgmTimeoutId = null;
+    if (this.isBgmPlaying && this.deckA && this.deckB) {
+      const activeDeck = this.activeDeck === 'A' ? this.deckA : this.deckB;
+      if (activeDeck.paused) {
+        if (!activeDeck.src && this.currentTrackSrc) {
+          activeDeck.src = this.currentTrackSrc;
         }
-      }).catch(() => {});
-      this.nightBgm?.play().catch(() => {});
+        activeDeck.play().then(() => {
+          if (this.bgmTimeoutId !== null) {
+            clearTimeout(this.bgmTimeoutId);
+            this.bgmTimeoutId = null;
+          }
+        }).catch(() => {});
+      }
     }
 
     if (this.playCustomSfx('uiClick')) return;
