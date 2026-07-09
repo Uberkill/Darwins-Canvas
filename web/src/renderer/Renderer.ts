@@ -20,6 +20,10 @@ export class GameRenderer {
   private renderBuffer: (Creature | Plant)[]
   private entityCount: number = 0
 
+  // Ghost image cache to prevent allocating 60 Image objects per second
+  private pendingGhostImg: HTMLImageElement | null = null;
+  private pendingGhostDataSrc: string | null = null;
+
   constructor(canvas: HTMLCanvasElement, dpr: number = window.devicePixelRatio || 1) {
     this.canvas = canvas
     this.dpr = dpr
@@ -153,12 +157,15 @@ export class GameRenderer {
       this.ctx.save();
       this.ctx.globalAlpha = 0.5;
       
-      const img = new Image();
-      img.src = pending.drawingData;
-      // Note: In a real app we'd want this cached, but for a simple ghost it's okay, 
-      // or we can just draw a placeholder bounding box if we don't want to load it synchronously.
-      // Since it's a data URL, it loads instantly in most browsers.
-      if (img.complete) {
+      // Prevent GC leak: Only create a new Image if the data actually changed
+      if (this.pendingGhostDataSrc !== pending.drawingData) {
+        this.pendingGhostImg = new Image();
+        this.pendingGhostImg.src = pending.drawingData;
+        this.pendingGhostDataSrc = pending.drawingData;
+      }
+      
+      const img = this.pendingGhostImg;
+      if (img && img.complete) {
         // Base scale matches spawn logic in buildCreature
         let scale = 1.0;
         if (pending.size === 'SMALL') scale = 0.6;

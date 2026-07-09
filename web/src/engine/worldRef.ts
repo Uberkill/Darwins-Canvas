@@ -23,6 +23,7 @@ function createInitialWorldState(): WorldState {
     totalTime:           0,
     worldWidth:          getWorldWidth(),
     worldHeight:         getWorldHeight(),
+    mapSizeMultiplier:   1,
     mouseX:              -1000,
     mouseY:              -1000,
     hoveredEntityId:     null,
@@ -57,8 +58,9 @@ function createInitialWorldState(): WorldState {
 
 /** Call this when the viewport is resized (orientation change, window resize). */
 export function updateWorldDimensions(): void {
-  worldRef.current.worldWidth  = getWorldWidth()
-  worldRef.current.worldHeight = getWorldHeight()
+  const mult = worldRef.current.mapSizeMultiplier || 1
+  worldRef.current.worldWidth  = getWorldWidth() * mult
+  worldRef.current.worldHeight = getWorldHeight() * mult
   worldRef.current.flags.boundsChanged = true
 }
 
@@ -70,17 +72,33 @@ export function clampEntitiesToWorld(world: WorldState): void {
   const w = world.worldWidth
   const h = world.worldHeight
 
+  // If map shrinks and we are holding something outside, drop it
+  if (world.draggedEntityId) {
+    const draggedC = world.creatures.find(c => c.id === world.draggedEntityId);
+    if (draggedC && (draggedC.x < 0 || draggedC.x > w || draggedC.y < 0 || draggedC.y > h)) {
+      world.draggedEntityId = null;
+    }
+  }
+
   // Clamp creatures horizontally and vertically
   for (const c of world.creatures) {
     const radius = (BASE_RENDER_SIZE * c.renderScale * (c.currentScale || 1.0)) / 2
-    c.x = Math.max(radius, Math.min(w - radius, c.x))
-    c.y = Math.max(radius, Math.min(h - radius, c.y))
+    
+    // If creature is out of bounds, scatter it slightly inward to avoid physics explosions
+    if (c.x < radius) c.x = radius + Math.random() * 20;
+    else if (c.x > w - radius) c.x = (w - radius) - Math.random() * 20;
+    
+    if (c.y < radius) c.y = radius + Math.random() * 20;
+    else if (c.y > h - radius) c.y = (h - radius) - Math.random() * 20;
   }
 
   // Clamp plants horizontally and vertically
   for (const p of world.plants) {
     const radius = 50 // Increased to 50 so large creatures can reach them!
-    p.x = Math.max(radius, Math.min(w - radius, p.x))
-    p.y = Math.max(radius, Math.min(h - radius, p.y))
+    if (p.x < radius) p.x = radius + Math.random() * 20;
+    else if (p.x > w - radius) p.x = (w - radius) - Math.random() * 20;
+    
+    if (p.y < radius) p.y = radius + Math.random() * 20;
+    else if (p.y > h - radius) p.y = (h - radius) - Math.random() * 20;
   }
 }

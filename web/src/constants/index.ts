@@ -45,13 +45,14 @@ export const FLEEING_HUNGER_MULTIPLIER = 1.0; // Handled by Stamina now
 export const HUNTING_HUNGER_MULTIPLIER = 1.0;
 
 // ─── Population limits ────────────────────────────────────────────────────────
-export const GLOBAL_POPULATION_CAP    = 250;
-export const HERBIVORE_POPULATION_CAP = 100;
-export const CARNIVORE_POPULATION_CAP = 25;
-export const OMNIVORE_POPULATION_CAP  = 25;
+const BASE_AREA = 1920 * 1080; // Assuming 1x is roughly 1080p
+export const getGlobalPopulationCap = (w: number, h: number) => Math.floor(250 * ((w * h) / BASE_AREA));
+export const getHerbivorePopulationCap = (w: number, h: number) => Math.floor(100 * ((w * h) / BASE_AREA));
+export const getCarnivorePopulationCap = (w: number, h: number) => Math.floor(25 * ((w * h) / BASE_AREA));
+export const getOmnivorePopulationCap = (w: number, h: number) => Math.floor(25 * ((w * h) / BASE_AREA));
 
 // ─── Plant constants ──────────────────────────────────────────────────────────
-export const PLANT_CAP          = 100;   // max plants on screen at once
+export const getPlantCap = (w: number, h: number) => Math.floor(100 * ((w * h) / BASE_AREA));
 export const PLANT_SPAWN_RATE   = 0.6;  // seconds between spawns
 export const PLANT_GROWTH_RATE  = 0.4;  // growthStage increase per second (0→1 in ~2.5s)
 export const PLANT_WOBBLE_SPEED = 1.2;  // radians/second for organic sway

@@ -7,6 +7,16 @@ export interface PerceptionResult {
   targetId: string | null;
 }
 
+// Zero-allocation shared buffers for O(N) spatial queries
+const nearbyCreatures: Creature[] = [];
+const nearbyPlants: Plant[] = [];
+const sharedResult: PerceptionResult = {
+  targetType: null,
+  targetX: 0,
+  targetY: 0,
+  targetId: null
+};
+
 function sizeValue(s: string) {
   return s === 'SMALL' ? 1 : s === 'MEDIUM' ? 2 : 3;
 }
@@ -62,10 +72,12 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
   const fleeRadiusSq = effectiveFleeRadius * effectiveFleeRadius;
   const sightSq = c.sightRadius * c.sightRadius;
 
+  world.scratchpad.spatialGrid.getNearbyCreatures(c.x, c.y, c.sightRadius, nearbyCreatures);
+
   // 1. Check Predators (Fear) - Survival is the highest priority
   // This must override LURE, even if the predator is further away than the lure.
-  for (let j = 0; j < world.creatures.length; j++) {
-    const other = world.creatures[j]
+  for (let j = 0; j < nearbyCreatures.length; j++) {
+    const other = nearbyCreatures[j]
     if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
 
     if (hunts(other, c)) {
@@ -97,8 +109,8 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
       // Selective Hunting: carnivores ignore prey unless genuinely hungry to avoid extinction loops.
     } else {
       let bestScore = Infinity;
-      for (let j = 0; j < world.creatures.length; j++) {
-        const other = world.creatures[j]
+      for (let j = 0; j < nearbyCreatures.length; j++) {
+        const other = nearbyCreatures[j]
         if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
         
         if (hunts(c, other)) {
@@ -132,15 +144,20 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
     }
   }
 
-  // 3. Check Scavenging (Dropped Meat)
-  // Carnivores and Omnivores will scavenge for meat if they are hungry.
-  // We REMOVED targetType !== 'HUNTS_MEAT' so if meat is CLOSER than live prey, it overrides!
+  // Pre-fetch plants only if needed to save time
   const isHungryCarnivore = c.diet === 'CARNIVORE' && c.hunger < 90;
   const isStarvingOmnivore = c.diet === 'OMNIVORE' && c.hunger < 20;
+  const canEatPlants = c.diet === 'HERBIVORE' || c.diet === 'OMNIVORE' || (c.diet === 'CARNIVORE' && c.hunger < 20);
+
+  if (targetType !== 'LURE' && targetType !== 'FLEE' && !isPanicking && (isHungryCarnivore || isStarvingOmnivore || canEatPlants)) {
+    world.scratchpad.spatialGrid.getNearbyPlants(c.x, c.y, c.sightRadius, nearbyPlants);
+  }
+
+  // 3. Check Scavenging (Dropped Meat)
   if (targetType !== 'LURE' && targetType !== 'FLEE' && !isPanicking &&
       (isHungryCarnivore || isStarvingOmnivore)) {
-    for (let k = 0; k < world.plants.length; k++) {
-      const p = world.plants[k];
+    for (let k = 0; k < nearbyPlants.length; k++) {
+      const p = nearbyPlants[k];
       if (world.scratchpad.deletedPlantIds.has(p.id) || p.type !== 'MEAT') continue;
       const dx = p.x - c.x;
       const dy = p.y - c.y;
@@ -156,10 +173,9 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
   }
 
   // 4. Check Foraging Plants
-  if (targetType !== 'LURE' && targetType !== 'FLEE' && targetType !== 'HUNTS_MEAT' && targetType !== 'HUNTS_SCAVENGE' && !isPanicking &&
-      (c.diet === 'HERBIVORE' || c.diet === 'OMNIVORE' || (c.diet === 'CARNIVORE' && c.hunger < 20))) {
-    for (let k = 0; k < world.plants.length; k++) {
-      const plant = world.plants[k]
+  if (targetType !== 'LURE' && targetType !== 'FLEE' && targetType !== 'HUNTS_MEAT' && targetType !== 'HUNTS_SCAVENGE' && !isPanicking && canEatPlants) {
+    for (let k = 0; k < nearbyPlants.length; k++) {
+      const plant = nearbyPlants[k]
       if (world.scratchpad.deletedPlantIds.has(plant.id) || plant.type === 'MEAT') continue;
       const dx = plant.x - c.x
       const dy = plant.y - c.y
@@ -209,10 +225,9 @@ export function evaluateThoughts(c: Creature, world: WorldState, timeOfDay: numb
     }
   }
 
-  return {
-    targetType,
-    targetX: closestTargetX,
-    targetY: closestTargetY,
-    targetId: closestTargetId,
-  }
+  sharedResult.targetType = targetType;
+  sharedResult.targetX = closestTargetX;
+  sharedResult.targetY = closestTargetY;
+  sharedResult.targetId = closestTargetId;
+  return sharedResult;
 }

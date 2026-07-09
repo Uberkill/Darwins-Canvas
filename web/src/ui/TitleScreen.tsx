@@ -6,6 +6,8 @@ import { DoodleLayer } from './components/DoodleLayer'
 import { SettingsModal } from './components/SettingsModal'
 import { SaveSlotsModal } from './components/SaveSlotsModal'
 import { PatchNotesModal } from './components/PatchNotesModal'
+import { MapSizePromptModal } from './components/MapSizePromptModal'
+import { updateWorldDimensions, worldRef } from '../engine/worldRef'
 import './PauseMenuModal.css'
 import './TitleScreen.css'
 
@@ -13,11 +15,12 @@ interface TitleScreenProps {
   onPlay: () => void
 }
 
-type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS' | 'PATCH_NOTES'
+type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS' | 'PATCH_NOTES' | 'MAP_SIZE_PROMPT'
 
 export function TitleScreen({ onPlay }: TitleScreenProps) {
   const [isHiding, setIsHiding] = useState(false)
   const [menuState, setMenuState] = useState<MenuState>('ROOT')
+  const [pendingPlaySlot, setPendingPlaySlot] = useState<{ slotId: string, isNew: boolean } | null>(null)
   
   const { saves, hasSaves, mostRecentSlot, executePlay, removeSave } = useSaves();
 
@@ -43,9 +46,28 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     }
   }, [])
 
-  const handlePlay = (slotId: string, isNew: boolean) => {
-    executePlay(slotId, isNew)
+  const handlePlayRequest = (slotId: string, isNew: boolean) => {
+    if (isNew) {
+      setPendingPlaySlot({ slotId, isNew })
+      setMenuState('MAP_SIZE_PROMPT')
+    } else {
+      executePlay(slotId, isNew)
+      setIsHiding(true)
+      setTimeout(() => {
+        onPlay()
+      }, 600)
+    }
+  }
+
+  const handleMapSizeSelect = (multiplier: number) => {
+    if (!pendingPlaySlot) return;
+    
+    worldRef.current.mapSizeMultiplier = multiplier;
+    updateWorldDimensions();
+
+    executePlay(pendingPlaySlot.slotId, pendingPlaySlot.isNew)
     setIsHiding(true)
+    setMenuState('ROOT')
     setTimeout(() => {
       onPlay()
     }, 600)
@@ -67,12 +89,12 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
         break
       }
     }
-    handlePlay(slotToUse, true)
+    handlePlayRequest(slotToUse, true)
   }
 
   const handleContinue = () => {
     if (mostRecentSlot) {
-      handlePlay(mostRecentSlot, false)
+      handlePlayRequest(mostRecentSlot, false)
     }
   }
 
@@ -154,9 +176,13 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
               <SaveSlotsModal 
                 mode={menuState === 'SLOT_MODAL_NEW' ? 'NEW' : 'LOAD'} 
                 saves={saves} 
-                onPlay={handlePlay} 
+                onPlay={handlePlayRequest} 
                 onDelete={handleDelete} 
               />
+            )}
+
+            {menuState === 'MAP_SIZE_PROMPT' && (
+              <MapSizePromptModal onSelect={handleMapSizeSelect} />
             )}
           </div>
         </div>

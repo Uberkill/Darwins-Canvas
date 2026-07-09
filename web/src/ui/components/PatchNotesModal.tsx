@@ -18,24 +18,24 @@ export function PatchNotesModal({ onClose }: PatchNotesModalProps) {
         
         <ul style={{ listStyleType: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-            <Bug size={18} style={{ marginTop: '2px', color: '#E06C75', flexShrink: 0 }} />
-            <div>
-              <strong>Complete Physics Overhaul</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Fixed the infamous "Starvation Circle" and Boids twitching glitches. Creatures now physically push each other apart smoothly and use dynamic radii to reach their food.</div>
-            </div>
-          </li>
-          <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-            <Hand size={18} style={{ marginTop: '2px', color: '#98C379', flexShrink: 0 }} />
-            <div>
-              <strong>New God Tools: Clone & Lure</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Added the ability to instantly duplicate your favorite creatures, or drop a Lure to attract the entire ecosystem to a single spot for chaos.</div>
-            </div>
-          </li>
-          <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
             <FileText size={18} style={{ marginTop: '2px', color: '#56B6C2', flexShrink: 0 }} />
             <div>
-              <strong>Audio Engine Rewrite</strong>
-              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Implemented a robust Web Audio API "DJ Crossfader" to seamlessly transition between Day and Night music without memory leaks, alongside fully procedural spatial sound effects.</div>
+              <strong>Huge Maps!</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>You can now pick 2x (Vast) and 3x (Epic) map sizes when starting a new game to build way bigger ecosystems.</div>
+            </div>
+          </li>
+          <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+            <Zap size={18} style={{ marginTop: '2px', color: '#facc15', flexShrink: 0 }} />
+            <div>
+              <strong>Butter-Smooth Performance</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Rewrote the AI and physics to handle thousands of creatures easily. Creatures are way smarter about finding food and running away without tanking your framerate.</div>
+            </div>
+          </li>
+          <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+            <Bug size={18} style={{ marginTop: '2px', color: '#E06C75', flexShrink: 0 }} />
+            <div>
+              <strong>No More Memory Leaks</strong>
+              <div style={{ fontSize: '0.9rem', opacity: 0.8, marginTop: '4px', lineHeight: 1.4 }}>Fixed the game freezing and crashing if you left the tab running overnight or spammed the clone tool.</div>
             </div>
           </li>
         </ul>

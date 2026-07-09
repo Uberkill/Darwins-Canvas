@@ -50,11 +50,16 @@ export function useSaves() {
         worldRef.current.timeOfDay = save.timeOfDay || 0.1;
         worldRef.current.weather = save.weather || 'CLEAR';
         worldRef.current.totalTime = save.totalTime || 0;
+        if (save.mapSizeMultiplier) {
+          worldRef.current.mapSizeMultiplier = save.mapSizeMultiplier;
+          import('../engine/worldRef').then(m => m.updateWorldDimensions());
+        }
       }
     } else {
       clearEntities(worldRef.current);
       worldRef.current.timeOfDay = 0.1;
       worldRef.current.totalTime = 0;
+      // mapSizeMultiplier is set BEFORE executePlay is called via TitleScreen
       useUIStore.getState().openOnboarding();
     }
   };

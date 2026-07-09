@@ -40,6 +40,15 @@ describe('TitleScreen Component', () => {
       fireEvent.click(playBtn)
     })
     
+    // Check that Map Size Modal opened
+    expect(screen.getByText('Ecosystem Scale')).toBeInTheDocument()
+
+    // Click a map size option
+    const vastBtn = screen.getByText('Vast (2x)')
+    await act(async () => {
+      fireEvent.click(vastBtn)
+    })
+
     // Check Zustand store to ensure onboarding was triggered
     expect(useUIStore.getState().isOnboardingOpen).toBe(true)
   })

@@ -1,5 +1,6 @@
 import type { WorldState, Creature } from '../../types';
 import { buildCreature } from '../creatureFactory';
+import { getGlobalPopulationCap } from '../../constants';
 
 export class ImmigrationSystem {
   /**
@@ -18,6 +19,8 @@ export class ImmigrationSystem {
     if (world.scratchpad.immigrationTimer > 120) { // Check every 120 seconds
       world.scratchpad.immigrationTimer = 0;
       
+      if (world.creatures.length >= getGlobalPopulationCap(world.worldWidth, world.worldHeight)) return [];
+
       let herbivores = 0, carnivores = 0, omnivores = 0;
       for (const c of world.creatures) {
          if (c.health > 0) {

@@ -1,4 +1,4 @@
-import type { WorldState } from '../types'
+import type { WorldState, Creature, Plant } from '../types'
 import { CARNIVORE_EAT_RANGE, HERBIVORE_EAT_RANGE, BASE_RENDER_SIZE } from '../constants'
 import { audio } from './audioEngine'
 import { hunts } from './ai/Thoughts'
@@ -16,12 +16,19 @@ export function runCollision(world: WorldState, _dt: number): void {
   // We compute range per-creature now based on their dynamic size
 
   // Combat loop
+  const nearbyCreatures: Creature[] = [];
   for (let i = 0; i < world.creatures.length; i++) {
     const a = world.creatures[i]
     if (deletedCreatureIds.has(a.id)) continue
 
-    for (let j = i + 1; j < world.creatures.length; j++) {
-      const b = world.creatures[j]
+    const aRadius = (BASE_RENDER_SIZE * a.currentScale * a.renderScale) / 2;
+    const maxCombatSearchRadius = aRadius + 100 + CARNIVORE_EAT_RANGE; // Safe upper bound for any other creature's radius
+
+    world.scratchpad.spatialGrid.getNearbyCreatures(a.x, a.y, maxCombatSearchRadius, nearbyCreatures);
+
+    for (let j = 0; j < nearbyCreatures.length; j++) {
+      const b = nearbyCreatures[j]
+      if (a.id >= b.id) continue; // Prevent self-collision and duplicate pair processing
       if (deletedCreatureIds.has(b.id)) continue
 
       // Z-Gate Hitbox: strictly enforce absolute height. Airborne creatures cannot attack or be attacked.
@@ -130,10 +137,15 @@ export function runCollision(world: WorldState, _dt: number): void {
   }
 
   // Feeding loop (Plants & Meat)
+  const nearbyPlants: Plant[] = [];
   for (const c of world.creatures) {
     if (deletedCreatureIds.has(c.id) || c.z > 20) continue
 
-    for (const p of world.plants) {
+    const cRadius = (BASE_RENDER_SIZE * c.currentScale * c.renderScale) / 2;
+    const maxSearchRadius = cRadius + Math.max(CARNIVORE_EAT_RANGE, HERBIVORE_EAT_RANGE);
+    world.scratchpad.spatialGrid.getNearbyPlants(c.x, c.y, maxSearchRadius, nearbyPlants);
+
+    for (const p of nearbyPlants) {
       if (deletedPlantIds.has(p.id)) continue
       
       const isMeat = p.type === 'MEAT';

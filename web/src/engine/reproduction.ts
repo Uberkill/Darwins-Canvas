@@ -1,7 +1,7 @@
 import type { Creature, WorldState } from '../types'
 import {
   REPRO_SPAWN_OFFSET, STARTING_HUNGER,
-  GLOBAL_POPULATION_CAP, CARNIVORE_POPULATION_CAP, HERBIVORE_POPULATION_CAP, OMNIVORE_POPULATION_CAP,
+  getGlobalPopulationCap, getCarnivorePopulationCap, getHerbivorePopulationCap, getOmnivorePopulationCap,
   HERBIVORE_REPRO_THRESHOLD, HERBIVORE_REPRO_COOLDOWN, HERBIVORE_REPRO_CHANCE,
   CARNIVORE_REPRO_THRESHOLD, CARNIVORE_REPRO_COOLDOWN, CARNIVORE_REPRO_CHANCE,
   OMNIVORE_REPRO_THRESHOLD, OMNIVORE_REPRO_COOLDOWN, OMNIVORE_REPRO_CHANCE,
@@ -15,7 +15,7 @@ export function checkReproduction(
   dt: number,
   excludeIds: Set<string> = new Set(),
 ): Creature[] {
-  if (world.creatures.length >= GLOBAL_POPULATION_CAP) return []
+  if (world.creatures.length >= getGlobalPopulationCap(world.worldWidth, world.worldHeight)) return []
 
   const babies: Creature[] = []
   
@@ -57,12 +57,12 @@ export function checkReproduction(
     if (creature.hunger < threshold) continue
 
     // Global cap check
-    if (world.creatures.length + babies.length >= GLOBAL_POPULATION_CAP) break
+    if (world.creatures.length + babies.length >= getGlobalPopulationCap(world.worldWidth, world.worldHeight)) break
     
     // Diet cap check
-    if (isCarnivore && currentCarnivores >= CARNIVORE_POPULATION_CAP) continue
-    if (isHerbivore && currentHerbivores >= HERBIVORE_POPULATION_CAP) continue
-    if (isOmnivore && currentOmnivores >= OMNIVORE_POPULATION_CAP) continue
+    if (isCarnivore && currentCarnivores >= getCarnivorePopulationCap(world.worldWidth, world.worldHeight)) continue
+    if (isHerbivore && currentHerbivores >= getHerbivorePopulationCap(world.worldWidth, world.worldHeight)) continue
+    if (isOmnivore && currentOmnivores >= getOmnivorePopulationCap(world.worldWidth, world.worldHeight)) continue
 
     // Adult check (Wait 30s)
     if (creature.age < 30) continue

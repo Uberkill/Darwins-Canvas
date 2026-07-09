@@ -1,5 +1,5 @@
 import type { Plant, WorldState } from '../types'
-import { PLANT_CAP, PLANT_SPAWN_RATE, PLANT_WOBBLE_SPEED, PLANT_GROWTH_RATE } from '../constants'
+import { getPlantCap, PLANT_SPAWN_RATE, PLANT_WOBBLE_SPEED, PLANT_GROWTH_RATE } from '../constants'
 import { spawnPlant } from './entityManager'/**
  * spawner.ts — plant spawning and growth logic.
  *
@@ -7,6 +7,9 @@ import { spawnPlant } from './entityManager'/**
  * is below the cap. They grow from seedlings to full size, and
  * wobble organically each frame.
  */
+
+const scratchNearbyPlants: Plant[] = [];
+const scratchNearbyCreatures: Creature[] = [];
 
 export function tickPlantSpawner(world: WorldState, dt: number): void {
   // ─── Tick wobble and growth for existing plants ───────────────────────────
@@ -18,7 +21,7 @@ export function tickPlantSpawner(world: WorldState, dt: number): void {
   // ─── Spawn timer ──────────────────────────────────────────────────────────
   world.plantSpawnTimer -= dt
   if (world.plantSpawnTimer > 0) return
-  if (world.plants.length >= PLANT_CAP) {
+  if (world.plants.length >= getPlantCap(world.worldWidth, world.worldHeight)) {
     world.plantSpawnTimer = PLANT_SPAWN_RATE
     return
   }
@@ -42,22 +45,12 @@ function createPlant(world: WorldState): Plant | null {
 
     let blocked = false
     
-    // Check against plants
-    for (const p of world.plants) {
-      const distSq = (p.x - x)**2 + (p.y - y)**2
-      if (distSq < (radius + 15)**2) {
-        blocked = true; break;
-      }
-    }
+    world.scratchpad.spatialGrid.getNearbyPlants(x, y, radius + 15, scratchNearbyPlants);
+    if (scratchNearbyPlants.length > 0) blocked = true;
 
-    // Check against creatures (approx 40px radius)
     if (!blocked) {
-      for (const c of world.creatures) {
-        const distSq = (c.x - x)**2 + (c.y - y)**2
-        if (distSq < (radius + 40)**2) {
-          blocked = true; break;
-        }
-      }
+      world.scratchpad.spatialGrid.getNearbyCreatures(x, y, radius + 40, scratchNearbyCreatures);
+      if (scratchNearbyCreatures.length > 0) blocked = true;
     }
 
     if (!blocked) {

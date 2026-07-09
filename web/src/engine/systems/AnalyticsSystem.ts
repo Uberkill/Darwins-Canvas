@@ -60,6 +60,11 @@ export class AnalyticsSystem {
       accum.huntedCarn = 0; accum.huntedOmni = 0; accum.huntedHerb = 0;
       accum.damageCarn = 0; accum.damageOmni = 0; accum.damageHerb = 0;
       accum.caloriesCarn = 0; accum.caloriesOmni = 0; accum.caloriesHerb = 0;
+      
+      // Prevent infinite memory leak over long play sessions (cap to 1 hour of history at 1 tick/sec)
+      if (world.analytics.history.length > 3600) {
+        world.analytics.history.shift();
+      }
     }
   }
 }

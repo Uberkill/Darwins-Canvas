@@ -1,3 +1,5 @@
+import type { SpatialGrid } from '../engine/SpatialGrid';
+
 // ─── Creature enums ───────────────────────────────────────────────────────────
 export type CreatureSize  = 'SMALL' | 'MEDIUM' | 'LARGE';
 export type MovementType  = 'CRAWLER' | 'HOPPER' | 'PACER';
@@ -156,6 +158,7 @@ export interface WorldState {
   totalTime:       number;   // total elapsed seconds
   worldWidth:      number;   // updated on resize
   worldHeight:     number;   // updated on resize
+  mapSizeMultiplier: number; // 1x, 2x, 3x size
   mouseX:          number;   // logical cursor X (for hover detection)
   mouseY:          number;   // logical cursor Y (for hover detection)
   hoveredEntityId: string | null;
@@ -172,6 +175,7 @@ export interface WorldState {
   scratchpad: {
     deletedCreatureIds: Set<string>;
     deletedPlantIds:    Set<string>;
+    spatialGrid:        SpatialGrid;
     immigrationTimer?:  number;
   };
   // Drag and Drop

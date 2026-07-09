@@ -10,6 +10,7 @@ import { LifeSystem } from './systems/LifeSystem'
 import { clampEntitiesToWorld } from './worldRef'
 import { spawnCreature, spawnPlant, killCreature, flushDeadEntities } from './entityManager'
 import { audio } from './audioEngine'
+import { SpatialGrid } from './SpatialGrid'
 import {
   EXHAUSTION_SPEED_PENALTY,
   LUNGE_SPEED_MULTIPLIER,
@@ -30,6 +31,25 @@ export function simulate(world: WorldState, dt: number): void {
       c.health = 0; // Force immediate death
       c.maxHealth = 100; // Reset to safe value so math doesn't propagate NaN during the death frame
       c.damage = 0;
+    }
+  }
+
+  // ─── 0. Build Spatial Grid ──────────────────────────────────────────────────
+  if (!world.scratchpad.spatialGrid) {
+    world.scratchpad.spatialGrid = new SpatialGrid(world.worldWidth, world.worldHeight, 150);
+  } else {
+    world.scratchpad.spatialGrid.resize(world.worldWidth, world.worldHeight);
+  }
+  world.scratchpad.spatialGrid.clear();
+  
+  for (const c of world.creatures) {
+    if (c.health > 0 && !world.scratchpad.deletedCreatureIds.has(c.id)) {
+      world.scratchpad.spatialGrid.insertCreature(c);
+    }
+  }
+  for (const p of world.plants) {
+    if (!world.scratchpad.deletedPlantIds.has(p.id)) {
+      world.scratchpad.spatialGrid.insertPlant(p);
     }
   }
 

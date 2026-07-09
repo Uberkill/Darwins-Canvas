@@ -13,10 +13,11 @@ export interface SaveSlotMetadata {
 
 export interface SaveSlotData extends SaveSlotMetadata {
   creatures: Creature[]
-  plants: Plant[]
-  timeOfDay: number
-  totalTime: number
-  weather: 'CLEAR' | 'RAIN' | 'DROUGHT'
+  plants: Plant[];
+  timeOfDay: number;
+  weather: 'CLEAR' | 'RAIN' | 'DROUGHT';
+  totalTime: number;
+  mapSizeMultiplier?: number;
 }
 
 let dbPromise: Promise<IDBDatabase> | null = null
@@ -55,6 +56,7 @@ export async function saveGame(slotId: string, world: WorldState, slotName: stri
     timeOfDay: world.timeOfDay,
     totalTime: world.totalTime,
     weather: world.weather,
+    mapSizeMultiplier: world.mapSizeMultiplier,
   }
 
   return new Promise((resolve, reject) => {

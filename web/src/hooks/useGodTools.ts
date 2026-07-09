@@ -2,7 +2,7 @@ import { worldRef } from '../engine/worldRef';
 import { spawnCreature, spawnPlant, killCreature } from '../engine/entityManager';
 import { buildCreature } from '../engine/creatureFactory';
 import { spawnBaby } from '../engine/reproduction';
-import { GLOBAL_POPULATION_CAP } from '../constants';
+import { getGlobalPopulationCap } from '../constants';
 import { preloadImage } from '../renderer/imageCache';
 import { audio } from '../engine/audioEngine';
 import { useUIStore } from '../store/useUIStore';
@@ -76,7 +76,7 @@ export function useGodTools() {
       worldRef.current.activeLure = { x: pt.x, y: pt.y, timer: 2 };
     } else if (activeTool === 'CLONE') {
       if (hitId) {
-        if (worldRef.current.creatures.length >= GLOBAL_POPULATION_CAP) {
+        if (worldRef.current.creatures.length >= getGlobalPopulationCap(worldRef.current.worldWidth, worldRef.current.worldHeight)) {
           audio.playGodTool('SMITE'); // error sound
         } else {
           const target = worldRef.current.creatures.find(c => c.id === hitId);

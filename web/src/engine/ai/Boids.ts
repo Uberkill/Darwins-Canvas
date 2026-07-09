@@ -12,6 +12,14 @@ export interface BoidsForces {
   boidCount: number;
 }
 
+const nearbyBoids: Creature[] = [];
+const sharedBoidsResult: BoidsForces = {
+  sepX: 0, sepY: 0,
+  alignX: 0, alignY: 0,
+  cohX: 0, cohY: 0,
+  boidCount: 0
+};
+
 export function calculateBoids(c: Creature, world: WorldState): BoidsForces {
   let sepX = 0, sepY = 0
   let alignX = 0, alignY = 0
@@ -23,9 +31,12 @@ export function calculateBoids(c: Creature, world: WorldState): BoidsForces {
   // Calculate this creature's true visual radius
   const cRadius = (BASE_RENDER_SIZE * c.currentScale * c.renderScale) / 2
 
-  for (let j = 0; j < world.creatures.length; j++) {
-    const other = world.creatures[j]
-    if (c.id === other.id || world.scratchpad.deletedCreatureIds.has(other.id)) continue
+  // Only check creatures physically near us using zero-allocation array
+  world.scratchpad.spatialGrid.getNearbyCreatures(c.x, c.y, c.sightRadius + cRadius, nearbyBoids);
+
+  for (let j = 0; j < nearbyBoids.length; j++) {
+    const other = nearbyBoids[j]
+    if (c.id === other.id) continue
     if (other.id === world.draggedEntityId) continue
 
     let dx = c.x - other.x
@@ -89,5 +100,13 @@ export function calculateBoids(c: Creature, world: WorldState): BoidsForces {
     c.intent = 'Following the herd';
   }
 
-  return { sepX, sepY, alignX, alignY, cohX, cohY, boidCount }
+  sharedBoidsResult.sepX = sepX;
+  sharedBoidsResult.sepY = sepY;
+  sharedBoidsResult.alignX = alignX;
+  sharedBoidsResult.alignY = alignY;
+  sharedBoidsResult.cohX = cohX;
+  sharedBoidsResult.cohY = cohY;
+  sharedBoidsResult.boidCount = boidCount;
+  
+  return sharedBoidsResult;
 }
