@@ -96,7 +96,9 @@ export function spawnBaby(parent: Creature, worldWidth: number, worldHeight: num
   const baseline = calculateCreatureStats(parent.size, parent.movement, parent.diet, parent.decals)
   const maxCap = 3.0 // Mutations cannot exceed 3x the baseline
 
-  // Mutations (must mutate from baseStats to prevent Lamarckian leakage & time-of-day glitches)
+  // Note for future devs: mutate() blindly multiplies stats, but it's mathematically safe
+  // because the lines below it strictly clamp everything with Math.max/Math.min.
+  // It literally can't spit out NaNs or Infinite stats into the baby.
   const mutate = (base: number, maxPct: number) => base * (1 + (Math.random() * maxPct * 2 - maxPct))
   const speed = Math.min(baseline.speed * maxCap, Math.max(10, mutate(parent.baseStats.speed, 0.05)))
   const sightRadius = Math.min(baseline.sight * maxCap, Math.max(50, mutate(parent.baseStats.sightRadius, 0.05)))

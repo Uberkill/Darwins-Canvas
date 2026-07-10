@@ -7,7 +7,7 @@ import { SettingsModal } from './components/SettingsModal'
 import { SaveSlotsModal } from './components/SaveSlotsModal'
 import { PatchNotesModal } from './components/PatchNotesModal'
 import { MapSizePromptModal } from './components/MapSizePromptModal'
-import { updateWorldDimensions, worldRef } from '../engine/worldRef'
+import { updateWorldDimensions, centerCamera, worldRef } from '../engine/worldRef'
 import './PauseMenuModal.css'
 import './TitleScreen.css'
 
@@ -64,6 +64,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     
     worldRef.current.mapSizeMultiplier = multiplier;
     updateWorldDimensions();
+    centerCamera();
 
     executePlay(pendingPlaySlot.slotId, pendingPlaySlot.isNew)
     setIsHiding(true)

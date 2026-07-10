@@ -9,7 +9,8 @@ describe('InteractionSystem — Hit Detection', () => {
     const c = createMockCreature({ x: 500, y: 500, z: 0, currentScale: 1.0 })
     const world = createMockWorld({ creatures: [c] })
     world.mouseX = 500
-    world.mouseY = 500
+    // To hit the middle of the sprite (visual Y = 160), mouseY must be 400 (400 * 0.4 = 160).
+    world.mouseY = 400
     world.camera = { x: 0, y: 0, zoom: 1.0 }
 
     InteractionSystem.update(world)
@@ -34,7 +35,8 @@ describe('InteractionSystem — Hit Detection', () => {
     const higher = createMockCreature({ x: 500, y: 510, z: 0, currentScale: 1.0 }) // higher y
     const world = createMockWorld({ creatures: [lower, higher] })
     world.mouseX = 500
-    world.mouseY = 505
+    // To hit visual Y = 190, mouseY must be 475 (475 * 0.4 = 190).
+    world.mouseY = 475
     world.camera = { x: 0, y: 0, zoom: 1.0 }
 
     InteractionSystem.update(world)
@@ -64,7 +66,8 @@ describe('InteractionSystem — Hit Detection', () => {
     const c = createMockCreature({ x: 500, y: 500, z: 0, currentScale: 0.1, renderScale: 0.1 })
     const world = createMockWorld({ creatures: [c] })
     world.mouseX = 50
-    world.mouseY = 500
+    // To hit visual Y = 196, mouseY must be 490 (490 * 0.4 = 196).
+    world.mouseY = 490 
     world.camera = { x: 0, y: 0, zoom: 0.1 }
 
     InteractionSystem.update(world)

@@ -1,6 +1,6 @@
 import type { WorldState } from '../types'
 import { SpatialGrid } from './SpatialGrid'
-import { getWorldWidth, getWorldHeight, BASE_RENDER_SIZE } from '../constants'
+import { getWorldWidth, getWorldHeight, BASE_RENDER_SIZE, CAMERA_TILT } from '../constants'
 
 /**
  * worldRef — the mutable, single source of truth for all simulation state.
@@ -34,8 +34,10 @@ function createInitialWorldState(): WorldState {
     weather:             'CLEAR',
     camera: {
       x: typeof window !== 'undefined' ? window.innerWidth / 2 : 500,
-      y: typeof window !== 'undefined' ? window.innerHeight / 2 : 300,
-      zoom: 1.0,
+      // camera.y is in visual space (world y * CAMERA_TILT).
+      // Since worldHeight is scaled by 1/CAMERA_TILT, visual height is exactly innerHeight.
+      y: typeof window !== 'undefined' ? window.innerHeight / 2 : 120,
+      zoom: typeof window !== 'undefined' ? 1.0 : 1.0,
     },
     scratchpad: {
       deletedCreatureIds: new Set(),
@@ -64,6 +66,13 @@ export function updateWorldDimensions(): void {
   worldRef.current.worldWidth  = getWorldWidth() * mult
   worldRef.current.worldHeight = getWorldHeight() * mult
   worldRef.current.flags.boundsChanged = true
+}
+
+/** Recenter the camera on the world. */
+export function centerCamera(): void {
+  // camera.x is in physical space, camera.y is in VISUAL space (squished by tilt)
+  worldRef.current.camera.x = worldRef.current.worldWidth / 2;
+  worldRef.current.camera.y = (worldRef.current.worldHeight / 2) * CAMERA_TILT;
 }
 
 /** 

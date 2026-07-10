@@ -90,6 +90,9 @@ export function runCollision(world: WorldState, _dt: number): void {
           }
 
           // Determine death
+          // FYI: killCreature just flags the ID and defers actual array removal.
+          // This prevents weird double-kill / double-meat bugs because the top of
+          // the outer loop checks deletedCreatureIds.has(c.id).
           if (a.health <= 0) {
             killCreature(world, a.id)
             if (a.diet === 'CARNIVORE') world.analytics.currentSecondAccumulator.huntedCarn++;

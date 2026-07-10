@@ -44,6 +44,9 @@ export function simulate(world: WorldState, dt: number): void {
   
   for (const c of world.creatures) {
     if (c.health > 0 && !world.scratchpad.deletedCreatureIds.has(c.id)) {
+      // FYI: SpatialGrid's getCellIndex uses Math.max/min clamping under the hood.
+      // If physics launches a creature to x=-5000, it safely pins it to the edge cell
+      // instead of throwing an Array Out-of-Bounds crash.
       world.scratchpad.spatialGrid.insertCreature(c);
     }
   }

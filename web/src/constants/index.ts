@@ -2,7 +2,23 @@ import type { CreatureSize } from '../types';
 
 // ─── World dimensions (functions — safe across resize/orientation changes) ────
 export const getWorldWidth  = (): number => window.innerWidth;
-export const getWorldHeight = (): number => window.innerHeight;
+export const getWorldHeight = (): number => window.innerHeight / CAMERA_TILT;
+
+export const CAMERA_TILT = 0.4; // 2.5D projection multiplier (lowered from 0.6 for a steeper angle)
+
+// ─── 2.5D Depth Illusion ────────────────────────────────────────────────────
+// Entities near the top of the map (y≈0, "far") render at DEPTH_SCALE_FAR.
+// Entities near the bottom (y≈worldHeight, "near") render at DEPTH_SCALE_NEAR.
+// This fakes a perspective camera: things far away look smaller.
+// NOTE: These are VISUAL-ONLY multipliers. Physics hitboxes are unchanged.
+export const DEPTH_SCALE_FAR  = 0.65; // 35% smaller at the horizon
+export const DEPTH_SCALE_NEAR = 1.10; // 10% larger in the foreground
+
+// ─── Directional Shadow (DST-style sun from upper-left) ─────────────────────
+// Shadow is cast offset from the creature's feet, selling the 3D ground plane.
+// Offset Y must be 0, otherwise the creature looks like it is floating in 2.5D space!
+export const SHADOW_OFFSET_X =  4; // px right
+export const SHADOW_OFFSET_Y =  0; // MUST BE 0 so shadow touches the feet
 
 // ─── Creature base render size ────────────────────────────────────────────────
 // MEDIUM creature renders at 80×80 px in the ecosystem.
@@ -45,7 +61,7 @@ export const FLEEING_HUNGER_MULTIPLIER = 1.0; // Handled by Stamina now
 export const HUNTING_HUNGER_MULTIPLIER = 1.0;
 
 // ─── Population limits ────────────────────────────────────────────────────────
-const BASE_AREA = 1920 * 1080; // Assuming 1x is roughly 1080p
+const BASE_AREA = 1920 * (1080 / CAMERA_TILT); // Scaled for 2.5D physical depth
 export const getGlobalPopulationCap = (w: number, h: number) => Math.floor(250 * ((w * h) / BASE_AREA));
 export const getHerbivorePopulationCap = (w: number, h: number) => Math.floor(100 * ((w * h) / BASE_AREA));
 export const getCarnivorePopulationCap = (w: number, h: number) => Math.floor(25 * ((w * h) / BASE_AREA));

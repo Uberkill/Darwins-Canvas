@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useUIStore } from '../store/useUIStore';
 import { worldRef } from '../engine/worldRef';
+import { CAMERA_TILT } from '../constants';
 
 export function useCameraControls() {
   useEffect(() => {
@@ -66,6 +67,7 @@ export function useCameraControls() {
 
   const panCamera = (dx: number, dy: number, pointerCount: number) => {
     worldRef.current.camera.x -= (dx / worldRef.current.camera.zoom) / pointerCount;
+    // camera.y is in visual space — dy maps directly without CAMERA_TILT compensation
     worldRef.current.camera.y -= (dy / worldRef.current.camera.zoom) / pointerCount;
     
     if (useUIStore.getState().cameraMode === 'TRACKING') {
@@ -76,7 +78,7 @@ export function useCameraControls() {
 
   const zoomCamera = (deltaY: number) => {
     const minZoomX = window.innerWidth / worldRef.current.worldWidth;
-    const minZoomY = window.innerHeight / worldRef.current.worldHeight;
+    const minZoomY = window.innerHeight / (worldRef.current.worldHeight * CAMERA_TILT);
     const minZoom = Math.max(minZoomX, minZoomY);
     const newZoom = Math.max(minZoom, Math.min(4.0, useUIStore.getState().targetZoom - deltaY * 0.001));
     useUIStore.getState().setTargetZoom(newZoom);

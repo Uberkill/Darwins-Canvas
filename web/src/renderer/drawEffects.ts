@@ -1,4 +1,5 @@
 import type { VisualEffect } from '../types';
+import { CAMERA_TILT } from '../constants';
 
 export function drawEffects(ctx: CanvasRenderingContext2D, visualEffects: VisualEffect[]) {
   if (!visualEffects || visualEffects.length === 0) return;
@@ -23,15 +24,16 @@ export function drawEffects(ctx: CanvasRenderingContext2D, visualEffects: Visual
       ctx.beginPath();
       // Start from sky (far above)
       let currentX = effect.x + (random() - 0.5) * 100;
-      let currentY = effect.y - 1000;
+      const targetY = effect.y * CAMERA_TILT;
+      let currentY = targetY - 1000;
       ctx.moveTo(currentX, currentY);
 
       // Draw jagged line down to target
-      while (currentY < effect.y) {
+      while (currentY < targetY) {
         currentY += 50 + random() * 50;
-        if (currentY > effect.y) currentY = effect.y;
+        if (currentY > targetY) currentY = targetY;
         currentX += (random() - 0.5) * 80;
-        if (currentY === effect.y) currentX = effect.x; // Ensure it hits the target exactly
+        if (currentY === targetY) currentX = effect.x; // Ensure it hits the target exactly
         ctx.lineTo(currentX, currentY);
       }
       ctx.stroke();
@@ -62,7 +64,7 @@ export function drawEffects(ctx: CanvasRenderingContext2D, visualEffects: Visual
         const rise = progress * (50 + random() * 50);
         
         const px = effect.x + rx;
-        const py = effect.y - 20 + ry - rise;
+        const py = (effect.y * CAMERA_TILT) - 20 + ry - rise;
         
         const size = 4 + random() * 6;
         
@@ -78,8 +80,9 @@ export function drawEffects(ctx: CanvasRenderingContext2D, visualEffects: Visual
       const alpha = Math.max(0, effect.timer / effect.maxTimer); // 1.0 to 0.0
       
       // Pillar of Light from sky down to spawn point
-      const topY = effect.y - 3000;
-      const gradient = ctx.createLinearGradient(effect.x, topY, effect.x, effect.y);
+      const targetY = effect.y * CAMERA_TILT;
+      const topY = targetY - 3000;
+      const gradient = ctx.createLinearGradient(effect.x, topY, effect.x, targetY);
       gradient.addColorStop(0, `rgba(255, 255, 200, 0)`);
       gradient.addColorStop(0.5, `rgba(255, 255, 220, ${alpha * 0.6})`);
       gradient.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
@@ -92,15 +95,15 @@ export function drawEffects(ctx: CanvasRenderingContext2D, visualEffects: Visual
       ctx.beginPath();
       ctx.moveTo(effect.x - widthTop, topY);
       ctx.lineTo(effect.x + widthTop, topY);
-      ctx.lineTo(effect.x + widthBottom, effect.y);
-      ctx.lineTo(effect.x - widthBottom, effect.y);
+      ctx.lineTo(effect.x + widthBottom, targetY);
+      ctx.lineTo(effect.x - widthBottom, targetY);
       ctx.fill();
 
       // Shockwave ring on the ground
       const progress = 1.0 - alpha; // 0.0 to 1.0
       const radius = progress * 150;
       ctx.beginPath();
-      ctx.ellipse(effect.x, effect.y, radius, radius * 0.35, 0, 0, Math.PI * 2);
+      ctx.ellipse(effect.x, targetY, radius, radius * 0.35 * CAMERA_TILT, 0, 0, Math.PI * 2);
       ctx.lineWidth = 4 * alpha;
       ctx.strokeStyle = `rgba(255, 255, 200, ${alpha})`;
       ctx.stroke();

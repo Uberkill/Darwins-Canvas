@@ -1,12 +1,27 @@
 import type { Creature } from '../types'
-import { BASE_RENDER_SIZE } from '../constants'
+import { BASE_RENDER_SIZE, CAMERA_TILT, DEPTH_SCALE_FAR, DEPTH_SCALE_NEAR, SHADOW_OFFSET_X, SHADOW_OFFSET_Y } from '../constants'
 import { getImage } from './imageCache'
+
+/**
+ * getDepthScale — returns the visual scale multiplier for an entity at world Y.
+ *
+ * Linearly interpolates between DEPTH_SCALE_FAR (at y=0, far horizon)
+ * and DEPTH_SCALE_NEAR (at y=worldHeight, close to viewer).
+ *
+ * This fakes a perspective camera where far objects appear smaller.
+ * Physics hitboxes are NEVER affected — this is visual-only.
+ */
+export function getDepthScale(worldY: number, worldHeight: number): number {
+  const t = Math.max(0, Math.min(1, worldY / worldHeight)); // 0=top/far, 1=bottom/near
+  return DEPTH_SCALE_FAR + (DEPTH_SCALE_NEAR - DEPTH_SCALE_FAR) * t;
+}
 
 /**
  * drawCreature.ts — renders a single creature on the canvas.
  *
  * Rendering features:
  * - Bottom-anchored: creature.y is the ground contact point
+ * - Depth Scale: creature.y drives visual scale (far=smaller, near=larger)
  * - Wobble rotation (±5° when MOVING, based on direction)
  * - Squash/stretch (hoppers: stretch ascending, squash landing)
  * - Breathing idle animation: gentle ±2.5% scale pulse using creature.age
@@ -17,10 +32,14 @@ import { getImage } from './imageCache'
  * fill). Only pixels the user drew are visible. The ecosystem sky/ground
  * shows through undrawn areas — creatures look like actual creatures.
  */
-export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature): void {
+export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature, worldHeight: number = 900): void {
   // Visual size is based on currentScale (which grows from 0.5 to 1.5)
   // We keep the hitbox separate.
   const size = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0)
+
+  // ── Depth Scale (perspective illusion) ──
+  // Far creatures (top of map) are smaller; near creatures (bottom) are larger.
+  const depthScale = getDepthScale(creature.y, worldHeight);
 
   // ── Spawn Drop Animation ──
   let spawnOffsetY = 0;
@@ -45,7 +64,11 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature):
   }
 
   ctx.save()
-  ctx.translate(creature.x, creature.y - creature.z - spawnOffsetY)
+  // 2.5D Projection: squish Y according to tilt, but keep Z fully un-squished (jumping)
+  ctx.translate(creature.x, (creature.y * CAMERA_TILT) - creature.z - spawnOffsetY)
+
+  // Apply depth scale — scales entire drawing context around the anchor point
+  ctx.scale(depthScale, depthScale);
 
   // ── Wobble rotation ──
   if (creature.state === 'MOVING') {
@@ -147,13 +170,14 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature):
 }
 
 /**
- * drawCreatureShadow — renders the ground contact shadow BEFORE the creature.
- * Call this in the render loop before drawCreature so the shadow appears
- * beneath the sprite.
+ * drawCreatureShadow — renders the directional ground shadow BEFORE the creature.
  *
+ * Shadow is offset in the direction of the DST "sun from upper-left", making it
+ * visually clear that creatures are standing on a 3D ground plane.
+ * Shadow also uses depth scale: far shadows are smaller (matching smaller creature).
  * Shadow fades and shrinks as the creature rises above the ground (hoppers).
  */
-export function drawCreatureShadow(ctx: CanvasRenderingContext2D, creature: Creature): void {
+export function drawCreatureShadow(ctx: CanvasRenderingContext2D, creature: Creature, worldHeight: number = 900): void {
   const size        = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0)
   let z             = creature.z  // elevation
 
@@ -170,17 +194,25 @@ export function drawCreatureShadow(ctx: CanvasRenderingContext2D, creature: Crea
     z += (1 - bounce) * 600; // Add to Z so shadow scales naturally during drop
   }
 
-  const alpha   = Math.max(0, 0.18 - z * 0.003)
+  const alpha   = Math.max(0, 0.28 - z * 0.004)
   if (alpha <= 0.005) return  // too faint to bother drawing
 
+  // Depth scale: shadow matches visual creature size
+  const depthScale = getDepthScale(creature.y, worldHeight);
   const scaleX  = Math.max(0.35, 1 - z * 0.012)
 
   ctx.save()
-  ctx.translate(creature.x, creature.y)
-  ctx.scale(scaleX, 1)
-  ctx.fillStyle = `rgba(58, 50, 40, ${alpha.toFixed(3)})`
+  // 2.5D Projection: ground shadow anchors to the tilted floor,
+  // then offset in the sun direction (SHADOW_OFFSET) for the DST directional look.
+  ctx.translate(
+    creature.x + SHADOW_OFFSET_X * depthScale,
+    creature.y * CAMERA_TILT + SHADOW_OFFSET_Y * depthScale
+  )
+  ctx.scale(scaleX * depthScale, depthScale)
+  ctx.fillStyle = `rgba(40, 32, 20, ${alpha.toFixed(3)})`
   ctx.beginPath()
-  ctx.ellipse(0, 2, size * 0.38, size * 0.065, 0, 0, Math.PI * 2)
+  // Wider, more elongated ellipse to sell the flat-ground-plane look
+  ctx.ellipse(0, 2, size * 0.42, size * 0.09, 0, 0, Math.PI * 2)
   ctx.fill()
   ctx.restore()
 }
@@ -204,16 +236,17 @@ function drawFallback(ctx: CanvasRenderingContext2D, size: number, creature: Cre
  * drawTrackingMarker — renders the visual crosshair/diamond above a tracked creature.
  * Called in Pass 2 of the renderer to ensure it floats above all sprites.
  */
-export function drawTrackingMarker(ctx: CanvasRenderingContext2D, creature: Creature, timestamp: number): void {
+export function drawTrackingMarker(ctx: CanvasRenderingContext2D, creature: Creature, timestamp: number, worldHeight: number = 900): void {
   const size = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0);
+  const depthScale = getDepthScale(creature.y, worldHeight);
   
   ctx.save();
-  // Anchor to creature's head
-  ctx.translate(creature.x, creature.y - creature.z - size - 20);
+  // Anchor to creature's head (True 2.5D projection + depth scale)
+  ctx.translate(creature.x, (creature.y * CAMERA_TILT) - creature.z - size * depthScale - 20);
   
   // Pulse animation using timestamp (O(1) CPU, no React state)
   const pulse = Math.sin(timestamp / 200);
-  const scale = 1 + pulse * 0.15;
+  const scale = (1 + pulse * 0.15) * depthScale;
   ctx.scale(scale, scale);
   
   // Draw glowing diamond
@@ -235,3 +268,4 @@ export function drawTrackingMarker(ctx: CanvasRenderingContext2D, creature: Crea
   
   ctx.restore();
 }
+

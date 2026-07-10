@@ -4,6 +4,7 @@ import { getWorldPoint, getCanvasPoint } from '../renderer/canvasUtils';
 import { useUIStore } from '../store/useUIStore';
 import { useCameraControls } from './useCameraControls';
 import { useGodTools } from './useGodTools';
+import { BASE_RENDER_SIZE, CAMERA_TILT } from '../constants';
 
 export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>) {
   const [isDragging, setIsDragging] = useState(false);
@@ -72,11 +73,15 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
     if (activePointersRef.current.size === 0) {
       for (let i = worldRef.current.creatures.length - 1; i >= 0; i--) {
         const c = worldRef.current.creatures[i];
-        const baseRadius = 32 * c.renderScale * c.currentScale;
-        const hitRadius = Math.max(48 / worldRef.current.camera.zoom, baseRadius);
-        const dx = c.x - pt.x;
-        const dy = (c.y - c.z) - pt.y;
-        if (dx * dx + dy * dy <= hitRadius * hitRadius) {
+        // 2.5D AABB — must match InteractionSystem exactly
+        const size = BASE_RENDER_SIZE * c.renderScale * (c.currentScale || 1.0);
+        const hitRadius = Math.max(48 / worldRef.current.camera.zoom, size / 2 + 25 / worldRef.current.camera.zoom);
+        const visualMouseY = pt.y * CAMERA_TILT;
+        const bottomY = (c.y * CAMERA_TILT) - c.z + hitRadius;
+        const topY    = (c.y * CAMERA_TILT) - c.z - size - hitRadius;
+        const leftX   = c.x - hitRadius;
+        const rightX  = c.x + hitRadius;
+        if (pt.x >= leftX && pt.x <= rightX && visualMouseY >= topY && visualMouseY <= bottomY) {
           hitId = c.id;
           break;
         }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { worldRef } from '../engine/worldRef';
 import './CameraControls.css';
+import { CAMERA_TILT } from '../constants';
 
 import { Crosshair, Globe2 } from 'lucide-react';
 import { useUIStore } from '../store/useUIStore';
@@ -18,7 +19,7 @@ export const CameraControls: React.FC = () => {
 
   const handleZoomOut = () => {
     const minZoomX = window.innerWidth / worldRef.current.worldWidth;
-    const minZoomY = window.innerHeight / worldRef.current.worldHeight;
+    const minZoomY = window.innerHeight / (worldRef.current.worldHeight * CAMERA_TILT);
     const minZoom = Math.max(minZoomX, minZoomY);
     setTargetZoom(Math.max(minZoom, targetZoom - 0.5));
   };
@@ -28,10 +29,10 @@ export const CameraControls: React.FC = () => {
       setCameraMode('FREE');
       setSelectedCreatureId(null);
     } else {
-      // Re-center on middle of world
+      // Re-center on visual center of the tilted floor
       worldRef.current.camera.x = worldRef.current.worldWidth / 2;
-      worldRef.current.camera.y = worldRef.current.worldHeight / 2;
-      setTargetZoom(1.0);
+      worldRef.current.camera.y = (worldRef.current.worldHeight * CAMERA_TILT) / 2;
+      setTargetZoom(1 / CAMERA_TILT); // fills the screen with the floor
     }
   };
 

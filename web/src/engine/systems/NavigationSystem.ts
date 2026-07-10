@@ -89,7 +89,23 @@ export const NavigationSystem = {
         accumulateForce(boids.cohX * MAX_STEERING_FORCE * 0.5, boids.cohY * MAX_STEERING_FORCE * 0.5);
       }
 
+      // 4. Wall Repulsion (Lowest Priority: gentle push away from edges)
+      // This prevents creatures from stuttering/sticking against the world boundary.
+      // The hard snap in applyWallBounds is a last resort; this keeps them from reaching it.
+      const WALL_REPEL_DIST = 80; // px from edge where repulsion starts
+      const wx = world.worldWidth;
+      const wy = world.worldHeight;
+      let wallX = 0, wallY = 0;
+      if (c.x < WALL_REPEL_DIST)            wallX = +(1 - c.x / WALL_REPEL_DIST);
+      if (c.x > wx - WALL_REPEL_DIST)       wallX = -(1 - (wx - c.x) / WALL_REPEL_DIST);
+      if (c.y < WALL_REPEL_DIST)            wallY = +(1 - c.y / WALL_REPEL_DIST);
+      if (c.y > wy - WALL_REPEL_DIST)       wallY = -(1 - (wy - c.y) / WALL_REPEL_DIST);
+      if (wallX !== 0 || wallY !== 0) {
+        accumulateForce(wallX * MAX_STEERING_FORCE * 0.6, wallY * MAX_STEERING_FORCE * 0.6);
+      }
+
       // Apply accumulated steering forces
+
       if (forceX !== 0 || forceY !== 0) {
         c.direction.vx += forceX * dt
         c.direction.vy += forceY * dt

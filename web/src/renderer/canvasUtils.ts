@@ -1,3 +1,4 @@
+import { CAMERA_TILT } from '../constants';
 /**
  * canvasUtils.ts
  *
@@ -95,6 +96,8 @@ export function getWorldPoint(
   // 2. Inverse matrix calculation
   return {
     x: (canvasX - logicalW / 2) / camera.zoom + camera.x,
-    y: (canvasY - logicalH / 2) / camera.zoom + camera.y,
+    // camera.y is in visual space. The visual y of a world entity is (entity.y * CAMERA_TILT).
+    // To get world y from screen y: first get visual y, then divide by CAMERA_TILT.
+    y: (((canvasY - logicalH / 2) / camera.zoom) + camera.y) / CAMERA_TILT,
   };
 }

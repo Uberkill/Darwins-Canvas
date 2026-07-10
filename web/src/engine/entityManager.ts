@@ -52,7 +52,13 @@ export function resetWorld(world: WorldState): void {
   clearEntities(world)
   world.timeOfDay = 0.1
   world.activeLure = null
-  world.camera = { x: 0, y: 0, zoom: 1.0 }
+  // Center camera on the visual floor center, not the world origin corner.
+  // camera.y = worldHeight/2 * CAMERA_TILT puts the midpoint of the tilted floor in center screen.
+  world.camera = {
+    x: world.worldWidth / 2,
+    y: (world.worldHeight * CAMERA_TILT) / 2,
+    zoom: 1 / CAMERA_TILT
+  }
 }
 
 /**

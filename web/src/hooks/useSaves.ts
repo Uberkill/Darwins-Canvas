@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { listSaves, deleteGame, loadGame } from '../utils/saveSystem';
 import type { SaveSlotMetadata } from '../utils/saveSystem';
-import { worldRef } from '../engine/worldRef';
+import { worldRef, updateWorldDimensions, centerCamera } from '../engine/worldRef';
 import { setEntities, clearEntities } from '../engine/entityManager';
 import { useEngineStore } from '../store/useEngineStore';
 import { useUIStore } from '../store/useUIStore';
@@ -52,8 +52,9 @@ export function useSaves() {
         worldRef.current.totalTime = save.totalTime || 0;
         if (save.mapSizeMultiplier) {
           worldRef.current.mapSizeMultiplier = save.mapSizeMultiplier;
-          import('../engine/worldRef').then(m => m.updateWorldDimensions());
+          updateWorldDimensions();
         }
+        centerCamera();
       }
     } else {
       clearEntities(worldRef.current);

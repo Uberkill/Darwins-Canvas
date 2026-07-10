@@ -39,7 +39,7 @@ export const CreatureStatsBadges: React.FC<Props> = ({ diet, movement, size }) =
   };
 
   return (
-    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', background: '#E2DDD5', padding: '5px 20px', borderRadius: '9999px', border: '3px solid var(--color-text)' }}>
+    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', alignSelf: 'center', width: 'fit-content', background: '#E2DDD5', padding: '5px 20px', borderRadius: '9999px', border: '3px solid var(--color-text)' }}>
       {getDietIcon()}
       {getMovementIcon()}
       {getSizeIcon()}

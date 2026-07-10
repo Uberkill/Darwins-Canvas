@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Flame, AlertTriangle, Moon, Smile, Meh, Search } from 'lucide-react';
 import { worldRef } from '../engine/worldRef';
-import { BASE_RENDER_SIZE } from '../constants';
+import { BASE_RENDER_SIZE, CAMERA_TILT } from '../constants';
 import './HoverOverlay.css';
 import { useSettingsStore } from '../store/useSettingsStore';
 
@@ -42,9 +42,9 @@ export const HoverOverlay: React.FC = () => {
           // Camera math to convert world coords to screen coords
           const size = BASE_RENDER_SIZE * hoveredCreature.renderScale * (hoveredCreature.currentScale || 1.0);
           
-          // World position above head
+          // World position above head — project to visual space first
           const worldX = hoveredCreature.x;
-          const worldY = hoveredCreature.y - hoveredCreature.z - size - 10; // slightly above
+          const worldVisualY = (hoveredCreature.y * CAMERA_TILT) - hoveredCreature.z - size - 10;
 
           const uiScale = useSettingsStore.getState().uiScale;
 
@@ -52,9 +52,9 @@ export const HoverOverlay: React.FC = () => {
           const logicalW = window.innerWidth;
           const logicalH = window.innerHeight;
 
-          // Camera math to convert world coords to screen coords
+          // camera.y is in visual space, worldVisualY is in visual space — math matches renderer
           const screenX = (worldX - camera.x) * camera.zoom + (logicalW / 2);
-          const screenY = (worldY - camera.y) * camera.zoom + (logicalH / 2);
+          const screenY = (worldVisualY - camera.y) * camera.zoom + (logicalH / 2);
 
           // Boundary clamping for mobile (tooltips go offscreen otherwise)
           const margin = 100;
