@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { WorldState } from '../types'
 import { SpatialGrid } from './SpatialGrid'
 import { getWorldWidth, getWorldHeight, BASE_RENDER_SIZE, CAMERA_TILT } from '../constants'
@@ -96,20 +97,20 @@ export function clampEntitiesToWorld(world: WorldState): void {
     const radius = (BASE_RENDER_SIZE * c.renderScale * (c.currentScale || 1.0)) / 2
     
     // If creature is out of bounds, scatter it slightly inward to avoid physics explosions
-    if (c.x < radius) c.x = radius + Math.random() * 20;
-    else if (c.x > w - radius) c.x = (w - radius) - Math.random() * 20;
+    if (c.x < radius) c.x = radius + random() * 20;
+    else if (c.x > w - radius) c.x = (w - radius) - random() * 20;
     
-    if (c.y < radius) c.y = radius + Math.random() * 20;
-    else if (c.y > h - radius) c.y = (h - radius) - Math.random() * 20;
+    if (c.y < radius) c.y = radius + random() * 20;
+    else if (c.y > h - radius) c.y = (h - radius) - random() * 20;
   }
 
   // Clamp plants horizontally and vertically
   for (const p of world.plants) {
     const radius = 50 // Increased to 50 so large creatures can reach them!
-    if (p.x < radius) p.x = radius + Math.random() * 20;
-    else if (p.x > w - radius) p.x = (w - radius) - Math.random() * 20;
+    if (p.x < radius) p.x = radius + random() * 20;
+    else if (p.x > w - radius) p.x = (w - radius) - random() * 20;
     
-    if (p.y < radius) p.y = radius + Math.random() * 20;
-    else if (p.y > h - radius) p.y = (h - radius) - Math.random() * 20;
+    if (p.y < radius) p.y = radius + random() * 20;
+    else if (p.y > h - radius) p.y = (h - radius) - random() * 20;
   }
 }

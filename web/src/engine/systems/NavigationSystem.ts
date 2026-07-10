@@ -1,3 +1,4 @@
+import { random } from '../random';
 import type { WorldState } from '../../types'
 import { evaluateThoughts } from '../ai/Thoughts'
 import { calculateBoids } from '../ai/Boids'
@@ -111,7 +112,7 @@ export const NavigationSystem = {
         c.direction.vy += forceY * dt
         const mag = Math.sqrt(c.direction.vx*c.direction.vx + c.direction.vy*c.direction.vy)
         if (mag === 0) {
-          const angle = Math.random() * Math.PI * 2
+          const angle = random() * Math.PI * 2
           c.direction.vx = Math.cos(angle)
           c.direction.vy = Math.sin(angle)
         } else {

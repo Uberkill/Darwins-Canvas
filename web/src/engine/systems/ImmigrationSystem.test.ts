@@ -1,13 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { ImmigrationSystem } from './ImmigrationSystem'
 import { createMockWorld, createMockCreature } from '../../test/factories'
+import { setRandomFn } from '../random'
 
 vi.mock('../audioEngine', () => ({
   audio: { playLevelUp: vi.fn(), playCreatureEvent: vi.fn() }
 }))
 
 describe('ImmigrationSystem', () => {
-  beforeEach(() => vi.clearAllMocks())
+  beforeEach(() => {
+    vi.clearAllMocks()
+    setRandomFn(Math.random)
+  })
 
   it('queues nothing when timer < 60s', () => {
     const world = createMockWorld()
@@ -19,10 +23,9 @@ describe('ImmigrationSystem', () => {
   it('resets timer to 0 when it exceeds 60s', () => {
     const world = createMockWorld()
     world.scratchpad.immigrationTimer = 59
-    vi.spyOn(Math, 'random').mockReturnValue(0.01)
+    setRandomFn(() => 0.01)
     ImmigrationSystem.update(world, 2) // 59+2=61 > 60
     expect(world.scratchpad.immigrationTimer).toBe(0)
-    vi.restoreAllMocks()
   })
 
   it('queues nothing when world is at population cap', () => {
@@ -30,10 +33,9 @@ describe('ImmigrationSystem', () => {
     for (let i = 0; i < 500; i++) creatures.push(createMockCreature())
     const world = createMockWorld({ creatures, worldWidth: 1000, worldHeight: 1000 })
     world.scratchpad.immigrationTimer = 61
-    vi.spyOn(Math, 'random').mockReturnValue(0.01)
+    setRandomFn(() => 0.01)
     ImmigrationSystem.update(world, 0)
     expect(world.scratchpad.pendingImmigrations?.length || 0).toBe(0)
-    vi.restoreAllMocks()
   })
 
   it('queues herbivore pair when herbivores extinct and carnivores ≤ 3', () => {
@@ -46,12 +48,11 @@ describe('ImmigrationSystem', () => {
       ]
     })
     world.scratchpad.immigrationTimer = 61
-    vi.spyOn(Math, 'random').mockReturnValue(0.01)
+    setRandomFn(() => 0.01)
     ImmigrationSystem.update(world, 0)
     const q = world.scratchpad.pendingImmigrations || []
     const herbs = q.filter(d => d === 'HERBIVORE')
     expect(herbs.length).toBeGreaterThanOrEqual(2) // guaranteed founding pair
-    vi.restoreAllMocks()
   })
 
   it('does NOT queue herbivores when carnivore count > 3 (too dangerous)', () => {
@@ -60,11 +61,10 @@ describe('ImmigrationSystem', () => {
       creatures: Array.from({ length: 5 }, () => createMockCreature({ diet: 'CARNIVORE' }))
     })
     world.scratchpad.immigrationTimer = 61
-    vi.spyOn(Math, 'random').mockReturnValue(0.01)
+    setRandomFn(() => 0.01)
     ImmigrationSystem.update(world, 0)
     const q = world.scratchpad.pendingImmigrations || []
     expect(q.includes('HERBIVORE')).toBe(false)
-    vi.restoreAllMocks()
   })
 
   it('does NOT queue carnivore when prey count < 3 (nothing to eat)', () => {
@@ -73,11 +73,10 @@ describe('ImmigrationSystem', () => {
       creatures: [createMockCreature({ diet: 'HERBIVORE' })]
     })
     world.scratchpad.immigrationTimer = 61
-    vi.spyOn(Math, 'random').mockReturnValue(0.01)
+    setRandomFn(() => 0.01)
     ImmigrationSystem.update(world, 0)
     const q = world.scratchpad.pendingImmigrations || []
     expect(q.includes('CARNIVORE')).toBe(false)
-    vi.restoreAllMocks()
   })
 
   it('queues carnivore when prey ≥ 3 and carnivores extinct', () => {
@@ -89,23 +88,21 @@ describe('ImmigrationSystem', () => {
       ]
     })
     world.scratchpad.immigrationTimer = 61
-    vi.spyOn(Math, 'random').mockReturnValue(0.01) // < 0.25, fires
+    setRandomFn(() => 0.01) // < 0.25, fires
     ImmigrationSystem.update(world, 0)
     const q = world.scratchpad.pendingImmigrations || []
     expect(q.includes('CARNIVORE')).toBe(true)
-    vi.restoreAllMocks()
   })
 
   it('all extinct with 0 carnivores: queues 3H + 0C + 2O (carn blocked by prey guard)', () => {
     const world = createMockWorld({ creatures: [] })
     world.scratchpad.immigrationTimer = 61
-    vi.spyOn(Math, 'random').mockReturnValue(0.01)
+    setRandomFn(() => 0.01)
     ImmigrationSystem.update(world, 0)
     const q = world.scratchpad.pendingImmigrations || []
     expect(q.length).toBe(5)
     expect(q.filter(d => d === 'HERBIVORE').length).toBe(3)
     expect(q.filter(d => d === 'CARNIVORE').length).toBe(0) // no prey yet!
     expect(q.filter(d => d === 'OMNIVORE').length).toBe(2)
-    vi.restoreAllMocks()
   })
 })

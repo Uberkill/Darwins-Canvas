@@ -1,3 +1,4 @@
+import { random } from './random';
 import { useEffect, useRef } from 'react'
 import { worldRef, updateWorldDimensions } from './worldRef'
 import { useEngineStore } from '../store/useEngineStore'
@@ -105,13 +106,13 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
                 matching = meta;
               }
 
-              const side = Math.random() < 0.5 ? 0 : world.worldWidth;
-              const y = Math.random() * (world.worldHeight - 200) + 100;
+              const side = random() < 0.5 ? 0 : world.worldWidth;
+              const y = random() * (world.worldHeight - 200) + 100;
 
               let migrant;
               if (matching.length > 0) {
                 // Pick a random saved creature
-                const choice = matching[Math.floor(Math.random() * matching.length)];
+                const choice = matching[Math.floor(random() * matching.length)];
                 const blob = await getCollectionBlob(choice.id);
                 if (blob) {
                   migrant = buildCreature({

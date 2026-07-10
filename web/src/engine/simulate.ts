@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { WorldState } from '../types'
 import { moveCrawler, moveHopper, movePacer } from './movement'
 import { runCollision } from './collision'
@@ -125,7 +126,7 @@ export function simulate(world: WorldState, dt: number): void {
         x: c.x,
         y: c.y,
         growthStage: 1.0,
-        wobblePhase: Math.random() * Math.PI * 2
+        wobblePhase: random() * Math.PI * 2
       });
     }
   }

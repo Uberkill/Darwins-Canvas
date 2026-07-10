@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { Creature, PendingCreature, CreatureSize, MovementType, DietType, Decal } from '../types'
 import {
   BASE_SPEED, STARTING_HUNGER, SIZE_STATS,
@@ -61,11 +62,11 @@ export function buildCreature(
   worldHeight: number,
   generation: number = 1
 ): Creature {
-  const angle = Math.random() * Math.PI * 2
+  const angle = random() * Math.PI * 2
   const decals = pending.decals || []
   
   const computed = calculateCreatureStats(pending.size, pending.movement, pending.diet, decals)
-  const initialBravery = Math.max(0.0, Math.min(1.0, 0.5 + computed.braveryBonus + (Math.random() * 0.4 - 0.2)))
+  const initialBravery = Math.max(0.0, Math.min(1.0, 0.5 + computed.braveryBonus + (random() * 0.4 - 0.2)))
 
   return {
     id:          crypto.randomUUID(),
@@ -74,8 +75,8 @@ export function buildCreature(
     decals:      decals,
     bakedSprites: pending.bakedSprites,
 
-    x: 30 + Math.random() * (worldWidth - 60),
-    y: 30 + Math.random() * (worldHeight - 60),
+    x: 30 + random() * (worldWidth - 60),
+    y: 30 + random() * (worldHeight - 60),
     z: 0,
 
     size:     pending.size,
@@ -113,12 +114,12 @@ export function buildCreature(
     behavior:  'WANDERING',
     targetId:  null,
     age:       0,
-    maxAge:    (pending.diet === 'CARNIVORE' ? 420 : 300) * (0.8 + Math.random() * 0.4),
+    maxAge:    (pending.diet === 'CARNIVORE' ? 420 : 300) * (0.8 + random() * 0.4),
     generation,
     currentScale: 0.5,
     panicTimer: 0,
 
-    hopPhase:        Math.random() * Math.PI * 2,
+    hopPhase:        random() * Math.PI * 2,
     hopPauseTimer:   0,
     pacerMoveTimer:  PACER_MOVE_DURATION,
     pacerPauseTimer: 0,

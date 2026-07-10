@@ -1,3 +1,4 @@
+import { random } from '../random';
 import type { WorldState } from '../../types';
 import { getGlobalPopulationCap } from '../../constants';
 
@@ -43,7 +44,7 @@ export class ImmigrationSystem {
 
       // 25% chance spawn — used for bonus slots.
       const queueChance = (diet: 'HERBIVORE' | 'CARNIVORE' | 'OMNIVORE', chance = 0.25) => {
-        if (Math.random() < chance) world.scratchpad.pendingImmigrations!.push(diet);
+        if (random() < chance) world.scratchpad.pendingImmigrations!.push(diet);
       };
 
       // ── Herbivores: only send when carnivores ≤ 3 so immigrants can survive long enough to breed ──

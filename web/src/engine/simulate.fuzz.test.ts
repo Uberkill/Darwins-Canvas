@@ -1,7 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { simulate } from './simulate'
 import { createMockWorld, createMockCreature, createMockPlant } from '../test/factories'
 import fc from 'fast-check'
+import { setRandomFn } from './random'
 
 vi.mock('./audioEngine', () => ({
   audio: {
@@ -12,9 +13,21 @@ vi.mock('./audioEngine', () => ({
   }
 }))
 
+let _seed = 12345;
+function seededRandom() {
+  _seed = (_seed * 1664525 + 1013904223) % 4294967296;
+  return _seed / 4294967296;
+}
+
 describe('simulate property-based testing (Fuzzing)', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    _seed = 12345;
+    setRandomFn(seededRandom);
+  })
+
+  afterEach(() => {
+    setRandomFn(Math.random);
   })
 
   it('never throws regardless of extreme delta time (dt)', () => {

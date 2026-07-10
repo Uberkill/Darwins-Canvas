@@ -1,9 +1,10 @@
+import { random } from './random';
 /**
  * balance.simulation.test.ts
  *
  * Full ecosystem balance probes — 1v1, edge cases, age/death tracing, old age system.
  */
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 vi.mock('./audioEngine', () => ({
   audio: {
@@ -15,6 +16,22 @@ vi.mock('./audioEngine', () => ({
     updateTimeOfDay: vi.fn(),
   }
 }))
+
+import { setRandomFn } from './random';
+let _seed = 12345;
+function seededRandom() {
+  _seed = (_seed * 1664525 + 1013904223) % 4294967296;
+  return _seed / 4294967296;
+}
+
+beforeEach(() => {
+  _seed = 12345;
+  setRandomFn(seededRandom);
+})
+
+afterEach(() => {
+  setRandomFn(Math.random);
+})
 
 import { simulate } from './simulate'
 import { buildCreature } from './creatureFactory'
@@ -64,7 +81,7 @@ function seedPlants(world: any, count: number) {
   for (let i = 0; i < count; i++) {
     spawnPlant(world, {
       id: crypto.randomUUID(), type: 'PLANT',
-      x: Math.random() * W, y: Math.random() * H,
+      x: random() * W, y: random() * H,
       growthStage: 1.0, wobblePhase: 0,
     })
   }
@@ -79,8 +96,8 @@ function tick(world: any, seconds: number) {
       const pending = [...world.scratchpad.pendingImmigrations]
       world.scratchpad.pendingImmigrations = []
       for (const diet of pending) {
-        const side = Math.random() < 0.5 ? 0 : world.worldWidth
-        const y = Math.random() * (world.worldHeight - 200) + 100
+        const side = random() < 0.5 ? 0 : world.worldWidth
+        const y = random() * (world.worldHeight - 200) + 100
         const color = diet === 'HERBIVORE' ? 'green' : diet === 'CARNIVORE' ? 'red' : 'purple'
         const svg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="${color}"/></svg>`
         const migrant = buildCreature({

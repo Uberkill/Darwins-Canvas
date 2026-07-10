@@ -2,19 +2,7 @@ import type { Creature } from '../types'
 import { BASE_RENDER_SIZE, CAMERA_TILT, DEPTH_SCALE_FAR, DEPTH_SCALE_NEAR, SHADOW_OFFSET_X, SHADOW_OFFSET_Y } from '../constants'
 import { getImage } from './imageCache'
 
-/**
- * getDepthScale — returns the visual scale multiplier for an entity at world Y.
- *
- * Linearly interpolates between DEPTH_SCALE_FAR (at y=0, far horizon)
- * and DEPTH_SCALE_NEAR (at y=worldHeight, close to viewer).
- *
- * This fakes a perspective camera where far objects appear smaller.
- * Physics hitboxes are NEVER affected — this is visual-only.
- */
-export function getDepthScale(worldY: number, worldHeight: number): number {
-  const t = Math.max(0, Math.min(1, worldY / worldHeight)); // 0=top/far, 1=bottom/near
-  return DEPTH_SCALE_FAR + (DEPTH_SCALE_NEAR - DEPTH_SCALE_FAR) * t;
-}
+import { getDepthScale, getSpawnOffsetY, getWobbleRotation, getSquashStretch, getBreatheScale, getProjectedY, getBossAuraRadius } from './math2_5d'
 
 /**
  * drawCreature.ts — renders a single creature on the canvas.
@@ -41,66 +29,32 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature, 
   // Far creatures (top of map) are smaller; near creatures (bottom) are larger.
   const depthScale = getDepthScale(creature.y, worldHeight);
 
-  // ── Spawn Drop Animation ──
-  let spawnOffsetY = 0;
-  if (creature.age < 0.4) {
-    const t = creature.age / 0.4;
-    const n1 = 7.5625;
-    const d1 = 2.75;
-    let bounce = 0;
-    if (t < 1 / d1) {
-      bounce = n1 * t * t;
-    } else if (t < 2 / d1) {
-      const t2 = t - 1.5 / d1;
-      bounce = n1 * t2 * t2 + 0.75;
-    } else if (t < 2.5 / d1) {
-      const t2 = t - 2.25 / d1;
-      bounce = n1 * t2 * t2 + 0.9375;
-    } else {
-      const t2 = t - 2.625 / d1;
-      bounce = n1 * t2 * t2 + 0.984375;
-    }
-    spawnOffsetY = (1 - bounce) * 600;
-  }
+  const spawnOffsetY = getSpawnOffsetY(creature.age);
 
   ctx.save()
   // 2.5D Projection: squish Y according to tilt, but keep Z fully un-squished (jumping)
-  ctx.translate(creature.x, (creature.y * CAMERA_TILT) - creature.z - spawnOffsetY)
+  ctx.translate(creature.x, getProjectedY(creature.y, creature.z, CAMERA_TILT, spawnOffsetY));
 
   // Apply depth scale — scales entire drawing context around the anchor point
   ctx.scale(depthScale, depthScale);
 
   // ── Wobble rotation ──
-  if (creature.state === 'MOVING') {
-    // Determine visual flip based on velocity
-    const isMovingRight = creature.direction.vx > 0
-    const wobbleDir = isMovingRight ? 1 : -1
-    const angle = (5 * Math.PI / 180) * wobbleDir
-    ctx.rotate(angle)
-  }
+  ctx.rotate(getWobbleRotation(creature.state, creature.direction.vx));
 
   // ── Squash / Stretch (hoppers only) ──
-  let scaleX = 1
-  let scaleY = 1
-  if (creature.movement === 'HOPPER' && creature.state === 'JUMPING') {
-    const ascending = creature.hopPhase < Math.PI / 2
-    scaleY = ascending ? 1.3 : 0.75
-    scaleX = ascending ? 0.85 : 1.2 // horizontal bulge when squashed
-  }
+  let { scaleX, scaleY } = getSquashStretch(creature.movement, creature.state, creature.hopPhase || 0);
 
   // ── Breathing idle animation ──
-  // Uses creature.age as the phase — each creature breathes at its own rate
-  // based on when it was born, so they don't all pulse in sync
-  const breathe = 1 + Math.sin(creature.age * Math.PI) * 0.025 // ±2.5%, period ~2s
-  scaleX *= breathe
-  scaleY *= breathe
+  const breathe = getBreatheScale(creature.age);
+  scaleX *= breathe;
+  scaleY *= breathe;
 
   // Flip horizontally if moving left (assuming drawn facing right)
   if (creature.direction.vx < 0) {
-    scaleX *= -1
+    scaleX *= -1;
   }
 
-  ctx.scale(scaleX, scaleY)
+  ctx.scale(scaleX, scaleY);
   
   // ── Determine Animated State ──
   let frameState: 'IDLE' | 'SLEEPING' | 'EATING' | 'FIGHTING' = 'IDLE'
@@ -134,12 +88,11 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature, 
         const age = creature.age || 0;
         const pulse = 0.5 + 0.5 * Math.sin(age * 3);
         
-        // Protect against negative/NaN radius
-        const radius = Math.max(0, size * 0.6 + size * 0.1 * pulse) || 0;
+        const radius = getBossAuraRadius(creature.level, age, size);
         if (radius > 0) {
-          let glowColor = `rgba(255, 215, 0, ${0.3 + 0.2 * pulse})`; // Gold for Omnivore
-          if (creature.diet === 'CARNIVORE') glowColor = `rgba(255, 50, 50, ${0.3 + 0.2 * pulse})`;
-          else if (creature.diet === 'HERBIVORE') glowColor = `rgba(50, 255, 50, ${0.3 + 0.2 * pulse})`;
+          let glowColor = `rgba(255, 215, 0, ${0.3 + 0.2 * (0.5 + 0.5 * Math.sin(age * 3))})`; // Gold for Omnivore
+          if (creature.diet === 'CARNIVORE') glowColor = `rgba(255, 50, 50, ${0.3 + 0.2 * (0.5 + 0.5 * Math.sin(age * 3))})`;
+          else if (creature.diet === 'HERBIVORE') glowColor = `rgba(50, 255, 50, ${0.3 + 0.2 * (0.5 + 0.5 * Math.sin(age * 3))})`;
           
           ctx.beginPath();
           ctx.arc(0, -size / 2, radius, 0, Math.PI * 2);

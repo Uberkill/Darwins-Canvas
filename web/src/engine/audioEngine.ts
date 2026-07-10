@@ -1,3 +1,4 @@
+import { random } from './random';
 import { worldRef } from './worldRef';
 import { AUDIO_ASSETS } from '../constants/audioConfig';
 import { calculateSpatialGain } from './spatialAudioUtils';
@@ -317,7 +318,7 @@ class AudioEngine {
   private playNextBgmNote() {
     if (!this.isBgmPlaying || !this.ctx || !this.bgmGain) return;
 
-    const freq = this.pentatonicScale[Math.floor(Math.random() * this.pentatonicScale.length)];
+    const freq = this.pentatonicScale[Math.floor(random() * this.pentatonicScale.length)];
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     
@@ -338,7 +339,7 @@ class AudioEngine {
     osc.start(now);
     osc.stop(now + attack + release);
     
-    const nextTime = (Math.random() * 1500 + 500) / this.currentPlaybackRate; // 500ms to 2000ms scaled
+    const nextTime = (random() * 1500 + 500) / this.currentPlaybackRate; // 500ms to 2000ms scaled
     this.bgmTimeoutId = window.setTimeout(() => this.playNextBgmNote(), nextTime);
   }
 

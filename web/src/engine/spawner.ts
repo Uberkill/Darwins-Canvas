@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { Plant, WorldState, Creature } from '../types'
 import { getPlantCap, PLANT_SPAWN_RATE, PLANT_WOBBLE_SPEED, PLANT_GROWTH_RATE } from '../constants'
 import { spawnPlant } from './entityManager'/**
@@ -40,8 +41,8 @@ function createPlant(world: WorldState): Plant | null {
 
   // Try 10 times to find a clear spawn point
   for (let attempt = 0; attempt < 10; attempt++) {
-    const x = margin + Math.random() * (world.worldWidth - margin * 2)
-    const y = margin + Math.random() * (world.worldHeight - margin * 2)
+    const x = margin + random() * (world.worldWidth - margin * 2)
+    const y = margin + random() * (world.worldHeight - margin * 2)
 
     let blocked = false
     
@@ -60,7 +61,7 @@ function createPlant(world: WorldState): Plant | null {
         x,
         y,
         growthStage: 0,
-        wobblePhase: Math.random() * Math.PI * 2,
+        wobblePhase: random() * Math.PI * 2,
       }
     }
   }

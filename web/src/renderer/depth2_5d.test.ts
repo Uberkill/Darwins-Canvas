@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getDepthScale } from './drawCreature';
+import { getDepthScale } from './math2_5d';
 import { DEPTH_SCALE_FAR, DEPTH_SCALE_NEAR, SHADOW_OFFSET_X, SHADOW_OFFSET_Y } from '../constants';
 
 /**

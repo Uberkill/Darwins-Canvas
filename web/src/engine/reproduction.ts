@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { Creature, WorldState } from '../types'
 import {
   REPRO_SPAWN_OFFSET, STARTING_HUNGER,
@@ -68,7 +69,7 @@ export function checkReproduction(
     if (creature.age < 30) continue
 
     // Probabilistic trigger
-    if (Math.random() > reproChance * dt) continue
+    if (random() > reproChance * dt) continue
 
     const baby = spawnBaby(creature, world.worldWidth, world.worldHeight, cooldown)
     babies.push(baby)
@@ -99,14 +100,14 @@ export function spawnBaby(parent: Creature, worldWidth: number, worldHeight: num
   // Note for future devs: mutate() blindly multiplies stats, but it's mathematically safe
   // because the lines below it strictly clamp everything with Math.max/Math.min.
   // It literally can't spit out NaNs or Infinite stats into the baby.
-  const mutate = (base: number, maxPct: number) => base * (1 + (Math.random() * maxPct * 2 - maxPct))
+  const mutate = (base: number, maxPct: number) => base * (1 + (random() * maxPct * 2 - maxPct))
   const speed = Math.min(baseline.speed * maxCap, Math.max(10, mutate(parent.baseStats.speed, 0.05)))
   const sightRadius = Math.min(baseline.sight * maxCap, Math.max(50, mutate(parent.baseStats.sightRadius, 0.05)))
   const maxHealth = Math.min(baseline.maxHealth * maxCap, Math.max(10, mutate(parent.baseStats.maxHealth, 0.05)))
   const renderScale = Math.min(baseline.renderScale * maxCap, Math.max(0.2, mutate(parent.baseStats.renderScale, 0.02)))
   const damage = Math.min(baseline.damage * maxCap, Math.max(1, mutate(parent.baseStats.damage, 0.05)))
-  const hueShift = Math.floor((parent.hueShift + (Math.random() * 30 - 15)) + 360) % 360
-  const bravery = Math.min(1, Math.max(0, parent.bravery + (Math.random() * 0.2 - 0.1)))
+  const hueShift = Math.floor((parent.hueShift + (random() * 30 - 15)) + 360) % 360
+  const bravery = Math.min(1, Math.max(0, parent.bravery + (random() * 0.2 - 0.1)))
 
   // Metabolic Cost Formula
   const speedFactor = speed / parent.baseStats.speed
@@ -153,7 +154,7 @@ export function spawnBaby(parent: Creature, worldWidth: number, worldHeight: num
     lungeTimer: 0,
     lungeCooldownTimer: 0,
     age: 0,
-    maxAge: (parent.diet === 'CARNIVORE' ? 420 : 300) * (0.8 + Math.random() * 0.4),
+    maxAge: (parent.diet === 'CARNIVORE' ? 420 : 300) * (0.8 + random() * 0.4),
     generation: parent.generation + 1,
     currentScale: 0.5,
     panicTimer: 0,
@@ -167,7 +168,7 @@ export function spawnBaby(parent: Creature, worldWidth: number, worldHeight: num
     bravery: bravery,
     targetId: null,
     direction: { vx: -parent.direction.vx, vy: -parent.direction.vy },
-    hopPhase: Math.random() * Math.PI * 2,
+    hopPhase: random() * Math.PI * 2,
     hopPauseTimer: 0,
     pacerMoveTimer: 0,
     pacerPauseTimer: 0,

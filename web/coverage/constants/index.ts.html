@@ -1,0 +1,541 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for constants/index.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">constants</a> index.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>72/72</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>7/7</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>65/65</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a>
+<a name='L142'></a><a href='#L142'>142</a>
+<a name='L143'></a><a href='#L143'>143</a>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">228715x</span>
+<span class="cline-any cline-yes">54497x</span>
+<span class="cline-any cline-yes">97142x</span>
+<span class="cline-any cline-yes">17408x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9727x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { CreatureSize } from '../types';
+&nbsp;
+// ─── World dimensions (functions — safe across resize/orientation changes) ────
+export const getWorldWidth  = (): number =&gt; window.innerWidth;
+export const getWorldHeight = (): number =&gt; window.innerHeight / CAMERA_TILT;
+&nbsp;
+export const CAMERA_TILT = 0.4; // 2.5D projection multiplier (lowered from 0.6 for a steeper angle)
+&nbsp;
+// ─── 2.5D Depth Illusion ────────────────────────────────────────────────────
+// Entities near the top of the map (y≈0, "far") render at DEPTH_SCALE_FAR.
+// Entities near the bottom (y≈worldHeight, "near") render at DEPTH_SCALE_NEAR.
+// This fakes a perspective camera: things far away look smaller.
+// NOTE: These are VISUAL-ONLY multipliers. Physics hitboxes are unchanged.
+export const DEPTH_SCALE_FAR  = 0.65; // 35% smaller at the horizon
+export const DEPTH_SCALE_NEAR = 1.10; // 10% larger in the foreground
+&nbsp;
+// ─── Directional Shadow (DST-style sun from upper-left) ─────────────────────
+// Shadow is cast offset from the creature's feet, selling the 3D ground plane.
+// Offset Y must be 0, otherwise the creature looks like it is floating in 2.5D space!
+export const SHADOW_OFFSET_X =  4; // px right
+export const SHADOW_OFFSET_Y =  0; // MUST BE 0 so shadow touches the feet
+&nbsp;
+// ─── Creature base render size ────────────────────────────────────────────────
+// MEDIUM creature renders at 80×80 px in the ecosystem.
+// SMALL = 40×40 px (renderScale 0.5) | LARGE = 160×160 px (renderScale 2.0)
+export const GAME_VERSION = 'v0.1.0 Alpha';
+export const BASE_RENDER_SIZE = 80; // px
+&nbsp;
+// ─── Creature stats by size ───────────────────────────────────────────────────
+export const BASE_SPEED        = 80;  // px/second for MEDIUM
+export const STARTING_HUNGER   = 80;  // all creatures start at 80%
+&nbsp;
+export const SIZE_STATS: Record&lt;CreatureSize, {
+  speedMultiplier:       number;
+  hungerDrainMultiplier: number;
+  renderScale:           number;
+  healthMultiplier:      number;
+  damageMultiplier:      number;
+}&gt; = {
+  SMALL:  { speedMultiplier: 2.0, hungerDrainMultiplier: 0.5, renderScale: 0.5, healthMultiplier: 0.5, damageMultiplier: 0.5 },
+  MEDIUM: { speedMultiplier: 1.0, hungerDrainMultiplier: 1.0, renderScale: 1.0, healthMultiplier: 1.0, damageMultiplier: 1.0 },
+  LARGE:  { speedMultiplier: 0.5, hungerDrainMultiplier: 2.0, renderScale: 2.0, healthMultiplier: 2.0, damageMultiplier: 2.0 },
+};
+&nbsp;
+// ─── Diet-Specific Tuning ─────────────────────────────────────────────────────
+export const HERBIVORE_BASE_HUNGER_DRAIN = 2.5; // 40 seconds to starve
+export const CARNIVORE_BASE_HUNGER_DRAIN = 1.5; // ~66 seconds to starve (Stamina/Endurance buff)
+export const OMNIVORE_BASE_HUNGER_DRAIN  = 2.3;  // Slightly more efficient than herbivore — opportunistic feeders
+&nbsp;
+// ─── Health &amp; Combat Stats ────────────────────────────────────────────────────
+export const BASE_HEALTH = 100;
+export const PASSIVE_HEAL_RATE = 10.0; // HP/sec regenerated if hunger &gt; 80
+export const STARVATION_DAMAGE = 5.0; // HP/sec lost if hunger &lt;= 0
+&nbsp;
+export const HERBIVORE_BASE_DAMAGE = 2.0;  // Weak
+export const OMNIVORE_BASE_DAMAGE  = 5.0; // Moderate
+export const CARNIVORE_BASE_DAMAGE = 40.0;  // 2.5s kill window — prey can flee if they detect early
+&nbsp;
+// Exhaustion multipliers applied during specific BehaviorStates
+export const FLEEING_HUNGER_MULTIPLIER = 1.0; // Handled by Stamina now
+export const HUNTING_HUNGER_MULTIPLIER = 1.0;
+&nbsp;
+// ─── Population limits ────────────────────────────────────────────────────────
+const BASE_AREA = 1920 * (1080 / CAMERA_TILT); // Scaled for 2.5D physical depth
+export const getGlobalPopulationCap = (w: number, h: number) =&gt; Math.floor(250 * ((w * h) / BASE_AREA));
+export const getHerbivorePopulationCap = (w: number, h: number) =&gt; Math.floor(100 * ((w * h) / BASE_AREA));
+export const getCarnivorePopulationCap = (w: number, h: number) =&gt; Math.floor(25 * ((w * h) / BASE_AREA));
+export const getOmnivorePopulationCap = (w: number, h: number) =&gt; Math.floor(25 * ((w * h) / BASE_AREA));
+&nbsp;
+// ─── Plant constants ──────────────────────────────────────────────────────────
+export const getPlantCap = (w: number, h: number) =&gt; Math.floor(100 * ((w * h) / BASE_AREA));
+export const PLANT_SPAWN_RATE   = 0.3;  // seconds between spawns (was 0.6 — doubled to support larger herds)
+export const PLANT_GROWTH_RATE  = 0.4;  // growthStage increase per second (0→1 in ~2.5s)
+export const PLANT_WOBBLE_SPEED = 1.2;  // radians/second for organic sway
+&nbsp;
+// ─── Collision &amp; Senses ───────────────────────────────────────────────────────
+export const CARNIVORE_EAT_RANGE = 35;  // px
+export const HERBIVORE_EAT_RANGE = 25;  // px
+export const SIGHT_RADIUS        = 400; // px
+export const MAX_STEERING_FORCE  = 120; // max velocity change per second
+&nbsp;
+// ─── Reproduction ─────────────────────────────────────────────────────────────
+export const HERBIVORE_REPRO_THRESHOLD = 75;
+export const HERBIVORE_REPRO_COOLDOWN  = 15; 
+export const CARNIVORE_REPRO_THRESHOLD = 75;
+export const CARNIVORE_REPRO_COOLDOWN  = 45;
+export const OMNIVORE_REPRO_THRESHOLD  = 85;
+export const OMNIVORE_REPRO_COOLDOWN   = 30;
+&nbsp;
+export const HERBIVORE_REPRO_CHANCE = 0.05; // 5% chance per eligible second
+export const CARNIVORE_REPRO_CHANCE = 0.008; // 0.8% chance per eligible second
+export const OMNIVORE_REPRO_CHANCE  = 0.030; // 3.0% — doubled to sustain viable mid-tier population
+export const REPRO_SPAWN_OFFSET     = 65;    // px away from parent
+&nbsp;
+// ─── Hopper movement ──────────────────────────────────────────────────────────
+export const HOP_HEIGHT         = 80;   // max Z elevation in px (upward)
+export const HOP_SPEED          = 3.5;  // radians/second for sine wave
+export const HOP_PAUSE_DURATION = 0.5;  // seconds between hops
+&nbsp;
+// ─── Pacer movement ───────────────────────────────────────────────────────────
+export const PACER_MOVE_DURATION  = 1.5; // seconds of burst
+export const PACER_PAUSE_DURATION = 2.0; // seconds of pause
+&nbsp;
+&nbsp;
+&nbsp;
+// ─── Stamina &amp; Combat Dynamics ───────────────────────────────────────────────
+export const MAX_STAMINA = 100;
+export const STAMINA_DRAIN_RATE = 15; // 6.7 seconds of pursuit before exhaustion
+export const STAMINA_REGEN_RATE = 15; // symmetric 6.7s recovery between hunts
+export const EXHAUSTION_SPEED_PENALTY = 0.5; // 50% slower when stamina is 0
+&nbsp;
+export const LUNGE_DURATION = 2.5;          // seconds — longer burst to close the gap
+export const LUNGE_COOLDOWN = 3.5;          // seconds — shorter cooldown between attempts
+export const LUNGE_SPEED_MULTIPLIER = 2.5;  // 150% faster burst
+&nbsp;
+// ─── Macro Systems (Day/Night &amp; Weather) ─────────────────────────────────────
+export const DAY_NIGHT_CYCLE_DURATION = 120; // 120 real seconds for a full 24h cycle (1 min day, 1 min night)
+export const NIGHT_SIGHT_PENALTY = 0.4; // 60% reduction in sight radius
+&nbsp;
+export const WEATHER_CYCLE_DURATION = 120; // 120 seconds per weather shift
+export const RAIN_PLANT_SPAWN_MULTIPLIER = 2.0; // 2x plants
+export const DROUGHT_PLANT_SPAWN_MULTIPLIER = 0.5; // half plants
+&nbsp;
+// ─── Decal Stats ─────────────────────────────────────────────────────────────
+export const DECAL_STATS: Record&lt;string, { desc: string, stats: { label: string, value: string, isGood: boolean }[] }&gt; = {
+  'CARNIVORE_EYE': { desc: 'Piercing gaze for tracking prey.', stats: [{ label: 'Sight', value: '+15%', isGood: true }, { label: 'Bravery', value: '+10%', isGood: true }] },
+  'HERBIVORE_EYE': { desc: 'Wide angle for spotting predators.', stats: [{ label: 'Sight', value: '+20%', isGood: true }, { label: 'Speed', value: '+5%', isGood: true }] },
+  'INSECT_EYE': { desc: 'Incredible peripheral vision, but easily startled.', stats: [{ label: 'Sight', value: '+30%', isGood: true }, { label: 'Bravery', value: '-15%', isGood: false }] },
+  'NOCTURNAL_EYE': { desc: 'Excellent vision in the dark.', stats: [{ label: 'Sight', value: '+25%', isGood: true }, { label: 'Energy', value: '-5%', isGood: false }] },
+  'AQUATIC_EYE': { desc: 'Moist eyes that reduce energy drain slightly.', stats: [{ label: 'Sight', value: '+10%', isGood: true }, { label: 'Energy', value: '+5%', isGood: true }] },
+  'CARNIVORE_JAW': { desc: 'Sharp teeth for tearing flesh.', stats: [{ label: 'Damage', value: '+30%', isGood: true }, { label: 'Energy', value: '-10%', isGood: false }] },
+  'BEAK': { desc: 'Lightweight aerodynamic jaw.', stats: [{ label: 'Speed', value: '+15%', isGood: true }, { label: 'Damage', value: '-5%', isGood: false }] },
+  'HERBIVORE_JAW': { desc: 'Flat molars for efficient chewing.', stats: [{ label: 'Energy', value: '+5%', isGood: true }, { label: 'Speed', value: '-5%', isGood: false }] },
+  'PROBOSCIS': { desc: 'Long tube for sipping nectar.', stats: [{ label: 'Energy', value: '+8%', isGood: true }, { label: 'Damage', value: '-8%', isGood: false }] },
+  'BALEEN': { desc: 'Filter feeding apparatus.', stats: [{ label: 'Energy', value: '+10%', isGood: true }, { label: 'Speed', value: '-8%', isGood: false }] },
+};
+&nbsp;
+// ─── Trait Stats ─────────────────────────────────────────────────────────────
+export const TRAIT_STATS: Record&lt;string, { desc: string, stats: { label: string, value: string, isGood: boolean }[] }&gt; = {
+  // Size
+  'SMALL':  { desc: 'Tiny and evasive.', stats: [{ label: 'Speed', value: '+100%', isGood: true }, { label: 'Energy', value: '+50%', isGood: true }, { label: 'Health', value: '-50%', isGood: false }, { label: 'Damage', value: '-50%', isGood: false }] },
+  'MEDIUM': { desc: 'A perfectly balanced organism.', stats: [] },
+  'LARGE':  { desc: 'Mighty and resilient.', stats: [{ label: 'Health', value: '+100%', isGood: true }, { label: 'Damage', value: '+100%', isGood: true }, { label: 'Speed', value: '-50%', isGood: false }, { label: 'Energy', value: '-100%', isGood: false }] },
+  // Movement
+  'CRAWLER': { desc: 'Steady and predictable movement.', stats: [] },
+  'HOPPER':  { desc: 'Jumps to avoid attacks and obstacles.', stats: [] },
+  'PACER':   { desc: 'Moves in extremely fast, short bursts.', stats: [] },
+  // Diet
+  'HERBIVORE': { desc: 'Eats plants peacefully.', stats: [{ label: 'Base Damage', value: '2', isGood: false }] },
+  'OMNIVORE':  { desc: 'Eats plants and scavenges.', stats: [{ label: 'Base Damage', value: '10', isGood: true }] },
+  'CARNIVORE': { desc: 'Hunts other creatures for food.', stats: [{ label: 'Base Damage', value: '30', isGood: true }] },
+};
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2026-07-10T12:33:02.698Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    

@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { WorldState, Creature, Plant } from '../types'
 import { CARNIVORE_EAT_RANGE, HERBIVORE_EAT_RANGE, BASE_RENDER_SIZE } from '../constants'
 import { audio } from './audioEngine'
@@ -104,7 +105,7 @@ export function runCollision(world: WorldState, _dt: number): void {
               x: a.x,
               y: a.y,
               growthStage: 1.0,
-              wobblePhase: Math.random() * Math.PI * 2
+              wobblePhase: random() * Math.PI * 2
             })
             if (bHuntsA && b.health > 0) {
               b.hunger = 100
@@ -124,7 +125,7 @@ export function runCollision(world: WorldState, _dt: number): void {
               x: b.x,
               y: b.y,
               growthStage: 1.0,
-              wobblePhase: Math.random() * Math.PI * 2
+              wobblePhase: random() * Math.PI * 2
             })
             if (aHuntsB && a.health > 0) {
               a.hunger = 100

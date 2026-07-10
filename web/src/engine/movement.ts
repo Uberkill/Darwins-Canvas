@@ -1,3 +1,4 @@
+import { random } from './random';
 import type { Creature } from '../types'
 import {
   HOP_HEIGHT, HOP_SPEED, HOP_PAUSE_DURATION,
@@ -113,7 +114,7 @@ export function movePacer(creature: Creature, dt: number, worldWidth: number, wo
 
     if (creature.pacerPauseTimer <= 0) {
       // Resume: pick a random new 2D direction, start burst
-      const angle = Math.random() * Math.PI * 2
+      const angle = random() * Math.PI * 2
       creature.direction.vx = Math.cos(angle)
       creature.direction.vy = Math.sin(angle)
       creature.pacerPaused    = false

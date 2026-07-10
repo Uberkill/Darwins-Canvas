@@ -1,3 +1,4 @@
+import { random } from './random';
 export function generatePop(ctx: AudioContext, dest: AudioNode) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -45,7 +46,7 @@ export function generateCrunch(ctx: AudioContext, dest: AudioNode) {
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
   for (let i = 0; i < bufferSize; i++) {
-    data[i] = Math.random() * 2 - 1;
+    data[i] = random() * 2 - 1;
   }
   
   const noise = ctx.createBufferSource();
@@ -137,7 +138,7 @@ export function generateCreatureEvent(
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
-      data[i] = Math.random() * 2 - 1;
+      data[i] = random() * 2 - 1;
     }
     
     const noise = ctx.createBufferSource();
