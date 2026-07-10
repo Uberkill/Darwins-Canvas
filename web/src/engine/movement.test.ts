@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { moveCrawler, moveHopper } from './movement';
 import { createMockCreature } from '../test/factories';
 import { BASE_RENDER_SIZE } from '../constants';

@@ -1,5 +1,5 @@
 import type { Creature } from '../types'
-import { BASE_RENDER_SIZE, CAMERA_TILT, DEPTH_SCALE_FAR, DEPTH_SCALE_NEAR, SHADOW_OFFSET_X, SHADOW_OFFSET_Y } from '../constants'
+import { BASE_RENDER_SIZE, CAMERA_TILT, SHADOW_OFFSET_X, SHADOW_OFFSET_Y } from '../constants'
 import { getImage } from './imageCache'
 
 import { getDepthScale, getSpawnOffsetY, getWobbleRotation, getSquashStretch, getBreatheScale, getProjectedY, getBossAuraRadius } from './math2_5d'
@@ -86,7 +86,6 @@ export function drawCreature(ctx: CanvasRenderingContext2D, creature: Creature, 
       // Boss Aura for Level 5+ creatures
       if (creature.level >= 5) {
         const age = creature.age || 0;
-        const pulse = 0.5 + 0.5 * Math.sin(age * 3);
         
         const radius = getBossAuraRadius(creature.level, age, size);
         if (radius > 0) {
