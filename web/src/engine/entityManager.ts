@@ -1,5 +1,6 @@
 import type { Creature, Plant, WorldState } from '../types'
 import { releaseImage } from '../renderer/imageCache'
+import { CAMERA_TILT } from '../constants'
 import { TrackingManager } from '../features/tracking/trackingManager'
 
 /**

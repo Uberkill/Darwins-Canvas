@@ -63,8 +63,6 @@ describe('Wall Repulsion — creature boundary behavior', () => {
     // but we can verify the expected behavior with a direct calculation.
     const WALL_REPEL_DIST = 80;
     const worldWidth = 1440;
-    const worldHeight = 900;
-
     // Creature at the very edge should have full repulsion (factor=1)
     const atLeft = 1 - 0 / WALL_REPEL_DIST; // c.x=0
     expect(atLeft).toBe(1);
