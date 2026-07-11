@@ -16,9 +16,10 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 5. **reproduction.ts:** Tracks population caps and spawns offspring with mutations.
 6. **spawner.ts:** Handles plant generation using `SpatialGrid` for O(1) empty-space checks.
 7. **entityManager.ts:** Zero-GC deferred deletion (using `scratchpad.deletedCreatureIds` and `flushDeadEntities`).
+8. **ImmigrationSystem.ts (Async DB Queue):** Physics checks for extinction and pushes events to `scratchpad.pendingImmigrations`. The game loop asynchronously fetches new creatures from IndexedDB to prevent blocking the 60FPS simulation thread.
 
 ## Presentation Layer (Audio & VFX)
-- **VFX (Renderer.ts):** All visual effects (e.g., Pillar of Light spawn bounce, Lightning) are mathematical offsets applied strictly in `Renderer.ts` (e.g., using `ctx.translate()`). They NEVER mutate core physics (`creature.z` or `creature.y`).
+- **VFX & 2.5D Math (`math2_5d.ts`):** All visual math (isometric camera tilt, shadows, wobble, and breathing scaling) has been extracted out of the Renderer into pure, stateless mathematical functions in `math2_5d.ts`. They NEVER mutate core physics (`creature.z` or `creature.y`). This separation makes the renderer fully deterministic and safely fuzz-testable.
 - **Audio:** Split into `audioEngine.ts` (BGM Manager featuring a dual-deck DJ Crossfader for seamless day/night transitions without memory leaks) and `proceduralSfx.ts` (Web Audio API synthesis). No external audio files are loaded.
 
 ## Save / Load System
@@ -31,3 +32,6 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 - NO heavy object instantiation inside the fixed loop. Use Zero-GC module-level scratch arrays or `world.scratchpad` to prevent heap allocations.
 - USE `requestAnimationFrame` for all canvas mutations.
 - Analytics loops MUST use rolling caps (e.g., 3600 points) to prevent runaway memory usage during long simulations.
+
+## Determinism & Testing (The Seeded Universe)
+- **PRNG Injection (`random.ts`):** The entire simulation strictly avoids native `Math.random()`. A custom, Dependency-Injected Pseudo-Random Number Generator is used throughout the physics and logic engines. This guarantees that massively complex, multi-thousand frame ecosystem simulations yield 100% identical results on every machine, enabling rigorous fast-check fuzz testing against the engine.

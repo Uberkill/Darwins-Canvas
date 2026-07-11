@@ -29,7 +29,10 @@ The ecosystem transitions through three deterministic weather states:
 - **DROUGHT:** Little to no plant generation.
 
 ### Immigration (Anti-Extinction)
-To prevent irreversible ecosystem collapse, if any species (Herbivore, Carnivore, Omnivore) population drops to exactly `0`, the system begins an immigration check. Every `120` seconds, there is a `5%` chance for a new migrant of that species to wander onto the map.
+To prevent irreversible ecosystem collapse, if any species (Herbivore, Carnivore, Omnivore) population drops to exactly `0`, the system begins an immigration check. Every `120` seconds, there is a `5%` chance for a new migrant of that species to wander onto the map. The system leverages an **asynchronous IndexedDB event queue** to pull saved creatures from the user's Darwinpedia collection, ensuring the 60FPS physics simulation thread never blocks while loading database assets.
+
+### 2.5D World Constraints
+The entire world operates on a flat Cartesian plane for physics collisions, but is rendered in 2.5D via the **Camera Tilt** (usually `0.4` ratio). All visual effects—such as Z-axis elevation for Hoppers, shadow rendering offsets, wobble, and breathing—are calculated via pure stateless math functions. Visuals **never** mutate the underlying physics grid.
 
 ## God Tools (Player Intervention)
 The player possesses interactive tools to influence the simulation:
