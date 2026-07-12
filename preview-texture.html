@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terrain Texture & Depth Preview</title>
+  <style>
+    body {
+      margin: 0;
+      background: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: white;
+      font-family: sans-serif;
+    }
+    #container {
+      position: relative;
+      width: 1200px;
+      height: 800px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      background: #333;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <svg id="terrain-svg-filters" style="position:absolute;width:0;height:0;overflow:hidden">
+    <filter id="terrain-metaball-filter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -20"
+        result="threshold"/>
+    </filter>
+  </svg>
+
+  <div id="container">
+    <canvas id="gameCanvas" width="1200" height="800"></canvas>
+  </div>
+
+  <div class="controls">
+    <label><input type="checkbox" id="toggleNoise" checked> Baked Noise Texture</label>
+    <label><input type="checkbox" id="toggleFog" checked> Depth Fog (Horizon)</label>
+    <label><input type="checkbox" id="toggleVignette" checked> Lens Vignette</label>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    
+    let showNoise = document.getElementById('toggleNoise').checked;
+    let showFog = document.getElementById('toggleFog').checked;
+    let showVignette = document.getElementById('toggleVignette').checked;
+
+    document.getElementById('toggleNoise').addEventListener('change', (e) => { showNoise = e.target.checked; draw(); });
+    document.getElementById('toggleFog').addEventListener('change', (e) => { showFog = e.target.checked; draw(); });
+    document.getElementById('toggleVignette').addEventListener('change', (e) => { showVignette = e.target.checked; draw(); });
+
+    const tw = 16, th = 12;
+    const CELL_SIZE = 100;
+    const worldWidth = tw * CELL_SIZE;
+    const worldHeight = th * CELL_SIZE;
+    
+    const terrain = new Uint8Array(tw * th);
+    for (let y = 0; y < th; y++) {
+      for (let x = 0; x < tw; x++) {
+        let val = 1;
+        const distToCenter = Math.hypot(x - tw/2, y - th/2);
+        if (distToCenter < 5.5 + Math.random()*1.5) val = 2;
+        if (distToCenter < 1.5 + Math.random()) val = 3;
+        if (distToCenter > 7) val = 0;
+        terrain[y * tw + x] = val;
+      }
+    }
+
+    const colors = ['#4CA8D1', '#D6A675', '#84C270', '#979A9E'];
+    const highlightColors = ['#45A3CC', '#CF6A48', '#2AB35B', '#42494F'];
+
+    const terrainCanvas = document.createElement('canvas');
+    terrainCanvas.width = worldWidth;
+    terrainCanvas.height = worldHeight;
+    const tCtx = terrainCanvas.getContext('2d', { alpha: false });
+
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = worldWidth; offCanvas.height = worldHeight;
+    const offCtx = offCanvas.getContext('2d');
+
+    const threshCanvas = document.createElement('canvas');
+    threshCanvas.width = worldWidth; threshCanvas.height = worldHeight;
+    const threshCtx = threshCanvas.getContext('2d');
+
+    tCtx.fillStyle = colors[0];
+    tCtx.fillRect(0, 0, worldWidth, worldHeight);
+
+    for (let layerIdx = 1; layerIdx <= 3; layerIdx++) {
+      offCtx.clearRect(0, 0, worldWidth, worldHeight);
+      threshCtx.clearRect(0, 0, worldWidth, worldHeight);
+
+      offCtx.fillStyle = '#FFFFFF';
+      offCtx.beginPath();
+      for (let y = 0; y < th; y++) {
+        for (let x = 0; x < tw; x++) {
+          if (terrain[y * tw + x] >= layerIdx) {
+            offCtx.fillRect(x * CELL_SIZE - 5, y * CELL_SIZE - 5, CELL_SIZE + 10, CELL_SIZE + 10);
+          }
+        }
+      }
+
+      threshCtx.filter = 'url(#terrain-metaball-filter)';
+      threshCtx.drawImage(offCanvas, 0, 0);
+      threshCtx.filter = 'none';
+
+      threshCtx.globalCompositeOperation = 'source-in';
+      threshCtx.fillStyle = colors[layerIdx];
+      threshCtx.fillRect(0, 0, worldWidth, worldHeight);
+      threshCtx.globalCompositeOperation = 'source-over';
+
+      tCtx.save();
+      tCtx.filter = "drop-shadow(0px -3px 0px " + highlightColors[layerIdx] + ")";
+      tCtx.drawImage(threshCanvas, 0, 0);
+      tCtx.filter = "drop-shadow(0px " + (layerIdx * 10) + "px 0px rgba(0,0,0,0.6))";
+      tCtx.drawImage(threshCanvas, 0, 0);
+      tCtx.restore();
+    }
+
+    const noiseCanvas = document.createElement('canvas');
+    noiseCanvas.width = 64; noiseCanvas.height = 64;
+    const nCtx = noiseCanvas.getContext('2d');
+    const nData = nCtx.createImageData(64, 64);
+    for (let i = 0; i < nData.data.length; i += 4) {
+      const val = Math.random() * 255;
+      nData.data[i] = val;
+      nData.data[i+1] = val;
+      nData.data[i+2] = val;
+      nData.data[i+3] = 18;
+    }
+    nCtx.putImageData(nData, 0, 0);
+    const noisePattern = tCtx.createPattern(noiseCanvas, 'repeat');
+
+    function draw() {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.drawImage(terrainCanvas, 0, 0);
+
+      if (showNoise) {
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.fillStyle = noisePattern;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+
+      if (showFog) {
+        const fogGrad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.6);
+        fogGrad.addColorStop(0, 'rgba(239, 230, 213, 0.7)');
+        fogGrad.addColorStop(1, 'rgba(239, 230, 213, 0.0)');
+        ctx.fillStyle = fogGrad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      if (showVignette) {
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const radius = Math.max(cx, cy) * 1.2;
+        const vigGrad = ctx.createRadialGradient(cx, cy, radius * 0.4, cx, cy, radius);
+        vigGrad.addColorStop(0, 'rgba(0, 0, 0, 0.0)');
+        vigGrad.addColorStop(1, 'rgba(20, 10, 0, 0.35)');
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.fillStyle = vigGrad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    }
+
+    draw();
+  </script>
+</body>
+</html>

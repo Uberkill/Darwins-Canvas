@@ -27,7 +27,7 @@ export function SaveSlotsModal({ mode, saves, onPlay, onDelete }: SaveSlotsModal
             return (
               <button key={slotId} className="save-slot filled" onClick={() => onPlay(slotId, mode === 'NEW')}>
                 <div className="slot-info">
-                  <div className="slot-title">Ecosystem {index + 1}</div>
+                  <div className="slot-title">{save.name || `Ecosystem ${index + 1}`}</div>
                   <div className="slot-stats">
                     <span>{save.creatureCount} Creatures</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>

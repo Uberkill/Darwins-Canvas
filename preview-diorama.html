@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accurate Diorama Preview</title>
+  <style>
+    body {
+      margin: 0;
+      background: #EFE6D5; /* Exact game sky color */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #333;
+      font-family: sans-serif;
+    }
+    #container {
+      position: relative;
+      width: 1400px;
+      height: 900px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #EFE6D5;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <svg id="terrain-svg-filters" style="position:absolute;width:0;height:0;overflow:hidden">
+    <filter id="terrain-metaball-filter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -20"
+        result="threshold"/>
+    </filter>
+  </svg>
+
+  <div id="container">
+    <canvas id="gameCanvas" width="1400" height="900"></canvas>
+  </div>
+
+  <div class="controls">
+    <label><input type="checkbox" id="toggleNoise" checked> Baked Noise Texture</label>
+    <label><input type="checkbox" id="toggleFog" checked> Atmospheric Depth Fog</label>
+    <label><input type="checkbox" id="toggleVignette" checked> Macro-Lens Vignette</label>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    
+    let showNoise = document.getElementById('toggleNoise').checked;
+    let showFog = document.getElementById('toggleFog').checked;
+    let showVignette = document.getElementById('toggleVignette').checked;
+
+    document.getElementById('toggleNoise').addEventListener('change', (e) => { showNoise = e.target.checked; draw(); });
+    document.getElementById('toggleFog').addEventListener('change', (e) => { showFog = e.target.checked; draw(); });
+    document.getElementById('toggleVignette').addEventListener('change', (e) => { showVignette = e.target.checked; draw(); });
+
+    // Game Config Matches
+    const tw = 40, th = 30; // Large sweeping map
+    const CELL_SIZE = 100;
+    const worldWidth = tw * CELL_SIZE;
+    const worldHeight = th * CELL_SIZE;
+    const CAMERA_TILT = 0.6;
+    
+    const terrain = new Uint8Array(tw * th);
+    
+    // Simple Perlin-ish generation for sweeping plains like the screenshot
+    function noiseScale(nx, ny) { return Math.sin(nx) * Math.cos(ny) + Math.sin(nx*2.5)*0.5; }
+    
+    for (let y = 0; y < th; y++) {
+      for (let x = 0; x < tw; x++) {
+        let val = 1; // Dirt everywhere
+        
+        const nx = x / 8;
+        const ny = y / 8;
+        const n = noiseScale(nx, ny);
+        
+        // Vast swaths of grass
+        if (n > -0.2) val = 2;
+        
+        terrain[y * tw + x] = val;
+      }
+    }
+
+    const colors = ['#4CA8D1', '#D6A675', '#84C270', '#979A9E'];
+    const highlightColors = ['#45A3CC', '#CF6A48', '#2AB35B', '#42494F'];
+
+    // Pre-bake the terrain to an offscreen canvas
+    const terrainCanvas = document.createElement('canvas');
+    terrainCanvas.width = worldWidth;
+    terrainCanvas.height = worldHeight;
+    const tCtx = terrainCanvas.getContext('2d', { alpha: false });
+
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = worldWidth; offCanvas.height = worldHeight;
+    const offCtx = offCanvas.getContext('2d');
+
+    const threshCanvas = document.createElement('canvas');
+    threshCanvas.width = worldWidth; threshCanvas.height = worldHeight;
+    const threshCtx = threshCanvas.getContext('2d');
+
+    // 1. Fill Dirt (Water is 0, Dirt is 1, so fill Dirt as base)
+    tCtx.fillStyle = colors[1];
+    tCtx.fillRect(0, 0, worldWidth, worldHeight);
+
+    // 2. Render Grass (Layer 2)
+    for (let layerIdx = 2; layerIdx <= 2; layerIdx++) {
+      offCtx.clearRect(0, 0, worldWidth, worldHeight);
+      threshCtx.clearRect(0, 0, worldWidth, worldHeight);
+
+      offCtx.fillStyle = '#FFFFFF';
+      offCtx.beginPath();
+      for (let y = 0; y < th; y++) {
+        for (let x = 0; x < tw; x++) {
+          if (terrain[y * tw + x] >= layerIdx) {
+            offCtx.fillRect(x * CELL_SIZE - 5, y * CELL_SIZE - 5, CELL_SIZE + 10, CELL_SIZE + 10);
+          }
+        }
+      }
+
+      threshCtx.filter = 'url(#terrain-metaball-filter)';
+      threshCtx.drawImage(offCanvas, 0, 0);
+      threshCtx.filter = 'none';
+
+      threshCtx.globalCompositeOperation = 'source-in';
+      threshCtx.fillStyle = colors[layerIdx];
+      threshCtx.fillRect(0, 0, worldWidth, worldHeight);
+      threshCtx.globalCompositeOperation = 'source-over';
+
+      tCtx.save();
+      // Upwards Bevel
+      tCtx.filter = "drop-shadow(0px -3px 0px " + highlightColors[layerIdx] + ")";
+      tCtx.drawImage(threshCanvas, 0, 0);
+      // Downwards Shadow
+      tCtx.filter = "drop-shadow(0px " + (layerIdx * 10) + "px 0px rgba(0,0,0,0.6))";
+      tCtx.drawImage(threshCanvas, 0, 0);
+      tCtx.restore();
+    }
+
+    // Bake Noise Pattern
+    const noiseCanvas = document.createElement('canvas');
+    noiseCanvas.width = 64; noiseCanvas.height = 64;
+    const nCtx = noiseCanvas.getContext('2d');
+    const nData = nCtx.createImageData(64, 64);
+    for (let i = 0; i < nData.data.length; i += 4) {
+      const val = Math.random() * 255;
+      nData.data[i] = val;
+      nData.data[i+1] = val;
+      nData.data[i+2] = val;
+      nData.data[i+3] = 16; // 6% opacity
+    }
+    nCtx.putImageData(nData, 0, 0);
+    const noisePattern = tCtx.createPattern(noiseCanvas, 'repeat');
+
+    // Camera settings to match game screenshot
+    const cameraX = worldWidth / 2.5;
+    const cameraY = worldHeight / 1.5;
+    const zoom = 0.8;
+
+    function draw() {
+      // Background Sky
+      ctx.fillStyle = '#EFE6D5';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      
+      // Center camera
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.scale(zoom, zoom);
+      
+      // APPLY 2.5D CAMERA TILT
+      ctx.scale(1, CAMERA_TILT);
+      ctx.translate(-cameraX, -cameraY);
+
+      // 1. Draw baked terrain
+      ctx.drawImage(terrainCanvas, 0, 0);
+
+      // 2. Add Noise Texture directly to ground (Multiply)
+      if (showNoise) {
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.fillStyle = noisePattern;
+        ctx.fillRect(0, 0, worldWidth, worldHeight);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+
+      // Draw some fake entities to show depth sorting
+      ctx.fillStyle = '#FF6B8B'; // Pink blob
+      for(let i=0; i<30; i++) {
+        const ex = 500 + i*100;
+        const ey = 500 + (i%5)*200;
+        ctx.beginPath();
+        ctx.arc(ex, ey, 20, 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      ctx.restore();
+
+      // 3. Draw SCREEN SPACE Depth Fog
+      if (showFog) {
+        // Gradient from top of screen fading out halfway down
+        const fogGrad = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.7);
+        // Match the background color perfectly
+        fogGrad.addColorStop(0.0, 'rgba(239, 230, 213, 1.0)'); 
+        fogGrad.addColorStop(0.4, 'rgba(239, 230, 213, 0.7)'); 
+        fogGrad.addColorStop(1.0, 'rgba(239, 230, 213, 0.0)');
+        ctx.fillStyle = fogGrad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
+      // 4. Draw SCREEN SPACE Macro Lens Vignette
+      if (showVignette) {
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const radius = Math.max(canvas.width, canvas.height) * 0.8;
+        const vigGrad = ctx.createRadialGradient(cx, cy, radius * 0.4, cx, cy, radius);
+        vigGrad.addColorStop(0, 'rgba(0, 0, 0, 0.0)');
+        vigGrad.addColorStop(1, 'rgba(30, 15, 0, 0.4)'); // Dark warm umber
+
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.fillStyle = vigGrad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    }
+
+    // Initial draw
+    draw();
+  </script>
+</body>
+</html>

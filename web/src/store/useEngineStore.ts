@@ -7,8 +7,9 @@ export const useEngineStore = create<EngineStore>()((set) => ({
 
   activeSaveSlot: null,
   setActiveSaveSlot: (slot) => set({ activeSaveSlot: slot }),
-
-
+  
+  pendingMapName: null,
+  setPendingMapName: (name) => set({ pendingMapName: name }),
 
   pendingCreature: null,
   queueCreature: (c) => set({ pendingCreature: c }),

@@ -249,10 +249,10 @@ body {
   width: 100%;
   max-width: 95%;
   height: 100%;
-  max-height: 90%;
+  max-height: 90dvh;
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: clamp(12px, 2dvh, 24px);
   
   /* Slide up animation */
   transform: translateY(50px) scale(0.95);
@@ -391,23 +391,24 @@ body {
 .modal-card {
   background: var(--color-panel);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: clamp(16px, 3dvh, 24px);
   box-shadow: var(--shadow-panel);
   border: 2px solid white;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: clamp(12px, 2dvh, 20px);
 }
 
 /* ─── Tools (Left) ───────────────────────────────────────────────────── */
 .col-tools {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  align-self: center;
+  gap: clamp(12px, 2dvh, 24px);
+  align-self: stretch;
   width: fit-content;
   min-width: 160px;
-  height: fit-content;
+  height: 100%;
+  max-height: 100%;
 }
 .section-title {
   font-size: 16px; font-weight: 900; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
@@ -498,11 +499,12 @@ body {
 .col-settings {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: clamp(12px, 2dvh, 24px);
   justify-content: space-between;
-  align-self: center;
+  align-self: stretch;
   width: 320px;
-  height: fit-content;
+  height: 100%;
+  max-height: 100%;
   flex-shrink: 0;
 }
 .pill-group { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -673,7 +675,12 @@ body {
   .onboarding-backdrop,
   .title-screen,
   .creation-modal-overlay,
-  .tutorial-backdrop {
+  .tutorial-backdrop,
+  .pause-modal-overlay,
+  .stats-modal-overlay,
+  .collection-modal-overlay,
+  .terrarium-overlay,
+  .onboarding-modal-overlay {
     transform: scale(var(--ui-scale, 1));
     width: calc(100% / var(--ui-scale, 1)) !important;
     height: calc(100% / var(--ui-scale, 1)) !important;

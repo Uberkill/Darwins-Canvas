@@ -1,9 +1,10 @@
 # UI & Style Guide
 
 > [!IMPORTANT]
-> This ruleset is STRICT. AI Agents modifying the UI must follow these constraints perfectly to prevent the application from regressing into generic, lazy, or mismatched "modern corporate" designs.
+> This ruleset is STRICT, but it applies **ONLY to UI elements** (HTML DOM, buttons, panels, menus). AI Agents modifying the UI must follow these constraints perfectly to prevent the application from regressing into generic, lazy, or mismatched "modern corporate" designs.
+> **DO NOT** apply these rules (thick borders, hard shadows, no blurs) to the actual 2.5D HTML5 Canvas simulation environment. The simulation environment uses a completely separate, soft, organic, painterly aesthetic (e.g., Animal Crossing style) with blurred shadows and smooth rendering.
 
-Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic. It should look like a premium children's educational game or a high-quality indie sandbox, NOT a SaaS dashboard.
+Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic. The UI should look like a premium children's educational game or a high-quality indie sandbox, NOT a SaaS dashboard.
 
 ## Typography
 - **Primary Font:** `Nunito`
@@ -19,6 +20,11 @@ Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic
   - Secondary (Yellow): `var(--color-secondary)` (`#F5D76E`)
   - Tertiary (Pink): `var(--color-tertiary)` (`#FF8C9D`)
   - Blue: `var(--color-blue)` (`#7CB9E8`)
+- **Terrain Colors (Strict Consistency):** If building UI related to the terrain or World Builder, use these exact hex codes to match the simulation engine. Do NOT use them with white text without checking accessibility contrast ratios:
+  - Water: `#4CA8D1`
+  - Dirt: `#D6A675`
+  - Grass: `#84C270`
+  - Rock: `#979A9E`
 
 ## Shape and Structure
 - **Borders:** Extremely thick. Use `border: 4px solid var(--color-text)` or `border: 4px solid white` depending on contrast needs. Do not use thin `1px` borders.
@@ -34,3 +40,15 @@ Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic
 ## Interactive States
 - **Hover/Active:** Instead of complex color transitions, interactive elements should "press down" physically.
   - Active state: `transform: translateY(4px); box-shadow: 0 0 0 transparent;`
+
+## Canvas Layout Constraints
+- **Coordinate Drift Prevention:** When building UI canvases (like the Creature Lab or Map Painter), you MUST wrap the canvas in a strict `100cqmin` Container Query wrapper.
+- DO NOT use `object-fit: contain` on a canvas inside a responsive flexbox. If the canvas DOM element stretches into a rectangle, the browser will letterbox the rendering buffer. `getBoundingClientRect` and `offsetX` do not calculate this letterboxing, which completely destroys pointer coordinate mapping and causes brush drift.
+- Use this exact structure to guarantee the DOM element is a perfect square, completely eliminating drift:
+```tsx
+<div style={{ containerType: 'size' /* applied to the parent column */ }}>
+  <div style={{ width: '100cqmin', height: '100cqmin' }}>
+    <canvas style={{ width: '100%', height: '100%' }} />
+  </div>
+</div>
+```

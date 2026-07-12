@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { listSaves, deleteGame, loadGame } from '../utils/saveSystem';
 import type { SaveSlotMetadata } from '../utils/saveSystem';
-import { worldRef, updateWorldDimensions, centerCamera } from '../engine/worldRef';
+import { worldRef, updateWorldDimensions, setWorldDimensions, centerCamera, getAutoFitZoom } from '../engine/worldRef';
+import { getWorldWidth, getWorldHeight } from '../constants';
 import { setEntities, clearEntities } from '../engine/entityManager';
 import { useEngineStore } from '../store/useEngineStore';
 import { useUIStore } from '../store/useUIStore';
@@ -46,15 +47,30 @@ export function useSaves() {
     if (!isNew) {
       const save = await loadGame(slotId);
       if (save) {
+        useEngineStore.getState().setPendingMapName(save.name || `Ecosystem ${slotId.replace('slot_', '')}`);
         setEntities(worldRef.current, save.creatures || [], save.plants || []);
         worldRef.current.timeOfDay = save.timeOfDay || 0.1;
         worldRef.current.weather = save.weather || 'CLEAR';
         worldRef.current.totalTime = save.totalTime || 0;
-        if (save.mapSizeMultiplier) {
-          worldRef.current.mapSizeMultiplier = save.mapSizeMultiplier;
-          updateWorldDimensions();
+        const saveMult = save.mapSizeMultiplier || 1;
+        worldRef.current.mapSizeMultiplier = saveMult;
+        
+        // Use explicitly saved dimensions, or fallback to constants for older saves
+        const w = save.worldWidth || getWorldWidth() * saveMult;
+        const h = save.worldHeight || getWorldHeight() * saveMult;
+        setWorldDimensions(w, h);
+        
+        if (save.terrain) {
+          worldRef.current.scratchpad.terrain = save.terrain;
+          worldRef.current.scratchpad.terrainWidth = save.terrainWidth;
+          worldRef.current.scratchpad.terrainHeight = save.terrainHeight;
+          worldRef.current.flags.terrainChanged = true;
         }
+
         centerCamera();
+        const optimalZoom = getAutoFitZoom();
+        useUIStore.getState().setTargetZoom(optimalZoom);
+        worldRef.current.camera.zoom = optimalZoom;
       }
     } else {
       clearEntities(worldRef.current);

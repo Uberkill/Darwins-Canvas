@@ -6,8 +6,11 @@ import { DoodleLayer } from './components/DoodleLayer'
 import { SettingsModal } from './components/SettingsModal'
 import { SaveSlotsModal } from './components/SaveSlotsModal'
 import { PatchNotesModal } from './components/PatchNotesModal'
-import { MapSizePromptModal } from './components/MapSizePromptModal'
-import { updateWorldDimensions, centerCamera, worldRef } from '../engine/worldRef'
+import { WorldSetupModal } from './components/WorldSetupModal'
+import { worldRef, updateWorldDimensions, centerCamera, getAutoFitZoom } from '../engine/worldRef'
+import { useEngineStore } from '../store/useEngineStore'
+import { useUIStore } from '../store/useUIStore'
+import { type MapType } from '../utils/terrainGenerator'
 import './PauseMenuModal.css'
 import './TitleScreen.css'
 
@@ -15,7 +18,7 @@ interface TitleScreenProps {
   onPlay: () => void
 }
 
-type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS' | 'PATCH_NOTES' | 'MAP_SIZE_PROMPT'
+type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS' | 'PATCH_NOTES' | 'WORLD_SETUP'
 
 export function TitleScreen({ onPlay }: TitleScreenProps) {
   const [isHiding, setIsHiding] = useState(false)
@@ -49,7 +52,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
   const handlePlayRequest = (slotId: string, isNew: boolean) => {
     if (isNew) {
       setPendingPlaySlot({ slotId, isNew })
-      setMenuState('MAP_SIZE_PROMPT')
+      setMenuState('WORLD_SETUP')
     } else {
       executePlay(slotId, isNew)
       setIsHiding(true)
@@ -59,12 +62,29 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     }
   }
 
-  const handleMapSizeSelect = (multiplier: number) => {
+  const handleWorldSetupStart = (multiplier: number, mapType: MapType | 'custom', mapName: string) => {
     if (!pendingPlaySlot) return;
     
+    useEngineStore.getState().setPendingMapName(mapName);
     worldRef.current.mapSizeMultiplier = multiplier;
+    
+    // This resizes and recreates a fresh blank terrain buffer
     updateWorldDimensions();
+    
+    // If the WorldSetupModal generated or painted a terrain, it left it here for us
+    const preGen = (worldRef.current as any).preGeneratedTerrain;
+    if (preGen) {
+      worldRef.current.scratchpad.terrain = preGen.data;
+      worldRef.current.scratchpad.terrainWidth = preGen.tw;
+      worldRef.current.scratchpad.terrainHeight = preGen.th;
+      worldRef.current.flags.terrainChanged = true;
+      delete (worldRef.current as any).preGeneratedTerrain;
+    }
+
     centerCamera();
+    const optimalZoom = getAutoFitZoom();
+    useUIStore.getState().setTargetZoom(optimalZoom);
+    worldRef.current.camera.zoom = optimalZoom;
 
     executePlay(pendingPlaySlot.slotId, pendingPlaySlot.isNew)
     setIsHiding(true)
@@ -157,8 +177,8 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
         </button>
       </div>
 
-      {/* Save Slots / Settings Modal */}
-      {(menuState !== 'ROOT') && (
+      {/* Save Slots / Settings / World Setup Modal */}
+      {(menuState !== 'ROOT' && menuState !== 'WORLD_SETUP') && (
         <div className="slots-modal-overlay">
           <div className="slots-modal-panel">
             <div className="slots-modal-close" onClick={() => setMenuState('ROOT')}>
@@ -181,12 +201,13 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
                 onDelete={handleDelete} 
               />
             )}
-
-            {menuState === 'MAP_SIZE_PROMPT' && (
-              <MapSizePromptModal onSelect={handleMapSizeSelect} />
-            )}
           </div>
         </div>
+      )}
+
+      {/* WorldSetupModal is heavily styled, has its own backdrop */}
+      {menuState === 'WORLD_SETUP' && (
+        <WorldSetupModal onStart={handleWorldSetupStart} onClose={() => setMenuState('ROOT')} />
       )}
     </div>
   )

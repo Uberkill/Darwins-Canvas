@@ -35,6 +35,7 @@ export function useDrawingCanvas(
   const canvasRef    = useRef<HTMLCanvasElement>(null)
   const ctxRef       = useRef<CanvasRenderingContext2D | null>(null)
   const isDrawing    = useRef(false)
+  const isDirtyRef   = useRef(false) // tracks if pixels changed this stroke — avoids mid-stroke setState
   
   const { saveSnapshot, undo: doUndo, canUndo, clearHistory } = useCanvasHistory()
   
@@ -50,6 +51,12 @@ export function useDrawingCanvas(
     // CRITICAL: Force DPR to 1 to prevent 36MB RAM explosion on mobile Retina screens
     const ctx = setupCanvas(canvas, CANVAS_SIZE, CANVAS_SIZE, 1)
     ctxRef.current = ctx
+    // setupCanvas injects inline pixel values (style.width="1024px", style.height="1024px")
+    // that fight against our CSS layout. We must clear them so CSS width/height: 100% takes
+    // back control of the canvas's visual size.  The *buffer* size (canvas.width=1024) is
+    // kept as-is — only the CSS presentation layer is cleared here.
+    canvas.style.width  = ''
+    canvas.style.height = ''
     applyBrushSettings(ctx, brushSize, brushColor)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -132,7 +139,7 @@ export function useDrawingCanvas(
     ctx.moveTo(pt.x, pt.y)
 
     if (activeTool !== 'ERASER') {
-      setIsEmpty(false)
+      isDirtyRef.current = true // mark dirty — state update deferred to pointerUp
     }
   }, [activeTool, activeStamp, brushSize, brushColor, decals, saveSnapshot])
 
@@ -154,7 +161,7 @@ export function useDrawingCanvas(
     ctx.moveTo(pt.x, pt.y)
 
     if (activeTool !== 'ERASER') {
-      setIsEmpty(false)
+      isDirtyRef.current = true // mark dirty — state update deferred to pointerUp
     }
   }, [activeTool, brushSize])
 
@@ -163,6 +170,13 @@ export function useDrawingCanvas(
     const ctx = ctxRef.current
     if (ctx) ctx.globalCompositeOperation = 'source-over'
     isDrawing.current = false
+
+    // Flush the dirty flag — single setState here instead of on every move event
+    if (isDirtyRef.current) {
+      setIsEmpty(false)
+      isDirtyRef.current = false
+    }
+
     if (activeTool === 'ERASER') {
       const canvas = canvasRef.current
       if (canvas && ctx) {

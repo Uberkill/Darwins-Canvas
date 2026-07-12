@@ -64,7 +64,8 @@ describe('Wall Repulsion — creature boundary behavior', () => {
     const WALL_REPEL_DIST = 80;
     const worldWidth = 1440;
     // Creature at the very edge should have full repulsion (factor=1)
-    const atLeft = 1 - 0 / WALL_REPEL_DIST; // c.x=0
+    const cx = 0;
+    const atLeft = 1 - cx / WALL_REPEL_DIST; // c.x=0
     expect(atLeft).toBe(1);
 
     // Creature just inside the repulsion zone should have partial force

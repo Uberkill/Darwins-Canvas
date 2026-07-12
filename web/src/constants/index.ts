@@ -1,10 +1,23 @@
 import type { CreatureSize } from '../types';
 
-// ─── World dimensions (functions — safe across resize/orientation changes) ────
-export const getWorldWidth  = (): number => window.innerWidth;
-export const getWorldHeight = (): number => window.innerHeight / CAMERA_TILT;
+export const CAMERA_TILT = 0.4; // 2.5D projection multiplier
 
-export const CAMERA_TILT = 0.4; // 2.5D projection multiplier (lowered from 0.6 for a steeper angle)
+const BASE_WORLD_AREA = 1920 * (1080 / CAMERA_TILT);
+
+export const getWorldWidth = (): number => {
+  if (typeof window === 'undefined') return 1920;
+  let aspect = window.innerWidth / (window.innerHeight / CAMERA_TILT);
+  aspect = Math.max(0.5, Math.min(2.0, aspect));
+  const h = Math.sqrt(BASE_WORLD_AREA / aspect);
+  return h * aspect;
+}
+
+export const getWorldHeight = (): number => {
+  if (typeof window === 'undefined') return 1080 / CAMERA_TILT;
+  let aspect = window.innerWidth / (window.innerHeight / CAMERA_TILT);
+  aspect = Math.max(0.5, Math.min(2.0, aspect));
+  return Math.sqrt(BASE_WORLD_AREA / aspect);
+}
 
 // ─── 2.5D Depth Illusion ────────────────────────────────────────────────────
 // Entities near the top of the map (y≈0, "far") render at DEPTH_SCALE_FAR.
@@ -69,7 +82,10 @@ export const getOmnivorePopulationCap = (w: number, h: number) => Math.floor(25 
 
 // ─── Plant constants ──────────────────────────────────────────────────────────
 export const getPlantCap = (w: number, h: number) => Math.floor(100 * ((w * h) / BASE_AREA));
-export const PLANT_SPAWN_RATE   = 0.3;  // seconds between spawns (was 0.6 — doubled to support larger herds)
+export const getPlantSpawnRate = (w: number, h: number) => {
+  const areaRatio = (w * h) / BASE_AREA;
+  return 0.3 / Math.max(0.1, areaRatio);
+};
 export const PLANT_GROWTH_RATE  = 0.4;  // growthStage increase per second (0→1 in ~2.5s)
 export const PLANT_WOBBLE_SPEED = 1.2;  // radians/second for organic sway
 

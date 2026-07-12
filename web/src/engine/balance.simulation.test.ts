@@ -43,7 +43,7 @@ import {
   OMNIVORE_BASE_HUNGER_DRAIN, CARNIVORE_BASE_DAMAGE,
   HERBIVORE_REPRO_CHANCE, CARNIVORE_REPRO_CHANCE,
   HERBIVORE_REPRO_COOLDOWN, CARNIVORE_REPRO_COOLDOWN,
-  PLANT_SPAWN_RATE,
+  getPlantSpawnRate,
 } from '../constants'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -326,7 +326,7 @@ describe('✅ Balance Flags', () => {
     console.log(`\n  Kill time: ${t.toFixed(2)}s | Lunge: ${(100/(CARNIVORE_BASE_DAMAGE*2)).toFixed(2)}s`)
     expect(t).toBeGreaterThan(1.5); expect(t).toBeLessThan(10)
   })
-  it('plant supply > 2/s', () => { expect(1/PLANT_SPAWN_RATE).toBeGreaterThan(2.0) })
+  it('plant supply > 2/s', () => { expect(1/getPlantSpawnRate(W, H)).toBeGreaterThan(2.0) })
   it('omnivore drains less than herbivore', () => { expect(OMNIVORE_BASE_HUNGER_DRAIN).toBeLessThan(HERBIVORE_BASE_HUNGER_DRAIN) })
   it('herbivore breeds much faster than carnivore', () => {
     const ratio = (HERBIVORE_REPRO_CHANCE/(HERBIVORE_REPRO_COOLDOWN+1)) /

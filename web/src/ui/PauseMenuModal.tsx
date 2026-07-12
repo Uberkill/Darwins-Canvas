@@ -11,6 +11,7 @@ export function PauseMenuModal() {
   const isOpen = useUIStore((s) => s.isPauseMenuOpen)
   const close = useUIStore((s) => s.closePauseMenu)
   const activeSaveSlot = useEngineStore((s) => s.activeSaveSlot)
+  const pendingMapName = useEngineStore((s) => s.pendingMapName)
   
   const masterVolume = useSettingsStore((s) => s.masterVolume)
   const sfxVolume = useSettingsStore((s) => s.sfxVolume)
@@ -31,7 +32,7 @@ export function PauseMenuModal() {
     setSaveSuccess(false)
     
     try {
-      await saveGame(activeSaveSlot, worldRef.current, `Ecosystem ${activeSaveSlot.replace('slot_', '')}`)
+      await saveGame(activeSaveSlot, worldRef.current, pendingMapName || `Ecosystem ${activeSaveSlot.replace('slot_', '')}`)
       setSaveSuccess(true)
       setTimeout(() => setSaveSuccess(false), 2000)
     } catch (e) {
@@ -45,12 +46,12 @@ export function PauseMenuModal() {
     if (activeSaveSlot && !isSaving) {
       setIsSaving(true)
       try {
-        await saveGame(activeSaveSlot, worldRef.current, `Ecosystem ${activeSaveSlot.replace('slot_', '')}`)
-      } catch (e) {
-        console.error('Save and quit failed:', e)
-      }
-      setIsSaving(false)
+      await saveGame(activeSaveSlot, worldRef.current, pendingMapName || `Ecosystem ${activeSaveSlot.replace('slot_', '')}`)
+    } catch (e) {
+      console.error('Save and quit failed:', e)
     }
+    setIsSaving(false)
+  }
     
     window.dispatchEvent(new CustomEvent('QUIT_TO_TITLE'))
     close()

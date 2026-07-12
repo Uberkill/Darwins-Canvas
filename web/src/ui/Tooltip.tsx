@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { useSettingsStore } from '../store/useSettingsStore';
 
 interface TooltipProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export function Tooltip({ children, content, position = 'top', align = 'center',
   const [show, setShow] = useState(false);
   const [coords, setCoords] = useState({ top: 0, left: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const uiScale = useSettingsStore(s => s.uiScale);
 
   const updatePosition = () => {
     if (!containerRef.current) return;
@@ -24,9 +26,9 @@ export function Tooltip({ children, content, position = 'top', align = 'center',
     if (align === 'right') leftPos = rect.right;
 
     if (position === 'top') {
-      setCoords({ top: rect.top - 8, left: leftPos });
+      setCoords({ top: rect.top - 8 * uiScale, left: leftPos });
     } else {
-      setCoords({ top: rect.bottom + 8, left: leftPos });
+      setCoords({ top: rect.bottom + 8 * uiScale, left: leftPos });
     }
   };
 
@@ -41,13 +43,21 @@ export function Tooltip({ children, content, position = 'top', align = 'center',
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show, position, align]);
+  }, [show, position, align, uiScale]);
 
   const getTransform = () => {
     let x = '-50%';
     if (align === 'left') x = '0%';
     if (align === 'right') x = '-100%';
-    return position === 'top' ? `translate(${x}, -100%) scale(1)` : `translate(${x}, 0) scale(1)`;
+    return position === 'top' ? `translate(${x}, -100%) scale(${uiScale})` : `translate(${x}, 0) scale(${uiScale})`;
+  };
+  
+  const getTransformOrigin = () => {
+    const yOrigin = position === 'top' ? 'bottom' : 'top';
+    let xOrigin = 'center';
+    if (align === 'left') xOrigin = 'left';
+    if (align === 'right') xOrigin = 'right';
+    return `${yOrigin} ${xOrigin}`;
   };
 
   const variantClass = variant === 'god' ? 'god-tooltip-fixed' : 'decal-tooltip';
@@ -73,7 +83,8 @@ export function Tooltip({ children, content, position = 'top', align = 'center',
             pointerEvents: 'none',
             opacity: 1, 
             visibility: 'visible',
-            transform: getTransform()
+            transform: getTransform(),
+            transformOrigin: getTransformOrigin()
           }}
         >
           {content}

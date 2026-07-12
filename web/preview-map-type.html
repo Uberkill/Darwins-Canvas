@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map Type Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-heading: 'Nunito', sans-serif;
+    --font-ui: 'Nunito', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+    --color-bg-base: #D4D0C8;
+    --color-panel: #FFFDF8;
+    --color-text: #4A4640;
+    --color-text-muted: #8A857D;
+    --color-primary: #98C972;
+    --color-primary-shadow: #7CA85B;
+    --color-secondary: #F5D76E;
+    --color-secondary-shadow: #D4A020;
+    --color-tertiary: #FF8C9D;
+    --color-tertiary-shadow: #D9697A;
+    --color-blue: #7CB9E8;
+    --color-blue-shadow: #5A95C2;
+    --radius-full: 9999px;
+    --radius-lg: 24px;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    background: var(--color-bg-base);
+    background-image: 
+      linear-gradient(90deg, transparent 79px, #FFE3B3 79px, #FFE3B3 81px, transparent 81px),
+      linear-gradient(#FFE3B3 .1em, transparent .1em);
+    background-size: 100% 100%, 100% 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Modal Base */
+  .pause-backdrop {
+    position: fixed; inset: 0; background: rgba(43, 33, 24, 0.6); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pause-modal {
+    background: #F4F0EA; border: 4px solid var(--color-text); border-radius: var(--radius-lg);
+    width: 90%; max-width: 450px; display: flex; flex-direction: column;
+    box-shadow: 0 8px 0 rgba(74, 59, 50, 0.15);
+  }
+  .pause-header {
+    padding: 24px 32px 16px 32px; text-align: center; border-bottom: 2px solid rgba(0, 0, 0, 0.05); position: relative;
+  }
+  .pause-header h2 { font-family: var(--font-heading); font-size: 2rem; color: var(--color-text); margin: 0; font-weight: 800; }
+  .pause-section-title { font-family: var(--font-ui); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: #8C7B70; margin: 8px 0 0 0; text-align: center; }
+  
+  .back-btn {
+    position: absolute; top: 24px; left: 24px; cursor: pointer; color: var(--color-text-muted);
+    transition: transform 0.2s;
+  }
+  .back-btn:hover { color: var(--color-text); transform: scale(1.1); }
+  
+  .pause-content { padding: 24px 32px; display: flex; flex-direction: column; gap: 16px; max-height: 60vh; overflow-y: auto; }
+  
+  /* Map Type Buttons */
+  .map-type-btn {
+    display: flex; align-items: center; justify-content: flex-start; gap: 16px; text-align: left;
+    width: 100%; padding: 16px 20px; border-radius: 24px;
+    background: white; border: 4px solid #E2DDD5; box-shadow: 0 8px 0 #E2DDD5;
+    cursor: pointer; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+    font-family: var(--font-body); box-sizing: border-box;
+  }
+  .map-type-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 0 #E2DDD5; }
+  .map-type-btn:active { transform: translateY(8px) scale(1.02, 0.96); box-shadow: 0 0 0 transparent; transition: transform 0.1s; }
+  
+  .map-type-btn.pangaea { border-color: var(--color-primary); box-shadow: 0 8px 0 var(--color-primary); }
+  .map-type-btn.pangaea:hover { box-shadow: 0 12px 0 var(--color-primary); }
+  
+  .map-type-btn.archipelago { border-color: var(--color-blue); box-shadow: 0 8px 0 var(--color-blue); }
+  .map-type-btn.archipelago:hover { box-shadow: 0 12px 0 var(--color-blue); }
+
+  .map-type-btn.great-lakes { border-color: #A0938A; box-shadow: 0 8px 0 #A0938A; }
+  .map-type-btn.great-lakes:hover { box-shadow: 0 12px 0 #A0938A; }
+
+  .map-type-btn.chaos { border-color: var(--color-tertiary); box-shadow: 0 8px 0 var(--color-tertiary); }
+  .map-type-btn.chaos:hover { box-shadow: 0 12px 0 var(--color-tertiary); }
+  
+  .map-type-btn.custom { border-color: var(--color-secondary); box-shadow: 0 8px 0 var(--color-secondary); }
+  .map-type-btn.custom:hover { box-shadow: 0 12px 0 var(--color-secondary); }
+
+  .icon-container { padding: 12px; border-radius: 50%; display: flex; }
+</style>
+</head>
+<body>
+
+<div class="pause-backdrop">
+  <div class="pause-modal">
+    <div class="pause-header">
+      <div class="back-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </div>
+      <h2>World Type</h2>
+      <p class="pause-section-title">Choose your ecosystem style</p>
+    </div>
+    
+    <div class="pause-content">
+      
+      <!-- Procedural Options -->
+      <button class="map-type-btn pangaea">
+        <div class="icon-container" style="background-color: #E5FAEE; color: var(--color-primary);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 1.3rem; color: var(--color-text); font-weight: 900;">Pangaea</div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted); font-weight: 800; margin-top: 2px;">One massive continent</div>
+        </div>
+      </button>
+
+      <button class="map-type-btn archipelago">
+        <div class="icon-container" style="background-color: #E5F6FA; color: var(--color-blue);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6"/><path d="M2 12c.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6"/><path d="M2 18c.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6.6 0 1.2-.2 1.7-.6.9-.6 2.1-.6 3 0 .5.4 1.1.6 1.7.6"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 1.3rem; color: var(--color-text); font-weight: 900;">Archipelago</div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted); font-weight: 800; margin-top: 2px;">Scattered islands</div>
+        </div>
+      </button>
+
+      <button class="map-type-btn great-lakes">
+        <div class="icon-container" style="background-color: #F0EEEA; color: #A0938A;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 1.3rem; color: var(--color-text); font-weight: 900;">Great Lakes</div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted); font-weight: 800; margin-top: 2px;">Inland seas and landmass</div>
+        </div>
+      </button>
+
+      <button class="map-type-btn chaos">
+        <div class="icon-container" style="background-color: #FFF0F5; color: var(--color-tertiary);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 1.3rem; color: var(--color-text); font-weight: 900;">Chaos</div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted); font-weight: 800; margin-top: 2px;">Pure noise and madness</div>
+        </div>
+      </button>
+
+      <!-- Divider -->
+      <div style="display: flex; align-items: center; margin: 8px 0;">
+        <div style="flex: 1; height: 2px; background: rgba(0,0,0,0.05);"></div>
+        <div style="padding: 0 16px; font-family: var(--font-ui); font-size: 0.85rem; font-weight: 800; color: #8C7B70; text-transform: uppercase;">Or</div>
+        <div style="flex: 1; height: 2px; background: rgba(0,0,0,0.05);"></div>
+      </div>
+
+      <!-- Custom -->
+      <button class="map-type-btn custom">
+        <div class="icon-container" style="background-color: #FFFDF0; color: var(--color-secondary);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 1.3rem; color: var(--color-text); font-weight: 900;">Build Your Own</div>
+          <div style="font-size: 0.85rem; color: var(--color-text-muted); font-weight: 800; margin-top: 2px;">Start with a blank canvas</div>
+        </div>
+      </button>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

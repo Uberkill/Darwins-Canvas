@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="c" width="800" height="600"></canvas>
+<script>
+  const ctx = document.getElementById('c').getContext('2d');
+  
+  // mock terrain 8x6 grid
+  const terrain = [
+    1, 1, 1, 2, 2, 2, 2, 1,
+    1, 1, 0, 0, 2, 2, 2, 1,
+    1, 0, 0, 0, 0, 2, 2, 1,
+    3, 3, 0, 0, 0, 1, 1, 1,
+    3, 3, 3, 1, 1, 1, 1, 1,
+    3, 3, 1, 1, 1, 1, 1, 1
+  ];
+  
+  const colors = ['#4CA8D1', '#D6A675', '#84C270', '#979A9E'];
+  
+  // offscreen
+  const off = document.createElement('canvas');
+  off.width = 800; off.height = 600;
+  const octx = off.getContext('2d');
+  
+  // fill base dirt
+  octx.fillStyle = colors[1];
+  octx.fillRect(0,0,800,600);
+  
+  octx.filter = 'blur(40px)';
+  
+  for(let y=0; y<6; y++){
+    for(let x=0; x<8; x++){
+      const val = terrain[y*8+x];
+      if (val !== 1) { // dont draw dirt over dirt
+        octx.fillStyle = colors[val];
+        // draw a circle to make it look organic
+        octx.beginPath();
+        octx.arc(x*100+50, y*100+50, 70, 0, Math.PI*2);
+        octx.fill();
+      }
+    }
+  }
+  
+  ctx.drawImage(off, 0, 0);
+</script>
+</body>
+</html>

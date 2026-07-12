@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Setup Preview - Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font: 'Nunito', sans-serif;
+    --color-bg-base: #D4D0C8;
+    --color-panel: #F4F0EA;
+    --color-text: #4A4640;
+    --color-text-muted: #8A857D;
+    --color-primary: #98C972;
+    --color-primary-shadow: #7CA85B;
+    
+    /* Terrain Button Colors */
+    --color-btn-border: #E8E4DC;
+    --color-active-green: #90C36D;
+    
+    --radius-full: 9999px;
+    --radius-lg: 24px;
+  }
+  
+  body {
+    margin: 0; padding: 0; font-family: var(--font); background: var(--color-bg-base);
+    background-image: linear-gradient(90deg, transparent 79px, #FFE3B3 79px, #FFE3B3 81px, transparent 81px), linear-gradient(#FFE3B3 .1em, transparent .1em); background-size: 100% 100%, 100% 40px;
+    display: flex; justify-content: center; align-items: center; height: 100vh;
+  }
+  
+  .pause-backdrop { position: fixed; inset: 0; background: rgba(43, 33, 24, 0.6); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; }
+  
+  .pause-modal {
+    background: var(--color-panel); border: 4px solid var(--color-text); border-radius: var(--radius-lg);
+    width: 95%; max-width: 1100px; display: flex; flex-direction: row; height: 85vh;
+    box-shadow: 0 12px 0 rgba(74, 59, 50, 0.15); overflow: hidden;
+  }
+  
+  /* Left Panel: Preview & Paint */
+  .preview-panel {
+    flex: 1.4; background: #FFF1E0; border-right: 4px solid var(--color-text);
+    display: flex; flex-direction: column; padding: 24px; position: relative;
+  }
+  .preview-header { font-size: 1.5rem; font-weight: 900; color: var(--color-text); margin-bottom: 12px; text-align: center; }
+  
+  .canvas-container {
+    flex: 1; background: #62BD5B; border: 4px solid var(--color-text); border-radius: 16px;
+    position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1); cursor: crosshair;
+  }
+  
+  .fake-stroke { position: absolute; top: 30%; left: 20%; width: 50%; height: 20px; background: #3770D0; border-radius: 20px; box-shadow: inset 0 3px 0 rgba(0,0,0,0.1); transform: rotate(15deg); }
+  
+  /* Imported Game Brush UI */
+  .game-tools-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    background: white; border: 3px solid var(--color-text); border-radius: 16px;
+    padding: 12px 20px; margin-top: 16px; box-shadow: 0 4px 0 rgba(74, 59, 50, 0.1);
+  }
+  .brush-group { display: flex; gap: 8px; }
+  .tool-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    width: 54px; height: 54px; border-radius: 12px; border: 3px solid #E2DDD5;
+    background: white; color: var(--color-text-muted); cursor: pointer; transition: 0.1s;
+    font-size: 0.75rem; font-weight: 800; font-family: var(--font);
+  }
+  .tool-btn:hover { border-color: var(--color-text); color: var(--color-text); transform: translateY(-2px); }
+  .tool-btn.active { border-color: var(--color-text); color: var(--color-text); background: #E5FAEE; box-shadow: inset 0 0 0 2px var(--color-active-green); }
+  
+  .brush-size-group { display: flex; flex-direction: column; flex: 1; }
+  .brush-size-label { font-size: 0.85rem; font-weight: 900; color: var(--color-text); margin-bottom: 6px; }
+  .brush-slider { width: 100%; cursor: pointer; }
+
+  /* Right Panel: Controls */
+  .controls-panel {
+    flex: 1; display: flex; flex-direction: column; padding: 0 12px; background: #F4F0EA;
+  }
+  
+  .pause-header { padding: 32px 32px 16px 32px; text-align: center; }
+  .pause-header h2 { font-size: 2.2rem; color: var(--color-text); margin: 0; font-weight: 900; }
+  .pause-section-title { font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #9A9289; margin: 8px 0 0 0; }
+  
+  .pause-content { padding: 8px 24px 24px 24px; display: flex; flex-direction: column; gap: 24px; overflow-y: auto; flex: 1; }
+  
+  .section-label { font-weight: 900; color: var(--color-text); margin-bottom: 12px; font-size: 1.15rem; }
+
+  /* Scale Selector */
+  .scale-toggle-container {
+    display: flex; gap: 4px; background: #DFD9CF; padding: 6px; border-radius: var(--radius-full); 
+    border: 3px solid var(--color-text);
+  }
+  .scale-tab {
+    flex: 1; text-align: center; padding: 12px 0; font-weight: 900; font-size: 1.05rem; 
+    border-radius: var(--radius-full); cursor: pointer; color: #8F877E; transition: 0.2s;
+  }
+  .scale-tab.active {
+    background: white; color: var(--color-text); box-shadow: 0 4px 0 rgba(74, 59, 50, 0.1); 
+  }
+  .size-context-box {
+    background: white; border: 3px solid #E8E4DC; border-radius: 16px; padding: 12px 16px; 
+    font-size: 0.9rem; color: var(--color-text-muted); font-weight: 800; margin-top: 12px; text-align: center;
+  }
+  .size-context-box span { color: var(--color-text); font-weight: 900; }
+
+  /* Map Types List */
+  .map-type-list { display: flex; flex-direction: column; gap: 14px; }
+  
+  .map-type-btn {
+    display: flex; align-items: center; gap: 16px; text-align: left;
+    width: 100%; padding: 14px 16px; border-radius: 20px;
+    background: white; border: 4px solid var(--color-btn-border); box-shadow: 0 6px 0 var(--color-btn-border);
+    cursor: pointer; transition: transform 0.1s, box-shadow 0.1s, border-color 0.1s; box-sizing: border-box; position: relative;
+    font-family: var(--font);
+  }
+  .map-type-btn:hover:not(.active) { transform: translateY(-2px); box-shadow: 0 8px 0 var(--color-btn-border); }
+  .map-type-btn:active:not(.active) { transform: translateY(6px); box-shadow: 0 0 0 transparent; }
+  
+  .map-type-btn.active {
+    border-color: var(--color-active-green); box-shadow: 0 6px 0 var(--color-active-green);
+  }
+  .map-type-btn.active:active { transform: translateY(6px); box-shadow: 0 0 0 transparent; }
+
+  .icon-circle {
+    width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  }
+  
+  .btn-title { font-size: 1.15rem; color: var(--color-text); font-weight: 900; margin-bottom: 2px; }
+  .btn-subtitle { font-size: 0.85rem; color: #8F877E; font-weight: 800; }
+  
+  .check-icon { position: absolute; right: 20px; color: var(--color-active-green); }
+
+  /* Colors for specific icons */
+  .icon-pangaea { background: #E6F5DD; color: #7DB55A; }
+  .icon-archipelago { background: #E1F4FA; color: #6DBDD6; }
+  .icon-lakes { background: #F0EEEA; color: #9A9289; }
+  .icon-chaos { background: #FDE8ED; color: #E87A90; }
+  .icon-custom { background: #FDF6E3; color: #E2B953; }
+
+  .start-btn {
+    margin: 0 24px 24px 24px; padding: 20px; background: var(--color-primary); color: white;
+    border: 4px solid white; border-radius: var(--radius-full); font-weight: 900; font-size: 1.3rem;
+    cursor: pointer; box-shadow: 0 8px 0 var(--color-primary-shadow); transition: 0.2s; font-family: var(--font);
+  }
+  .start-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 0 var(--color-primary-shadow); }
+  .start-btn:active { transform: translateY(8px); box-shadow: 0 0 0 transparent; }
+</style>
+</head>
+<body>
+
+<div class="pause-backdrop">
+  <div class="pause-modal">
+    
+    <!-- Left Panel: Preview -->
+    <div class="preview-panel">
+      <div class="preview-header">Paint Your World</div>
+      
+      <div class="canvas-container">
+        <div class="fake-stroke"></div>
+      </div>
+      
+      <!-- EXACT GAME UI PORTED -->
+      <div class="game-tools-bar">
+        <div class="brush-group">
+          <button class="tool-btn active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-1.5.5-10 10-10"/><path d="M9.5 2v3"/><path d="M13 2.5 12 5"/><path d="M16 4.5 14.5 7"/><path d="M18 7.5 16 9.5"/></svg>
+            Grass
+          </button>
+          <button class="tool-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="m5 2 5 5"/><path d="M2 13h15"/><path d="M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z"/></svg>
+            Dirt
+          </button>
+          <button class="tool-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 22.5A11.5 11.5 0 0 0 22.5 11 11.5 11.5 0 0 0 11-.5 11.5 11.5 0 0 0-.5 11 11.5 11.5 0 0 0 11 22.5z"/><path d="M4 11s2-2 7-2 7 2 7 2"/></svg>
+            Water
+          </button>
+          <button class="tool-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+            Rock
+          </button>
+        </div>
+        
+        <div class="brush-size-group">
+          <div class="brush-size-label">Brush Size: <span style="color: var(--color-text-muted);">3</span></div>
+          <input type="range" class="brush-slider" min="1" max="15" value="3">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Controls -->
+    <div class="controls-panel">
+      <div class="pause-header">
+        <h2>World Setup</h2>
+        <p class="pause-section-title">Configure your ecosystem</p>
+      </div>
+      
+      <div class="pause-content">
+        
+        <!-- 1. Select Scale -->
+        <div>
+          <div class="section-label">1. Select Scale</div>
+          <div class="scale-toggle-container">
+            <div class="scale-tab active">Standard</div>
+            <div class="scale-tab">Vast</div>
+            <div class="scale-tab">Epic</div>
+          </div>
+          <div class="size-context-box" style="display: none;">
+            <span>Max 250 Creatures.</span> A balanced environment. Good for focused observation.
+          </div>
+        </div>
+
+        <!-- 2. Select Terrain -->
+        <div>
+          <div class="section-label">2. Select Terrain</div>
+          <div class="map-type-list">
+            
+            <button class="map-type-btn active">
+              <div class="icon-circle icon-pangaea">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              </div>
+              <div>
+                <div class="btn-title">Pangaea</div>
+                <div class="btn-subtitle">One massive continent</div>
+              </div>
+              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+
+            <button class="map-type-btn">
+              <div class="icon-circle icon-archipelago">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/><path d="M2 18h20"/><path d="M2 6h20"/></svg>
+              </div>
+              <div>
+                <div class="btn-title">Archipelago</div>
+                <div class="btn-subtitle">Scattered islands</div>
+              </div>
+            </button>
+
+            <button class="map-type-btn">
+              <div class="icon-circle icon-lakes">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19c-1.5 0-2.5-1-2.5-2.5a2.5 2.5 0 0 0-5 0c0 1.5-1 2.5-2.5 2.5a2.5 2.5 0 0 1 0-5c1.5 0 2.5-1 2.5-2.5a2.5 2.5 0 0 1 5 0c0 1.5 1 2.5 2.5 2.5a2.5 2.5 0 0 1 0 5z"/></svg>
+              </div>
+              <div>
+                <div class="btn-title">Great Lakes</div>
+                <div class="btn-subtitle">Inland seas and landmass</div>
+              </div>
+            </button>
+            
+            <button class="map-type-btn">
+              <div class="icon-circle icon-chaos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/><path d="m4.9 4.9 14.2 14.2"/><path d="m4.9 19.1 14.2-14.2"/></svg>
+              </div>
+              <div>
+                <div class="btn-title">Chaos</div>
+                <div class="btn-subtitle">Pure noise and madness</div>
+              </div>
+            </button>
+
+            <button class="map-type-btn">
+              <div class="icon-circle icon-custom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+              </div>
+              <div>
+                <div class="btn-title">Build Your Own</div>
+                <div class="btn-subtitle">Blank canvas</div>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+      <button class="start-btn">Start Simulation</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

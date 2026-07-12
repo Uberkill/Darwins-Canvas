@@ -162,7 +162,7 @@ export interface WorldState {
   mouseX:          number;   // logical cursor X (for hover detection)
   mouseY:          number;   // logical cursor Y (for hover detection)
   hoveredEntityId: string | null;
-  flags:           { boundsChanged: boolean };
+  flags:           { boundsChanged: boolean, terrainChanged?: boolean };
 
   // Macro Systems
   timeOfDay:       number;   // 0.0 to 1.0 (cycles every day)
@@ -176,6 +176,9 @@ export interface WorldState {
     deletedCreatureIds: Set<string>;
     deletedPlantIds:    Set<string>;
     spatialGrid:        SpatialGrid;
+    terrain?:           Uint8Array; // Grid-based biome terrain
+    terrainWidth?:      number;     // Grid width for 2D mapping
+    terrainHeight?:     number;     // Grid height for 2D mapping
     immigrationTimer?:  number;
     pendingImmigrations?: DietType[];
   };
@@ -242,7 +245,8 @@ export interface EngineStore {
   // Save System
   activeSaveSlot:  string | null;
   setActiveSaveSlot: (slot: string | null) => void;
-
+  pendingMapName:  string | null;
+  setPendingMapName: (name: string | null) => void;
 
 
   pendingCreature: PendingCreature | null;

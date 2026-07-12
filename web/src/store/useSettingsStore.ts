@@ -13,7 +13,7 @@ export const useSettingsStore = create<SettingsStore>()(
       setSettings: (settings) => set((state) => {
         const newState = { ...state, ...settings };
         audio.setVolumes(newState.masterVolume, newState.sfxVolume, newState.musicVolume);
-        return settings;
+        return newState;
       }),
     }),
     {

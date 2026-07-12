@@ -6,6 +6,9 @@ import { useEngineStore } from '../store/useEngineStore';
 import { useTrackingStore } from '../features/tracking/useTrackingStore';
 import { drawEnvironment } from './drawEnvironment'
 import { drawEffects } from './drawEffects'
+import { getNightAlpha } from './lighting'
+
+const WIND_DIR = 0.3;
 
 /**
  * GameRenderer strictly paints pixels. It does not mutate world state.
@@ -25,6 +28,30 @@ export class GameRenderer {
   private pendingGhostImg: HTMLImageElement | null = null;
   private pendingGhostDataSrc: string | null = null;
 
+  // Global Illumination
+  private lightingCanvas: HTMLCanvasElement;
+  private lightCtx: CanvasRenderingContext2D;
+  private lightGradientCache: Map<string, CanvasGradient> = new Map();
+
+  // Atmosphere
+  private dustCanvas: HTMLCanvasElement;
+  private dustCtx: CanvasRenderingContext2D;
+  private dustParticles: { sx: number, sy: number, speed: number, size: number, depth: number, alpha: number, phaseX: number, phaseY: number }[] = [];
+  private lastTotalTime: number = 0;
+
+  // Terrain Baking
+  private terrainCanvas: HTMLCanvasElement;
+  private terrainCtx: CanvasRenderingContext2D;
+  private offscreenCanvas: HTMLCanvasElement;
+  private offscreenCtx: CanvasRenderingContext2D;
+  private thresholdCanvas: HTMLCanvasElement;
+  private thresholdCtx: CanvasRenderingContext2D;
+  private isTerrainBaked: boolean = false;
+
+  private fogGradCache: CanvasGradient | null = null;
+  private vignetteGradCache: CanvasGradient | null = null;
+  private noisePatternCache: CanvasPattern | null = null;
+
   constructor(canvas: HTMLCanvasElement, dpr: number = window.devicePixelRatio || 1) {
     this.canvas = canvas
     this.dpr = dpr
@@ -32,12 +59,59 @@ export class GameRenderer {
     if (!ctx) throw new Error('Could not get 2D context')
     this.ctx = ctx
 
-    // Pre-allocate buffer for up to 2000 entities
-    this.renderBuffer = new Array(2000)
-    for (let i = 0; i < 2000; i++) this.renderBuffer[i] = null as any
+    // Pre-allocate buffer for up to 10000 entities
+    this.renderBuffer = new Array(10000)
+    for (let i = 0; i < 10000; i++) this.renderBuffer[i] = null as any
+
+    this.lightingCanvas = document.createElement('canvas');
+    this.lightCtx = this.lightingCanvas.getContext('2d') as CanvasRenderingContext2D;
+
+    for (let i = 0; i < 150; i++) {
+      this.dustParticles.push({
+        sx: Math.random() * 2000,
+        sy: Math.random() * 2000,
+        speed: 20 + Math.random() * 30,
+        size: 1 + Math.random() * 3,
+        depth: Math.random(),
+        alpha: 0.12 + Math.random() * 0.13,
+        phaseX: Math.random() * Math.PI * 2,
+        phaseY: Math.random() * Math.PI * 2
+      });
+    }
+
+    // Initialize offscreen canvas for dust particles (DPR aware)
+    this.dustCanvas = document.createElement('canvas');
+    this.dustCanvas.width = 32 * this.dpr;
+    this.dustCanvas.height = 32 * this.dpr;
+    this.dustCtx = this.dustCanvas.getContext('2d') as CanvasRenderingContext2D;
+    this.dustCtx.scale(this.dpr, this.dpr);
+
+    // Initialize offscreen canvas for terrain
+    this.terrainCanvas = document.createElement('canvas');
+    this.terrainCtx = this.terrainCanvas.getContext('2d', { alpha: false }) as CanvasRenderingContext2D;
+    this.offscreenCanvas = document.createElement('canvas');
+    this.offscreenCtx = this.offscreenCanvas.getContext('2d', { alpha: true }) as CanvasRenderingContext2D;
+    this.thresholdCanvas = document.createElement('canvas');
+    this.thresholdCtx = this.thresholdCanvas.getContext('2d', { alpha: true }) as CanvasRenderingContext2D;
+
+    this._injectSVGFilter();
 
     // Initial resize to setup context
     this.resize(window.innerWidth, window.innerHeight)
+  }
+
+  private _injectSVGFilter() {
+    if (document.getElementById('terrain-svg-filters')) return;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.id = 'terrain-svg-filters';
+    svg.setAttribute('style', 'position:absolute;width:0;height:0;overflow:hidden');
+    svg.innerHTML = `<filter id="terrain-metaball-filter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -20"
+        result="threshold"/>
+    </filter>`;
+    document.body.appendChild(svg);
   }
 
   /**
@@ -48,14 +122,34 @@ export class GameRenderer {
     this.canvas.style.height = `${logicalHeight}px`
     this.canvas.width = logicalWidth * this.dpr
     this.canvas.height = logicalHeight * this.dpr
+    
+    this.lightingCanvas.width = logicalWidth * this.dpr;
+    this.lightingCanvas.height = logicalHeight * this.dpr;
+    this.lightCtx = this.lightingCanvas.getContext('2d') as CanvasRenderingContext2D;
+    this.lightGradientCache.clear();
+
+    // Cache Screen-Space Atmospheric Fog (top 20% of screen)
+    // Needs to multiply by dpr for Retina/High-DPI screens!
+    this.fogGradCache = this.ctx.createLinearGradient(0, 0, 0, logicalHeight * this.dpr * 0.20);
+    this.fogGradCache.addColorStop(0.0, 'rgba(239, 230, 213, 0.15)'); // Tuned down from 0.35 to 0.15
+    this.fogGradCache.addColorStop(1.0, 'rgba(239, 230, 213, 0.0)');
+
+    // Cache Screen-Space Macro-Lens Vignette
+    const cx = (logicalWidth * this.dpr) / 2;
+    const cy = (logicalHeight * this.dpr) / 2;
+    const radius = Math.max(logicalWidth, logicalHeight) * this.dpr * 0.8;
+    this.vignetteGradCache = this.ctx.createRadialGradient(cx, cy, radius * 0.4, cx, cy, radius);
+    this.vignetteGradCache.addColorStop(0, 'rgba(0, 0, 0, 0.0)');
+    this.vignetteGradCache.addColorStop(1, 'rgba(20, 10, 0, 0.10)'); // Tuned down from 0.30 to 0.10
   }
 
   /**
    * Paints the world state. 
-   * The signature enforces Readonly so we don't accidentally mutate physics.
    */
-  public draw(world: Readonly<WorldState>) {
+  public draw(world: WorldState) {
     const { worldWidth, worldHeight, camera } = world
+    const dt = Math.min(0.1, (world.totalTime - this.lastTotalTime) || 0);
+    this.lastTotalTime = world.totalTime;
 
     // 1. Clear physical canvas background
     this.ctx.save();
@@ -63,6 +157,12 @@ export class GameRenderer {
     this.ctx.fillStyle = '#1e1e1e'; // void color
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.restore();
+
+    // Check if we need to bake terrain
+    if (!this.isTerrainBaked || world.flags.terrainChanged) {
+      this.bakeTerrain(world);
+      world.flags.terrainChanged = false; // Safe: draw() now accepts mutable WorldState
+    }
 
     this.ctx.save();
     
@@ -79,14 +179,9 @@ export class GameRenderer {
     this.ctx.scale(1, CAMERA_TILT);
     this.ctx.clearRect(0, 0, worldWidth, worldHeight);
 
-    // ── 2a. Floor Base Gradient ───────────────────────────────────────────────
-    // Far end (top) = cooler, slightly darker. Near end (bottom) = warm, bright.
-    const floorGrad = this.ctx.createLinearGradient(0, 0, 0, worldHeight);
-    floorGrad.addColorStop(0.0, '#ccc4aa'); // far horizon — more muted
-    floorGrad.addColorStop(0.4, '#d8d0ba');
-    floorGrad.addColorStop(1.0, '#ece6d8'); // near — warm, bright
-    this.ctx.fillStyle = floorGrad;
-    this.ctx.fillRect(0, 0, worldWidth, worldHeight);
+    // ── 2a. Floor Base Gradient & Terrain ───────────────────────────────────────
+    // Draw the pre-baked terrain directly as the floor
+    this.ctx.drawImage(this.terrainCanvas, 0, 0, worldWidth, worldHeight);
 
     // ── 2b. Sky / Horizon Strip at the very top ───────────────────────────────
     // DST always has a pale sky visible above the top of the ground plane.
@@ -98,55 +193,6 @@ export class GameRenderer {
     skyGrad.addColorStop(1.0, 'rgba(204, 196, 176, 0.00)'); // fades to floor
     this.ctx.fillStyle = skyGrad;
     this.ctx.fillRect(0, 0, worldWidth, skyH);
-
-    // ── 2c. Converging Grid Lines (Perspective) ───────────────────────────────
-    // Vertical lines fan out from a vanishing point at top-center.
-    // Horizontal lines are drawn normally (squished by CAMERA_TILT).
-    // Together they create the illusion of a receding ground plane.
-    const vp = camera.x; // vanishing point X moves with the camera for perfect 3D parallax!
-    this.ctx.strokeStyle = 'rgba(0,0,0,0.10)';
-    this.ctx.lineWidth = 1.5;
-    this.ctx.beginPath();
-
-    // Vertical converging lines: at y=0 they converge to vp, at y=worldHeight they are evenly spaced
-    // Scale the number of lines by worldWidth so they don't get sparse on big maps
-    const colCount = Math.max(14, Math.floor(worldWidth / 140));
-    
-    // The grid must converge at the exact same rate the creatures shrink!
-    // Creature near scale = 1.10, far scale = 0.65. Ratio = 0.65/1.10 = 0.59.
-    // If the grid uses 0.08, the floor looks infinitely deep while creatures look flat, causing parallax nausea.
-    const convergenceRatio = 0.59; 
-
-    for (let col = 0; col <= colCount; col++) {
-      const tNear = col / colCount;                       // 0→1 across the bottom
-      const xNear = tNear * worldWidth;                   // evenly spread at the bottom
-      const xFar  = vp + (xNear - vp) * convergenceRatio; // converge tightly at camera's horizon
-      this.ctx.moveTo(xFar,  0);
-      this.ctx.lineTo(xNear, worldHeight);
-    }
-
-    // Horizontal lines — uneven spacing: denser at top to fake depth foreshortening
-    // Scale by worldHeight to keep density consistent on large maps
-    const rowCount = Math.max(16, Math.floor(worldHeight / 60));
-    for (let row = 0; row <= rowCount; row++) {
-      // Gentle exponential spacing to match the 0.59 depth compression
-      const t = Math.pow(row / rowCount, 1.2); 
-      const y = t * worldHeight;
-      this.ctx.moveTo(0, y);
-      this.ctx.lineTo(worldWidth, y);
-    }
-    this.ctx.stroke();
-
-    // ── 2d. Atmospheric Depth Fog ─────────────────────────────────────────────
-    // Overlays a warm-haze gradient that washes out the far end of the map.
-    // This is the single most powerful depth cue: far = washed out, near = clear.
-    const fogGrad = this.ctx.createLinearGradient(0, 0, 0, worldHeight);
-    fogGrad.addColorStop(0.0, 'rgba(195, 188, 165, 0.52)'); // heavy haze at horizon
-    fogGrad.addColorStop(0.3, 'rgba(205, 198, 178, 0.25)');
-    fogGrad.addColorStop(0.7, 'rgba(220, 215, 195, 0.06)');
-    fogGrad.addColorStop(1.0, 'rgba(235, 228, 210, 0.00)'); // clear foreground
-    this.ctx.fillStyle = fogGrad;
-    this.ctx.fillRect(0, 0, worldWidth, worldHeight);
 
     this.ctx.restore();
 
@@ -209,6 +255,8 @@ export class GameRenderer {
       this.ctx.restore()
     }
 
+    this.drawDust(dt, true, logicalW, logicalH, world);
+
     // 5. Draw Entities (Back to Front)
     for (let i = 0; i < this.entityCount; i++) {
       const entity = this.renderBuffer[i]
@@ -225,6 +273,8 @@ export class GameRenderer {
         }
       }
     }
+    
+    this.drawDust(dt, false, logicalW, logicalH, world);
 
     // 5.5. Draw Tracking Markers (Two-Pass Render for Z-Index)
     // Hoist the timestamp and Zustand state exactly once per frame
@@ -242,7 +292,36 @@ export class GameRenderer {
       }
     }
 
-    // 6. Draw Tooltip (Removed in favor of React HoverOverlay)
+    // Restore context scaling and camera matrix from the world space
+    // So we can draw Screen-Space effects
+    this.ctx.restore()
+
+    // 6. Draw Screen-Space 3D Depth Cues (Fog & Vignette)
+    // We draw this here so entities fade into the distance, but the Day/Night and UI overlays don't.
+    this.ctx.save();
+    try {
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset entirely to physical screen coords
+      
+      if (this.fogGradCache) {
+        this.ctx.fillStyle = this.fogGradCache;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+      
+      if (this.vignetteGradCache) {
+        this.ctx.globalCompositeOperation = 'multiply';
+        this.ctx.fillStyle = this.vignetteGradCache;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+    } finally {
+      this.ctx.restore();
+    }
+
+    // Re-apply camera matrix for the remaining effects that exist in world-space
+    this.ctx.save();
+    this.ctx.scale(this.dpr, this.dpr);
+    this.ctx.translate(logicalW / 2, logicalH / 2);
+    this.ctx.scale(camera.zoom, camera.zoom);
+    this.ctx.translate(-camera.x, -camera.y);
 
     // 7. Draw Pending Creature Ghost
     const pending = useEngineStore.getState().pendingCreature;
@@ -286,6 +365,12 @@ export class GameRenderer {
 
     // Restore context scaling and camera matrix
     this.ctx.restore()
+
+    // 10. Global Illumination Pass
+    const nightAlpha = getNightAlpha(world.timeOfDay);
+    if (nightAlpha > 0.01) {
+      this.drawLightingPass(world, nightAlpha, logicalW, logicalH, camera);
+    }
   }
 
   private drawHealthBar(creature: Creature, worldHeight: number = 900) {
@@ -321,9 +406,335 @@ export class GameRenderer {
 
 
 
+  private drawDust(dt: number, isBackground: boolean, logicalW: number, logicalH: number, world: Readonly<WorldState>) {
+    this.ctx.save();
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0); // Raw screen space
+    
+    // Time of day tint calculation (once per frame)
+    // Day = Golden Pollen, Sunset = Orange/Purple, Night = Blue
+    let r = 255, g = 235, b = 180; // Daytime
+    const t = world.timeOfDay;
+    
+    if (t >= 0.5 && t < 0.6) {
+      // Dusk
+      const mix = (t - 0.5) / 0.1;
+      r = 255 - (75 * mix);  // 255 -> 180
+      g = 235 - (55 * mix);  // 235 -> 180
+      b = 180 + (75 * mix);  // 180 -> 255
+    } else if (t >= 0.6 && t < 0.9) {
+      // Full Night
+      r = 180; g = 180; b = 255;
+    } else if (t >= 0.9 && t <= 1.0) {
+      // Dawn
+      const mix = (t - 0.9) / 0.1;
+      r = 180 + (75 * mix);
+      g = 180 + (55 * mix);
+      b = 255 - (75 * mix);
+    }
+
+    const rgb = `${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)}`;
+
+    // Re-bake the dust sprite once per frame for the current color
+    // A 32x32 canvas bake is virtually free compared to drawing 150*3 arcs on the main canvas
+    this.dustCtx.clearRect(0, 0, 32, 32);
+    
+    // 1. Draw Tiny Drop Shadow
+    this.dustCtx.beginPath();
+    this.dustCtx.arc(16, 17.5, 3, 0, Math.PI * 2);
+    this.dustCtx.fillStyle = `rgba(0, 0, 0, 0.5)`;
+    this.dustCtx.fill();
+    
+    // 2. Draw Core Mote
+    this.dustCtx.beginPath();
+    this.dustCtx.arc(16, 16, 3, 0, Math.PI * 2);
+    this.dustCtx.fillStyle = `rgba(${rgb}, 1.0)`;
+    this.dustCtx.fill();
+    
+    // 3. Foreground soft blur effect
+    if (!isBackground) {
+      this.dustCtx.beginPath();
+      this.dustCtx.arc(16, 16, 9, 0, Math.PI * 2);
+      this.dustCtx.fillStyle = `rgba(${rgb}, 0.2)`;
+      this.dustCtx.fill();
+    }
+
+    for (let i = 0; i < this.dustParticles.length; i++) {
+      const p = this.dustParticles[i];
+      if (isBackground ? p.depth <= 0.5 : p.depth > 0.5) continue;
+      
+      // Update with Brownian motion
+      p.sx += (p.speed * WIND_DIR * dt) + Math.sin(world.totalTime * 2 + p.phaseX) * 0.5;
+      p.sy -= (p.speed * 0.3 * dt) + Math.cos(world.totalTime * 1.5 + p.phaseY) * 0.2;
+      
+      // Boundary wrap
+      if (p.sx > logicalW + 50) p.sx = -50;
+      else if (p.sx < -50) p.sx = logicalW + 50;
+      
+      if (p.sy < -50) p.sy = logicalH + 50;
+      else if (p.sy > logicalH + 50) p.sy = -50;
+      
+      // Parallax Scale
+      const parallaxScale = 0.5 + p.depth * 0.5;
+      const actualSize = p.size * parallaxScale;
+
+      // Twinkling alpha
+      const pulse = Math.abs(Math.sin(world.totalTime * 0.8 + p.phaseY));
+      const currentAlpha = p.alpha * pulse;
+      
+      this.ctx.globalAlpha = currentAlpha;
+      // actualSize is typically around 1 to 4. Our baked core radius is 3.
+      // We scale the 32x32 image to match actualSize.
+      const scale = actualSize / 3;
+      const renderSize = 32 * scale;
+      this.ctx.drawImage(this.dustCanvas, p.sx - renderSize / 2, p.sy - renderSize / 2, renderSize, renderSize);
+    }
+    
+    // Explicitly reset globalAlpha to prevent context state leaks
+    this.ctx.globalAlpha = 1.0;
+    this.ctx.restore();
+  }
+
+  private getGradient(key: string, createFn: () => CanvasGradient): CanvasGradient {
+    let grad = this.lightGradientCache.get(key);
+    if (!grad) {
+      grad = createFn();
+      this.lightGradientCache.set(key, grad);
+    }
+    return grad;
+  }
+
+  private drawLightingPass(world: Readonly<WorldState>, nightAlpha: number, logicalW: number, logicalH: number, camera: Readonly<WorldState['camera']>) {
+    // 1. Clear and fill darkness
+    this.lightCtx.clearRect(0, 0, this.lightingCanvas.width, this.lightingCanvas.height);
+    this.lightCtx.fillStyle = `rgba(10, 10, 40, ${nightAlpha})`;
+    this.lightCtx.fillRect(0, 0, this.lightingCanvas.width, this.lightingCanvas.height);
+    
+    this.lightCtx.save();
+    this.lightCtx.globalCompositeOperation = 'destination-out';
+    // We scale lightCtx by dpr so we can draw in logical coordinates
+    this.lightCtx.scale(this.dpr, this.dpr);
+    
+    // Draw Lure Glow
+    if (world.activeLure) {
+      const { x, y } = world.activeLure;
+      const screenX = (x - camera.x) * camera.zoom + logicalW / 2;
+      const screenY = (y * CAMERA_TILT - camera.y) * camera.zoom + logicalH / 2;
+      
+      const radius = 100 * camera.zoom;
+      const grad = this.getGradient(`lure_${radius.toFixed(1)}`, () => {
+        const g = this.lightCtx.createRadialGradient(0, 0, 0, 0, 0, radius);
+        g.addColorStop(0, 'rgba(255,255,255,1)');
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        return g;
+      });
+      this.lightCtx.translate(screenX, screenY);
+      this.lightCtx.fillStyle = grad;
+      this.lightCtx.beginPath();
+      this.lightCtx.arc(0, 0, radius, 0, Math.PI * 2);
+      this.lightCtx.fill();
+      this.lightCtx.translate(-screenX, -screenY);
+    }
+
+    // Draw Creature Glows
+    for (let i = 0; i < world.creatures.length; i++) {
+      const creature = world.creatures[i];
+      if (creature.level >= 5 || creature.diet === 'CARNIVORE') {
+        const screenX = (creature.x - camera.x) * camera.zoom + logicalW / 2;
+        const screenY = (creature.y * CAMERA_TILT - creature.z - camera.y) * camera.zoom + logicalH / 2;
+        const size = BASE_RENDER_SIZE * creature.renderScale * (creature.currentScale || 1.0) * camera.zoom;
+        
+        if (creature.level >= 5) {
+          const radius = size * 2;
+          const grad = this.getGradient(`boss_${radius.toFixed(1)}`, () => {
+            const g = this.lightCtx.createRadialGradient(0, 0, 0, 0, 0, radius);
+            g.addColorStop(0, 'rgba(255,255,255,1)');
+            g.addColorStop(1, 'rgba(255,255,255,0)');
+            return g;
+          });
+          this.lightCtx.translate(screenX, screenY - size / 2);
+          this.lightCtx.fillStyle = grad;
+          this.lightCtx.beginPath();
+          this.lightCtx.arc(0, 0, radius, 0, Math.PI * 2);
+          this.lightCtx.fill();
+          this.lightCtx.translate(-screenX, -(screenY - size / 2));
+        } else if (creature.diet === 'CARNIVORE') {
+          const radius = size * 0.4;
+          const grad = this.getGradient(`carn_${radius.toFixed(1)}`, () => {
+            const g = this.lightCtx.createRadialGradient(0, 0, 0, 0, 0, radius);
+            g.addColorStop(0, 'rgba(255,255,255,0.8)');
+            g.addColorStop(1, 'rgba(255,255,255,0)');
+            return g;
+          });
+          const eyeOffset = size * 0.15;
+          const headY = screenY - size * 0.7;
+          
+          this.lightCtx.fillStyle = grad;
+          this.lightCtx.translate(screenX - eyeOffset, headY);
+          this.lightCtx.beginPath(); this.lightCtx.arc(0, 0, radius, 0, Math.PI*2); this.lightCtx.fill();
+          this.lightCtx.translate(eyeOffset * 2, 0);
+          this.lightCtx.beginPath(); this.lightCtx.arc(0, 0, radius, 0, Math.PI*2); this.lightCtx.fill();
+          this.lightCtx.translate(-(screenX + eyeOffset), -headY);
+        }
+      }
+    }
+    
+    this.lightCtx.restore();
+
+    this.ctx.save();
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0); // physical
+    this.ctx.drawImage(this.lightingCanvas, 0, 0);
+    this.ctx.restore();
+  }
+
   public dispose() {
-    this.ctx = null as any
-    this.canvas = null as any
-    this.renderBuffer = []
+    this.ctx = null as any;
+    this.canvas = null as any;
+    this.renderBuffer = [];
+    this.lightingCanvas = null as any;
+    this.lightCtx = null as any;
+    this.dustParticles = [];
+    this.lightGradientCache.clear();
+    this.terrainCanvas = null as any;
+    this.terrainCtx = null as any;
+    this.offscreenCanvas = null as any;
+    this.offscreenCtx = null as any;
+    this.thresholdCanvas = null as any;
+    this.thresholdCtx = null as any;
+    document.getElementById('terrain-svg-filters')?.remove();
+  }
+
+  /**
+   * Bakes the Uint8Array terrain data into a soft, blurred, painterly canvas.
+   * This runs O(N) where N is map cells, but only executes when terrain is updated.
+   */
+  private bakeTerrain(world: Readonly<WorldState>) {
+    const { worldWidth, worldHeight } = world;
+    const terrain = world.scratchpad.terrain;
+    const tw = world.scratchpad.terrainWidth;
+    const th = world.scratchpad.terrainHeight;
+    
+    // We render at 1x resolution. The physical zoom will scale it.
+    if (this.terrainCanvas.width !== worldWidth || this.terrainCanvas.height !== worldHeight) {
+      this.terrainCanvas.width = worldWidth;
+      this.terrainCanvas.height = worldHeight;
+      this.offscreenCanvas.width = worldWidth;
+      this.offscreenCanvas.height = worldHeight;
+      this.thresholdCanvas.width = worldWidth;
+      this.thresholdCanvas.height = worldHeight;
+    }
+
+    if (!terrain || !tw || !th) {
+      // Fallback if terrain is not initialized
+      const floorGrad = this.terrainCtx.createLinearGradient(0, 0, 0, worldHeight);
+      floorGrad.addColorStop(0.0, '#ccc4aa');
+      floorGrad.addColorStop(0.4, '#d8d0ba');
+      floorGrad.addColorStop(1.0, '#ece6d8');
+      this.terrainCtx.fillStyle = floorGrad;
+      this.terrainCtx.fillRect(0, 0, worldWidth, worldHeight);
+      this.isTerrainBaked = true;
+      return;
+    }
+
+    // TERRAIN_COLORS mapping: 0=Water, 1=Dirt, 2=Grass, 3=Rock
+    const colors = ['#4CA8D1', '#D6A675', '#84C270', '#979A9E'];
+    const highlightColors = ['#45A3CC', '#CF6A48', '#2AB35B', '#42494F'];
+
+    // 1. Fill entire base with Water (index 0) 
+    this.terrainCtx.fillStyle = colors[0];
+    this.terrainCtx.fillRect(0, 0, worldWidth, worldHeight);
+
+    // Filter fallback for older Safari
+    const supportsFilter = typeof this.terrainCtx.filter === 'string';
+
+    const CELL_SIZE = 100;
+    
+    // Seeded random no longer needed here since we removed getJitteredVertex
+
+    // 2. Render Dirt, Grass, Rock
+    for (let layerIdx = 1; layerIdx <= 3; layerIdx++) {
+      this.offscreenCtx.clearRect(0, 0, worldWidth, worldHeight);
+      this.thresholdCtx.clearRect(0, 0, worldWidth, worldHeight);
+
+      this.offscreenCtx.fillStyle = '#FFFFFF';
+      
+      // Step A: Draw slightly oversized blocks so neighbors overlap
+      this.offscreenCtx.beginPath();
+      for (let y = 0; y < th; y++) {
+        for (let x = 0; x < tw; x++) {
+          if (terrain[y * tw + x] >= layerIdx) {
+            this.offscreenCtx.fillRect(x * CELL_SIZE - 5, y * CELL_SIZE - 5, CELL_SIZE + 10, CELL_SIZE + 10);
+          }
+        }
+      }
+
+      // Step B: Melt & Snap using GPU
+      if (supportsFilter) {
+        this.thresholdCtx.filter = 'url(#terrain-metaball-filter)';
+      }
+      this.thresholdCtx.drawImage(this.offscreenCanvas, 0, 0);
+      if (supportsFilter) {
+        this.thresholdCtx.filter = 'none';
+      }
+
+      // Color the shape
+      this.thresholdCtx.globalCompositeOperation = 'source-in';
+      this.thresholdCtx.fillStyle = colors[layerIdx];
+      this.thresholdCtx.fillRect(0, 0, worldWidth, worldHeight);
+      this.thresholdCtx.globalCompositeOperation = 'source-over';
+      
+      // Step C & D: Draw to main canvas with GPU Bevels & Shadows!
+      // To maintain the 3D diorama pop WITHOUT drawing any jagged grid lines,
+      // we use a clever dual drop-shadow technique.
+      this.terrainCtx.save();
+      if (supportsFilter) {
+        // Pass 1: The Top-Edge Bevel Highlight
+        // We draw the shape with an upwards-pointing drop shadow in the highlight color.
+        this.terrainCtx.filter = `drop-shadow(0px -3px 0px ${highlightColors[layerIdx]})`;
+        this.terrainCtx.drawImage(this.thresholdCanvas, 0, 0);
+
+        // Pass 2: The Main Elevation Shadow
+        // We draw the shape AGAIN exactly on top, with a massive downwards drop shadow.
+        // This covers the main body of Pass 1, leaving only the top highlight exposed!
+        const shadowY = layerIdx * 10;
+        this.terrainCtx.filter = `drop-shadow(0px ${shadowY}px 0px rgba(0,0,0,0.6))`;
+        this.terrainCtx.drawImage(this.thresholdCanvas, 0, 0);
+      } else {
+        this.terrainCtx.drawImage(this.thresholdCanvas, 0, 0);
+      }
+      this.terrainCtx.restore();
+    }
+
+    // Bake Global Noise Texture
+    if (!this.noisePatternCache) {
+      const noiseCanvas = document.createElement('canvas');
+      noiseCanvas.width = 64; 
+      noiseCanvas.height = 64;
+      const nCtx = noiseCanvas.getContext('2d');
+      if (nCtx) {
+        const nData = nCtx.createImageData(64, 64);
+        for (let i = 0; i < nData.data.length; i += 4) {
+          const val = Math.random() * 255;
+          nData.data[i] = val;
+          nData.data[i+1] = val;
+          nData.data[i+2] = val;
+          nData.data[i+3] = 15; // Extremely subtle 6% opacity
+        }
+        nCtx.putImageData(nData, 0, 0);
+        this.noisePatternCache = this.terrainCtx.createPattern(noiseCanvas, 'repeat');
+      }
+    }
+
+    if (this.noisePatternCache) {
+      this.terrainCtx.save();
+      try {
+        this.terrainCtx.globalCompositeOperation = 'multiply';
+        this.terrainCtx.fillStyle = this.noisePatternCache;
+        this.terrainCtx.fillRect(0, 0, worldWidth, worldHeight);
+      } finally {
+        this.terrainCtx.restore();
+      }
+    }
+
+    this.isTerrainBaked = true;
   }
 }

@@ -18,6 +18,11 @@ export interface SaveSlotData extends SaveSlotMetadata {
   weather: 'CLEAR' | 'RAIN' | 'DROUGHT';
   totalTime: number;
   mapSizeMultiplier?: number;
+  terrain?: Uint8Array;
+  terrainWidth?: number;
+  terrainHeight?: number;
+  worldWidth?: number;
+  worldHeight?: number;
 }
 
 let dbPromise: Promise<IDBDatabase> | null = null
@@ -57,6 +62,11 @@ export async function saveGame(slotId: string, world: WorldState, slotName: stri
     totalTime: world.totalTime,
     weather: world.weather,
     mapSizeMultiplier: world.mapSizeMultiplier,
+    terrain: world.scratchpad?.terrain,
+    terrainWidth: world.scratchpad?.terrainWidth,
+    terrainHeight: world.scratchpad?.terrainHeight,
+    worldWidth: world.worldWidth,
+    worldHeight: world.worldHeight,
   }
 
   return new Promise((resolve, reject) => {

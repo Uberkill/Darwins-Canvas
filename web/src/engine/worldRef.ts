@@ -30,7 +30,7 @@ function createInitialWorldState(): WorldState {
     mouseY:              -1000,
     hoveredEntityId:     null,
     activeLure:          null,
-    flags:               { boundsChanged: false },
+    flags:               { boundsChanged: false, terrainChanged: false },
     timeOfDay:           0.1,
     weather:             'CLEAR',
     camera: {
@@ -61,12 +61,29 @@ function createInitialWorldState(): WorldState {
   }
 }
 
-/** Call this when the viewport is resized (orientation change, window resize). */
 export function updateWorldDimensions(): void {
   const mult = worldRef.current.mapSizeMultiplier || 1
-  worldRef.current.worldWidth  = getWorldWidth() * mult
-  worldRef.current.worldHeight = getWorldHeight() * mult
-  worldRef.current.flags.boundsChanged = true
+  const newW = getWorldWidth() * mult
+  const newH = getWorldHeight() * mult
+  
+  if (worldRef.current.worldWidth !== newW || worldRef.current.worldHeight !== newH) {
+    worldRef.current.worldWidth = newW
+    worldRef.current.worldHeight = newH
+    worldRef.current.flags.boundsChanged = true
+    worldRef.current.flags.terrainChanged = true
+    initializeTerrain(worldRef.current)
+  }
+}
+
+/** Explicitly load a fixed-size world from a save file */
+export function setWorldDimensions(w: number, h: number): void {
+  if (worldRef.current.worldWidth !== w || worldRef.current.worldHeight !== h) {
+    worldRef.current.worldWidth = w
+    worldRef.current.worldHeight = h
+    worldRef.current.flags.boundsChanged = true
+    worldRef.current.flags.terrainChanged = true
+    initializeTerrain(worldRef.current)
+  }
 }
 
 /** Recenter the camera on the world. */
@@ -74,6 +91,19 @@ export function centerCamera(): void {
   // camera.x is in physical space, camera.y is in VISUAL space (squished by tilt)
   worldRef.current.camera.x = worldRef.current.worldWidth / 2;
   worldRef.current.camera.y = (worldRef.current.worldHeight / 2) * CAMERA_TILT;
+}
+
+/** Computes the zoom required for the world to fill the browser window. */
+export function getAutoFitZoom(): number {
+  if (typeof window === 'undefined') return 1.0;
+  const w = worldRef.current.worldWidth;
+  const h = worldRef.current.worldHeight * CAMERA_TILT;
+  
+  const zoomX = window.innerWidth / w;
+  const zoomY = window.innerHeight / h;
+  const requiredZoom = Math.max(zoomX, zoomY);
+  
+  return requiredZoom > 1.0 ? requiredZoom : 1.0;
 }
 
 /** 
@@ -112,5 +142,38 @@ export function clampEntitiesToWorld(world: WorldState): void {
     
     if (p.y < radius) p.y = radius + random() * 20;
     else if (p.y > h - radius) p.y = (h - radius) - random() * 20;
+  }
+}
+
+export const TERRAIN_CELL_SIZE = 100;
+
+export function initializeTerrain(world: WorldState): void {
+  const gridW = Math.ceil(world.worldWidth / TERRAIN_CELL_SIZE);
+  const gridH = Math.ceil(world.worldHeight / TERRAIN_CELL_SIZE);
+  const totalCells = gridW * gridH;
+  
+  const oldTerrain = world.scratchpad.terrain;
+  const oldW = world.scratchpad.terrainWidth;
+  const oldH = world.scratchpad.terrainHeight;
+
+  // If missing entirely or sizes don't match exactly, we must create a new buffer
+  if (!oldTerrain || oldTerrain.length !== totalCells || oldW !== gridW || oldH !== gridH) {
+    const newTerrain = new Uint8Array(totalCells);
+    newTerrain.fill(1); // Default to Dirt
+    
+    // Copy over old terrain if it exists (for resizing, preserving top-left layout)
+    if (oldTerrain && oldW && oldH) {
+      const minW = Math.min(oldW, gridW);
+      const minH = Math.min(oldH, gridH);
+      for (let y = 0; y < minH; y++) {
+        for (let x = 0; x < minW; x++) {
+          newTerrain[y * gridW + x] = oldTerrain[y * oldW + x];
+        }
+      }
+    }
+    
+    world.scratchpad.terrain = newTerrain;
+    world.scratchpad.terrainWidth = gridW;
+    world.scratchpad.terrainHeight = gridH;
   }
 }

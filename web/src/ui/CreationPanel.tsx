@@ -6,6 +6,7 @@ import { bakeCreatureSprites } from '../renderer/baker'
 import { CreationTools } from './CreationTools'
 import { CreationSettings } from './CreationSettings'
 import { CreationCanvas } from './CreationCanvas'
+import { WorldBuilderTab } from './WorldBuilder'
 import { useUIStore } from '../store/useUIStore';
 import { useEngineStore } from '../store/useEngineStore';
 import { useSettingsStore } from '../store/useSettingsStore';
@@ -16,7 +17,10 @@ export function CreationPanel() {
   const queueCreature = useEngineStore((s) => s.queueCreature)
   const uiScale       = useSettingsStore((s) => s.uiScale)
 
-  // Settings state
+  // Tab state
+  const [activeTab, setActiveTab] = useState<'CREATURE' | 'WORLD'>('CREATURE')
+
+  // Settings state (creature canvas only)
   const [brushSize,  setBrushSize]  = useState(10)
   const [brushColor, setBrushColor] = useState('#4A3B32')
 
@@ -63,28 +67,53 @@ export function CreationPanel() {
     <div className={`creation-modal-overlay ${isPanelOpen ? 'open' : ''}`}>
       <div className="creation-modal-container">
         
-        <CreationTools drawing={drawing} />
-        
-        <CreationCanvas 
-          name={name}
-          setName={setName}
-          drawing={drawing}
-          uiScale={uiScale}
-          brushSize={brushSize}
-          brushColor={brushColor}
-          closePanel={closePanel}
-        />
-        
-        <CreationSettings 
-          brushSize={brushSize} setBrushSize={setBrushSize}
-          brushColor={brushColor} setBrushColor={setBrushColor}
-          size={size} setSize={setSize}
-          movement={movement} setMovement={setMovement}
-          diet={diet} setDiet={setDiet}
-          drawing={drawing}
-          handleRelease={handleRelease}
-          isBaking={isBaking}
-        />
+        {/* Left Column: Creature Tools — hidden in World tab (it has its own sidebar) */}
+        {activeTab !== 'WORLD' && (
+          <CreationTools 
+            drawing={drawing} 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab} 
+          />
+        )}
+
+        {activeTab === 'WORLD' ? (
+          /* WorldBuilderTab owns its own brush/size state — not shared with creature canvas */
+          <WorldBuilderTab 
+            isVisible={isPanelOpen} 
+            closePanel={closePanel}
+            onSwitchToCreature={() => setActiveTab('CREATURE')}
+          />
+        ) : (
+          <>
+            {/* Center Column: Massive Canvas */}
+            <CreationCanvas 
+              name={name} 
+              setName={setName} 
+              drawing={drawing} 
+              uiScale={uiScale} 
+              brushSize={brushSize} 
+              brushColor={brushColor} 
+              closePanel={closePanel} 
+            />
+
+            {/* Right Column: Settings */}
+            <CreationSettings 
+              brushColor={brushColor} 
+              setBrushColor={setBrushColor} 
+              brushSize={brushSize} 
+              setBrushSize={setBrushSize} 
+              size={size} 
+              setSize={setSize} 
+              movement={movement} 
+              setMovement={setMovement} 
+              diet={diet} 
+              setDiet={setDiet} 
+              handleRelease={handleRelease} 
+              drawing={drawing} 
+              isBaking={isBaking} 
+            />
+          </>
+        )}
 
       </div>
     </div>

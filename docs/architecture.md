@@ -5,7 +5,7 @@ Darwin's Canvas uses React, Vite, and HTML5 Canvas. It implements a strict 3-Tie
 ## 3-Tier Separation
 1. **Data Layer (Zustand & IndexedDB):** `useStore.ts` manages high-level UI state. `collectionDB.ts` interfaces with IndexedDB to persist saved creatures and generated lore across sessions. This layer DOES NOT store raw simulation arrays to prevent React re-render flooding.
 2. **Simulation Layer (Mutable Ref):** `worldRef.ts` holds the living arrays (`creatures`, `plants`). The game loop mutates these directly.
-3. **Render Layer (HTML5 Canvas):** `Renderer.ts` reads from `worldRef` and draws entities to the DOM canvas. React has zero knowledge of the actual pixel positions of creatures, except when extracted via `useTrackingStore.ts` for HUD rendering.
+3. **Render Layer (HTML5 Canvas):** `Renderer.ts` reads from `worldRef` and draws entities to the DOM canvas. React has zero knowledge of the actual pixel positions of creatures. This layer implements a **2.5D Isometric Perspective** by mathematically squishing the Y-axis using a `CAMERA_TILT` constant. Entities are dynamically depth-sorted (O(N) Insertion Sort) based on their Y-coordinate to create a fake 3D depth effect.
 
 ## The 7-Pillar Physics Engine
 The core simulation (`simulate.ts`) is strictly modularized into isolated systems:
@@ -17,6 +17,7 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 6. **spawner.ts:** Handles plant generation using `SpatialGrid` for O(1) empty-space checks.
 7. **entityManager.ts:** Zero-GC deferred deletion (using `scratchpad.deletedCreatureIds` and `flushDeadEntities`).
 8. **ImmigrationSystem.ts (Async DB Queue):** Physics checks for extinction and pushes events to `scratchpad.pendingImmigrations`. The game loop asynchronously fetches new creatures from IndexedDB to prevent blocking the 60FPS simulation thread.
+9. **terrainGenerator.ts:** Asynchronous procedural map generation powered by the `simplex-noise` library. Uses radial falloff math to sculpt Pangaea and Archipelago continents. Yields execution via `requestAnimationFrame` to prevent UI thread freezing.
 
 ## Presentation Layer (Audio & VFX)
 - **VFX & 2.5D Math (`math2_5d.ts`):** All visual math (isometric camera tilt, shadows, wobble, and breathing scaling) has been extracted out of the Renderer into pure, stateless mathematical functions in `math2_5d.ts`. They NEVER mutate core physics (`creature.z` or `creature.y`). This separation makes the renderer fully deterministic and safely fuzz-testable.

@@ -30,7 +30,8 @@ export function UpdatePrompt() {
     // 1. Force flush the save state
     const activeSlot = useEngineStore.getState().activeSaveSlot
     if (activeSlot) {
-      await saveGame(activeSlot, worldRef.current, "Autosaved Before Update")
+      const pendingMapName = useEngineStore.getState().pendingMapName
+      await saveGame(activeSlot, worldRef.current, pendingMapName || "Autosaved Before Update")
     }
     // 2. Perform the update
     updateServiceWorker(true)

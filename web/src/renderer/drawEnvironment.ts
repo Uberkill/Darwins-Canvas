@@ -2,7 +2,7 @@ import type { WorldState } from '../types';
 import { CAMERA_TILT } from '../constants';
 
 export function drawEnvironment(ctx: CanvasRenderingContext2D, world: Readonly<WorldState>) {
-  const { worldWidth, worldHeight, totalTime, weather, timeOfDay } = world;
+  const { worldWidth, worldHeight, totalTime, weather } = world;
 
   // Draw Weather Overlay (Rain / Drought)
   const visibleHeight = worldHeight * CAMERA_TILT;
@@ -27,18 +27,5 @@ export function drawEnvironment(ctx: CanvasRenderingContext2D, world: Readonly<W
     ctx.fillRect(0, 0, worldWidth, visibleHeight);
   }
 
-  // Draw Day/Night Overlay
-  let darknessAlpha = 0;
-  if (timeOfDay > 0.6 && timeOfDay < 0.9) {
-    darknessAlpha = 0.6;
-  } else if (timeOfDay >= 0.5 && timeOfDay <= 0.6) {
-    darknessAlpha = 0.6 * ((timeOfDay - 0.5) / 0.1);
-  } else if (timeOfDay >= 0.9 && timeOfDay <= 1.0) {
-    darknessAlpha = 0.6 * (1.0 - ((timeOfDay - 0.9) / 0.1));
-  }
-  
-  if (darknessAlpha > 0) {
-    ctx.fillStyle = `rgba(10, 10, 40, ${darknessAlpha})`;
-    ctx.fillRect(0, 0, worldWidth, visibleHeight); // only cover the tilted visible floor
-  }
+  // Day/Night overlay moved to Renderer.ts lightingCanvas pass (see draw() step 2)
 }

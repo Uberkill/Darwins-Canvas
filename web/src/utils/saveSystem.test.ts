@@ -42,4 +42,16 @@ describe('saveSystem Compatibility', () => {
     expect(loaded?.plants.length).toBe(0)
     expect(loaded?.timeOfDay).toBe(0.1)
   })
+
+  it('correctly serializes and deserializes the terrain Uint8Array', async () => {
+    const world = createMockWorld()
+    world.scratchpad.terrain = new Uint8Array([0, 1, 2, 3])
+    
+    await saveGame('slot_3', world, 'Terrain Ecosystem')
+    
+    const loaded = await loadGame('slot_3')
+    expect(loaded).toBeDefined()
+    expect(loaded?.terrain?.length).toBe(4)
+    expect(loaded?.terrain?.[2]).toBe(2)
+  })
 })

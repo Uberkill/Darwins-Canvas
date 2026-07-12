@@ -179,7 +179,6 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
     rafIdRef.current = requestAnimationFrame(tick)
 
     function handleResize() {
-      updateWorldDimensions()
       if (rendererRef.current) {
         rendererRef.current.resize(window.innerWidth, window.innerHeight)
       }

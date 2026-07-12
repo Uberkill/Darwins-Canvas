@@ -25,7 +25,7 @@ export function CreationCanvas({
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, scale: 1 })
 
   return (
-    <div className="col-canvas-area" style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minWidth: 0, gap: '16px' }}>
+    <div className="col-canvas-area" style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minWidth: 0, gap: '16px' }}>
       
       <div className="canvas-header" style={{ display: 'flex', justifyContent: 'center', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
@@ -64,10 +64,18 @@ export function CreationCanvas({
 
       <div 
         className="col-canvas"
-        style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flex: 1, minHeight: 0 }}
+        style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flex: 1, minHeight: 0, containerType: 'size' }}
       >
+        {/*
+          CRITICAL UI RULE (DO NOT REMOVE OR CHANGE):
+          We MUST use `containerType: 'size'` on the parent and `100cqmin` on the child.
+          This mathematically forces this div to be a PERFECT SQUARE equal to the smallest dimension of the screen.
+          If this becomes a rectangle, `object-fit: contain` will letterbox the canvas, causing `getBoundingClientRect` 
+          to be completely disjointed from the visual pixels, causing massive pointer drift when drawing.
+          DO NOT USE `aspect-ratio: 1/1` here, it will fail due to flexbox rules.
+        */}
         <div
-          style={{ position: 'relative', aspectRatio: '1/1', maxHeight: '100%', maxWidth: '100%' }}
+          style={{ position: 'relative', width: '100cqmin', height: '100cqmin' }}
           onPointerEnter={(e) => {
             if (e.pointerType === 'mouse') setShowCursor(true)
           }}

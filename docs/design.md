@@ -3,10 +3,14 @@
 Darwin's Canvas is primarily a hands-off, Zen digital terrarium. Users generally interact by creating life and observing the ecosystem, though they may intervene through specific God Tools.
 
 ## Core Game Loop
-1. **World Setup:** User selects Map Size (1x Vast, 2x Huge, 3x Epic) prior to entering the terrarium.
+1. **World Building:** Before observing life, the player acts as a God sculpting the terrarium. The user can dynamically paint terrain types (Water, Grass, Dirt, Rock) using an interactive brush, or invoke Procedural Generation algorithms (Pangaea, Archipelago, Great Lakes) to sculpt continents instantly.
 2. **Creation:** User draws a shape on a canvas and selects three traits: Size, Diet, and Movement.
 3. **Release:** The creature is spawned into the world.
 4. **Observation:** The creature lives, eats, starves, mates, and dies automatically based on its AI (boids + ecosystem rules).
+
+### World Builder Safeties & UI
+Because the game engine runs at 60 FPS, all Map Generation and Painting occurs in a detached **Draft Buffer**. The game engine does not calculate physical collisions for the new terrain until the user explicitly clicks **"Apply Changes"**.
+If a user is procedurally generating a massive map, the UI invokes a race-condition lock preventing them from painting, and implements an `AbortController` to safely kill the generator if the window is resized mid-calculation.
 
 ## Ecosystem Mechanics
 

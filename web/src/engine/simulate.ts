@@ -8,7 +8,7 @@ import { EnvironmentSystem } from './systems/EnvironmentSystem'
 import { ImmigrationSystem } from './systems/ImmigrationSystem'
 import { NavigationSystem } from './systems/NavigationSystem'
 import { LifeSystem } from './systems/LifeSystem'
-import { clampEntitiesToWorld } from './worldRef'
+import { clampEntitiesToWorld, TERRAIN_CELL_SIZE } from './worldRef'
 import { spawnCreature, spawnPlant, killCreature, flushDeadEntities } from './entityManager'
 import { audio } from './audioEngine'
 import { SpatialGrid } from './SpatialGrid'
@@ -80,6 +80,11 @@ export function simulate(world: WorldState, dt: number): void {
   LifeSystem.update(world, dt, globalSightPenalty);
 
   // ─── 3. Movement ──────────────────────────────────────────────────────────
+  // Hoist terrain constants outside the loop — they are frame-constants.
+  const terrainTw = world.scratchpad.terrainWidth;
+  const terrainTh = world.scratchpad.terrainHeight;
+  const terrainData = world.scratchpad.terrain;
+
   for (const creature of world.creatures) {
     if (creature.behavior === 'SLEEPING' as any) continue;
     if (creature.id === world.draggedEntityId) continue;
@@ -90,6 +95,23 @@ export function simulate(world: WorldState, dt: number): void {
     } else if (creature.lungeTimer > 0) {
       speedMult = LUNGE_SPEED_MULTIPLIER;
     }
+    
+    // Apply terrain speed penalties
+    if (terrainData && terrainTw && terrainTh) {
+      const px = Math.floor(creature.x / TERRAIN_CELL_SIZE);
+      const py = Math.floor(creature.y / TERRAIN_CELL_SIZE);
+      if (px >= 0 && px < terrainTw && py >= 0 && py < terrainTh) {
+        const val = terrainData[py * terrainTw + px];
+        if (val === 0) { // Water
+           if (creature.movement === 'CRAWLER' || creature.movement === 'PACER') {
+              speedMult *= 0.5; // 50% slow in water
+           }
+        } else if (val === 3) { // Rock
+           speedMult *= 0.7; // 30% slow on rocks
+        }
+      }
+    }
+
     const effectiveDt = dt * speedMult;
 
     switch (creature.movement) {

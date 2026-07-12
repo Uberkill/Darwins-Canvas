@@ -6,11 +6,18 @@ import {
   STAMINA_DRAIN_RATE, STAMINA_REGEN_RATE,
   LUNGE_DURATION, LUNGE_COOLDOWN
 } from '../../constants'
+import { TERRAIN_CELL_SIZE } from '../worldRef'
+import { random } from '../random'
 
 const ADULT_AGE = 30; // 30 seconds to reach full size
 
 export const LifeSystem = {
   update(world: WorldState, dt: number, globalSightPenalty: number) {
+    // Hoist terrain constants outside the loop — they are frame-constants.
+    const terrainTw = world.scratchpad.terrainWidth;
+    const terrainTh = world.scratchpad.terrainHeight;
+    const terrainData = world.scratchpad.terrain;
+
     for (const creature of world.creatures) {
       creature.age += dt
       
@@ -99,6 +106,21 @@ export const LifeSystem = {
         creature.stamina = Math.max(0, creature.stamina - STAMINA_DRAIN_RATE * dt);
       } else {
         creature.stamina = Math.min(creature.maxStamina, creature.stamina + STAMINA_REGEN_RATE * dt);
+      }
+
+      // Terrain Traps (Drowning & Panic)
+      if (terrainData && terrainTw && terrainTh) {
+        const px = Math.floor(creature.x / TERRAIN_CELL_SIZE);
+        const py = Math.floor(creature.y / TERRAIN_CELL_SIZE);
+        if (px >= 0 && px < terrainTw && py >= 0 && py < terrainTh) {
+          const val = terrainData[py * terrainTw + px];
+          // Water (0) drowns Crawlers and Pacers
+          if (val === 0 && (creature.movement === 'CRAWLER' || creature.movement === 'PACER')) {
+             creature.health -= 5 * dt; // Take 5 DPS drowning damage
+             creature.panicTimer = Math.max(creature.panicTimer, 1.0); // Stay panicked
+             if (random() < 0.1) creature.hitTimer = 0.5; // Flash red occasionally (seeded for determinism)
+          }
+        }
       }
 
       if (creature.lungeCooldownTimer > 0) {

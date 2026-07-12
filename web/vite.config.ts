@@ -6,6 +6,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://vite.dev/config/
 export default defineConfig({
   base: '/Darwins-Canvas/',
+  server: {
+    port: 5180,
+    strictPort: true,
+  },
   plugins: [
     react(),
     VitePWA({
