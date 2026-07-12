@@ -31,6 +31,7 @@ import { UpdatePrompt } from './ui/components/UpdatePrompt';
 import { CollectionButton } from './features/collection/CollectionButton';
 import { CollectionModal } from './features/collection/CollectionModal';
 import { ActiveResearchHUD } from './features/tracking/ActiveResearchHUD';
+import { ConfirmModal } from './ui/components/ConfirmModal';
 
 /** Subscribe to creature count changes via a polling interval. */
 function useCreatureCount(): number {
@@ -192,6 +193,9 @@ function App() {
       
       {/* PWA Update Prompt */}
       <UpdatePrompt />
+      
+      {/* Global Confirmation Modal */}
+      <ConfirmModal />
     </div>
   )
 }

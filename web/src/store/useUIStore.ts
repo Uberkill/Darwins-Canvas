@@ -39,4 +39,8 @@ export const useUIStore = create<UIStore>()((set) => ({
   isPauseMenuOpen: false,
   openPauseMenu: () => set({ isPauseMenuOpen: true }),
   closePauseMenu: () => set({ isPauseMenuOpen: false }),
+
+  confirmDialog: null,
+  requestConfirm: (message, onConfirm, onCancel) => set({ confirmDialog: { message, onConfirm, onCancel } }),
+  closeConfirm: () => set({ confirmDialog: null }),
 }));

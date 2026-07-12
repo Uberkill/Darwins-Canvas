@@ -129,7 +129,7 @@ export function useTerrainPainter({
 
     if (!draftTerrainRef.current || draftTerrainRef.current.length !== totalCells) {
       const newTerrain = new Uint8Array(totalCells);
-      newTerrain.fill(1); // Dirt default
+      newTerrain.fill(2); // Grass default
       
       const liveTerrain = worldRef.current.scratchpad.terrain;
       const liveW = worldRef.current.scratchpad.terrainWidth;
@@ -255,10 +255,6 @@ export function useTerrainPainter({
   }, []);
 
   const generateProcedural = useCallback(async (mapType: MapType, forceClean = false) => {
-    // If dirty, handle gracefully outside (e.g. prompt), or forcefully overwrite if forced
-    if (isDirtyRef.current && !forceClean && !window.confirm("Generating a new map will overwrite your unsaved hand-painted changes. Continue?")) {
-      return;
-    }
 
     const tw = Math.ceil(worldDims.w / TERRAIN_CELL_SIZE);
     const th = Math.ceil(worldDims.h / TERRAIN_CELL_SIZE);
@@ -290,9 +286,6 @@ export function useTerrainPainter({
         // This guarantees the minimap render is never blocked by the old throttle logic.
         isGeneratingRef.current = false;
         renderMinimapRef.current();
-        
-        setIsDirty(true);
-        isDirtyRef.current = true;
       }
     } catch (e) {
       console.error("Terrain generation failed", e);
@@ -306,11 +299,11 @@ export function useTerrainPainter({
 
   const clearCanvas = useCallback(() => {
     if (draftTerrainRef.current) {
-        draftTerrainRef.current.fill(1); // Dirt
+        draftTerrainRef.current.fill(2); // Grass
         rowsReadyRef.current = 0; // render all rows
         renderMinimapRef.current();
-        setIsDirty(true);
-        isDirtyRef.current = true;
+        setIsDirty(false);
+        isDirtyRef.current = false;
     }
   }, [worldDims.w, worldDims.h]);
 

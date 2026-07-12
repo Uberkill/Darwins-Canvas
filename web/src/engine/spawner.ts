@@ -58,10 +58,8 @@ function createPlant(world: WorldState): Plant | null {
       const py = Math.floor(y / TERRAIN_CELL_SIZE);
       if (px >= 0 && px < tw && py >= 0 && py < th) {
         const val = terrain[py * tw + px];
-        let spawnChance = 0.5; // Default Dirt
-        if (val === 0) spawnChance = 0.0; // Water (no plants)
-        else if (val === 2) spawnChance = 1.0; // Grass (very fertile)
-        else if (val === 3) spawnChance = 0.1; // Rock (barren)
+        let spawnChance = 0.0; // Default (Nothing but grass spawns plants)
+        if (val === 2) spawnChance = 1.0; // Grass (very fertile)
         
         if (random() > spawnChance) {
           blocked = true;

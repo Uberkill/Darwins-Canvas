@@ -247,7 +247,7 @@ body {
 
 .creation-modal-container {
   width: 100%;
-  max-width: 95%;
+  max-width: min(95%, calc(90dvh + 380px));
   height: 100%;
   max-height: 90dvh;
   display: flex;

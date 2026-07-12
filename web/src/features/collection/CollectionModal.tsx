@@ -4,6 +4,7 @@ import { useCollectionStore } from './useCollectionStore';
 import { getCollectionBlob } from './collectionDB';
 import type { CollectionBlob, CollectionMeta } from './collectionDB';
 import { useEngineStore } from '../../store/useEngineStore';
+import { useUIStore } from '../../store/useUIStore';
 import { audio } from '../../engine/audioEngine';
 import './CollectionModal.css';
 
@@ -17,6 +18,7 @@ import { Confetti } from './components/Confetti';
 
 export const CollectionModal: React.FC = () => {
   const { isOpen, metadata, selectedId, closeCollection, selectCreature, removeCreature } = useCollectionStore();
+  const requestConfirm = useUIStore(s => s.requestConfirm);
   const [blob, setBlob] = useState<CollectionBlob | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -61,10 +63,10 @@ export const CollectionModal: React.FC = () => {
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!selectedId) return;
-    if (confirm('Delete this creature from your collection?')) {
+    requestConfirm('Delete this creature from your collection?', () => {
       removeCreature(selectedId);
       audio.playUIPop();
-    }
+    });
   };
 
   return (

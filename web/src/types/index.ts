@@ -236,6 +236,10 @@ export interface UIStore {
   isPauseMenuOpen:  boolean;
   openPauseMenu:    () => void;
   closePauseMenu:   () => void;
+
+  confirmDialog: { message: string; onConfirm: () => void; onCancel?: () => void } | null;
+  requestConfirm: (message: string, onConfirm: () => void, onCancel?: () => void) => void;
+  closeConfirm: () => void;
 }
 
 export interface EngineStore {

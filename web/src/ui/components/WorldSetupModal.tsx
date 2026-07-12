@@ -5,6 +5,7 @@ import { useTerrainPainter } from '../../hooks/useTerrainPainter';
 import { worldRef } from '../../engine/worldRef';
 import { TERRAIN_CELL_SIZE } from '../../engine/worldRef';
 import { getWorldWidth, getWorldHeight } from '../../constants';
+import { useUIStore } from '../../store/useUIStore';
 import './WorldSetupModal.css';
 
 interface WorldSetupModalProps {
@@ -32,7 +33,7 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
   // Minimap scaling: epic maps shouldn't blow up the canvas element
   const minimapScale = 0.1 / multiplier; // keeps preview canvas size constant-ish
 
-  const isPaintingAllowed = mapType === 'custom';
+  const isPaintingAllowed = true;
 
   const {
     canvasRef,
@@ -98,18 +99,45 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
     onClose();
   };
 
+  const requestConfirm = useUIStore(s => s.requestConfirm);
+
   const handleTypeSelect = (type: MapType | 'custom') => {
-    if (isPaintingAllowed && isDirtyRef.current && type !== 'custom') {
-      if (!window.confirm("Switching to a procedural map will overwrite your hand-painted world. Continue?")) {
-        return;
-      }
+    if (isDirtyRef.current && mapType !== type) {
+      requestConfirm(
+        "Switching maps will overwrite your hand-painted changes. Continue?",
+        () => setMapType(type)
+      );
+      return;
     }
     setMapType(type);
   };
 
+  const handleScaleSelect = (newMultiplier: number) => {
+    if (multiplier === newMultiplier) return;
+    if (isDirtyRef.current) {
+      requestConfirm(
+        "Changing world size will overwrite your hand-painted changes. Continue?",
+        () => setMultiplier(newMultiplier)
+      );
+    } else {
+      setMultiplier(newMultiplier);
+    }
+  };
+
+  const handleReRoll = () => {
+    if (isDirtyRef.current) {
+      requestConfirm(
+        "Re-rolling will overwrite your hand-painted changes. Continue?",
+        () => generateProceduralRef.current(mapType as MapType, true)
+      );
+    } else {
+      generateProceduralRef.current(mapType as MapType, true);
+    }
+  };
+
   return (
     <>
-      <div className="pause-backdrop">
+      <div className="world-setup-backdrop">
         <div className="world-setup-modal">
           
           <button className="close-modal-btn" onClick={handleClose}>
@@ -171,7 +199,7 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
                 {mapType !== 'custom' && (
                   <button 
                     className="reroll-fab"
-                    onClick={() => generateProceduralRef.current(mapType as MapType, true)}
+                    onClick={handleReRoll}
                     disabled={isGenerating}
                     title="Re-roll Map Seed"
                   >
@@ -181,8 +209,8 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
               </div>
             </div>
             
-            {/* Game Tools Bar - Only active when 'custom' is selected */}
-            <div className="world-setup-tools" style={{ opacity: isPaintingAllowed ? 1 : 0.5, pointerEvents: isPaintingAllowed ? 'auto' : 'none' }}>
+            {/* Game Tools Bar - Active for all maps now! */}
+            <div className="world-setup-tools">
               <div className="brush-group">
                 <button className={`setup-tool-btn ${activeBrush === 'GRASS' ? 'active' : ''}`} onClick={() => setActiveBrush('GRASS')}>
                   <div className="icon-circle icon-pangaea" style={{width:32,height:32}}><Map size={16}/></div>
@@ -239,9 +267,9 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
               <div>
                 <div className="section-label">1. Select Scale</div>
                 <div className="scale-toggle-container">
-                  <div className={`scale-tab ${multiplier === 1 ? 'active' : ''}`} onClick={() => setMultiplier(1)}>Small</div>
-                  <div className={`scale-tab ${multiplier === 2 ? 'active' : ''}`} onClick={() => setMultiplier(2)}>Standard</div>
-                  <div className={`scale-tab ${multiplier === 3 ? 'active' : ''}`} onClick={() => setMultiplier(3)}>Large</div>
+                  <div className={`scale-tab ${multiplier === 1 ? 'active' : ''}`} onClick={() => handleScaleSelect(1)}>Small</div>
+                  <div className={`scale-tab ${multiplier === 2 ? 'active' : ''}`} onClick={() => handleScaleSelect(2)}>Standard</div>
+                  <div className={`scale-tab ${multiplier === 3 ? 'active' : ''}`} onClick={() => handleScaleSelect(3)}>Large</div>
                 </div>
                 <div className="size-context-box">
                   {multiplier === 1 && <><span>Max 250 Creatures.</span> A balanced environment. Good for focused observation.</>}
@@ -254,49 +282,49 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
                 <div className="section-label">2. Select Terrain</div>
                 <div className="map-type-list">
                   
-                  <button className={`map-type-btn ${mapType === 'pangaea' ? 'active' : ''}`} onClick={() => handleTypeSelect('pangaea')}>
-                    <div className="icon-circle icon-pangaea"><Globe2 size={24} /></div>
+                  <button className={`map-type-btn ${mapType === 'custom' ? 'active' : ''}`} onClick={() => handleTypeSelect('custom')}>
+                    <div className="icon-circle icon-custom"><Eraser size={24} /></div>
                     <div>
-                      <div className="btn-title">Pangaea</div>
-                      <div className="btn-subtitle">One massive continent</div>
+                      <div className="btn-title">Blank Canvas</div>
+                      <div className="btn-subtitle">Start from scratch on an empty plain</div>
                     </div>
-                    {mapType === 'pangaea' && <Check className="check-icon" size={28} strokeWidth={3} />}
-                  </button>
-
-                  <button className={`map-type-btn ${mapType === 'archipelago' ? 'active' : ''}`} onClick={() => handleTypeSelect('archipelago')}>
-                    <div className="icon-circle icon-archipelago"><Map size={24} /></div>
-                    <div>
-                      <div className="btn-title">Archipelago</div>
-                      <div className="btn-subtitle">Scattered islands</div>
-                    </div>
-                    {mapType === 'archipelago' && <Check className="check-icon" size={28} strokeWidth={3} />}
+                    {mapType === 'custom' && <Check className="check-icon" size={28} strokeWidth={3} />}
                   </button>
 
                   <button className={`map-type-btn ${mapType === 'great-lakes' ? 'active' : ''}`} onClick={() => handleTypeSelect('great-lakes')}>
                     <div className="icon-circle icon-lakes"><Droplets size={24} /></div>
                     <div>
                       <div className="btn-title">Great Lakes</div>
-                      <div className="btn-subtitle">Inland seas and landmass</div>
+                      <div className="btn-subtitle">Large lakes surrounded by interconnected land</div>
                     </div>
                     {mapType === 'great-lakes' && <Check className="check-icon" size={28} strokeWidth={3} />}
+                  </button>
+
+                  <button className={`map-type-btn ${mapType === 'archipelago' ? 'active' : ''}`} onClick={() => handleTypeSelect('archipelago')}>
+                    <div className="icon-circle icon-archipelago"><Map size={24} /></div>
+                    <div>
+                      <div className="btn-title">Archipelago</div>
+                      <div className="btn-subtitle">Scattered islands surrounded by water</div>
+                    </div>
+                    {mapType === 'archipelago' && <Check className="check-icon" size={28} strokeWidth={3} />}
+                  </button>
+
+                  <button className={`map-type-btn ${mapType === 'pangaea' ? 'active' : ''}`} onClick={() => handleTypeSelect('pangaea')}>
+                    <div className="icon-circle icon-pangaea"><Globe2 size={24} /></div>
+                    <div>
+                      <div className="btn-title">Pangaea</div>
+                      <div className="btn-subtitle">One massive, continuous grassy landmass</div>
+                    </div>
+                    {mapType === 'pangaea' && <Check className="check-icon" size={28} strokeWidth={3} />}
                   </button>
                   
                   <button className={`map-type-btn ${mapType === 'chaos' ? 'active' : ''}`} onClick={() => handleTypeSelect('chaos')}>
                     <div className="icon-circle icon-chaos"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"/><path d="M2 12h20"/><path d="m4.9 4.9 14.2 14.2"/><path d="m4.9 19.1 14.2-14.2"/></svg></div>
                     <div>
                       <div className="btn-title">Chaos</div>
-                      <div className="btn-subtitle">Pure noise and madness</div>
+                      <div className="btn-subtitle">Scattered terrain of all types</div>
                     </div>
                     {mapType === 'chaos' && <Check className="check-icon" size={28} strokeWidth={3} />}
-                  </button>
-
-                  <button className={`map-type-btn ${mapType === 'custom' ? 'active' : ''}`} onClick={() => handleTypeSelect('custom')}>
-                    <div className="icon-circle icon-custom"><Eraser size={24} /></div>
-                    <div>
-                      <div className="btn-title">Build Your Own</div>
-                      <div className="btn-subtitle">Blank canvas</div>
-                    </div>
-                    {mapType === 'custom' && <Check className="check-icon" size={28} strokeWidth={3} />}
                   </button>
 
                 </div>

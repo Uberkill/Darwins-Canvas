@@ -25,6 +25,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
   const [menuState, setMenuState] = useState<MenuState>('ROOT')
   const [pendingPlaySlot, setPendingPlaySlot] = useState<{ slotId: string, isNew: boolean } | null>(null)
   
+  const requestConfirm = useUIStore(s => s.requestConfirm)
   const { saves, hasSaves, mostRecentSlot, executePlay, removeSave } = useSaves();
 
   useEffect(() => {
@@ -96,9 +97,9 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
 
   const handleDelete = (e: React.MouseEvent, slotId: string) => {
     e.stopPropagation()
-    if (confirm('Are you sure you want to delete this ecosystem?')) {
+    requestConfirm('Are you sure you want to delete this ecosystem?', () => {
       removeSave(slotId)
-    }
+    })
   }
 
   const handleFrictionlessPlay = () => {
