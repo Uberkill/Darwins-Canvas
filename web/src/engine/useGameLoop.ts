@@ -1,6 +1,6 @@
 import { random } from './random';
 import { useEffect, useRef } from 'react'
-import { worldRef, updateWorldDimensions } from './worldRef'
+import { worldRef } from './worldRef'
 import { useEngineStore } from '../store/useEngineStore'
 import { useUIStore } from '../store/useUIStore'
 import { simulate } from './simulate'

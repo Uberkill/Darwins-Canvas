@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useUIStore } from '../../store/useUIStore';
 import { AlertTriangle } from 'lucide-react';
 import './ConfirmModal.css';

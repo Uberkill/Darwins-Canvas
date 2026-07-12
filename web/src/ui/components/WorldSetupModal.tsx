@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Check, X, Map, Droplets, Mountain, Globe2, Eraser, Loader2, Dices } from 'lucide-react';
 import { type MapType } from '../../utils/terrainGenerator';
 import { useTerrainPainter } from '../../hooks/useTerrainPainter';

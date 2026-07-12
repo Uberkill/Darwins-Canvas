@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { listSaves, deleteGame, loadGame } from '../utils/saveSystem';
 import type { SaveSlotMetadata } from '../utils/saveSystem';
-import { worldRef, updateWorldDimensions, setWorldDimensions, centerCamera, getAutoFitZoom } from '../engine/worldRef';
+import { worldRef, setWorldDimensions, centerCamera, getAutoFitZoom } from '../engine/worldRef';
 import { getWorldWidth, getWorldHeight } from '../constants';
 import { setEntities, clearEntities } from '../engine/entityManager';
 import { useEngineStore } from '../store/useEngineStore';

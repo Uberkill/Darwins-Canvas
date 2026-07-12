@@ -63,7 +63,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     }
   }
 
-  const handleWorldSetupStart = (multiplier: number, mapType: MapType | 'custom', mapName: string) => {
+  const handleWorldSetupStart = (multiplier: number, _mapType: MapType | 'custom', mapName: string) => {
     if (!pendingPlaySlot) return;
     
     useEngineStore.getState().setPendingMapName(mapName);

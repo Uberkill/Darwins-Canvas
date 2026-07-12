@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X, Wand2, Save, Paintbrush, AlertCircle, Sprout, Pickaxe, Waves, Mountain, Globe2, Map, ShieldAlert, Dices } from 'lucide-react'
+import { X, Wand2, Save, Paintbrush, AlertCircle, Sprout, Pickaxe, Waves, Mountain, Globe2, Map, Dices } from 'lucide-react'
 import { worldRef } from '../engine/worldRef'
 import { type MapType } from '../utils/terrainGenerator'
 import { useTerrainPainter } from '../hooks/useTerrainPainter'

@@ -28,7 +28,7 @@ interface UseTerrainPainterProps {
 
 export function useTerrainPainter({
   worldDims,
-  minimapScale,
+  minimapScale: _minimapScale,
   activeBrush,
   brushSize,
   isPaintingAllowed = true,
@@ -156,7 +156,7 @@ export function useTerrainPainter({
   }, [worldDims.w, worldDims.h]);
 
 
-  const paintTerrain = useCallback((clientX: number, clientY: number, nativeEvent?: MouseEvent) => {
+  const paintTerrain = useCallback((_clientX: number, _clientY: number, nativeEvent?: MouseEvent) => {
     if (!isPaintingAllowed || !nativeEvent) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -205,7 +205,7 @@ export function useTerrainPainter({
     }
   }, [worldDims.w, worldDims.h, activeBrush, brushSize, isPaintingAllowed]);
 
-  const updateCursorPosition = useCallback((clientX: number, clientY: number, nativeEvent?: MouseEvent) => {
+  const updateCursorPosition = useCallback((_clientX: number, _clientY: number, nativeEvent?: MouseEvent) => {
     if (!cursorRef.current || !canvasRef.current || !isPaintingAllowed || !nativeEvent) return;
     const canvas = canvasRef.current;
     
@@ -254,7 +254,7 @@ export function useTerrainPainter({
     generationIdRef.current++;
   }, []);
 
-  const generateProcedural = useCallback(async (mapType: MapType, forceClean = false) => {
+  const generateProcedural = useCallback(async (mapType: MapType, _forceClean = false) => {
 
     const tw = Math.ceil(worldDims.w / TERRAIN_CELL_SIZE);
     const th = Math.ceil(worldDims.h / TERRAIN_CELL_SIZE);
