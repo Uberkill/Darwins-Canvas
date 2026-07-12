@@ -1,6 +1,18 @@
 .collection-modal-overlay {
   position: absolute;
-  inset: 40px;
+  inset: 0;
+  display: flex;
+  padding: 40px;
+  z-index: 1000;
+  pointer-events: none; /* Let clicks pass through if empty space? No, this is an overlay */
+}
+
+.collection-modal-overlay > * {
+  pointer-events: auto;
+}
+
+.collection-modal-container {
+  flex: 1;
   background-color: var(--color-panel);
   border: 6px solid var(--color-text);
   border-radius: 24px;
@@ -8,7 +20,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 1000;
 }
 
 .collection-modal-header {

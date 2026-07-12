@@ -71,7 +71,8 @@ export const CollectionModal: React.FC = () => {
 
   return (
     <div className="collection-modal-overlay">
-      <div className="collection-modal-header">
+      <div className="collection-modal-container">
+        <div className="collection-modal-header">
         <h1 className="collection-modal-title">Darwinpedia</h1>
         <button className="collection-close-btn" onClick={() => { audio.playUIClick(); closeCollection(); }}>
           <X size={32} strokeWidth={3} />
@@ -145,6 +146,7 @@ export const CollectionModal: React.FC = () => {
           )}
         </div>
 
+      </div>
       </div>
     </div>
   );
