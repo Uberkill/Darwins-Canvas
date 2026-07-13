@@ -68,6 +68,21 @@ export function getCanvasPoint(
   const scaleX = (canvas.width  / dpr) / rect.width;
   const scaleY = (canvas.height / dpr) / rect.height;
 
+  // DRIFT GUARD (dev only): if the canvas is ever non-square, scaleX ≠ scaleY
+  // and every pointer coordinate will be wrong. This fires immediately so you
+  // never spend hours debugging mysterious brush drift.
+  // Root cause is almost always: .canvas-inner-wrapper lost `container-type: size`,
+  // or the `100cqmin` width/height constraint was removed from its child div.
+  if (import.meta.env.DEV && Math.abs(scaleX - scaleY) > 0.01) {
+    console.warn(
+      `[getCanvasPoint] ⚠️ POINTER DRIFT DETECTED: canvas is not square.\n` +
+      `  scaleX=${scaleX.toFixed(3)}, scaleY=${scaleY.toFixed(3)}\n` +
+      `  rect: ${rect.width.toFixed(1)}×${rect.height.toFixed(1)}px\n` +
+      `  Fix: ensure .canvas-inner-wrapper has container-type:size in CSS\n` +
+      `  and its child div keeps { width:'100cqmin', height:'100cqmin' }.`
+    );
+  }
+
   const clientX = 'clientX' in e ? e.clientX : (e as Touch).clientX;
   const clientY = 'clientY' in e ? e.clientY : (e as Touch).clientY;
 

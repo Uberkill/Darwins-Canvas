@@ -33,6 +33,12 @@ Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic
 - **Layouts (Dashboards):** Avoid messy multi-column grids. Prefer clean "Top-Middle-Bottom" horizontal rows (e.g. 3 massive KPI cards on top, charts in the middle, analytics badges on the bottom).
 - **BANNED (Dark Glassmorphism):** NEVER use dark translucent backgrounds with blurred overlays (`rgba(0,0,0, 0.8)` with `backdrop-filter: blur`). It destroys the bright, kid-friendly DNA of the app.
 
+## Global UI Scale & Modal Positioning
+- The application scales the entire UI using a global CSS variable (`--ui-scale`).
+- **NO `position: fixed` for Modals:** Global modals (e.g., PauseMenu, StatsPanel) must NOT use `position: fixed` if they are intended to respect the global `uiScale`.
+- Use `position: absolute; inset: 0;` inside the `.app-container` (which is `position: relative`).
+- **Stacking & Accessibility:** Because absolute positioning within a scaled container changes stacking contexts, the `.app-container` MUST NOT have `overflow: hidden` (to prevent clipping), and accessibility focus-trapping libraries must be configured to search within `.app-container` rather than `document.body`.
+
 ## Icons & Graphics
 - **NO EMOJIS:** Absolutely no emojis allowed in the UI. 
 - **SVG ONLY:** Use `lucide-react` for all icons. Icons should generally have a `stroke-width` of `2.5` or `3` to match the thick borders of the app.
@@ -52,3 +58,8 @@ Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic
   </div>
 </div>
 ```
+
+## Screen Pixels vs. CSS Pixels (Cursor Math)
+- `getBoundingClientRect()` returns *physical screen pixels* which inherently include any CSS `transform: scale()`. This applies uniformly to both `mouse` and `touch` events.
+- **Rule 1 (Raw Canvas):** When feeding pointer coordinates into a raw Canvas buffer (e.g., `getCanvasPoint`), **do not** divide by `uiScale`. The raw canvas lives outside the CSS transform hierarchy and self-corrects via `scaleX = 1024 / rect.width`.
+- **Rule 2 (CSS Transforms):** When feeding pointer coordinates into a DOM element's CSS `transform: translate()` (like a custom cursor dot), and that element lives *inside* a container scaled by `uiScale`, you **must** divide the screen coordinates by `uiScale`. Failure to do this results in double-compensation and pointer drift.

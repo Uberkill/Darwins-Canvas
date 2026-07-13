@@ -1,5 +1,5 @@
 .onboarding-backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: rgba(43, 33, 24, 0.4);
   backdrop-filter: blur(4px);
@@ -134,12 +134,12 @@
   cursor: pointer;
   transition: all 0.15s ease;
   /* DS: Hard drop shadow */
-  box-shadow: 0 4px 0 #E2DDD5;
+  box-shadow: 0 4px 0 var(--color-border);
 }
 
 .btn-next:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 #E2DDD5;
+  box-shadow: 0 6px 0 var(--color-border);
 }
 
 .btn-next:active {

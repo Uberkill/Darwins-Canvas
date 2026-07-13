@@ -15,7 +15,7 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 4. **collision.ts:** Hit detection for feeding and physical Boids repulsion (push-back using dynamic bounding radii).
 5. **reproduction.ts:** Tracks population caps and spawns offspring with mutations.
 6. **spawner.ts:** Handles plant generation using `SpatialGrid` for O(1) empty-space checks.
-7. **entityManager.ts:** Zero-GC deferred deletion (using `scratchpad.deletedCreatureIds` and `flushDeadEntities`).
+7. **entityManager.ts:** Zero-GC deferred deletion (using `scratchpad.deletedCreatureIds` and `flushDeadEntities`). Uses an O(1) swap-and-pop pattern to avoid O(N) array shifting.
 8. **ImmigrationSystem.ts (Async DB Queue):** Physics checks for extinction and pushes events to `scratchpad.pendingImmigrations`. The game loop asynchronously fetches new creatures from IndexedDB to prevent blocking the 60FPS simulation thread.
 9. **terrainGenerator.ts:** Asynchronous procedural map generation powered by the `simplex-noise` library. Uses radial falloff math to sculpt Pangaea and Archipelago continents. Yields execution via `requestAnimationFrame` to prevent UI thread freezing.
 
@@ -33,6 +33,8 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 - NO heavy object instantiation inside the fixed loop. Use Zero-GC module-level scratch arrays or `world.scratchpad` to prevent heap allocations.
 - USE `requestAnimationFrame` for all canvas mutations.
 - Analytics loops MUST use rolling caps (e.g., 3600 points) to prevent runaway memory usage during long simulations.
+- **Decoupled Analytics (Game Loop):** `AnalyticsSystem` must remain decoupled from the fixed-timestep physics `while` loop. It runs exactly once per `requestAnimationFrame` tick to prevent compounding overhead at 2x/3x simulation speeds. Note: This means analytics reads the state at the end of the frame; systems must ensure they don't leave the world in an inconsistent partial state between fixed ticks.
+- **GC-Free Transient IDs:** `crypto.randomUUID()` is strictly banned in the hot path. Transient entities (meat chunks, plants) must use the monotonic integer counter `nextPlantId()`. While JS `Number.MAX_SAFE_INTEGER` is 9 quadrillion (meaning it won't realistically overflow), using integer counters is safe solely because these entities are transient and never persisted to IndexedDB across sessions.
 
 ## Determinism & Testing (The Seeded Universe)
 - **PRNG Injection (`random.ts`):** The entire simulation strictly avoids native `Math.random()`. A custom, Dependency-Injected Pseudo-Random Number Generator is used throughout the physics and logic engines. This guarantees that massively complex, multi-thousand frame ecosystem simulations yield 100% identical results on every machine, enabling rigorous fast-check fuzz testing against the engine.

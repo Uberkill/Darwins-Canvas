@@ -15,17 +15,12 @@ export function CreationTools({ drawing, activeTab, setActiveTab }: CreationTool
   const [activeCategory, setActiveCategory] = useState<'EYE' | 'MOUTH' | null>(null)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '100%' }}>
+    <div className="col-tools-panel">
       {/* Tab Navigation Pill */}
       <button 
-        className="tool-btn"
+        className="tool-btn pill--primary"
         style={{ 
-          backgroundColor: 'white', 
-          border: '4px solid var(--color-blue)', 
-          color: 'var(--color-blue-shadow)',
-          boxShadow: 'var(--shadow-btn-blue)',
-          padding: '16px 24px',
-          borderRadius: 'var(--radius-full)',
+          padding: 'var(--space-md) var(--space-lg)',
           justifyContent: 'center',
           flexShrink: 0
         }} 
@@ -49,8 +44,7 @@ export function CreationTools({ drawing, activeTab, setActiveTab }: CreationTool
           </button>
           
           <button
-            className={`tool-btn ${drawing.activeTool === 'FILL' ? 'active' : ''}`}
-            style={{ marginTop: '12px' }}
+            className={`tool-btn tool-btn--spaced ${drawing.activeTool === 'FILL' ? 'active' : ''}`}
             onClick={() => drawing.setActiveTool('FILL')}
           >
             <PaintBucket />
@@ -58,8 +52,7 @@ export function CreationTools({ drawing, activeTab, setActiveTab }: CreationTool
           </button>
           
           <button
-            className={`tool-btn ${drawing.activeTool === 'ERASER' ? 'active' : ''}`}
-            style={{ marginTop: '12px' }}
+            className={`tool-btn tool-btn--spaced ${drawing.activeTool === 'ERASER' ? 'active' : ''}`}
             onClick={() => { drawing.setActiveTool('ERASER'); drawing.setActiveStamp(null) }}
           >
             <Eraser />
@@ -121,7 +114,7 @@ export function CreationTools({ drawing, activeTab, setActiveTab }: CreationTool
             )}
           </div>
 
-          <div className="feature-category-wrapper" style={{ marginTop: '12px' }}>
+          <div className="feature-category-wrapper feature-category-wrapper--spaced">
             <button
               className={`tool-btn ${activeCategory === 'MOUTH' ? 'active' : ''}`}
               onClick={() => setActiveCategory(prev => prev === 'MOUTH' ? null : 'MOUTH')}
@@ -185,8 +178,7 @@ export function CreationTools({ drawing, activeTab, setActiveTab }: CreationTool
             <span className="tool-label">Undo</span>
           </button>
           <button 
-            className="tool-btn" 
-            style={{ marginTop: '12px' }} 
+            className="tool-btn tool-btn--spaced" 
             onClick={drawing.clear}
           >
             <Trash2 />

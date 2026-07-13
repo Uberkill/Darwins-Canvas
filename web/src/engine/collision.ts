@@ -3,7 +3,7 @@ import type { WorldState, Creature, Plant } from '../types'
 import { CARNIVORE_EAT_RANGE, HERBIVORE_EAT_RANGE, BASE_RENDER_SIZE } from '../constants'
 import { audio } from './audioEngine'
 import { hunts } from './ai/Thoughts'
-import { spawnPlant, killCreature, killPlant } from './entityManager'
+import { spawnPlant, killCreature, killPlant, nextPlantId } from './entityManager'
 
 /**
  * collision.ts — food-chain collision detection.
@@ -100,7 +100,7 @@ export function runCollision(world: WorldState, _dt: number): void {
             else if (a.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.huntedOmni++;
             else if (a.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.huntedHerb++;
             spawnPlant(world, {
-              id: crypto.randomUUID(),
+              id: nextPlantId(),
               type: 'MEAT',
               x: a.x,
               y: a.y,
@@ -120,7 +120,7 @@ export function runCollision(world: WorldState, _dt: number): void {
             else if (b.diet === 'OMNIVORE') world.analytics.currentSecondAccumulator.huntedOmni++;
             else if (b.diet === 'HERBIVORE') world.analytics.currentSecondAccumulator.huntedHerb++;
             spawnPlant(world, {
-              id: crypto.randomUUID(),
+              id: nextPlantId(),
               type: 'MEAT',
               x: b.x,
               y: b.y,

@@ -25,10 +25,10 @@ export function CreationCanvas({
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, scale: 1 })
 
   return (
-    <div className="col-canvas-area" style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', minWidth: 0, gap: '16px' }}>
+    <div className="col-canvas-area">
       
-      <div className="canvas-header" style={{ display: 'flex', justifyContent: 'center', width: '100%', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
+      <div className="canvas-header">
+        <div className="canvas-header-input-row">
           <input 
             type="text" 
             value={name} 
@@ -43,12 +43,12 @@ export function CreationCanvas({
             onClick={() => setName(generateRandomName())}
             aria-label="Randomize Name"
             title="Randomize Name"
-            style={{ backgroundColor: 'white', flexShrink: 0, padding: '12px', border: '3px solid #E2DDD5', borderRadius: '16px', cursor: 'pointer' }}
+            style={{ flexShrink: 0 }}
           >
             <Dices size={24} />
           </button>
         </div>
-        <div className="canvas-helper-text" style={{ marginTop: '8px', fontSize: '14px', color: '#66594C', fontWeight: 600, opacity: 0.8 }}>
+        <div className="canvas-helper-text">
           Draw your creature facing right! ➔
         </div>
       </div>
@@ -57,15 +57,11 @@ export function CreationCanvas({
         className="btn-close" 
         onClick={closePanel} 
         aria-label="Close Creation Modal" 
-        style={{ position: 'absolute', right: 0, top: 0, zIndex: 50 }}
       >
         <X />
       </button>
 
-      <div 
-        className="col-canvas"
-        style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flex: 1, minHeight: 0, containerType: 'size' }}
-      >
+      <div className="col-canvas canvas-inner-wrapper">
         {/*
           CRITICAL UI RULE (DO NOT REMOVE OR CHANGE):
           We MUST use `containerType: 'size'` on the parent and `100cqmin` on the child.
@@ -86,6 +82,12 @@ export function CreationCanvas({
           onPointerMove={(e) => {
             if (e.pointerType === 'mouse') {
               const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect()
+              // rect.width is in SCREEN pixels (post CSS transform: scale).
+              // The cursor dot uses CSS `transform: translate()` which lives INSIDE the
+              // scaled container — 1 CSS px here = uiScale screen px.
+              // We must divide by uiScale to convert screen coords to CSS coords.
+              // (This is different from getCanvasPoint which maps directly to the
+              // 1024-buffer and does not care about the CSS transform hierarchy.)
               const scale = (rect.width / uiScale) / 1024
               setCursorPos({ 
                 x: (e.clientX - rect.left) / uiScale, 

@@ -3,7 +3,7 @@
   top: calc(max(24px, env(safe-area-inset-top)) + 70px);
   right: max(24px, env(safe-area-inset-right));
   width: 320px;
-  max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 180px);
+  max-height: calc(100cqh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 180px);
   overflow-y: auto;
   background: var(--color-panel);
   border-radius: var(--radius-lg);
@@ -24,7 +24,7 @@
     right: 0;
     left: 0;
     width: 100%;
-    max-height: 50vh;
+    max-height: 50cqh;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     border-bottom: none;
     border-left: none;

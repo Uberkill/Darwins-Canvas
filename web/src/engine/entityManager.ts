@@ -3,6 +3,13 @@ import { releaseImage } from '../renderer/imageCache'
 import { CAMERA_TILT } from '../constants'
 import { TrackingManager } from '../features/tracking/trackingManager'
 
+// Fast monotonic counter for plant IDs.
+// Plants only exist within a single session — they are never written to
+// IndexedDB — so a simple integer ID is safe and avoids crypto.randomUUID()
+// GC pressure in the hot simulation path.
+let _plantIdCounter = 0;
+export function nextPlantId(): string { return 'p' + (++_plantIdCounter) }
+
 /**
  * Safely adds a creature to the world.
  */
@@ -83,11 +90,13 @@ export function flushDeadEntities(world: WorldState): void {
       if (world.scratchpad.deletedCreatureIds.has(c.id)) {
         // Tag & Track hook
         TrackingManager.checkDeath(c);
-        
         releaseImage(c.id)
-        world.creatures.splice(i, 1)
         if (world.draggedEntityId === c.id) world.draggedEntityId = null
         if (world.hoveredEntityId === c.id) world.hoveredEntityId = null
+        // O(1) swap-and-pop instead of O(N) splice.
+        // Array order is intentionally unstable — no system relies on it.
+        world.creatures[i] = world.creatures[world.creatures.length - 1]
+        world.creatures.pop()
       }
     }
     world.scratchpad.deletedCreatureIds.clear()
@@ -96,7 +105,9 @@ export function flushDeadEntities(world: WorldState): void {
   if (world.scratchpad.deletedPlantIds.size > 0) {
     for (let i = world.plants.length - 1; i >= 0; i--) {
       if (world.scratchpad.deletedPlantIds.has(world.plants[i].id)) {
-        world.plants.splice(i, 1)
+        // O(1) swap-and-pop
+        world.plants[i] = world.plants[world.plants.length - 1]
+        world.plants.pop()
       }
     }
     world.scratchpad.deletedPlantIds.clear()

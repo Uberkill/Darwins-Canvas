@@ -91,28 +91,19 @@ export function WorldBuilderTab({ isVisible, closePanel, onSwitchToCreature }: W
   };
 
   return (
-    <div style={{
-      display: isVisible ? 'flex' : 'none',
-      justifyContent: 'center',
-      flex: 1,
-      height: '100%',
-      minWidth: 0,
-      gap: '24px',
-    }}>
+    <div 
+      className="world-builder-layout"
+      style={{ display: isVisible ? 'flex' : 'none' }}
+    >
 
       {/* ── LEFT SIDEBAR (Using Design System Classes) ──────────────── */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '100%' }}>
+      <div className="col-tools-panel">
         {/* Tab Navigation Pill */}
         <button
-          className="tool-btn"
+          className="tool-btn pill--primary"
           onClick={onSwitchToCreature}
           style={{ 
-            backgroundColor: 'white', 
-            border: '4px solid var(--color-primary)', 
-            color: 'var(--color-primary-shadow)',
-            boxShadow: 'var(--shadow-btn-pink)',
-            padding: '16px 24px',
-            borderRadius: 'var(--radius-full)',
+            padding: 'var(--space-md) var(--space-lg)',
             justifyContent: 'center',
             flexShrink: 0
           }}
@@ -146,7 +137,7 @@ export function WorldBuilderTab({ isVisible, closePanel, onSwitchToCreature }: W
             );
           })}
 
-          <div style={{ marginTop: '16px' }}>
+          <div className="section-block">
             <div className="section-title">Brush Size</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input
@@ -378,28 +369,12 @@ export function WorldBuilderTab({ isVisible, closePanel, onSwitchToCreature }: W
             closePanel();
           }}
           aria-label="Close panel"
-          style={{ position: 'absolute', top: '16px', right: '16px', zIndex: 50 }}
         >
           <X size={24} />
         </button>
 
         {/* Canvas watermark label */}
-        <div style={{
-          position: 'absolute',
-          top: '24px',
-          left: '24px',
-          fontSize: '14px',
-          fontWeight: 900,
-          color: 'var(--color-text-muted)',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          pointerEvents: 'none',
-          backgroundColor: 'white',
-          padding: '8px 16px',
-          borderRadius: 'var(--radius-full)',
-          border: '3px solid #E2DDD5',
-          boxShadow: 'var(--shadow-btn-neutral)',
-        }}>
+        <div className="canvas-watermark">
           World Sandbox
         </div>
       </div>

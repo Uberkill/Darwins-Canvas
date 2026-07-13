@@ -1,7 +1,7 @@
 import { random } from './random';
 import type { Plant, WorldState, Creature } from '../types'
 import { getPlantCap, getPlantSpawnRate, PLANT_WOBBLE_SPEED, PLANT_GROWTH_RATE } from '../constants'
-import { spawnPlant } from './entityManager'
+import { spawnPlant, nextPlantId } from './entityManager'
 import { TERRAIN_CELL_SIZE } from './worldRef'
 
 /**
@@ -77,7 +77,7 @@ function createPlant(world: WorldState): Plant | null {
 
     if (!blocked) {
       return {
-        id:          crypto.randomUUID(),
+        id:          nextPlantId(),
         type:        'PLANT',
         x,
         y,

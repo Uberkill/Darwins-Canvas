@@ -9,7 +9,7 @@ import { ImmigrationSystem } from './systems/ImmigrationSystem'
 import { NavigationSystem } from './systems/NavigationSystem'
 import { LifeSystem } from './systems/LifeSystem'
 import { clampEntitiesToWorld, TERRAIN_CELL_SIZE } from './worldRef'
-import { spawnCreature, spawnPlant, killCreature, flushDeadEntities } from './entityManager'
+import { spawnCreature, spawnPlant, killCreature, flushDeadEntities, nextPlantId } from './entityManager'
 import { audio } from './audioEngine'
 import { SpatialGrid } from './SpatialGrid'
 import {
@@ -143,7 +143,7 @@ export function simulate(world: WorldState, dt: number): void {
     if (c.health <= 0 && !deletedCreatureIds.has(c.id)) {
       killCreature(world, c.id);
       spawnPlant(world, {
-        id: crypto.randomUUID(),
+        id: nextPlantId(),
         type: 'MEAT',
         x: c.x,
         y: c.y,

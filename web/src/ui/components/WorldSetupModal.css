@@ -19,7 +19,7 @@
   max-width: 1100px; 
   display: flex; 
   flex-direction: row; 
-  height: 85vh;
+  height: 85cqh;
   box-shadow: 0 12px 0 rgba(74, 59, 50, 0.15); 
   overflow: hidden;
   position: relative;

@@ -80,11 +80,15 @@ export function useGameLoop(canvasRef: React.RefObject<HTMLCanvasElement | null>
       while (accumulator.current >= FIXED_TIME_STEP && steps < 60) {
         const dtSec = FIXED_TIME_STEP / 1000;
         simulate(world, dtSec);
-        AnalyticsSystem.update(world, dtSec);
-        
         steps++
-
         accumulator.current -= FIXED_TIME_STEP;
+      }
+
+      // Analytics runs once per RAF frame, not once per physics step.
+      // At 3x speed the while-loop above runs 3 steps; we pass the total
+      // simulated time so the 1-second history-push timer stays accurate.
+      if (steps > 0) {
+        AnalyticsSystem.update(world, (FIXED_TIME_STEP / 1000) * steps);
       }
 
       // ─── Process Async Immigration Queue ───
