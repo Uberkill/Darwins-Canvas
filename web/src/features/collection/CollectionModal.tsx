@@ -74,78 +74,78 @@ export const CollectionModal: React.FC = () => {
       <div className="collection-modal-container">
         <div className="collection-modal-header">
         <h1 className="collection-modal-title">Darwinpedia</h1>
-        <button className="collection-close-btn" onClick={() => { audio.playUIClick(); closeCollection(); }}>
+        <button className="collection-close-btn" aria-label="Close Collection" onClick={() => { audio.playUIClick(); closeCollection(); }}>
           <X size={32} strokeWidth={3} />
         </button>
       </div>
 
       <div className="collection-modal-content">
-        
-        {/* Top Area (Image & Text) */}
-        <div className="collection-top-area">
-          {/* Left Half (Hero) */}
-          <div className="collection-hero-pane">
-            {selectedMeta && blob ? (
-              <>
-                <TradingCard diet={selectedMeta.diet}>
-                  <img src={blob.bakedSprites?.IDLE || blob.drawingData} alt={selectedMeta.name} />
-                </TradingCard>
-                
-                <h2 className="collection-card-title">{selectedMeta.name}</h2>
-                
-                <div className="collection-card-actions" style={{ position: 'relative' }}>
-                  <button className="collection-delete-btn" onClick={handleRemove} title="Delete from Collection">
-                    <Trash2 size={28} strokeWidth={3} />
-                  </button>
-                  <button className="collection-spawn-btn" onClick={handleSpawn} disabled={showConfetti}>
-                    {showConfetti && <Confetti />}
-                    <Download size={28} strokeWidth={3} style={{ marginRight: 8 }} />
-                    Spawn
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div className="collection-empty-left">
-                Select a creature from the catalog to view its details.
+        {metadata.length === 0 ? (
+          <EmptyState />
+        ) : (
+          <>
+            {/* Top Area (Image & Text) */}
+            <div className="collection-top-area">
+              {/* Left Half (Hero) */}
+              <div className="collection-hero-pane">
+                {selectedMeta && blob ? (
+                  <>
+                    <TradingCard diet={selectedMeta.diet}>
+                      <img src={blob.bakedSprites?.IDLE || blob.drawingData} alt={selectedMeta.name} />
+                    </TradingCard>
+                    
+                    <h2 className="collection-card-title">{selectedMeta.name}</h2>
+                    
+                    <div className="collection-card-actions" style={{ position: 'relative' }}>
+                      <button className="collection-delete-btn" onClick={handleRemove} title="Delete from Collection">
+                        <Trash2 size={28} strokeWidth={3} />
+                      </button>
+                      <button className="collection-spawn-btn" onClick={handleSpawn} disabled={showConfetti}>
+                        {showConfetti && <Confetti />}
+                        <Download size={28} strokeWidth={3} style={{ marginRight: 8 }} />
+                        Spawn
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <div className="collection-empty-left">
+                    Select a creature from the catalog to view its details.
+                  </div>
+                )}
               </div>
-            )}
-          </div>
 
-          {/* Right Half (Details) */}
-          <div className="collection-details-pane">
-            {selectedMeta && blob && (
-              <>
-                <CreatureStatsBadges 
-                  diet={selectedMeta.diet} 
-                  movement={selectedMeta.movement} 
-                  size={selectedMeta.size} 
-                />
-                
-                <CreatureLoreCard 
-                  id={selectedMeta.id}
-                  loreProfile={selectedMeta.loreProfile} 
-                  userNotes={selectedMeta.userNotes}
-                  kills={selectedMeta.kills} 
-                  foodEaten={selectedMeta.foodEaten} 
-                />
-              </>
-            )}
-          </div>
-        </div>
+              {/* Right Half (Details) */}
+              <div className="collection-details-pane">
+                {selectedMeta && blob && (
+                  <>
+                    <CreatureStatsBadges 
+                      diet={selectedMeta.diet} 
+                      movement={selectedMeta.movement} 
+                      size={selectedMeta.size} 
+                    />
+                    
+                    <CreatureLoreCard 
+                      id={selectedMeta.id}
+                      loreProfile={selectedMeta.loreProfile} 
+                      userNotes={selectedMeta.userNotes}
+                      kills={selectedMeta.kills} 
+                      foodEaten={selectedMeta.foodEaten} 
+                    />
+                  </>
+                )}
+              </div>
+            </div>
 
-        {/* Bottom Area (Catalog) */}
-        <div className="collection-catalog-pane">
-          {metadata.length === 0 ? (
-            <EmptyState />
-          ) : (
-            <CollectionList 
-              metadata={metadata} 
-              selectedId={selectedId} 
-              onSelect={selectCreature} 
-            />
-          )}
-        </div>
-
+            {/* Bottom Area (Catalog) */}
+            <div className="collection-catalog-pane">
+              <CollectionList 
+                metadata={metadata} 
+                selectedId={selectedId} 
+                onSelect={selectCreature} 
+              />
+            </div>
+          </>
+        )}
       </div>
       </div>
     </div>

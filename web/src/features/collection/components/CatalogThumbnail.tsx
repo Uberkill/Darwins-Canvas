@@ -37,7 +37,7 @@ export const CatalogThumbnail: React.FC<Props> = ({ id }) => {
       src={imgSrc} 
       alt="Thumbnail" 
       className="catalog-thumbnail-img" 
-      style={{ width: '100%', aspectRatio: '1', objectFit: 'contain', backgroundColor: 'white', borderRadius: '8px', border: '3px solid var(--color-text)' }}
+      style={{ width: '100%', aspectRatio: '1', padding: '15%', objectFit: 'contain', backgroundColor: 'white', borderRadius: '8px', border: '3px solid var(--color-text)', boxSizing: 'border-box' }}
     />
   );
 };

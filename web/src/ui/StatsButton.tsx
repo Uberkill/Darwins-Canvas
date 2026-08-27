@@ -10,10 +10,14 @@ export function StatsButton() {
 
   return (
     <Tooltip content="Ecosystem Stats" position="bottom" align="left" variant="god">
-      <button className="tutorial-button" onClick={() => {
-        audio.playUIClick()
-        openStats()
-      }}>
+      <button 
+        className="tutorial-button" 
+        aria-label="Toggle Stats"
+        onClick={() => {
+          audio.playUIClick()
+          openStats()
+        }}
+      >
         <LineChart size={32} />
       </button>
     </Tooltip>

@@ -51,7 +51,7 @@ export function TutorialModal() {
               Field Guide
             </button>
           </div>
-          <button className="tutorial-close" onClick={closeTutorial}>
+          <button className="tutorial-close" onClick={closeTutorial} aria-label="Close Tutorial">
             <X size={24} />
           </button>
         </div>

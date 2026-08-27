@@ -32,6 +32,7 @@ export function GodToolbar() {
         <button
           key={tool.id}
           className={`god-tool-btn ${activeTool === tool.id ? 'active' : ''}`}
+          aria-label={tool.tooltip}
           onClick={() => {
             audio.playUIClick()
             setActiveTool(tool.id)

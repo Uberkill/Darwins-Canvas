@@ -4,7 +4,7 @@
 > This ruleset is STRICT, but it applies **ONLY to UI elements** (HTML DOM, buttons, panels, menus). AI Agents modifying the UI must follow these constraints perfectly to prevent the application from regressing into generic, lazy, or mismatched "modern corporate" designs.
 > **DO NOT** apply these rules (thick borders, hard shadows, no blurs) to the actual 2.5D HTML5 Canvas simulation environment. The simulation environment uses a completely separate, soft, organic, painterly aesthetic (e.g., Animal Crossing style) with blurred shadows and smooth rendering.
 
-Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic. The UI should look like a premium children's educational game or a high-quality indie sandbox, NOT a SaaS dashboard.
+Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic. The UI must look like a premium children's educational game or a high-quality indie sandbox.
 
 ## Typography
 - **Primary Font:** `Nunito`
@@ -15,7 +15,7 @@ Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic
 - **Backgrounds:** Use warm cream/off-white (`var(--color-bg-base)` -> `#D4D0C8`). Do not use pure white `#FFFFFF` or generic gray `#F3F4F6` for main backgrounds.
 - **Panels/Modals:** `var(--color-panel)` (`#FFFDF8`).
 - **Text:** `var(--color-text)` (`#4A4640`) for high contrast, `var(--color-text-muted)` (`#8A857D`) for secondary text.
-- **Accents:** Use vibrant, saturated colors for buttons and highlights:
+- **Accents:** Use lively, saturated colors for buttons and highlights:
   - Primary (Green): `var(--color-primary)` (`#98C972`)
   - Secondary (Yellow): `var(--color-secondary)` (`#F5D76E`)
   - Tertiary (Pink): `var(--color-tertiary)` (`#FF8C9D`)

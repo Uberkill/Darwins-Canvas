@@ -118,8 +118,8 @@
   }
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
+/* Mobile Responsiveness & Short Screens (Landscape) */
+@media (max-width: 768px), (max-height: 500px) {
   .god-toolbar {
     left: 50%;
     top: auto;

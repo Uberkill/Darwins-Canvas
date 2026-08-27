@@ -21,3 +21,14 @@ The established UI aesthetic (Playful Clean Design Tokens, soft colors, specific
    ```
    This guarantees the canvas DOM element exactly matches its visual drawing area, making coordinate tracking mathematically flawless.
 </RULE[workspace]>
+
+<RULE[workspace]>
+# Rule: UI Visual Audit Automation
+**Trigger:** Whenever the user asks to check the UI, audit visual styles, verify frontend layout changes, or asks "how does this look?".
+**Action:**
+1. Do NOT rely on the built-in Chrome DevTools MCP or primitive browser subagents which are slow or incompatible on Windows.
+2. Ensure the Vite Dev Server is running (e.g., `npm run dev -- --port 5175`).
+3. Run the dedicated Playwright script by executing `npm run audit:ui` in the `web` directory.
+4. Wait for the command to finish. It will automatically navigate through the entire game lifecycle (Title Screen, World Setup, Main Sandbox, Collection Book, Stats, Settings, and Creature Creation) and generate screenshots.
+5. Review the resulting screenshots in `web/.artifacts/screenshots/` by copying them to your artifact directory and updating `walkthrough.md` if necessary, or simply reading them to answer the user's question about how the UI looks.
+</RULE[workspace]>

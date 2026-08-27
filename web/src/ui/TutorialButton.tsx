@@ -8,7 +8,7 @@ export function TutorialButton() {
 
   return (
     <Tooltip content="Help & Controls" position="bottom" align="left" variant="god">
-      <button className="tutorial-button" onClick={openTutorial}>
+      <button className="tutorial-button" aria-label="Open Tutorial" onClick={openTutorial}>
         <HelpCircle size={32} />
       </button>
     </Tooltip>

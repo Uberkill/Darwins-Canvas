@@ -1,18 +1,18 @@
-# Game Design & Mechanics ("Rules of the Universe")
+# Game Design & Mechanics
 
-Darwin's Canvas is primarily a hands-off, Zen digital terrarium. Users generally interact by creating life and observing the ecosystem, though they may intervene through specific God Tools.
+Darwin's Canvas is a digital terrarium simulation focusing on observation and ecosystem mechanics. Players can interact by creating life and observing the environment, or intervene through specific God Tools.
 
 ## Core Game Loop
-1. **World Building:** Before observing life, the player acts as a God sculpting the terrarium. The user can dynamically paint terrain types (Water, Grass, Dirt, Rock) using an interactive brush, or invoke Procedural Generation algorithms (Pangaea, Archipelago, Great Lakes) to sculpt continents instantly.
+1. **World Setup:** Players initialize the map using the World Builder. Paint terrain types (Water, Grass, Dirt, Rock) using an interactive brush, or invoke Procedural Generation algorithms (Pangaea, Archipelago, Great Lakes).
 2. **Creation:** User draws a shape on a canvas and selects three traits: Size, Diet, and Movement.
 3. **Release:** The creature is spawned into the world.
-4. **Observation:** The creature lives, eats, starves, mates, and dies automatically based on its AI (boids + ecosystem rules).
+4. **Observation:** The creature lives, eats, starves, mates, and dies automatically based on its AI (boids + environment rules).
 
 ### World Builder Safeties & UI
 Because the game engine runs at 60 FPS, all Map Generation and Painting occurs in a detached **Draft Buffer**. The game engine does not calculate physical collisions for the new terrain until the user explicitly clicks **"Apply Changes"**.
 If a user is procedurally generating a massive map, the UI invokes a race-condition lock preventing them from painting, and implements an `AbortController` to safely kill the generator if the window is resized mid-calculation.
 
-## Ecosystem Mechanics
+## Environment Mechanics
 
 ### Diets & The Food Chain
 - **Herbivores:** Eat plants. They wander until they detect a plant, then seek it.
@@ -27,13 +27,13 @@ If a user is procedurally generating a massive map, the UI invokes a race-condit
 ## Environmental Systems
 
 ### Weather Cycles
-The ecosystem transitions through three deterministic weather states:
+The environment transitions through three deterministic weather states:
 - **CLEAR:** Standard plant generation.
 - **RAIN:** Rapid plant generation.
 - **DROUGHT:** Little to no plant generation.
 
 ### Immigration (Anti-Extinction)
-To prevent irreversible ecosystem collapse, if any species (Herbivore, Carnivore, Omnivore) population drops to exactly `0`, the system begins an immigration check. Every `120` seconds, there is a `5%` chance for a new migrant of that species to wander onto the map. The system leverages an **asynchronous IndexedDB event queue** to pull saved creatures from the user's Darwinpedia collection, ensuring the 60FPS physics simulation thread never blocks while loading database assets.
+To prevent irreversible environment collapse, if any species (Herbivore, Carnivore, Omnivore) population drops to exactly `0`, the system begins an immigration check. Every `120` seconds, there is a `5%` chance for a migrant of that species to wander onto the map. The system uses an IndexedDB async queue to load Darwinpedia assets without blocking the main physics thread.
 
 ### 2.5D World Constraints
 The entire world operates on a flat Cartesian plane for physics collisions, but is rendered in 2.5D via the **Camera Tilt** (usually `0.4` ratio). All visual effects—such as Z-axis elevation for Hoppers, shadow rendering offsets, wobble, and breathing—are calculated via pure stateless math functions. Visuals **never** mutate the underlying physics grid.
@@ -52,7 +52,7 @@ When a creature eats enough food, it builds up `reproduction reserve`. Once the 
 - **Stat Mutations:** Speed, vision radius, and metabolic efficiency can fluctuate up or down by small percentages.
 - **Hue Shift:** The offspring's visual color shifts slightly to represent its genetic lineage.
 
-## Ecosystem Analytics & Tracking
+## System Analytics & Tracking
 - The game tracks historical data (Populations, Births, Starvations, Kills, Calories) at exactly 1Hz.
 - Data is strictly capped at a 1-hour rolling window (3,600 data points) to guarantee save-file stability.
 - **Active Research HUD:** Players can pin up to 3 creatures to track their real-time vitals. If a tracked creature dies, the tracking slot is automatically cleared (Ghost Eviction).

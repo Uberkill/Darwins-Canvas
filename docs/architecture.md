@@ -1,11 +1,11 @@
 # Technical Architecture
 
-Darwin's Canvas uses React, Vite, and HTML5 Canvas. It implements a strict 3-Tier Separation and a modular 7-Pillar physics engine to ensure 60FPS performance.
+Darwin's Canvas uses React, Vite, and HTML5 Canvas. It implements a 3-Tier Separation and a modular 7-Pillar physics engine.
 
 ## 3-Tier Separation
 1. **Data Layer (Zustand & IndexedDB):** `useStore.ts` manages high-level UI state. `collectionDB.ts` interfaces with IndexedDB to persist saved creatures and generated lore across sessions. This layer DOES NOT store raw simulation arrays to prevent React re-render flooding.
-2. **Simulation Layer (Mutable Ref):** `worldRef.ts` holds the living arrays (`creatures`, `plants`). The game loop mutates these directly.
-3. **Render Layer (HTML5 Canvas):** `Renderer.ts` reads from `worldRef` and draws entities to the DOM canvas. React has zero knowledge of the actual pixel positions of creatures. This layer implements a **2.5D Isometric Perspective** by mathematically squishing the Y-axis using a `CAMERA_TILT` constant. Entities are dynamically depth-sorted (O(N) Insertion Sort) based on their Y-coordinate to create a fake 3D depth effect.
+2. **Simulation Layer (Mutable Ref):** `worldRef.ts` holds the living arrays (`creatures`, `plants`). The game loop mutates these directly. The simulation's `worldWidth` and `worldHeight` are decoupled from `window.innerWidth/Height`, allowing for a scalable/pannable camera viewport over a fixed ecosystem grid.
+3. **Render Layer (HTML5 Canvas):** `Renderer.ts` reads from `worldRef` and draws entities to the DOM canvas. React has zero knowledge of the actual pixel positions of creatures. This layer implements an Isometric 2.5D Perspective by squishing the Y-axis using a `CAMERA_TILT` constant. Entities are dynamically depth-sorted based on their Y-coordinate to create a depth effect.
 
 ## The 7-Pillar Physics Engine
 The core simulation (`simulate.ts`) is strictly modularized into isolated systems:
@@ -20,13 +20,13 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 9. **terrainGenerator.ts:** Asynchronous procedural map generation powered by the `simplex-noise` library. Uses radial falloff math to sculpt Pangaea and Archipelago continents. Yields execution via `requestAnimationFrame` to prevent UI thread freezing.
 
 ## Presentation Layer (Audio & VFX)
-- **VFX & 2.5D Math (`math2_5d.ts`):** All visual math (isometric camera tilt, shadows, wobble, and breathing scaling) has been extracted out of the Renderer into pure, stateless mathematical functions in `math2_5d.ts`. They NEVER mutate core physics (`creature.z` or `creature.y`). This separation makes the renderer fully deterministic and safely fuzz-testable.
-- **Audio:** Split into `audioEngine.ts` (BGM Manager featuring a dual-deck DJ Crossfader for seamless day/night transitions without memory leaks) and `proceduralSfx.ts` (Web Audio API synthesis). No external audio files are loaded.
+- **VFX & 2.5D Math (`math2_5d.ts`):** All visual math (isometric camera tilt, shadows, wobble, and breathing scaling) is extracted into pure, stateless mathematical functions in `math2_5d.ts`. They NEVER mutate core physics (`creature.z` or `creature.y`). This separation ensures rendering remains stateless and safely fuzz-testable.
+- **Audio:** Split into `audioEngine.ts` (BGM Manager featuring a dual-deck DJ Crossfader for smooth day/night transitions without memory leaks) and `proceduralSfx.ts` (Web Audio API synthesis). No external audio files are loaded.
 
 ## Save / Load System
 - Handled by `saveSystem.ts`.
 - Serializes the entire `WorldState` to `localStorage` (excluding transient states like UI overlays).
-- Contains robust versioning to migrate old saves.
+- Contains thorough versioning to migrate old saves.
 
 ## Performance Constraints
 - NO React State for creature positions.
@@ -36,5 +36,6 @@ The core simulation (`simulate.ts`) is strictly modularized into isolated system
 - **Decoupled Analytics (Game Loop):** `AnalyticsSystem` must remain decoupled from the fixed-timestep physics `while` loop. It runs exactly once per `requestAnimationFrame` tick to prevent compounding overhead at 2x/3x simulation speeds. Note: This means analytics reads the state at the end of the frame; systems must ensure they don't leave the world in an inconsistent partial state between fixed ticks.
 - **GC-Free Transient IDs:** `crypto.randomUUID()` is strictly banned in the hot path. Transient entities (meat chunks, plants) must use the monotonic integer counter `nextPlantId()`. While JS `Number.MAX_SAFE_INTEGER` is 9 quadrillion (meaning it won't realistically overflow), using integer counters is safe solely because these entities are transient and never persisted to IndexedDB across sessions.
 
-## Determinism & Testing (The Seeded Universe)
-- **PRNG Injection (`random.ts`):** The entire simulation strictly avoids native `Math.random()`. A custom, Dependency-Injected Pseudo-Random Number Generator is used throughout the physics and logic engines. This guarantees that massively complex, multi-thousand frame ecosystem simulations yield 100% identical results on every machine, enabling rigorous fast-check fuzz testing against the engine.
+## Determinism & Testing
+- **PRNG Injection (`random.ts`):** The simulation strictly avoids native `Math.random()`. A custom, Dependency-Injected Pseudo-Random Number Generator is used throughout the physics and logic engines. This ensures deterministic execution for rigorous fuzz testing.
+- **Visual Auditing (Playwright):** The UI layer is tested using an automated Playwright script (`npm run audit:ui`) which programmatically asserts the actionability of all UI modals (Settings, Creation, World Builder) in a headless environment.

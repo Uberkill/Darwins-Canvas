@@ -267,9 +267,9 @@ export function WorldSetupModal({ onStart, onClose }: WorldSetupModalProps) {
               <div>
                 <div className="section-label">1. Select Scale</div>
                 <div className="scale-toggle-container">
-                  <div className={`scale-tab ${multiplier === 1 ? 'active' : ''}`} onClick={() => handleScaleSelect(1)}>Small</div>
-                  <div className={`scale-tab ${multiplier === 2 ? 'active' : ''}`} onClick={() => handleScaleSelect(2)}>Standard</div>
-                  <div className={`scale-tab ${multiplier === 3 ? 'active' : ''}`} onClick={() => handleScaleSelect(3)}>Large</div>
+                  <button className={`scale-tab ${multiplier === 1 ? 'active' : ''}`} onClick={() => handleScaleSelect(1)}>Small</button>
+                  <button className={`scale-tab ${multiplier === 2 ? 'active' : ''}`} onClick={() => handleScaleSelect(2)}>Standard</button>
+                  <button className={`scale-tab ${multiplier === 3 ? 'active' : ''}`} onClick={() => handleScaleSelect(3)}>Large</button>
                 </div>
                 <div className="size-context-box">
                   {multiplier === 1 && <><span>Max 250 Creatures.</span> A balanced environment. Good for focused observation.</>}

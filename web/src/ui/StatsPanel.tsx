@@ -103,7 +103,7 @@ export function StatsPanel() {
   return (
     <div className="stats-panel-overlay" onClick={closeStats}>
       <div className="stats-panel-content" onClick={(e) => e.stopPropagation()}>
-        <button className="stats-close-btn" onClick={closeStats}>
+        <button className="stats-close-btn" onClick={closeStats} aria-label="Close Analytics">
           <X size={24} />
         </button>
         

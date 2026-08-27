@@ -294,7 +294,7 @@ body {
     padding: 24px;
     gap: 24px;
   }
-  .col-tools { grid-area: tools; }
+  .col-tools-panel { grid-area: tools; }
   .col-settings { grid-area: settings; }
   .col-canvas {
     grid-area: canvas;
@@ -325,8 +325,12 @@ body {
     grid-area: canvas;
     min-height: 40%;
   }
-  .col-tools {
+  .col-tools-panel {
     grid-area: tools;
+    gap: 8px;
+    padding-top: 16px;
+  }
+  .col-tools {
     flex-direction: row;
     overflow-x: auto;
     padding: 16px;
@@ -726,8 +730,8 @@ body {
 .color-chip.selected { border-color: white; transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 -4px 0 rgba(0,0,0,0.15); }
 
 .btn-action {
-  width: 100%; font-family: var(--font-body); font-size: 20px; font-weight: 900; color: white;
-  background: var(--color-primary); border: 4px solid white; border-radius: var(--radius-full);
+  width: 100%; font-family: var(--font-body); font-size: 20px; font-weight: 900; color: var(--color-text);
+  background: var(--color-primary); border: 4px solid var(--color-text); border-radius: var(--radius-full);
   padding: 16px; cursor: pointer; box-shadow: var(--shadow-btn-pink); letter-spacing: 1px; text-transform: uppercase;
   transition: transform 0.2s;
 }
@@ -909,33 +913,19 @@ body {
 }
 
 .feature-flyout {
-  /* Desktop: Absolute positioned to the right */
-  position: absolute;
-  top: 0;
-  left: calc(100% + 16px);
-  background: var(--color-panel);
-  border: 2px solid white;
-  border-radius: var(--radius-md);
-  padding: 12px;
-  box-shadow: var(--shadow-panel);
+  /* Consistent inline expanding menu (replaces clipped absolute flyout) */
+  position: static;
+  background: transparent;
   display: flex;
-  gap: 12px;
-  z-index: 50;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: var(--space-sm);
   animation: flyoutIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Tooltip pointer arrow */
 .feature-flyout::before {
-  content: '';
-  position: absolute;
-  top: 20px;
-  left: -8px;
-  width: 12px;
-  height: 12px;
-  background: var(--color-panel);
-  border-left: 2px solid white;
-  border-bottom: 2px solid white;
-  transform: rotate(45deg);
+  display: none;
 }
 
 .flyout-item {
@@ -1281,3 +1271,10 @@ body {
 }
 
 
+
+/* Global Accessibility Focus Styles */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

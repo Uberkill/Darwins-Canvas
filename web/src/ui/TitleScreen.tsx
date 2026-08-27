@@ -182,9 +182,9 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
       {(menuState !== 'ROOT' && menuState !== 'WORLD_SETUP') && (
         <div className="slots-modal-overlay">
           <div className="slots-modal-panel">
-            <div className="slots-modal-close" onClick={() => setMenuState('ROOT')}>
+            <button className="slots-modal-close" aria-label="Close Menu" onClick={() => setMenuState('ROOT')}>
               <X size={32} />
-            </div>
+            </button>
             
             {menuState === 'SETTINGS' && (
               <SettingsModal onClose={() => setMenuState('ROOT')} />
