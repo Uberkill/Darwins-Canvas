@@ -41,11 +41,11 @@ export function CreationSettings({
       <div className="settings-scroll-area">
         <div className="section-title">Colors & Brush</div>
         <ColorPalette selectedColor={brushColor} onColorChange={setBrushColor} />
-        <div style={{ marginTop: '16px' }}>
+        <div style={{ marginTop: 'var(--space-lg)' }}>
           <BrushPicker brushSize={brushSize} onBrushChange={setBrushSize} />
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'var(--space-xl)', marginBottom: 'var(--space-md)' }}>
           <div className="section-title" style={{ margin: 0 }}>Traits</div>
           <div className={`dna-budget-badge ${drawing.decals.length > 10 ? 'over-budget' : ''}`}>
             <Activity size={16} className="dna-icon" />
@@ -53,7 +53,7 @@ export function CreationSettings({
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)' }}>
           <TraitPicker label="Size" options={SIZE_OPTIONS} value={size} onChange={setSize} />
           <TraitPicker label="Movement" options={MOVEMENT_OPTIONS} value={movement} onChange={setMovement} />
           <TraitPicker label="Diet" options={DIET_OPTIONS} value={diet} onChange={setDiet} />
