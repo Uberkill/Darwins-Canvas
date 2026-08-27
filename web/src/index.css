@@ -264,7 +264,7 @@ body {
 
 .creation-modal-container {
   width: 100%;
-  max-width: min(95%, calc(90cqh + 380px));
+  max-width: min(96%, calc(90cqh + 640px));
   height: 100%;
   max-height: 90cqh;
   display: flex;
@@ -294,8 +294,8 @@ body {
     padding: 24px;
     gap: 24px;
   }
-  .col-tools-panel { grid-area: tools; }
-  .col-settings { grid-area: settings; }
+  .col-tools-panel { grid-area: tools; width: 100%; }
+  .col-settings { grid-area: settings; width: 100%; }
   .col-canvas {
     grid-area: canvas;
     min-height: 400px;
@@ -342,6 +342,7 @@ body {
   }
   .col-settings {
     grid-area: settings;
+    width: 100%;
     overflow-y: auto;
     max-height: 40%;
     border-radius: 0;
@@ -427,7 +428,7 @@ body {
   gap: var(--space-xl);
   align-self: stretch;
   width: fit-content;
-  min-width: 160px;
+  min-width: 220px;
   height: 100%;
   max-height: 100%;
 }
@@ -564,7 +565,7 @@ body {
   gap: var(--space-xl);
   justify-content: space-between;
   align-self: stretch;
-  width: clamp(280px, 24cqw, 340px);
+  width: clamp(340px, 28cqw, 420px);
   height: 100%;
   max-height: 100%;
   flex-shrink: 0;
