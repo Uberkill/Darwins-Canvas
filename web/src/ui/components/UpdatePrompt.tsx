@@ -31,7 +31,11 @@ export function UpdatePrompt() {
     const activeSlot = useEngineStore.getState().activeSaveSlot
     if (activeSlot) {
       const pendingMapName = useEngineStore.getState().pendingMapName
-      await saveGame(activeSlot, worldRef.current, pendingMapName || "Autosaved Before Update")
+      try {
+        await saveGame(activeSlot, worldRef.current, pendingMapName || "Autosaved Before Update")
+      } catch (err) {
+        console.error("Failed to autosave before update:", err)
+      }
     }
     // 2. Perform the update
     updateServiceWorker(true)

@@ -1,10 +1,25 @@
 import { useState } from 'react';
 import { AlertTriangle } from 'lucide-react';
+import { useEngineStore } from '../../store/useEngineStore';
+import { saveGame } from '../../utils/saveSystem';
+import { worldRef } from '../../engine/worldRef';
 
 export function EmergencyResetButton() {
   const [isConfirming, setIsConfirming] = useState(false);
 
   const handleEmergencyReset = async () => {
+    // 1. Force flush the save state to prevent data loss
+    const activeSlot = useEngineStore.getState().activeSaveSlot;
+    if (activeSlot) {
+      const pendingMapName = useEngineStore.getState().pendingMapName;
+      try {
+        await saveGame(activeSlot, worldRef.current, pendingMapName || "Autosaved Before Reset");
+      } catch (err) {
+        console.error("Failed to autosave before reset:", err);
+      }
+    }
+
+    // 2. Wipe PWA caches and unregister SW
     if ('serviceWorker' in navigator) {
       try {
         const registrations = await navigator.serviceWorker.getRegistrations();
@@ -42,7 +57,7 @@ export function EmergencyResetButton() {
           RESET GAME CACHE?
         </div>
         <p style={{ fontSize: '0.85rem', color: 'var(--color-text)', marginBottom: '16px', lineHeight: '1.4' }}>
-          This completely wipes the cache and forces a hard reload. Only do this if your game is stuck.
+          This completely wipes the cache and forces a hard reload. Only do this if your game is stuck. (Your game will be autosaved first).
         </p>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
           <button 
