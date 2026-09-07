@@ -1,5 +1,5 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+// removed React
+import { render, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { DoodleLayer } from './DoodleLayer';
 

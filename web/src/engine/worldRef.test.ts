@@ -1,7 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { worldRef, updateWorldDimensions, setWorldDimensions, centerCamera, getAutoFitZoom, clampEntitiesToWorld, initializeTerrain } from './worldRef';
-import * as constants from '../constants';
-import type { WorldState } from '../types';
 
 vi.mock('./random', () => ({
   random: () => 0.5
@@ -61,14 +59,14 @@ describe('worldRef', () => {
   it('getAutoFitZoom in headless environment (returns 1.0)', () => {
     // We are running in Node/JSDOM where innerWidth is typical, 
     // let's mock window to simulate browser dimensions
-    const originalWindow = global.window;
+    const originalWindow = globalThis.window;
     // @ts-ignore
-    global.window = { innerWidth: 500, innerHeight: 500 };
+    globalThis.window = { innerWidth: 500, innerHeight: 500 };
     worldRef.current.worldWidth = 1000;
     worldRef.current.worldHeight = 1000;
     const zoom = getAutoFitZoom();
     expect(zoom).toBe(1.0); // 500/1000 = 0.5, 500/500 = 1.0. Max is 1.0
-    global.window = originalWindow;
+    globalThis.window = originalWindow;
   });
 
   it('clampEntitiesToWorld clamps creature out of bounds', () => {
@@ -92,7 +90,7 @@ describe('worldRef', () => {
     initializeTerrain(worldRef.current);
     
     expect(worldRef.current.scratchpad.terrain).toBeInstanceOf(Uint8Array);
-    expect(worldRef.current.scratchpad.terrain.length).toBe(4);
+    expect(worldRef.current.scratchpad.terrain!.length).toBe(4);
     expect(worldRef.current.scratchpad.terrainWidth).toBe(2);
     expect(worldRef.current.scratchpad.terrainHeight).toBe(2);
   });

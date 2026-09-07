@@ -1,9 +1,8 @@
-import React from 'react';
+
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TitleScreen } from './TitleScreen';
 import { useSaves } from '../hooks/useSaves';
-import { useUIStore } from '../store/useUIStore';
 
 // Mock audio
 vi.mock('../engine/audioEngine', () => ({
@@ -18,14 +17,13 @@ vi.mock('../hooks/useSaves', () => ({
 }));
 
 vi.mock('../store/useUIStore', () => {
-  let mockZoom = 1;
   const storeFn = vi.fn((selector) => {
     if (typeof selector === 'function') {
-      return vi.fn((msg, cb) => cb()); // requestConfirm mock
+      return vi.fn((_msg, cb) => cb()); // requestConfirm mock
     }
     return {
       getState: () => ({ 
-        setTargetZoom: vi.fn((z) => { mockZoom = z; }),
+        setTargetZoom: vi.fn(),
         isOnboardingOpen: false
       })
     };

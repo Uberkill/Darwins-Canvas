@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import { AlertTriangle } from 'lucide-react';
-import { useEngineStore } from '../../store/useEngineStore';
-import { saveGame } from '../../utils/saveSystem';
-import { worldRef } from '../../engine/worldRef';
 
 export function EmergencyResetButton() {
   const [isConfirming, setIsConfirming] = useState(false);

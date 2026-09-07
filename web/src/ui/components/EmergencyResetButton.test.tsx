@@ -1,7 +1,6 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { EmergencyResetButton } from './EmergencyResetButton';
-import { saveGame } from '../../utils/saveSystem';
 import { useEngineStore } from '../../store/useEngineStore';
 
 vi.mock('../../utils/saveSystem', () => ({

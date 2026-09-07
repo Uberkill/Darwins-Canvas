@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { TrackingManager } from './TrackingManager';
+import { TrackingManager } from './trackingManager';
 import { useTrackingStore } from './useTrackingStore';
 import { saveToCollection } from '../collection/collectionDB';
 import { generateLore } from '../../utils/loreGenerator';

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { WorldSetupModal } from './WorldSetupModal';
@@ -41,7 +41,7 @@ vi.mock('../../hooks/useTerrainPainter', () => ({
 describe('WorldSetupModal', () => {
   const mockOnStart = vi.fn();
   const mockOnClose = vi.fn();
-  const mockRequestConfirm = vi.fn((msg, cb) => cb());
+  const mockRequestConfirm = vi.fn((_msg, cb) => cb());
 
   beforeEach(() => {
     vi.clearAllMocks();
