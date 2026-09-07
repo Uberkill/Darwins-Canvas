@@ -25,7 +25,7 @@ export function EmergencyResetButton() {
       try {
         indexedDB.deleteDatabase('darwins-canvas-saves');
         indexedDB.deleteDatabase('darwins-canvas-collection');
-      } catch (err) {}
+      } catch {}
     }
 
     // 2. Clear Local Storage & Session Storage (Settings, UI states)

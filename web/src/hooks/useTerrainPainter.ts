@@ -49,7 +49,9 @@ export function useTerrainPainter({
 
   useEffect(() => {
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       if (pendingAnimationFrame.current !== null) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         cancelAnimationFrame(pendingAnimationFrame.current);
       }
     };
@@ -203,7 +205,7 @@ export function useTerrainPainter({
       setIsDirty(true);
       isDirtyRef.current = true;
     }
-  }, [worldDims.w, worldDims.h, activeBrush, brushSize, isPaintingAllowed]);
+  }, [activeBrush, brushSize, isPaintingAllowed]);
 
   const updateCursorPosition = useCallback((_clientX: number, _clientY: number, nativeEvent?: MouseEvent) => {
     if (!cursorRef.current || !canvasRef.current || !isPaintingAllowed || !nativeEvent) return;
@@ -305,7 +307,7 @@ export function useTerrainPainter({
         setIsDirty(false);
         isDirtyRef.current = false;
     }
-  }, [worldDims.w, worldDims.h]);
+  }, []);
 
   return {
     canvasRef,

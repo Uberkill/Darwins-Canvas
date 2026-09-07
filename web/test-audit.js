@@ -1,5 +1,3 @@
-﻿const assert = require('assert');
-
 // Test SVG logic
 let domCalls = 0;
 function injectSVGFilter() {
