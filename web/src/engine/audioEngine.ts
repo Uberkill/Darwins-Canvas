@@ -373,7 +373,7 @@ class AudioEngine {
       const debounceTimes = { EAT: 0.15, HURT: 0.1, SLEEP: 2.0, ATTACK: 0.5 };
       const delay = debounceTimes[event] || 0.2;
       
-      if (this.lastPlayedEvent[eventKey] && now - this.lastPlayedEvent[eventKey] < delay) {
+      if (this.lastPlayedEvent[eventKey] !== undefined && now - this.lastPlayedEvent[eventKey] < delay) {
         return;
       }
       this.lastPlayedEvent[eventKey] = now;
@@ -421,7 +421,7 @@ class AudioEngine {
     
     const now = this.ctx.currentTime;
     // Only play if not played in last 0.05s to prevent massive spam on rapid clicks
-    if (this.lastPlayedEvent['UIClick'] && now - this.lastPlayedEvent['UIClick'] < 0.05) return;
+    if (this.lastPlayedEvent['UIClick'] !== undefined && now - this.lastPlayedEvent['UIClick'] < 0.05) return;
     this.lastPlayedEvent['UIClick'] = now;
 
     const osc = this.ctx.createOscillator();
