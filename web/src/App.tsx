@@ -118,7 +118,7 @@ function App() {
       />
 
       {/* Terrarium Overlay UI */}
-      <div className="terrarium-overlay">
+      <div className={`terrarium-overlay ${useUIStore((s) => s.selectedCreatureId) ? 'inspector-open' : ''}`}>
         {isPlaying && <HoverOverlay />}
         {useEngineStore((s) => s.pendingCreature) && (
           <div className="toast-notification">

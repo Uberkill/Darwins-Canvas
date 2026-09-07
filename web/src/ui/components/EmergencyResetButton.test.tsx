@@ -37,9 +37,9 @@ describe('EmergencyResetButton', () => {
     render(<EmergencyResetButton />);
     fireEvent.click(screen.getByText('Reset App'));
     
-    expect(screen.getByText('RESET GAME CACHE?')).toBeTruthy();
+    expect(screen.getByText('FACTORY RESET APP?')).toBeTruthy();
     expect(screen.getByText('Cancel')).toBeTruthy();
-    expect(screen.getByText('Yes, Wipe It')).toBeTruthy();
+    expect(screen.getByText('Yes, Hard Reset')).toBeTruthy();
   });
 
   it('cancels confirmation', () => {
@@ -52,7 +52,7 @@ describe('EmergencyResetButton', () => {
   });
 
   it('executes emergency reset without service workers', async () => {
-    // Delete navigator.serviceWorker and caches for this test to ensure it handles it gracefully
+    // Mock caches
     Object.defineProperty(globalThis, 'caches', {
       value: {
         keys: vi.fn().mockResolvedValue(['cache-1', 'cache-2']),
@@ -61,32 +61,69 @@ describe('EmergencyResetButton', () => {
       writable: true,
       configurable: true,
     });
+    
+    // Mock indexedDB
+    const mockDeleteDatabase = vi.fn();
+    Object.defineProperty(globalThis, 'indexedDB', {
+      value: {
+        databases: vi.fn().mockResolvedValue([{ name: 'darwins-canvas-saves' }, { name: 'darwins-canvas-collection' }]),
+        deleteDatabase: mockDeleteDatabase,
+      },
+      writable: true,
+      configurable: true,
+    });
+    
+    // Mock localStorage / sessionStorage
+    const mockLocalStorageClear = vi.fn();
+    const mockSessionStorageClear = vi.fn();
+    Object.defineProperty(globalThis, 'localStorage', {
+      value: { clear: mockLocalStorageClear },
+      writable: true,
+    });
+    Object.defineProperty(globalThis, 'sessionStorage', {
+      value: { clear: mockSessionStorageClear },
+      writable: true,
+    });
 
     render(<EmergencyResetButton />);
     fireEvent.click(screen.getByText('Reset App'));
     
     await act(async () => {
-      fireEvent.click(screen.getByText('Yes, Wipe It'));
+      fireEvent.click(screen.getByText('Yes, Hard Reset'));
     });
     
-    expect(saveGame).toHaveBeenCalledWith('slot_1', expect.anything(), 'Map');
+    expect(mockDeleteDatabase).toHaveBeenCalledWith('darwins-canvas-saves');
+    expect(mockDeleteDatabase).toHaveBeenCalledWith('darwins-canvas-collection');
+    expect(mockLocalStorageClear).toHaveBeenCalled();
+    expect(mockSessionStorageClear).toHaveBeenCalled();
+    
     expect(caches.delete).toHaveBeenCalledWith('cache-1');
     expect(caches.delete).toHaveBeenCalledWith('cache-2');
     expect(locationReloadMock).toHaveBeenCalled();
   });
   
-  it('executes emergency reset handling errors in save', async () => {
+  it('executes emergency reset handling errors in indexeddb', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {});
-    (saveGame as any).mockRejectedValue(new Error('Save failed'));
+    
+    const mockDeleteDatabase = vi.fn();
+    Object.defineProperty(globalThis, 'indexedDB', {
+      value: {
+        databases: vi.fn().mockRejectedValue(new Error('IDB failed')),
+        deleteDatabase: mockDeleteDatabase,
+      },
+      writable: true,
+      configurable: true,
+    });
     
     render(<EmergencyResetButton />);
     fireEvent.click(screen.getByText('Reset App'));
     
     await act(async () => {
-      fireEvent.click(screen.getByText('Yes, Wipe It'));
+      fireEvent.click(screen.getByText('Yes, Hard Reset'));
     });
     
     expect(console.error).toHaveBeenCalled();
+    expect(mockDeleteDatabase).toHaveBeenCalledWith('darwins-canvas-saves'); // fallback called
     expect(locationReloadMock).toHaveBeenCalled();
   });
 
@@ -99,10 +136,11 @@ describe('EmergencyResetButton', () => {
       writable: true,
       configurable: true,
     });
-
-    Object.defineProperty(globalThis, 'caches', {
+    
+    Object.defineProperty(globalThis, 'indexedDB', {
       value: {
-        keys: vi.fn().mockResolvedValue([]),
+        databases: vi.fn().mockResolvedValue([]),
+        deleteDatabase: vi.fn(),
       },
       writable: true,
       configurable: true,
@@ -112,7 +150,7 @@ describe('EmergencyResetButton', () => {
     fireEvent.click(screen.getByText('Reset App'));
     
     await act(async () => {
-      fireEvent.click(screen.getByText('Yes, Wipe It'));
+      fireEvent.click(screen.getByText('Yes, Hard Reset'));
     });
     
     expect(mockUnregister).toHaveBeenCalled();
@@ -142,7 +180,7 @@ describe('EmergencyResetButton', () => {
     fireEvent.click(screen.getByText('Reset App'));
     
     await act(async () => {
-      fireEvent.click(screen.getByText('Yes, Wipe It'));
+      fireEvent.click(screen.getByText('Yes, Hard Reset'));
     });
     
     expect(console.error).toHaveBeenCalled();

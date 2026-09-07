@@ -1,6 +1,7 @@
 import { Volume2 } from 'lucide-react';
 import { useSettingsStore } from '../../store/useSettingsStore';
 import { EmergencyResetButton } from './EmergencyResetButton';
+import { CheckForUpdatesButton } from './CheckForUpdatesButton';
 
 interface SettingsModalProps {
   onClose: () => void;
@@ -72,7 +73,10 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
         borderTop: '2px solid #E2DDD5', 
         paddingTop: '24px' 
       }}>
-        <EmergencyResetButton />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <CheckForUpdatesButton />
+          <EmergencyResetButton />
+        </div>
         <button className="btn-massive" onClick={onClose} style={{ fontSize: '1.2rem', padding: '12px 32px' }}>
           Done
         </button>

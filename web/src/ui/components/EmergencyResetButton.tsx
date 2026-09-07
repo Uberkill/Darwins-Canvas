@@ -6,20 +6,36 @@ import { worldRef } from '../../engine/worldRef';
 
 export function EmergencyResetButton() {
   const [isConfirming, setIsConfirming] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   const handleEmergencyReset = async () => {
-    // 1. Force flush the save state to prevent data loss
-    const activeSlot = useEngineStore.getState().activeSaveSlot;
-    if (activeSlot) {
-      const pendingMapName = useEngineStore.getState().pendingMapName;
-      try {
-        await saveGame(activeSlot, worldRef.current, pendingMapName || "Autosaved Before Reset");
-      } catch (err) {
-        console.error("Failed to autosave before reset:", err);
+    setIsResetting(true);
+
+    // 1. Wipe IndexedDB databases (Saves & Custom Creatures)
+    try {
+      if (indexedDB.databases) {
+        const dbs = await indexedDB.databases();
+        for (const db of dbs) {
+          if (db.name) indexedDB.deleteDatabase(db.name);
+        }
+      } else {
+        indexedDB.deleteDatabase('darwins-canvas-saves');
+        indexedDB.deleteDatabase('darwins-canvas-collection');
       }
+    } catch (e) {
+      console.error(e);
+      // Fallback if databases() throws (e.g. security errors in some browsers)
+      try {
+        indexedDB.deleteDatabase('darwins-canvas-saves');
+        indexedDB.deleteDatabase('darwins-canvas-collection');
+      } catch (err) {}
     }
 
-    // 2. Wipe PWA caches and unregister SW
+    // 2. Clear Local Storage & Session Storage (Settings, UI states)
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // 3. Wipe PWA caches and unregister SW
     if ('serviceWorker' in navigator) {
       try {
         const registrations = await navigator.serviceWorker.getRegistrations();
@@ -54,29 +70,43 @@ export function EmergencyResetButton() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#ff4444', marginBottom: '8px', fontWeight: 800 }}>
           <AlertTriangle size={16} />
-          RESET GAME CACHE?
+          FACTORY RESET APP?
         </div>
         <p style={{ fontSize: '0.85rem', color: 'var(--color-text)', marginBottom: '16px', lineHeight: '1.4' }}>
-          This completely wipes the cache and forces a hard reload. Only do this if your game is stuck. (Your game will be autosaved first).
+          This completely wipes <b>ALL saved games, custom creatures, settings, and caches</b>. Only do this if your game is completely broken.
         </p>
-        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
           <button 
-            style={{ 
-              fontFamily: 'var(--font-body)', fontSize: '0.8rem', fontWeight: 800, padding: '8px 16px', 
-              borderRadius: '20px', background: 'white', color: 'var(--color-text-muted)', border: '2px solid #E2DDD5', cursor: 'pointer' 
-            }}
             onClick={() => setIsConfirming(false)}
-          >
+            disabled={isResetting}
+            style={{ 
+              flex: 1, 
+              padding: '8px', 
+              borderRadius: '8px', 
+              border: 'none', 
+              background: '#e0e0e0',
+              color: '#333',
+              cursor: isResetting ? 'default' : 'pointer',
+              fontWeight: 'bold',
+              opacity: isResetting ? 0.5 : 1
+            }}>
             Cancel
           </button>
           <button 
-            style={{ 
-              fontFamily: 'var(--font-body)', fontSize: '0.8rem', fontWeight: 800, padding: '8px 16px', 
-              borderRadius: '20px', background: 'rgba(255, 68, 68, 0.1)', color: '#ff4444', border: '2px solid #ff4444', cursor: 'pointer' 
-            }}
             onClick={handleEmergencyReset}
-          >
-            Yes, Wipe It
+            disabled={isResetting}
+            style={{ 
+              flex: 1, 
+              padding: '8px', 
+              borderRadius: '8px', 
+              border: 'none', 
+              background: '#ff4444', 
+              color: 'white',
+              cursor: isResetting ? 'default' : 'pointer',
+              fontWeight: 'bold',
+              opacity: isResetting ? 0.5 : 1
+            }}>
+            {isResetting ? 'Saving...' : 'Yes, Hard Reset'}
           </button>
         </div>
       </div>

@@ -232,7 +232,7 @@ export function useTerrainPainter({
 
   const handlePointerUp = (e: React.PointerEvent) => {
     isPainting.current = false;
-    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    try { (e.target as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
   };
 
   const handlePointerEnter = () => {

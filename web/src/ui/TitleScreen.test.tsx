@@ -141,7 +141,7 @@ describe('TitleScreen', () => {
     expect(screen.getByTestId('settings-modal')).toBeInTheDocument();
   });
   
-  it('handles play request flow for new game', () => {
+  it('handles play request flow for new game', async () => {
     vi.useFakeTimers();
     render(<TitleScreen onPlay={mockOnPlay} />);
     
@@ -150,8 +150,9 @@ describe('TitleScreen', () => {
     
     expect(screen.getByTestId('world-setup-modal')).toBeInTheDocument();
     
-    act(() => {
+    await act(async () => {
       fireEvent.click(screen.getByText('Start World'));
+      await Promise.resolve();
     });
     
     act(() => {
@@ -162,12 +163,16 @@ describe('TitleScreen', () => {
     vi.useRealTimers();
   });
 
-  it('handles play request flow for load game', () => {
+  it('handles play request flow for load game', async () => {
     vi.useFakeTimers();
     render(<TitleScreen onPlay={mockOnPlay} />);
     
     fireEvent.click(screen.getByText('Load Game'));
-    fireEvent.click(screen.getByText('Play Slot 1 (Load)'));
+    
+    await act(async () => {
+      fireEvent.click(screen.getByText('Play Slot 1 (Load)'));
+      await Promise.resolve();
+    });
     
     act(() => {
       vi.runAllTimers();
@@ -177,11 +182,14 @@ describe('TitleScreen', () => {
     vi.useRealTimers();
   });
 
-  it('handles continue flow', () => {
+  it('handles continue flow', async () => {
     vi.useFakeTimers();
     render(<TitleScreen onPlay={mockOnPlay} />);
     
-    fireEvent.click(screen.getByText('Continue'));
+    await act(async () => {
+      fireEvent.click(screen.getByText('Continue'));
+      await Promise.resolve();
+    });
     
     act(() => {
       vi.runAllTimers();
@@ -191,7 +199,7 @@ describe('TitleScreen', () => {
     vi.useRealTimers();
   });
 
-  it('handles frictionless play when no saves exist', () => {
+  it('handles frictionless play when no saves exist', async () => {
     vi.useFakeTimers();
     (useSaves as any).mockReturnValue({
       saves: { slot_1: null, slot_2: null, slot_3: null },
@@ -207,8 +215,9 @@ describe('TitleScreen', () => {
     // Goes straight to World Setup Modal
     expect(screen.getByTestId('world-setup-modal')).toBeInTheDocument();
     
-    act(() => {
+    await act(async () => {
       fireEvent.click(screen.getByText('Start World'));
+      await Promise.resolve();
     });
     
     act(() => {

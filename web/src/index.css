@@ -1279,3 +1279,12 @@ body {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+@media (max-width: 768px), (max-height: 500px) {
+  .terrarium-overlay.inspector-open .god-toolbar,
+  .terrarium-overlay.inspector-open .fab,
+  .terrarium-overlay.inspector-open .camera-controls-container,
+  .terrarium-overlay.inspector-open .time-controls-container {
+    display: none !important;
+  }
+}

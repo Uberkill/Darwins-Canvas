@@ -48,6 +48,10 @@ export function useTerrariumInput(canvasRef: RefObject<HTMLCanvasElement | null>
     activePointersRef.current.delete(e.pointerId);
     if (activePointersRef.current.size === 0) {
       setIsDragging(false);
+      if (e.pointerType === 'touch') {
+        worldRef.current.mouseX = -99999;
+        worldRef.current.mouseY = -99999;
+      }
     }
     try { (e.target as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
     

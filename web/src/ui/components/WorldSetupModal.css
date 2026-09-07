@@ -393,3 +393,87 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 850px), (max-height: 500px) {
+  .world-setup-modal {
+    width: 100%;
+    max-width: 100%;
+    height: 100cqh;
+    max-height: 100cqh;
+    border-radius: 0;
+    border: none;
+  }
+  .world-setup-preview {
+    padding: 8px;
+    border-right-width: 2px;
+  }
+  .world-setup-preview-header {
+    display: none;
+  }
+  .world-setup-tools {
+    padding: 8px;
+    margin-top: 8px;
+    gap: 8px;
+  }
+  .setup-tool-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    gap: 0;
+  }
+  .setup-tool-btn .icon-circle {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .brush-size-label {
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+  }
+  .world-setup-title {
+    padding: 12px 12px 4px 12px;
+  }
+  .world-setup-title h2 {
+    font-size: 1.4rem;
+  }
+  .world-setup-scroll {
+    padding: 8px 12px;
+    gap: 16px;
+  }
+  .map-name-input {
+    padding: 8px;
+    font-size: 1rem;
+  }
+  .section-label {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  .map-type-btn {
+    padding: 8px;
+    gap: 8px;
+  }
+  .map-type-btn .icon-circle {
+    width: 36px;
+    height: 36px;
+  }
+  .btn-title {
+    font-size: 1rem;
+  }
+  .btn-subtitle {
+    font-size: 0.75rem;
+  }
+  .start-simulation-btn {
+    margin: 8px 12px 12px 12px;
+    padding: 8px;
+    font-size: 1.1rem;
+  }
+  .reroll-fab {
+    width: 44px;
+    height: 44px;
+    bottom: 8px;
+    right: 8px;
+  }
+  .reroll-fab svg {
+    width: 20px;
+    height: 20px;
+  }
+}

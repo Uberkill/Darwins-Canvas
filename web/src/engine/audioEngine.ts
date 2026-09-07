@@ -64,6 +64,19 @@ class AudioEngine {
       this.bgmGain.connect(this.masterGain);
       this.masterGain.connect(this.ctx.destination);
 
+      // Handle tab visibility to save battery and prevent audio glitches in the background
+      document.addEventListener('visibilitychange', () => {
+        if (!this.ctx) return;
+        if (document.hidden) {
+          this.ctx.suspend().catch(() => {});
+        } else {
+          // Only resume if we actually want BGM or if the app is active
+          if (this.isBgmPlaying) {
+            this.ctx.resume().catch(() => {});
+          }
+        }
+      });
+
       this.updateVolumes();
       this.loadCustomAssets();
     } catch (e) {

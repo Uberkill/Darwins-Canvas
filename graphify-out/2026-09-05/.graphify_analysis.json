@@ -636,7 +636,7 @@
       "web_src_renderer_decals_getdecaldataurl"
     ],
     "17": [
-      "renderer_renderer_renderer_renderer_renderer_renderer_zerogcbuffer",
+      "renderer_renderer_renderer_renderer_renderer_zerogcbuffer",
       "web_src_renderer_imagecache",
       "web_src_renderer_imagecache_cache",
       "web_src_renderer_imagecache_generatetintedimage",
@@ -999,7 +999,7 @@
       ],
       "confidence": "INFERRED",
       "relation": "implements",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ code); connects across different repos/directories; peripheral node `Architecture Layering` unexpectedly reaches hub `useStore`"
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 code); connects across different repos/directories; peripheral node `Architecture Layering` unexpectedly reaches hub `useStore`"
     },
     {
       "source": "Zero-GC Buffer",
@@ -1046,41 +1046,8 @@
       "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
     }
   ],
-  "questions": [
-    {
-      "type": "bridge_node",
-      "question": "Why does `CreatureLoreCard()` connect `CollectionModal.tsx` to `scripts`?",
-      "why": "High betweenness centrality (0.126) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `react` connect `scripts` to `CollectionModal.tsx`?",
-      "why": "High betweenness centrality (0.124) - this node is a cross-community bridge."
-    },
-    {
-      "type": "isolated_nodes",
-      "question": "What connects `parser`, `plugins`, `extends` to the rest of the system?",
-      "why": "199 weakly-connected nodes found - possible documentation gaps or missing edges."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `App.tsx` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.05654712260216847 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `index.ts` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.07333333333333333 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `index.ts` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.06041986687147977 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `WorldState` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.08272859216255443 - nodes in this community are weakly interconnected."
-    }
-  ]
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
 }

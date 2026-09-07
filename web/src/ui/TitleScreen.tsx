@@ -23,6 +23,7 @@ type MenuState = 'ROOT' | 'SLOT_MODAL_NEW' | 'SLOT_MODAL_LOAD' | 'SETTINGS' | 'P
 export function TitleScreen({ onPlay }: TitleScreenProps) {
   const [isHiding, setIsHiding] = useState(false)
   const [menuState, setMenuState] = useState<MenuState>('ROOT')
+  const [isLoading, setIsLoading] = useState(false)
   const [pendingPlaySlot, setPendingPlaySlot] = useState<{ slotId: string, isNew: boolean } | null>(null)
   
   const requestConfirm = useUIStore(s => s.requestConfirm)
@@ -50,12 +51,14 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     }
   }, [])
 
-  const handlePlayRequest = (slotId: string, isNew: boolean) => {
+  const handlePlayRequest = async (slotId: string, isNew: boolean) => {
     if (isNew) {
       setPendingPlaySlot({ slotId, isNew })
       setMenuState('WORLD_SETUP')
     } else {
-      executePlay(slotId, isNew)
+      setIsLoading(true)
+      await executePlay(slotId, isNew)
+      setIsLoading(false)
       setIsHiding(true)
       setTimeout(() => {
         onPlay()
@@ -63,7 +66,7 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     }
   }
 
-  const handleWorldSetupStart = (multiplier: number, _mapType: MapType | 'custom', mapName: string) => {
+  const handleWorldSetupStart = async (multiplier: number, _mapType: MapType | 'custom', mapName: string) => {
     if (!pendingPlaySlot) return;
     
     useEngineStore.getState().setPendingMapName(mapName);
@@ -87,7 +90,9 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     useUIStore.getState().setTargetZoom(optimalZoom);
     worldRef.current.camera.zoom = optimalZoom;
 
-    executePlay(pendingPlaySlot.slotId, pendingPlaySlot.isNew)
+    setIsLoading(true)
+    await executePlay(pendingPlaySlot.slotId, pendingPlaySlot.isNew)
+    setIsLoading(false)
     setIsHiding(true)
     setMenuState('ROOT')
     setTimeout(() => {
@@ -137,6 +142,13 @@ export function TitleScreen({ onPlay }: TitleScreenProps) {
     <div className={`title-screen ${isHiding ? 'hidden' : ''}`}>
       
       <DoodleLayer />
+
+      {isLoading && (
+        <div className="loading-overlay" style={{ position: 'absolute', inset: 0, zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.8)', color: 'white' }}>
+          <div className="lucide-spin" style={{ animation: 'spin 2s linear infinite', marginBottom: '16px' }}><Settings size={48} /></div>
+          <h2 style={{ fontFamily: 'var(--font-heading)' }}>Loading Ecosystem...</h2>
+        </div>
+      )}
 
       <div className="title-screen-container">
         <div className="title-logo" style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
