@@ -1,0 +1,28 @@
+# Dependencies & Build Outputs
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env*
+
+# Logs
+logs/
+*.log
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# AI Tooling & Metadata
+.serena/
+.agents/
+graphify-out/
+web/graphify-out/
+web/.serena/
+
+# Test Artifacts
+.artifacts/
+coverage/
+test-results/

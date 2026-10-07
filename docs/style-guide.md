@@ -1,8 +1,8 @@
 # UI & Style Guide
 
 > [!IMPORTANT]
-> This ruleset is STRICT, but it applies **ONLY to UI elements** (HTML DOM, buttons, panels, menus). AI Agents modifying the UI must follow these constraints perfectly to prevent the application from regressing into generic, lazy, or mismatched "modern corporate" designs.
-> **DO NOT** apply these rules (thick borders, hard shadows, no blurs) to the actual 2.5D HTML5 Canvas simulation environment. The simulation environment uses a completely separate, soft, organic, painterly aesthetic (e.g., Animal Crossing style) with blurred shadows and smooth rendering.
+> This ruleset applies **specifically to UI elements** (HTML DOM, buttons, panels, menus) to maintain a cohesive, distinct visual identity.
+> **DO NOT** apply these rules (thick borders, hard shadows, no blurs) to the actual 2.5D HTML5 Canvas simulation environment. The simulation environment uses a completely separate, soft, organic, painterly aesthetic with blurred shadows and smooth rendering.
 
 Darwin's Canvas relies on a warm, playful, and distinctly hand-crafted aesthetic. The UI must look like a premium children's educational game or a high-quality indie sandbox.
 
